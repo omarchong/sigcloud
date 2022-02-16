@@ -19,7 +19,7 @@ class CreateUsuariosTable extends Migration
             $table->string('email');
             $table->string('password');
             $table->string('password_confirmar');
-            $table->string('tipodepartamento');
+            $table->string('departamento');
             $table->string('imagen');
             $table->foreignId('rol_id')
                 ->references('id')

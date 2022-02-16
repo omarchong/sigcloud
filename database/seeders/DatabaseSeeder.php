@@ -6,13 +6,13 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
+  
     public function run()
     {
-        // User::factory(10)->create();
+        $this->call(RolSeeder::class);
+        $this->call(UsuarioSeeder::class);
+        $this->call(ContactoSeeder::class);
+        $this->call(ClientesSeeder::class);
+        $this->call(ServicioSeeder::class);
     }
 }
