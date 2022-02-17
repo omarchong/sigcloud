@@ -22,4 +22,8 @@ class Cotizacion extends Model
     {
         return $this->belongsTo(DetalleCotizacion::class);
     }
+    public function ordenpagos()
+    {
+        return $this->belongsTo(Ordenpago::class);
+    }
 }

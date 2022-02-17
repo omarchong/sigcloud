@@ -19,4 +19,8 @@ class Ordenpago extends Model
     {
         return $this->hasMany(Cotizacion::class);
     }
+    public function seguimientofacturas()
+    {
+        return $this->belongsTo(Seguimientofactura::class);
+    }
 }

@@ -10,4 +10,10 @@ class Estatuorden extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable  = ['nombre'];
+
+    public function ordenpagos()
+    {
+        return $this->belongsTo(Ordenpago::class);
+    }
+
 }

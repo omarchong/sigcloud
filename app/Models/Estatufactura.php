@@ -10,4 +10,9 @@ class Estatufactura extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = ['nombre'];
+
+    public function seguimientofacturas()
+    {
+        return $this->belongsTo(Seguimientofactura::class);
+    }
 }
