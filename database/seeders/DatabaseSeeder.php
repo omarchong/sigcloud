@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Estatufactura;
+use App\Models\Estatuorden;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,5 +17,10 @@ class DatabaseSeeder extends Seeder
         $this->call(ClientesSeeder::class);
         $this->call(ServicioSeeder::class);
         $this->call(CotizacionSeeder::class);
+        $this->call(EstatuordenSeeder::class);
+        $this->call(OrdenpagosSeeder::class);
+        $this->call(EstatufacturaSeeder::class);
+        $this->call(SeguimientofacturaSeeder::class);
+        $this->call(EstatucotizacionSeeder::class);
     }
 }
