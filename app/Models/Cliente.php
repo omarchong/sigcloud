@@ -29,4 +29,10 @@ class Cliente extends Model
     {
         return $this->hasMany(Contacto::class);
     }
+
+    public function proyecto()
+    {
+        return $this->belongsTo(Proyecto::class);
+    }
+
 }

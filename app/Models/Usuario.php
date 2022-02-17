@@ -9,14 +9,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Usuario extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $fillable = ['nombre', 'app','apm',
-                            'telefono', 
-                            'usuario', 'email', 'password',
-                            'password_confirmar',
-                            'departamento','imagen','rol_id'];
+    protected $fillable = [
+        'nombre', 'app', 'apm',
+        'telefono',
+        'usuario', 'email', 'password',
+        'password_confirmar',
+        'departamento', 'imagen', 'rol_id'
+    ];
 
     public function rol()
     {
         return $this->belongsTo(Rol::class);
+    }
+
+    public function proyecto()
+    {
+        return $this->belongsTo(Proyecto::class);
     }
 }

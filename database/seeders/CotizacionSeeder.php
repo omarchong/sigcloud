@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class CotizacionSeeder extends Seeder
 {
-    
+
     public function run()
     {
         DB::table('cotizaciones')->insert([

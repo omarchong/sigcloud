@@ -6,13 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Estatucotizacion extends Model
+class Estatuproyecto extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = ['nombre'];
 
-    public function detallecotizacion()
+
+    public function proyectos()
+
     {
-        return $this->belongsTo(DetalleCotizacion::class);
+        return $this->belongsTo(Proyecto::class);
     }
 }

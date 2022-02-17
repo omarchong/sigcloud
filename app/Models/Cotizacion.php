@@ -18,4 +18,8 @@ class Cotizacion extends Model
     {
         return $this->hasOne(Cliente::class);
     }
+    public function detallecotizacion()
+    {
+        return $this->belongsTo(DetalleCotizacion::class);
+    }
 }
