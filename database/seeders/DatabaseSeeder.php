@@ -30,5 +30,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AgendaSeeder::class);
         $this->call(EstatutareaSeeder::class);
         $this->call(TareaSeeder::class);
+        $this->call(CronogramaSeeder::class);
     }
 }

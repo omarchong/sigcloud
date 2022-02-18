@@ -34,7 +34,7 @@ class Proyecto extends Model
         return $this->hasMany(Usuario::class);
     }
 
-   
+
     public function tipoproyectos()
     {
         return $this->hasOne(Tipoproyecto::class);
@@ -42,5 +42,10 @@ class Proyecto extends Model
     public function detallecotizaciones()
     {
         return $this->hasOne(DetalleCotizacion::class);
+    }
+
+    public function cronogramas()
+    {
+        return $this->belongsTo(Cronograma::class);
     }
 }

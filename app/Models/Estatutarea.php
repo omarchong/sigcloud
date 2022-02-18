@@ -10,5 +10,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Estatutarea extends Model
 {
     use HasFactory, softDeletes;
-    Protected $fillable = ['nombre'];
+    protected $fillable = ['nombre'];
+
+    public function tareas()
+    {
+        return $this->belongsTo(Tarea::class);
+    }
+    public function cronogramas()
+    {
+        return $this->belongsTo(Cronograma::class);
+    }
 }

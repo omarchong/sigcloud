@@ -27,9 +27,18 @@ class Usuario extends Model
     {
         return $this->belongsTo(Proyecto::class);
     }
-    
+
     public function citas()
     {
         return $this->belongsTo(Cita::class);
+    }
+
+    public function tareas()
+    {
+        return $this->belongsTo(Tarea::class);
+    }
+    public function cronogramas()
+    {
+        return $this->belongsTo(Cronograma::class);
     }
 }

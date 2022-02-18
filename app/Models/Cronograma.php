@@ -4,35 +4,32 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-
-class Tarea extends Model
+class Cronograma extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+
     protected $fillable = [
-        'nombre',
-        'descripcion',
-        'fecha_limite',
-        'hora_limite',
-        'tipo_tarea',
+        'actividad',
+        'fecha_inicio',
+        'fecha_fin',
+        'hora_entrega',
         'usuario_id',
         'estatustareas_id',
-        'cita_id'
+        'proyecto_id',
     ];
 
     public function usuarios()
     {
-        return $this->hasMany(Usuario::class);
+        return $this->hasOne(Usuario::class);
     }
 
     public function estatustareas()
     {
         return $this->hasOne(Estatutarea::class);
     }
-
-    public function citas()
+    public function proyectos()
     {
-        return $this->hasMany(Cita::class);
+        return $this->hasOne(Proyectos::class);
     }
 }

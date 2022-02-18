@@ -38,4 +38,8 @@ class Cita extends Model
     {
         return $this->belongsTo(Agenda::class);
     }
-}   
+    public function tareas()
+    {
+        return $this->hasMany(Tarea::class);
+    }
+}
