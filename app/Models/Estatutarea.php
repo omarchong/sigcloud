@@ -7,13 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
-class Rol extends Model
+class Estatutarea extends Model
 {
     use HasFactory, softDeletes;
-    protected $fillable = ['nombre', 'descripcion'];
-
-    public function usuarios()
-    {
-        return $this->hasOne(Usuario::class);
-    }
+    Protected $fillable = ['nombre'];
 }
