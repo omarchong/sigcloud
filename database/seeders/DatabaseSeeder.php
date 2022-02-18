@@ -2,16 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Estatufactura;
-use App\Models\Estatuorden;
-use App\Models\Estatuproyecto;
-use App\Models\Proyecto;
-use App\Models\Tipoproyecto;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-  
+
     public function run()
     {
         $this->call(RolSeeder::class);
@@ -32,5 +28,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EstatucitaSeeder::class);
         $this->call(CitaSeeder::class);
         $this->call(AgendaSeeder::class);
+        $this->call(EstatutareaSeeder::class);
+        $this->call(TareaSeeder::class);
     }
 }
