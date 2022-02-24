@@ -25,9 +25,11 @@ class CreateClientesTable extends Migration
             $table->string('giro');
             $table->string('servicio');
             $table->string('rfc');
-            $table->foreignId('contacto_id')
+            /* $table->foreignId('contacto_id')
                 ->references('id')
-                ->on('contactos');
+                ->on('contactos'); */
+            /* otra manera de crear relaciones */
+            $table->foreignId('contacto_id')->constrained();
             $table->softDeletes();
             $table->timestamps();
         });
