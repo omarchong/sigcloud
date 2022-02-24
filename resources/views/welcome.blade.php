@@ -7,21 +7,28 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
         integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <title>Document</title>
+    <title>Login</title>
+    {{-- Tipo de letras --}}
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    {{-- Estilos --}}
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
 </head>
 
 <body>
-    <div class="container col-md-12">
-        <div class="row">
+    <div class="container-fluid">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
             <div class="col-md-7" id="fondo1">
-                <div class="text-center my-3">
+                <div class="text-center my-4">
                     <img src="img/lego.png" width="50%" alt="">
                 </div>
                 <div class="text-center">
-                    <h2 class="text-white">Tu sistema de </h2><h2 class="text-white">administración flexible</h2>
-                    <p class="text-white">Controla tu negocio desde la palma <br>de tu mano , gestionando ventas,<br>
-                    finanzas, contabilidad y más...</p>
+                    <h2 class="titulo text-white">Tu sistema de administración flexible</h2>
+                    <h2 class="titulo text-white">administración flexible</h2>
+                </div>
+                <div class="text-center">
+                    <p class="text-white" id="letra1">Controla tu negocio desde la palma <br>de tu mano, gestionando ventas,<br>
+                        finanzas, contabilidad y más...</p><br>
                 </div>
             </div>
             <div class="col-md-5" id="fondo2">
@@ -34,10 +41,10 @@
                 <div class="container mt-4">
                     <form action="">
                         <div class="form-group mx-sm-3 mb-3">
-                            <input type="text" class="form-control" id="inputPassword2" placeholder="Usuario">
+                            <input type="text" class="form-control" id="bienvenido" placeholder="Usuario">
                         </div>
                         <div class="form-group mx-sm-3 mb-4">
-                            <input type="password" class="form-control" id="inputPassword2" placeholder="Contraseña">
+                            <input type="password" class="form-control" id="bienvenido" placeholder="Contraseña">
                         </div>
                         <div class="form-group mx-sm-3 mb-5 text-center">
                             <button type="submit" class="btn btn-primary" id="btnlogin">Iniciar sesión</button>

@@ -6,7 +6,15 @@
 }
 #bienvenido{
     color: #0b6fed;
+    font-family: 'Montserrat', sans-serif;
 }
 #btnlogin{
     width: 40%;
+    font-family: 'Montserrat', sans-serif;
+}
+#titulo{
+    font-family: 'Montserrat', sans-serif;
+}
+#letra1{
+    font-family: 'Montserrat', sans-serif;
 }
