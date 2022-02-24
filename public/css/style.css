@@ -1,0 +1,12 @@
+#fondo1{
+    background: linear-gradient(#29c0fd, #1977ef, #0b6fed, #0019d6);
+}
+#fondo2{
+    background: #edeef3;
+}
+#bienvenido{
+    color: #0b6fed;
+}
+#btnlogin{
+    width: 40%;
+}
