@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class UsuarioSeeder extends Seeder
 {
-    
+
     public function run()
     {
         DB::table('usuarios')->insert([
@@ -16,11 +16,11 @@ class UsuarioSeeder extends Seeder
             'apm' => 'Lopez',
             'telefono' => '7291039802',
             'usuario' => 'Chong',
-            'email' => 'omar.chong@dswestudio.com',
+            'email' => 'omar.13.chong@gmail.com',
             'password' => bcrypt('12345678'),
             'password_confirmar' => bcrypt('12345678'),
             'departamento' => 'Tic',
-            'imagen' => 'imagen', 
+            'imagen' => 'imagen',
             'estatus' => 'Si',
             'rol_id' => 1,
             'created_at' => date('Y-m-d H:i:s'),
@@ -37,7 +37,7 @@ class UsuarioSeeder extends Seeder
             'password' => bcrypt('cris12345'),
             'password_confirmar' => bcrypt('cris12345'),
             'departamento' => 'Negocios',
-            'imagen' => 'imagen', 
+            'imagen' => 'imagen',
             'estatus' => 'Si',
             'rol_id' => 2,
             'created_at' => date('Y-m-d H:i:s'),
@@ -54,7 +54,7 @@ class UsuarioSeeder extends Seeder
             'password' => bcrypt('hector12345'),
             'password_confirmar' => bcrypt('hector12345'),
             'departamento' => 'Ventas',
-            'imagen' => 'imagen', 
+            'imagen' => 'imagen',
             'estatus' => 'Si',
             'rol_id' => 3,
             'created_at' => date('Y-m-d H:i:s'),
@@ -71,7 +71,7 @@ class UsuarioSeeder extends Seeder
             'password' => bcrypt('karla12345'),
             'password_confirmar' => bcrypt('karla12345'),
             'departamento' => 'Marketing',
-            'imagen' => 'imagen', 
+            'imagen' => 'imagen',
             'estatus' => 'Si',
             'rol_id' => 2,
             'created_at' => date('Y-m-d H:i:s'),
@@ -88,7 +88,7 @@ class UsuarioSeeder extends Seeder
             'password' => bcrypt('monse12345'),
             'password_confirmar' => bcrypt('monse12345'),
             'departamento' => 'Tic',
-            'imagen' => 'imagen', 
+            'imagen' => 'imagen',
             'estatus' => 'Si',
             'rol_id' => 2,
             'created_at' => date('Y-m-d H:i:s'),
