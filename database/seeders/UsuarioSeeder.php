@@ -21,6 +21,7 @@ class UsuarioSeeder extends Seeder
             'password_confirmar' => bcrypt('12345678'),
             'departamento' => 'Tic',
             'imagen' => 'imagen', 
+            'estatus' => 'Si',
             'rol_id' => 1,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
@@ -37,6 +38,7 @@ class UsuarioSeeder extends Seeder
             'password_confirmar' => bcrypt('cris12345'),
             'departamento' => 'Negocios',
             'imagen' => 'imagen', 
+            'estatus' => 'Si',
             'rol_id' => 2,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
@@ -53,6 +55,7 @@ class UsuarioSeeder extends Seeder
             'password_confirmar' => bcrypt('hector12345'),
             'departamento' => 'Ventas',
             'imagen' => 'imagen', 
+            'estatus' => 'Si',
             'rol_id' => 3,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
@@ -69,6 +72,7 @@ class UsuarioSeeder extends Seeder
             'password_confirmar' => bcrypt('karla12345'),
             'departamento' => 'Marketing',
             'imagen' => 'imagen', 
+            'estatus' => 'Si',
             'rol_id' => 2,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
@@ -85,6 +89,7 @@ class UsuarioSeeder extends Seeder
             'password_confirmar' => bcrypt('monse12345'),
             'departamento' => 'Tic',
             'imagen' => 'imagen', 
+            'estatus' => 'Si',
             'rol_id' => 2,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')

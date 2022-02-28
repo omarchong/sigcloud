@@ -11,11 +11,18 @@ class Usuario extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = [
-        'nombre', 'app', 'apm',
+        'nombre',
+        'app',
+        'apm',
         'telefono',
-        'usuario', 'email', 'password',
+        'usuario',
+        'email',
+        'password',
         'password_confirmar',
-        'departamento', 'imagen', 'rol_id'
+        'departamento',
+        'imagen',
+        'rol_id',
+        'estatus'
     ];
 
     public function rol()

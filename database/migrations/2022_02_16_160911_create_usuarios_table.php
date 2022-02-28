@@ -21,6 +21,7 @@ class CreateUsuariosTable extends Migration
             $table->string('password_confirmar');
             $table->string('departamento');
             $table->string('imagen');
+            $table->string('estatus');
             $table->foreignId('rol_id')
                 ->references('id')
                 ->on('roles');
