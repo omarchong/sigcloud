@@ -1,14 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h2 class="text-center">Hola</h2>
-</body>
 
 <head>
     <meta charset="UTF-8">
@@ -45,30 +36,22 @@
                     <img src="img/logosigcloud.svg" width="50%" alt="">
                 </div>
                 <div class="mt-5">
-                    <h6 class="text-center" id="bienvenido">¡Bienvenido!</h6>
+                    <h6 class="text-center" id="bienvenido">¡Recuperación de contraseña!</h6>
                 </div>
                 <div class="container mt-4">
-                    <form action="{{route('validar')}}" method="POST">
+                    <form action="{{route('recuperarcontraseña')}}"  method="GET">
                         {{csrf_field()}}
                         <div class="form-group mx-sm-3 mb-3">
-                            <input type="text" class="form-control" @error('usuario') is-invalid @enderror name="usuario" id="usuario" placeholder="Usuario">
-                            @error('usuario')
+                            <label for="">En este apartado, tendras que ingresar un correo electronico valido, con acceso, al cual se enviara tu nueva contraseña.</label>
+                            <input type="email" class="form-control" value="{{old('email')}}" @error('email') is-invalid @enderror name="email" id="email" placeholder="Ingrese su correo">
+                            @error('email')
                             <small class="text-danger"> {{ $message }} </small>
                             @enderror
                         </div>
-                        <div class="form-group mx-sm-3 mb-4">
-                            <input type="password" class="form-control" name="password" @error('password') is-invalid @enderror id="password" placeholder="Contraseña">
-                            @error('password')
-                            <small class="text-danger">{{$message}}</small>
-                            @enderror
-                        </div>
                         <div class="form-group mx-sm-3 mb-5 text-center">
-                            <button type="submit" class="btn btn-primary" id="btnlogin" value="Iniciar">Iniciar sesión</button>
+                            <button type="submit" class="btn btn-primary" id="btnlogin" value="enviar">Enviar</button>
                         </div>
                     </form>
-                    <div class="mt-5">
-                        <h6 class="text-center" id="bienvenido"><a href="{{route('recuperarcontraseña')}}">¿Olvidaste tu contraseña?</a></h6>
-                    </div>
                 </div>
             </div>
         </div>
