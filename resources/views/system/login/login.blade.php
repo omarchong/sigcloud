@@ -61,6 +61,10 @@
                     <div class="mt-5">
                         <h6 class="text-center" id="bienvenido"><a href="{{route('recuperarcontrasena')}}">¿Olvidaste tu contraseña?</a></h6>
                     </div>
+                    @if(Session::has('mensaje'))
+                    <div class="alert alert-primary">{{Session::get('mensaje')}}</div>
+                    @endif
+
                 </div>
             </div>
         </div>

@@ -38,11 +38,11 @@
                     <h6 class="text-center" id="bienvenido">¡Recuperación de contraseña!</h6>
                 </div>
                 <div class="container mt-4">
-                    <form action="{{route('recuperacion')}}"  method="GET">
+                    <form action="{{route('recuperacion')}}" method="GET">
                         {{csrf_field()}}
                         <div class="form-group mx-sm-3 mb-3">
                             <label for="">En este apartado, tendras que ingresar un correo electronico valido, con acceso, al cual se enviara tu nueva contraseña.</label>
-                            <input type="email" class="form-control" value="{{old('email')}}" @error('email') is-invalid @enderror name="email" id="email" placeholder="Ingrese su correo">
+                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" value="{{old('email')}}"    placeholder="Ingrese su correo">
                             @error('email')
                             <small class="text-danger"> {{ $message }} </small>
                             @enderror
@@ -50,12 +50,15 @@
                         <div class="form-group mx-sm-3 mb-5 text-center">
                             <button type="submit" class="btn btn-primary" id="btnlogin" value="Eviar">Enviar</button>
                         </div>
+                        @if(Session::has('mensaje'))
+                        <div class="alert alert-danger">{{Session::get('mensaje')}}</div>
+                        @endif
+
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
 </body>
 
 </html>

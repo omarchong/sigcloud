@@ -68,15 +68,15 @@ class LoginController extends Controller
             $datos = array('destinatario'=>$email, 'nuevopassword'=>$nuevopassword);
             Mail::send('system.login.passwordrecuperada', $datos, function($msj)
             use($email, $nuevopassword, $asunto){
-                $msj->from("cristhianzacarias@gmail.com", "SigCloud");
+                $msj->from("al221811717@gmail.com", "SigCloud");
                 $msj->subject($asunto);
                 $msj->to($email);
             });
-            Session::flash('mensaje','Revise su correo electrónico, porque ahí le llegará su nueva contraseña');
+            Session::flash('mensaje','¡Su nueva contraseña a sido enviada exitosamente a su correo electrónico!');
             return redirect()->route('login');
         }
         else{
-            return redirect('restaurarcontraseña')->compact("estado","El correo ingresado no esta registrado");
+            return redirect('recuperarcontrasena')->with("mensaje","El correo electrónico ingresado no esta registrado");
         }
         /* dd($request->all()) */
     }
