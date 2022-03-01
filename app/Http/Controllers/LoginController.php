@@ -73,7 +73,7 @@ class LoginController extends Controller
                 $msj->to($email);
             });
             Session::flash('mensaje','Revise su correo electrónico, porque ahí le llegará su nueva contraseña');
-            return redirect()->route('login');
+            return view('sytem.login.login');
         }
         else{
             return redirect('restaurarcontraseña')->compact("estado","El correo ingresado no esta registrado");
