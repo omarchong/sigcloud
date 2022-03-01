@@ -76,7 +76,7 @@ class LoginController extends Controller
             return redirect()->route('login');
         }
         else{
-            return redirect('restaurarcontraseña')->compact("estado","El correo ingresado no esta registrado");
+            return redirect('recuperarcontrasena')->with("mensaje","El correo ingresado no esta registrado");
         }
         /* dd($request->all()) */
     }

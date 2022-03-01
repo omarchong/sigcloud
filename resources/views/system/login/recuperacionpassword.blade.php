@@ -50,6 +50,9 @@
                         <div class="form-group mx-sm-3 mb-5 text-center">
                             <button type="submit" class="btn btn-primary" id="btnlogin" value="Eviar">Enviar</button>
                         </div>
+                        @if(Session::has('mensaje'))
+                <div class="alert alert-danger">{{Session::get('mensaje')}}</div>
+        		@endif
                     </form>
                 </div>
             </div>
