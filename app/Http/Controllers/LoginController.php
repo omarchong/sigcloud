@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Usuario;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Redis;
 use Session;
+use Mail;
+use DB;
+
 
 class LoginController extends Controller
 {
@@ -53,28 +53,30 @@ class LoginController extends Controller
 
     public function recuperacion(Request $request)
     {
-
-        $usuario = $request['usuario'];
+        $email = $request['email'];
         $asunto = "Recuperacion  de contraseña";
-        $consulta = DB::select("SELECT * FROM usuarios where  usuario = '$usuario'");
+
+        $consulta = DB::select("SELECT * FROM usuarios where  email = '$email'");
         if($consulta!=null)
         {
-            $letras ="abcdefghijklmnopqrstuvwxyz0123456789";
-            $nuevopassword = substr(str_shuffle($letras),0,8);
+            $letras = "abcdefghijklmnopqrstuvwxyz0123456789";
+            $nuevopassword = substr (str_shuffle($letras),0,8);
             $passwordEncryptado = Hash::make($nuevopassword);
-            DB::SELECT("UPDATE usuarios SET password='$passwordEncryptado' WHERE usuario = '$usuario'");
-            $datos = array('destinatario'=>$usuario, 'nuevopassword'=>$nuevopassword);
-            Mail::send('recuperacionpassword', $datos, function($msj)
-            use($usuario, $nuevopassword, $asunto){
-                $msj->from("al221811717@gmail.com", "SIGCLOUD");
+            DB::SELECT("UPDATE usuarios SET password = '$passwordEncryptado' WHERE email = '$email'");
+
+
+            $datos = array('destinatario'=>$email, 'nuevopassword'=>$nuevopassword);
+            Mail::send('system.login.passwordrecuperada', $datos, function($msj)
+            use($email, $nuevopassword, $asunto){
+                $msj->from("cristhianzacarias@gmail.com", "SigCloud");
                 $msj->subject($asunto);
-                $msj->to($usuario);
+                $msj->to($email);
             });
             Session::flash('mensaje','Revise su correo electrónico, porque ahí le llegará su nueva contraseña');
-            return view('sytem.login.login');
+            return redirect()->route('login');
         }
         else{
-            return redirect('restaurar')->compact("estado","El correo ingresado no esta registrado");
+            return redirect('restaurarcontraseña')->compact("estado","El correo ingresado no esta registrado");
         }
         /* dd($request->all()) */
     }

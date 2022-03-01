@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\Route;
 route::get('/',[LoginController::class, 'login'])->name('login');
 Route::post('validar',[LoginController::class, 'validar'])->name('validar');
 route::get('inicio',[LoginController::class, 'inicio'])->name('inicio');
-route::get('recuperarcontrasena',[LoginController::class, 'recuperarcontrasena'])->name('recuperarcontrasena');
 route::get('recuperacion',[LoginController::class, 'recuperacion'])->name('recuperacion');
+route::get('recuperarcontrasena',[LoginController::class, 'recuperarcontrasena'])->name('recuperarcontrasena');
 
 Route::resource('clientes', ClientesController::class);
 
