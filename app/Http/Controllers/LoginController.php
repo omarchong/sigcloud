@@ -32,20 +32,20 @@ class LoginController extends Controller
         $cuantos = count($consulta);
 
         if ($cuantos == 1 and Hash::check($request->password, $consulta[0]->password)) {
-            Session::put('sessionusuario', $consulta[0]->nombre . ' ' . $consulta[0]->app);
+            Session::put('sessionusuario', $consulta[0]->nombre. ' ' .$consulta[0]->app);
             return redirect()->route('inicio');
         } else {
-           
+
             return redirect()->route('login');
         }
     }
     public function inicio()
     {
-            return view('welcome');
-    
+            return view('system.dashboard.principal');
+
     }
 
-    public function recuperarcontraseña()
+    public function recuperarcontrasena()
     {
         return view('system.login.recuperacionpassword');
     }
@@ -53,6 +53,7 @@ class LoginController extends Controller
 
     public function recuperacion(Request $request)
     {
+
         $usuario = $request['usuario'];
         $asunto = "Recuperacion  de contraseña";
         $consulta = DB::select("SELECT * FROM usuarios where  usuario = '$usuario'");
@@ -65,7 +66,7 @@ class LoginController extends Controller
             $datos = array('destinatario'=>$usuario, 'nuevopassword'=>$nuevopassword);
             Mail::send('recuperacionpassword', $datos, function($msj)
             use($usuario, $nuevopassword, $asunto){
-                $msj->from("omar.13.chong@gmail.com", "SIGCLOUD");
+                $msj->from("al221811717@gmail.com", "SIGCLOUD");
                 $msj->subject($asunto);
                 $msj->to($usuario);
             });
@@ -75,5 +76,6 @@ class LoginController extends Controller
         else{
             return redirect('restaurar')->compact("estado","El correo ingresado no esta registrado");
         }
+        /* dd($request->all()) */
     }
 }

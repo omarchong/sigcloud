@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <title>Login</title>
     {{-- Tipo de letras --}}
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
@@ -39,7 +38,7 @@
                     <h6 class="text-center" id="bienvenido">¡Recuperación de contraseña!</h6>
                 </div>
                 <div class="container mt-4">
-                    <form action="{{route('recuperarcontraseña')}}"  method="GET">
+                    <form action="{{route('recuperarcontrasena')}}" method="GET">
                         {{csrf_field()}}
                         <div class="form-group mx-sm-3 mb-3">
                             <label for="">En este apartado, tendras que ingresar un correo electronico valido, con acceso, al cual se enviara tu nueva contraseña.</label>
@@ -49,7 +48,7 @@
                             @enderror
                         </div>
                         <div class="form-group mx-sm-3 mb-5 text-center">
-                            <button type="submit" class="btn btn-primary" id="btnlogin" value="enviar">Enviar</button>
+                            <button type="submit" class="btn btn-primary" id="btnlogin" value="Enviar">Enviar</button>
                         </div>
                     </form>
                 </div>

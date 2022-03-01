@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -43,13 +43,13 @@
                     <form action="{{route('validar')}}" method="POST">
                         {{csrf_field()}}
                         <div class="form-group mx-sm-3 mb-3">
-                            <input type="text" class="form-control" @error('usuario') is-invalid @enderror name="usuario" id="usuario" placeholder="Usuario">
+                            <input type="text" class="form-control" @error('usuario') is-invalid @enderror name="usuario" id="usuario" value="{{ old('usuario')}}" placeholder="Usuario">
                             @error('usuario')
                             <small class="text-danger"> {{ $message }} </small>
                             @enderror
                         </div>
                         <div class="form-group mx-sm-3 mb-4">
-                            <input type="password" class="form-control" name="password" @error('password') is-invalid @enderror id="password" placeholder="Contraseña">
+                            <input type="password" class="form-control" name="password" @error('password') is-invalid @enderror id="password" value="{{ old('password')}}" placeholder="Contraseña">
                             @error('password')
                             <small class="text-danger">{{$message}}</small>
                             @enderror
@@ -59,7 +59,7 @@
                         </div>
                     </form>
                     <div class="mt-5">
-                        <h6 class="text-center" id="bienvenido"><a href="{{route('recuperarcontraseña')}}">¿Olvidaste tu contraseña?</a></h6>
+                        <h6 class="text-center" id="bienvenido"><a href="{{route('recuperarcontrasena')}}">¿Olvidaste tu contraseña?</a></h6>
                     </div>
                 </div>
             </div>
