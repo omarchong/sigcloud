@@ -52,7 +52,6 @@
                         </div>
                         @if(Session::has('mensaje'))
                         <div class="alert alert-danger">{{Session::get('mensaje')}}</div>
-                        @endif
 
                     </form>
                 </div>
