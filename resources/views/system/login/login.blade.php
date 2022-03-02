@@ -5,13 +5,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link href="{{ asset('css/app.css')}}" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <title>Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" 
+    integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    
+     <title>Login</title>
+     
     {{-- Tipo de letras --}}
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    
     {{-- Estilos --}}
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
 </head>
@@ -24,8 +29,8 @@
                     <img src="img/lego.png" width="50%" alt="">
                 </div>
                 <div class="text-center">
-                    <h2 class="titulo text-white">Tu sistema de </h2>
-                    <h2 class="titulo text-white">administración flexible</h2>
+                    <h2 class="titulo text-white" >Tu sistema de </h2>
+                    <h2 class="titulo text-white" >administración flexible</h2>
                 </div>
                 <div class="text-center">
                     <p class="text-white" id="letra1">Controla tu negocio desde la palma <br>de tu mano, gestionando ventas,<br>
@@ -71,5 +76,6 @@
     </div>
 
 </body>
+<script src=" {{asset('js/app.js') }}" defer></script>
 
 </html>
