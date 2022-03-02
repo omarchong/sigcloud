@@ -1,0 +1,21 @@
+
+
+a:hover{
+    text-decoration: none;
+}
+.colorsidebar{
+    background: linear-gradient(#0019d6, #0b6fed, #1977ef, #29c0fd);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+#sidebar-container{
+    min-height: 100vh;
+}
+
+#sidebar-container .logo{
+    padding: .875rem 1.25rem;
+}
+
+#sidebar-container .menu{
+    width: 15rem;
+}
