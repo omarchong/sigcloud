@@ -230,28 +230,32 @@
                                                 <h5>Canales de atención al cliente</h5>
                                                 <div class="row">
                                                     <div class="col-md-3">
-                                                        <img class="mr-2" src="img/omar.png" alt="" width="50px">
+                                                        <img class="mr-2" src="img/omar.png" alt=""
+                                                            width="50px">
                                                     </div>
                                                     <div class="col-md-9">
                                                         <h5>Facebook</h5>
                                                         <p>2 mensajes</p>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img class="mr-2" src="img/omar.png" alt="" width="50px">
+                                                        <img class="mr-2" src="img/omar.png" alt=""
+                                                            width="50px">
                                                     </div>
                                                     <div class="col-md-9">
                                                         <h5>Instagram</h5>
                                                         <p>3 mensajes</p>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img class="mr-2" src="img/omar.png" alt="" width="50px">
+                                                        <img class="mr-2" src="img/omar.png" alt=""
+                                                            width="50px">
                                                     </div>
                                                     <div class="col-md-9">
                                                         <h5>Whatsapp</h5>
                                                         <p>2 mensajes</p>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <img class="mr-2" src="img/omar.png" alt="" width="50px">
+                                                        <img class="mr-2" src="img/omar.png" alt=""
+                                                            width="50px">
                                                     </div>
                                                     <div class="col-md-9">
                                                         <h5>Linkedin</h5>
@@ -307,39 +311,39 @@
         );
     </script>
 
-    
-<script>
-    const labels = [
-        'Enero',
-        'Febrero',
-        'Marzo',
-        'Abril',
-        'Mayo',
-        'Junio',
-    ];
 
-    const data = {
-        labels: labels,
-        datasets: [{
-            label: 'My First dataset',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45],
-        }]
-    };
+    <script>
+        const labels = [
+            'Enero',
+            'Febrero',
+            'Marzo',
+            'Abril',
+            'Mayo',
+            'Junio',
+        ];
 
-    const config = {
-        type: 'line',
-        data: data,
-        options: {}
-    };
-</script>
-<script>
-    const tabla = new Chart(
-        document.getElementById('tabla'),
-        config
-    );
-</script>
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [0, 10, 5, 2, 20, 30, 45],
+            }]
+        };
+
+        const config = {
+            type: 'line',
+            data: data,
+            options: {}
+        };
+    </script>
+    <script>
+        const tabla = new Chart(
+            document.getElementById('tabla'),
+            config
+        );
+    </script>
 </body>
 
 </html>
