@@ -7,6 +7,7 @@ a:hover{
     background: linear-gradient(#0019d6, #0b6fed, #1977ef, #29c0fd);
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
+    font-family: 'Montserrat', sans-serif;
 }
 #sidebar-container{
     min-height: 100vh;
@@ -23,14 +24,114 @@ a:hover{
     background: #edeef3;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
+    font-family: 'Montserrat', sans-serif;
 }
 .navbar{
     background: #edeef3;
     border-top-left-radius: 20px;
+    
 }
 #content{
     background: #edeef3;
     overflow-y: auto;
     height: 100vh;
     padding-bottom: 5rem;
+    border-bottom-left-radius: 20px;
+    
+}
+
+span.azul {
+    background: #0b8fed;
+    border-radius: 50px;
+    color: #fff;
+    display: inline-block;
+    font-weight: bold;
+    line-height: 45px;
+    margin-right: 15px;
+    text-align: center;
+    width: 3em; 
+  }
+  span.morado {
+    background: #5867ec;
+    border-radius: 50px;
+    color: #fff;
+    display: inline-block;
+    font-weight: bold;
+    line-height: 45px;
+    margin-right: 15px;
+    text-align: center;
+    width: 3em; 
+  }
+  span.naranja {
+    background: #f7a552;
+    border-radius: 50px;
+    color: #fff;
+    display: inline-block;
+    font-weight: bold;
+    line-height: 45px;
+    margin-right: 15px;
+    text-align: center;
+    width: 3em; 
+  }
+  span.verde {
+    background: #60c8c9;
+    border-radius: 50px;
+    color: #fff;
+    display: inline-block;
+    font-weight: bold;
+    line-height: 45px;
+    margin-right: 15px;
+    text-align: center;
+    width: 3em; 
+  }
+
+#servicios{
+    border-radius: 15px;
+    background: #fff;
+    font-family: 'Montserrat', sans-serif;
+}
+#curso{
+    border-radius: 15px;
+    background: #fff;
+    font-family: 'Montserrat', sans-serif;
+}
+#validacion{
+    border-radius: 15px;
+    background: #fff;
+    font-family: 'Montserrat', sans-serif;
+}
+#concluidos{
+    border-radius: 15px;
+    background: #fff;
+    font-family: 'Montserrat', sans-serif;
+}
+#ventasa{
+    border-radius: 15px;
+    background: #fff;
+    font-family: 'Montserrat', sans-serif;
+}
+#ingresos{
+    border-radius: 15px;
+    background: #fff;
+    font-family: 'Montserrat', sans-serif;
+}
+#febrero{
+    border-radius: 15px;
+    background: #fff;
+    font-family: 'Montserrat', sans-serif;
+}
+#miembros{
+    border-radius: 15px;
+    background: #fff;
+    font-family: 'Montserrat', sans-serif;
+}
+#ventasm{
+    border-radius: 15px;
+    background: #fff;
+    font-family: 'Montserrat', sans-serif;
+}
+#canales{
+    border-radius: 15px;
+    background: #fff;
+    font-family: 'Montserrat', sans-serif;
 }
