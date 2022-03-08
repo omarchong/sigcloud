@@ -21,7 +21,7 @@
     <div class="d-flex">
         <div id="sidebar-container" class="colorsidebar">
             <div class="menu">
-                <a href="#" class="d-block text-light p-4"><img src="img/menu.svg" alt="" width="30px"></a>
+                <a href="#" class="d-block text-light p-4"><img src="img/menu.svg" id="menu-toggle alt="" width="30px"></a>
                 <a href="#" class="d-block text-light p-3"><img class="mr-2" src="img/dashboard.svg" alt=""
                         width="30px"> Dashboard</a>
                 <a href="#" class="d-block text-light p-3"><img class="mr-2" src="img/usuario.svg" alt=""
@@ -340,7 +340,7 @@
     <script>
         // Obtener una referencia al elemento canvas del DOM
         const $grafica = document.querySelector("#grafica");
-        // Las etiquetas son las que van en el eje X. 
+        // Las etiquetas son las que van en el eje X.
         const etiquetas = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto"]
         // Podemos tener varios conjuntos de datos
         const Sistemas = {
@@ -395,7 +395,18 @@
             }
         });
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <script>
+            $("#colorsidebar").click(function (e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+            $("#menu-toggle").mouseover(function (e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+        </script>
+
 </body>
 
 </html>
-
