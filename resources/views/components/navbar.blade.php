@@ -172,11 +172,11 @@
                         <div class="col-lg-5">
                             <div class="card-header" id="canales">
                                 <div class="row">
-                                    <div class="col">
+                                <div class="col">
                                         <h6><b>Canales de atención al cliente</b></h6>
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="ms-3">
+                                        <div class="container mt-3">
+                                            <div class="row px-5">
+                                                <div class="ms-3 ">
                                                     <img src="img/fb.svg" class="mr-2" width="40px"
                                                         height="40px" alt="...">
                                                 </div>
@@ -184,7 +184,7 @@
                                                     <h6 class="mt-0 mb-1"><b>Facebook</b></h6>
                                                     <p>2 mensajes</p>
                                                 </div>
-                                                <div class="col-sm-2 mr-3">
+                                                <div class="col-sm-2 px-5">
                                                     <img src="img/mail.svg" class="mr-3" width="40px"
                                                         height="40px" alt="...">
                                                 </div>
@@ -194,7 +194,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="row">
+                                            <div class="row px-5">
                                                 <div class="ms-3">
                                                     <img src="img/ig.svg" class="mr-2" width="40px"
                                                         height="40px" alt="...">
@@ -203,7 +203,7 @@
                                                     <h6 class="mt-0 mb-1"><b>Instagram</b></h6>
                                                     <p>3 mensajes</p>
                                                 </div>
-                                                <div class="col-sm-2 mr-3">
+                                                <div class="col-sm-2 px-5">
                                                     <img src="img/tiktok.svg" class="mr-3" width="40px"
                                                         height="40px" alt="...">
                                                 </div>
@@ -212,7 +212,7 @@
                                                     <p>3 mensajes</p>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row px-5">
                                                 <div class="ms-3">
                                                     <img src="img/wa.svg" class="mr-2" width="40px"
                                                         height="40px" alt="...">
@@ -221,7 +221,7 @@
                                                     <h6 class="mt-0 mb-1"><b>Whatsapp</b></h6>
                                                     <p>2 mensajes</p>
                                                 </div>
-                                                <div class="col-sm-2 mr-3">
+                                                <div class="col-sm-2 px-5">
                                                     <img src="img/llamadas.svg" class="mr-3" width="40px"
                                                         height="40px" alt="...">
                                                 </div>
@@ -230,7 +230,7 @@
                                                     <p>2 mensajes</p>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row px-5">
                                                 <div class="ms-3">
                                                     <img src="img/in.svg" class="mr-2" width="40px"
                                                         height="40px" alt="...">
@@ -239,7 +239,7 @@
                                                     <h6 class="mt-0 mb-1"><b>Linkedin</b></h6>
                                                     <p>0 mensajes</p>
                                                 </div>
-                                                <div class="col-sm-2 mr-3">
+                                                <div class="col-sm-2 px-5">
                                                     <img src="img/twitter.svg" class="mr-3" width="40px"
                                                         height="40px" alt="...">
                                                 </div>
