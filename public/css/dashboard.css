@@ -1,37 +1,245 @@
+/* Google Font Import - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
 
-
-a:hover{
-    text-decoration: none;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
 }
-.colorsidebar{
+
+:root {
+    /* ===== Colors ===== */
+    --body-color: #E4E9F7;
+    --sidebar-color: #FFF;
+    --primary-color-light: #F6F5FF;
+    --toggle-color: #DDD;
+    --text-color: #edeef3;
+
+    /* ====== Transition ====== */
+    --tran-03: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.3s ease;
+    --tran-05: all 0.3s ease;
+}
+
+body {
+    min-height: 100vh;
+    transition: var(--tran-05);
+}
+
+::selection {
+    color: #fff;
+}
+
+/* body.dark{
+    --body-color: #18191a;
+    --sidebar-color: #242526;
+    --primary-color: #3a3b3c;
+    --primary-color-light: #3a3b3c;
+    --toggle-color: #fff;
+    --text-color: #ccc;
+} */
+
+/* ===== Sidebar ===== */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    padding: 10px 14px;
+    transition: var(--tran-05);
+    z-index: 100;
     background: linear-gradient(#0019d6, #0b6fed, #1977ef, #29c0fd);
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     font-family: 'Montserrat', sans-serif;
 }
-#sidebar-container{
+
+.sidebar.close {
+    width: 88px;
+}
+
+/* ===== Reusable code - Here ===== */
+.sidebar li {
+    height: 50px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.sidebar .text {
+    color: var(--text-color);
+    transition: var(--tran-03);
+}
+
+.sidebar .text {
+    font-size: 17px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 1;
+}
+
+.sidebar.close .text {
+    opacity: 0;
+}
+
+/* =========================== */
+
+.sidebar li a {
+    list-style: none;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: var(--tran-03);
+}
+
+
+body.dark .sidebar li a:hover .icon,
+body.dark .sidebar li a:hover .text {
+    color: var(--text-color);
+}
+
+.sidebar .menu-bar {
+    height: calc(100% - 55px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: scroll;
+}
+
+.menu-bar::-webkit-scrollbar {
+    display: none;
+}
+
+.menu-bar .mode .sun-moon {
+    height: 50px;
+    width: 60px;
+}
+
+.mode .sun-moon i {
+    position: absolute;
+}
+
+.mode .sun-moon i.sun {
+    opacity: 0;
+}
+
+body.dark .mode .sun-moon i.sun {
+    opacity: 1;
+}
+
+body.dark .mode .sun-moon i.moon {
+    opacity: 0;
+}
+
+.menu-bar .bottom-content .toggle-switch {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    min-width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.toggle-switch .switch {
+    position: relative;
+    height: 22px;
+    width: 40px;
+    border-radius: 25px;
+    background-color: var(--toggle-color);
+    transition: var(--tran-05);
+}
+
+.switch::before {
+    content: '';
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    background-color: var(--sidebar-color);
+    transition: var(--tran-04);
+}
+
+body.dark .switch::before {
+    left: 20px;
+}
+
+.home {
+    position: absolute;
+    top: 0;
+    top: 0;
+    left: 250px;
+    height: 100vh;
+    width: calc(100% - 250px);
+    transition: var(--tran-05);
+}
+
+.home .text {
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text-color);
+    padding: 12px 60px;
+}
+
+.sidebar.close~.home {
+    left: 78px;
+    height: 100vh;
+    width: calc(100% - 78px);
+}
+
+
+
+a:hover {
+    text-decoration: none;
+}
+
+.colorsidebar {
+    background: linear-gradient(#0019d6, #0b6fed, #1977ef, #29c0fd);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#sidebar-container {
     min-height: 100vh;
 }
 
-#sidebar-container .logo{
+#sidebar-container .logo {
     padding: .875rem 1.25rem;
 }
 
-#sidebar-container .menu{
+#sidebar-container .menu {
     width: 15rem;
 }
+
 .encabezado {
     background: #edeef3;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     font-family: 'Montserrat', sans-serif;
 }
-.navbar{
+
+.navbar {
     background: #edeef3;
     border-top-left-radius: 20px;
 
 }
-#content{
+
+#content {
     background: #edeef3;
     overflow-y: auto;
     height: 100vh;
@@ -50,8 +258,9 @@ span.azul {
     margin-right: 15px;
     text-align: center;
     width: 3em;
-  }
-  span.morado {
+}
+
+span.morado {
     background: #5867ec;
     border-radius: 50px;
     color: #fff;
@@ -61,8 +270,9 @@ span.azul {
     margin-right: 15px;
     text-align: center;
     width: 3em;
-  }
-  span.naranja {
+}
+
+span.naranja {
     background: #f7a552;
     border-radius: 50px;
     color: #fff;
@@ -72,8 +282,9 @@ span.azul {
     margin-right: 15px;
     text-align: center;
     width: 3em;
-  }
-  span.verde {
+}
+
+span.verde {
     background: #60c8c9;
     border-radius: 50px;
     color: #fff;
@@ -83,250 +294,64 @@ span.azul {
     margin-right: 15px;
     text-align: center;
     width: 3em;
-  }
+}
 
-#servicios{
-    border-radius: 15px;
-    background: #fff;
-    font-family: 'Montserrat', sans-serif;
-}
-#curso{
-    border-radius: 15px;
-    background: #fff;
-    font-family: 'Montserrat', sans-serif;
-}
-#validacion{
-    border-radius: 15px;
-    background: #fff;
-    font-family: 'Montserrat', sans-serif;
-}
-#concluidos{
-    border-radius: 15px;
-    background: #fff;
-    font-family: 'Montserrat', sans-serif;
-}
-#ventasa{
-    border-radius: 15px;
-    background: #fff;
-    font-family: 'Montserrat', sans-serif;
-}
-#ingresos{
-    border-radius: 15px;
-    background: #fff;
-    font-family: 'Montserrat', sans-serif;
-}
-#febrero{
-    border-radius: 15px;
-    background: #fff;
-    font-family: 'Montserrat', sans-serif;
-}
-#miembros{
-    border-radius: 15px;
-    background: #fff;
-    font-family: 'Montserrat', sans-serif;
-}
-#ventasm{
-    border-radius: 15px;
-    background: #fff;
-    font-family: 'Montserrat', sans-serif;
-}
-#canales{
+#servicios {
     border-radius: 15px;
     background: #fff;
     font-family: 'Montserrat', sans-serif;
 }
 
-
-#wrapper {
-    padding-left: 0;
-    -webkit-transition: all 0.6s ease;
-    -moz-transition: all 0.6s ease;
-    -o-transition: all 0.6s ease;
-    transition: all 0.6s ease;
-
+#curso {
+    border-radius: 15px;
+    background: #fff;
+    font-family: 'Montserrat', sans-serif;
 }
 
-#wrapper.toggled {
-    padding-left: 200px;
+#validacion {
+    border-radius: 15px;
+    background: #fff;
+    font-family: 'Montserrat', sans-serif;
 }
 
-#sidebar-wrapper {
-    z-index: 1000;
-    position: fixed;
-    left: 250px;
-
-    width: 0;
-    height: 100%;
-    margin-left: -250px;
-    overflow-y: auto;
-    background-color:#312A25 !Important;
-
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+#concluidos {
+    border-radius: 15px;
+    background: #fff;
+    font-family: 'Montserrat', sans-serif;
 }
 
-#wrapper.toggled #sidebar-wrapper {
-    width: 0;
+#ventasa {
+    border-radius: 15px;
+    background: #fff;
+    font-family: 'Montserrat', sans-serif;
 }
 
-#page-content-wrapper {
-    width: 100%;
-    position: absolute;
-    padding: 10px;
+#ingresos {
+    border-radius: 15px;
+    background: #fff;
+    font-family: 'Montserrat', sans-serif;
 }
 
-#wrapper.toggled #page-content-wrapper {
-    position: absolute;
-    margin-left:-250px;
+#febrero {
+    border-radius: 15px;
+    background: #fff;
+    font-family: 'Montserrat', sans-serif;
 }
 
-/* Sidebar Styles */
-
-.sidebar-nav {
-    position: absolute;
-    top: 0;
-    right:15px;
-    width: 200px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+#miembros {
+    border-radius: 15px;
+    background: #fff;
+    font-family: 'Montserrat', sans-serif;
 }
 
-.sidebar-nav li {
-    text-indent: 20px;
-    line-height: 40px;
+#ventasm {
+    border-radius: 15px;
+    background: #fff;
+    font-family: 'Montserrat', sans-serif;
 }
 
-.sidebar-nav li a {
-    display: block;
-    text-decoration: none;
-    color: #999999;
+#canales {
+    border-radius: 15px;
+    background: #fff;
+    font-family: 'Montserrat', sans-serif;
 }
-
-.sidebar-nav li a:hover {
-    text-decoration: none;
-    color: #fff;
-    background: #312A25;
-}
-
-.sidebar-nav li a:active,
-.sidebar-nav li a:focus {
-    text-decoration: none;
-}
-
-.sidebar-nav > .sidebar-brand {
-    height: 65px;
-    font-size: 18px;
-    line-height: 60px;
-}
-
-.sidebar-nav > .sidebar-brand a {
-    color: #999999;
-}
-
-.sidebar-nav > .sidebar-brand a:hover {
-    color: #fff;
-    background: none;
-}
-
-@media(min-width:768px) {
-    #wrapper {
-        padding-left: 220px;
-    }
-
-    #wrapper.toggled {
-        padding-left: 0;
-    }
-
-    #sidebar-wrapper {
-        width: 200px;
-    }
-
-    #wrapper.toggled #sidebar-wrapper {
-        width: 40px;
-
-
-    }
-
-#wrapper.toggled span {
-        visibility:hidden;
-
-    }
-  #wrapper.toggled   i {
- float:right;
- }
-
-    #page-content-wrapper {
-        padding: 20px;
-        position: relative;
-    }
-
-    #wrapper.toggled #page-content-wrapper {
-        position: relative;
-        margin-right: 0;
-    }
-}
-
-
-@media(max-width:414px) {
-
-#wrapper.toggled #page-content-wrapper {
-    position: absolute;
-    margin-right:60px;
-}
-
-#wrapper.toggled {
-    padding-right: 60px;
-}
-
- #wrapper {
-        padding-left: 20px;
-    }
-
-    #wrapper.toggled {
-        padding-left: 0;
-    }
-
-    #sidebar-wrapper {
-        width: 50px;
-    }
-
-    #wrapper.toggled #sidebar-wrapper {
-        width: 140px;
-
-
-    }
-
-    #wrapper.toggled span {
-        visibility:visible;
-        position:relative;
-        left:70px;
-        bottom:13px;
-
-    }
-
-#wrapper span {
-        visibility:hidden;
-
-    }
-  #wrapper.toggled   i {
- float:right;
- }
-
-  #wrapper   i {
- float:right;
- }
-
-    #page-content-wrapper {
-        padding: 5px;
-        position: relative;
-    }
-
-    #wrapper.toggled #page-content-wrapper {
-        position: relative;
-        margin-right: 0;
-    }
-}
-
