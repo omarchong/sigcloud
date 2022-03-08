@@ -11,9 +11,6 @@
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
     <title>Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
-
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 
 </head>
 
@@ -107,9 +104,10 @@
                         </ul>
                     </div>
                 </div>
+                
             </nav>
-
             <section>
+                
                 <div class="container">
                     <div class="row">
                         <div class="col lg-3 ">
@@ -243,7 +241,7 @@
                             <div class="card" id="ventasm">
                                 <div class="card-body">
                                     <h6><b>Ventas mensuales</b></h6>
-                                    <canvas id="grafica" height="115px"></canvas>
+                                    <canvas id="grafica" height="120px"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -252,9 +250,9 @@
                                 <div class="row">
                                     <div class="col">
                                         <h6><b>Canales de atención al cliente</b></h6>
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="ms-3">
+                                        <div class="container mt-3">
+                                            <div class="row px-5">
+                                                <div class="ms-3 ">
                                                     <img src="img/fb.svg" class="mr-2" width="40px"
                                                         height="40px" alt="...">
                                                 </div>
@@ -262,7 +260,7 @@
                                                     <h6 class="mt-0 mb-1"><b>Facebook</b></h6>
                                                     <p>2 mensajes</p>
                                                 </div>
-                                                <div class="col-sm-2 mr-3">
+                                                <div class="col-sm-2 px-5">
                                                     <img src="img/mail.svg" class="mr-3" width="40px"
                                                         height="40px" alt="...">
                                                 </div>
@@ -272,7 +270,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="row">
+                                            <div class="row px-5">
                                                 <div class="ms-3">
                                                     <img src="img/ig.svg" class="mr-2" width="40px"
                                                         height="40px" alt="...">
@@ -281,7 +279,7 @@
                                                     <h6 class="mt-0 mb-1"><b>Instagram</b></h6>
                                                     <p>3 mensajes</p>
                                                 </div>
-                                                <div class="col-sm-2 mr-3">
+                                                <div class="col-sm-2 px-5">
                                                     <img src="img/tiktok.svg" class="mr-3" width="40px"
                                                         height="40px" alt="...">
                                                 </div>
@@ -290,7 +288,7 @@
                                                     <p>3 mensajes</p>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row px-5">
                                                 <div class="ms-3">
                                                     <img src="img/wa.svg" class="mr-2" width="40px"
                                                         height="40px" alt="...">
@@ -299,7 +297,7 @@
                                                     <h6 class="mt-0 mb-1"><b>Whatsapp</b></h6>
                                                     <p>2 mensajes</p>
                                                 </div>
-                                                <div class="col-sm-2 mr-3">
+                                                <div class="col-sm-2 px-5">
                                                     <img src="img/llamadas.svg" class="mr-3" width="40px"
                                                         height="40px" alt="...">
                                                 </div>
@@ -308,7 +306,7 @@
                                                     <p>2 mensajes</p>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row px-5">
                                                 <div class="ms-3">
                                                     <img src="img/in.svg" class="mr-2" width="40px"
                                                         height="40px" alt="...">
@@ -317,7 +315,7 @@
                                                     <h6 class="mt-0 mb-1"><b>Linkedin</b></h6>
                                                     <p>0 mensajes</p>
                                                 </div>
-                                                <div class="col-sm-2 mr-3">
+                                                <div class="col-sm-2 px-5">
                                                     <img src="img/twitter.svg" class="mr-3" width="40px"
                                                         height="40px" alt="...">
                                                 </div>
@@ -340,9 +338,9 @@
 
     <script>
         const body = document.querySelector('body'),
-      sidebar = body.querySelector('nav'),
-      toggle = body.querySelector(".toggle"),
-      modeSwitch = body.querySelector(".toggle-switch");
+        sidebar = body.querySelector('nav'),
+        toggle = body.querySelector(".toggle"),
+        modeSwitch = body.querySelector(".toggle-switch");
 
 
 toggle.addEventListener("mouseover" , () =>{
