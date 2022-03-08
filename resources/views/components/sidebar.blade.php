@@ -1,4 +1,3 @@
-@yield("content")
 <nav class="sidebar close toggle">
         <div class="menu-bar">
                 <ul class="menu-links">
@@ -18,7 +17,7 @@
                     </li>
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="{{ route('clientes.index') }}">
                             <img class="mr-2" src="img/usuario.svg" alt="" width="35px">
                             <span class="text nav-text">  Clientes</span>
                         </a>
