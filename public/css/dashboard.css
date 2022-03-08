@@ -9,7 +9,7 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-:root{
+:root {
     /* ===== Colors ===== */
     --body-color: #E4E9F7;
     --sidebar-color: #FFF;
@@ -24,12 +24,12 @@
     --tran-05: all 0.3s ease;
 }
 
-body{
+body {
     min-height: 100vh;
     transition: var(--tran-05);
 }
 
-::selection{
+::selection {
     color: #fff;
 }
 
@@ -43,7 +43,7 @@ body{
 } */
 
 /* ===== Sidebar ===== */
- .sidebar{
+.sidebar {
     position: fixed;
     top: 0;
     left: 0;
@@ -51,18 +51,19 @@ body{
     width: 250px;
     padding: 10px 14px;
     transition: var(--tran-05);
-    z-index: 100;  
+    z-index: 100;
     background: linear-gradient(#0019d6, #0b6fed, #1977ef, #29c0fd);
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     font-family: 'Montserrat', sans-serif;
 }
-.sidebar.close{
+
+.sidebar.close {
     width: 88px;
 }
 
 /* ===== Reusable code - Here ===== */
-.sidebar li{
+.sidebar li {
     height: 50px;
     list-style: none;
     display: flex;
@@ -70,23 +71,25 @@ body{
     margin-top: 10px;
 }
 
-.sidebar .text{
+.sidebar .text {
     color: var(--text-color);
     transition: var(--tran-03);
 }
 
-.sidebar .text{
+.sidebar .text {
     font-size: 17px;
     font-weight: 500;
     white-space: nowrap;
     opacity: 1;
 }
-.sidebar.close .text{
+
+.sidebar.close .text {
     opacity: 0;
 }
+
 /* =========================== */
 
-.sidebar li a{
+.sidebar li a {
     list-style: none;
     height: 100%;
     background-color: transparent;
@@ -101,40 +104,44 @@ body{
 
 
 body.dark .sidebar li a:hover .icon,
-body.dark .sidebar li a:hover .text{
+body.dark .sidebar li a:hover .text {
     color: var(--text-color);
 }
 
-.sidebar .menu-bar{
+.sidebar .menu-bar {
     height: calc(100% - 55px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     overflow-y: scroll;
 }
-.menu-bar::-webkit-scrollbar{
+
+.menu-bar::-webkit-scrollbar {
     display: none;
 }
 
-.menu-bar .mode .sun-moon{
+.menu-bar .mode .sun-moon {
     height: 50px;
     width: 60px;
 }
 
-.mode .sun-moon i{
+.mode .sun-moon i {
     position: absolute;
 }
-.mode .sun-moon i.sun{
-    opacity: 0;
-}
-body.dark .mode .sun-moon i.sun{
-    opacity: 1;
-}
-body.dark .mode .sun-moon i.moon{
+
+.mode .sun-moon i.sun {
     opacity: 0;
 }
 
-.menu-bar .bottom-content .toggle-switch{
+body.dark .mode .sun-moon i.sun {
+    opacity: 1;
+}
+
+body.dark .mode .sun-moon i.moon {
+    opacity: 0;
+}
+
+.menu-bar .bottom-content .toggle-switch {
     position: absolute;
     right: 0;
     height: 100%;
@@ -145,7 +152,8 @@ body.dark .mode .sun-moon i.moon{
     border-radius: 6px;
     cursor: pointer;
 }
-.toggle-switch .switch{
+
+.toggle-switch .switch {
     position: relative;
     height: 22px;
     width: 40px;
@@ -154,7 +162,7 @@ body.dark .mode .sun-moon i.moon{
     transition: var(--tran-05);
 }
 
-.switch::before{
+.switch::before {
     content: '';
     position: absolute;
     height: 15px;
@@ -167,11 +175,11 @@ body.dark .mode .sun-moon i.moon{
     transition: var(--tran-04);
 }
 
-body.dark .switch::before{
+body.dark .switch::before {
     left: 20px;
 }
 
-.home{
+.home {
     position: absolute;
     top: 0;
     top: 0;
@@ -180,14 +188,15 @@ body.dark .switch::before{
     width: calc(100% - 250px);
     transition: var(--tran-05);
 }
-.home .text{
+
+.home .text {
     font-size: 30px;
     font-weight: 500;
     color: var(--text-color);
     padding: 12px 60px;
 }
 
-.sidebar.close ~ .home{
+.sidebar.close~.home {
     left: 78px;
     height: 100vh;
     width: calc(100% - 78px);
@@ -195,44 +204,49 @@ body.dark .switch::before{
 
 
 
-a:hover{
+a:hover {
     text-decoration: none;
 }
-.colorsidebar{
+
+.colorsidebar {
     background: linear-gradient(#0019d6, #0b6fed, #1977ef, #29c0fd);
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     font-family: 'Montserrat', sans-serif;
 }
-#sidebar-container{
+
+#sidebar-container {
     min-height: 100vh;
 }
 
-#sidebar-container .logo{
+#sidebar-container .logo {
     padding: .875rem 1.25rem;
 }
 
-#sidebar-container .menu{
+#sidebar-container .menu {
     width: 15rem;
 }
+
 .encabezado {
     background: #edeef3;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     font-family: 'Montserrat', sans-serif;
 }
-.navbar{
+
+.navbar {
     background: #edeef3;
     border-top-left-radius: 20px;
-    
+
 }
-#content{
+
+#content {
     background: #edeef3;
     overflow-y: auto;
     height: 100vh;
     padding-bottom: 5rem;
     border-bottom-left-radius: 20px;
-    
+
 }
 
 span.azul {
@@ -244,9 +258,10 @@ span.azul {
     line-height: 45px;
     margin-right: 15px;
     text-align: center;
-    width: 3em; 
-  }
-  span.morado {
+    width: 3em;
+}
+
+span.morado {
     background: #5867ec;
     border-radius: 50px;
     color: #fff;
@@ -255,9 +270,10 @@ span.azul {
     line-height: 45px;
     margin-right: 15px;
     text-align: center;
-    width: 3em; 
-  }
-  span.naranja {
+    width: 3em;
+}
+
+span.naranja {
     background: #f7a552;
     border-radius: 50px;
     color: #fff;
@@ -266,9 +282,10 @@ span.azul {
     line-height: 45px;
     margin-right: 15px;
     text-align: center;
-    width: 3em; 
-  }
-  span.verde {
+    width: 3em;
+}
+
+span.verde {
     background: #60c8c9;
     border-radius: 50px;
     color: #fff;
@@ -277,55 +294,64 @@ span.azul {
     line-height: 45px;
     margin-right: 15px;
     text-align: center;
-    width: 3em; 
-  }
+    width: 3em;
+}
 
-#servicios{
+#servicios {
     border-radius: 15px;
     background: #fff;
     font-family: 'Montserrat', sans-serif;
 }
-#curso{
+
+#curso {
     border-radius: 15px;
     background: #fff;
     font-family: 'Montserrat', sans-serif;
 }
-#validacion{
+
+#validacion {
     border-radius: 15px;
     background: #fff;
     font-family: 'Montserrat', sans-serif;
 }
-#concluidos{
+
+#concluidos {
     border-radius: 15px;
     background: #fff;
     font-family: 'Montserrat', sans-serif;
 }
-#ventasa{
+
+#ventasa {
     border-radius: 15px;
     background: #fff;
     font-family: 'Montserrat', sans-serif;
 }
-#ingresos{
+
+#ingresos {
     border-radius: 15px;
     background: #fff;
     font-family: 'Montserrat', sans-serif;
 }
-#febrero{
+
+#febrero {
     border-radius: 15px;
     background: #fff;
     font-family: 'Montserrat', sans-serif;
 }
-#miembros{
+
+#miembros {
     border-radius: 15px;
     background: #fff;
     font-family: 'Montserrat', sans-serif;
 }
-#ventasm{
+
+#ventasm {
     border-radius: 15px;
     background: #fff;
     font-family: 'Montserrat', sans-serif;
 }
-#canales{
+
+#canales {
     border-radius: 15px;
     background: #fff;
     font-family: 'Montserrat', sans-serif;

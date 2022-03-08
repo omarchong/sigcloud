@@ -14,7 +14,7 @@
     {{-- Tipo de letras --}}
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    
+
     {{-- Estilos --}}
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
 </head>
