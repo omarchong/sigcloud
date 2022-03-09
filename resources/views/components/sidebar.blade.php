@@ -16,6 +16,13 @@
                         </a>
                     </li>
 
+
+                    <li class="nav-link">
+                        <a href="{{ route('contactos.index') }}">
+                            <img class="mr-2" src="img/usuario.svg" alt="" width="35px">
+                            <span class="text nav-text">  Contatctos</span>
+                        </a>
+                    </li>
                     <li class="nav-link">
                         <a href="{{ route('clientes.index') }}">
                             <img class="mr-2" src="img/usuario.svg" alt="" width="35px">
