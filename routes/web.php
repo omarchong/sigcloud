@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ServiciosController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -16,4 +17,5 @@ route::get('recuperacion',[LoginController::class, 'recuperacion'])->name('recup
 route::get('recuperarcontrasena',[LoginController::class, 'recuperarcontrasena'])->name('recuperarcontrasena');
 
 Route::resource('clientes', ClientesController::class);
+Route::resource('servicios', ServiciosController::class);
 
