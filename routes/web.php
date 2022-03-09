@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\ContactosController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ServiciosController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -22,4 +23,6 @@ route::get('recuperarcontrasena',[LoginController::class, 'recuperarcontrasena']
 
 Route::resource('clientes', ClientesController::class);
 Route::resource('contactos', ContactosController::class);
+
+Route::resource('servicios', ServiciosController::class);
 

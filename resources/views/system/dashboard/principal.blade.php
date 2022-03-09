@@ -25,18 +25,20 @@
     </section>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script src=" {{asset('js/sidebar.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js" integrity="sha256-ErZ09KkZnzjpqcane4SCyyHsKAXMvID9/xwbl/Aq1pc=" crossorigin="anonymous"></script>
-    <script src="{{asset('js/graficas.js') }}"></script>
-    @if ( session()->has('success') )
-                        <script>
-                            Swal.fire(
-                            'Exitoso!',
-                            '{{ session()->get('success')}}',
-                            'success'
-                            )
-                        </script>
-                    @endif
+    <script src=" {{ asset('js/sidebar.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"
+        integrity="sha256-ErZ09KkZnzjpqcane4SCyyHsKAXMvID9/xwbl/Aq1pc=" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/graficas.js') }}"></script>
+    {{-- alertas --}}
+    @if (session()->has('success'))
+        <script>
+            Swal.fire(
+                'Exitoso!',
+                '{{ session()->get('success') }}',
+                'success'
+            )
+        </script>
+    @endif
 </body>
 
 </html>
