@@ -1,5 +1,8 @@
 @extends('system.dashboard.principal')
-
+@section('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.css
+">
+@endsection
 @section('contenido')
     <div class="main col-md-12 mt-5 encabezado">
         <div class="main-content">

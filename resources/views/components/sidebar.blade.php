@@ -2,14 +2,14 @@
         <div class="menu-bar">
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="{{ route('prueba') }}">
                             <img class="mr-2" src="img/menu.svg" alt=""
                         width="35px">
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="{{ route('prueba') }}">
                             <img class="mr-2" src="img/dashboard.svg" alt=""
                         width="35px">
                             <span class="text nav-text">  Dashboard</span>

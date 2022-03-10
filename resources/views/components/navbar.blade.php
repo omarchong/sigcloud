@@ -1,3 +1,8 @@
+
+@section("css")
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.css"
+
+@endsection
 <div class="encabezado w-100">
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
