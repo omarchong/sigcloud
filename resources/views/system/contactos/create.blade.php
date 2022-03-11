@@ -1,6 +1,7 @@
-@extends('system.dashboard.principal')
+@include('layouts.admin')
 
-@section('contenido')
+
+
 
 <div class="container my-5">
     <div class="card">
@@ -48,4 +49,4 @@
     </div>
 </div>
 
-@endsection
+
