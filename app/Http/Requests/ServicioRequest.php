@@ -18,9 +18,8 @@ class ServicioRequest extends FormRequest
         return [
             'nombre' => ['required'],
             'descripcion' => ['required'],
-            'precio_final' => ['required'],
-            'precio_inicial' => ['required'],
-
+            'precio_final' => ['required', 'numeric'],
+            'precio_inicial' => ['required', 'numeric'],
         ];
     }
 }

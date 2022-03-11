@@ -21,15 +21,15 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputPrecioi">Precio inicial</label>
-                                <input type="int" class="form-control" id="inputPrecioi" name="precio_inicial" value="{{ old('precio_inicial')}}">
+                                <input type="number" class="form-control" id="inputPrecioi" name="precio_inicial" value="{{ old('precio_inicial')}}">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputPreciof">Precio final</label>
-                                <input type="int" class="form-control" id="inputPreciof" name="precio_final" value="{{ old('precio_final')}}">
+                                <input type="number" class="form-control" id="inputPreciof" name="precio_final" value="{{ old('precio_final')}}">
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="submit" class="btn btn-primary float-right">Guardar</button>
                     </form>
                 </div>
             </div>

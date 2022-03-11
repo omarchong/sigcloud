@@ -27,15 +27,18 @@
                                 <td>{{$servicio->descripcion}}</td>
                                 <td>{{$servicio->precio_inicial}}</td>
                                 <td>{{$servicio->precio_final}}</td>
-                                <td> <center><a href="{{ route('servicios.update',['servicio' => $servicio->id], 'servicios.edit') }}"><img src="img/editar.svg" alt="" width="20px"></a>
+                                <td> <center><a href="#"><img src="img/editar.svg" alt="" width="20px"></a>
                                     <a href=""><img src="img/basurero.svg" alt="" width="20px"></a>
                                     </center>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    <h5><b>Total de ingresos</b></h5>
+
                     <!-- Button trigger modal -->
-                    <a href="{{ route('servicios.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Registrar servicio</a>
+                    <a href="{{route('servicios.create')}}"  class="btn btn-primary"><i class="fas fa-plus"></i> Registrar servicio</a>
                                     
                 </div>
             </div>
