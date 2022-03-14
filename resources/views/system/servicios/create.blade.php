@@ -1,6 +1,10 @@
-@extends('system.dashboard.principal')
+@include('layouts.admin')
 
-@section('contenido')
+@section('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.css
+">
+@endsection
+
     <div class="main col-md-12 mt-5 encabezado">
         <div class="main-content">
             <div class="panel panel-headline">
@@ -35,16 +39,5 @@
             </div>
         </div>
     </div>
-@endsection
-@section('js')
-@if ( session()->has('success') )
-                        <script>
-                            Swal.fire(
-                            'Exitoso!',
-                            '{{ session()->get('success')}}',
-                            'success'
-                            )
-                        </script>
-                    @endif
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-@endsection
+
+

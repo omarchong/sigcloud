@@ -26,5 +26,11 @@ class ServiciosController extends Controller
       ->route('servicios.index')
       ->withSuccess("El servicio $servicio->nombre se dio de alta correctamente");
   }
-  
+
+  public function RegistrosDatatables()
+  {
+    return datatables()
+      ->eloquent(Servicio::query())->toJson();
+  }
 }
+

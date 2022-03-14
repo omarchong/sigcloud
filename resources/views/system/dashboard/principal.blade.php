@@ -8,6 +8,8 @@
     @yield('css')
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.css
+">
     <title>Dashboard</title>
 
 </head>
@@ -26,18 +28,20 @@
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src=" {{ asset('js/sidebar.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"
-        integrity="sha256-ErZ09KkZnzjpqcane4SCyyHsKAXMvID9/xwbl/Aq1pc=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js" integrity="sha256-ErZ09KkZnzjpqcane4SCyyHsKAXMvID9/xwbl/Aq1pc=" crossorigin="anonymous"></script>
     <script src="{{ asset('js/graficas.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.js"></script>
+
     {{-- alertas --}}
     @if (session()->has('success'))
-        <script>
-            Swal.fire(
-                'Exitoso!',
-                '{{ session()->get('success') }}',
-                'success'
-            )
-        </script>
+    <script>
+        Swal.fire(
+            'Exitoso!',
+            '{{ session()->get('
+            success ') }}',
+            'success'
+        )
+    </script>
     @endif
 </body>
 
