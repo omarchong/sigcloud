@@ -26,19 +26,11 @@ class ServiciosController extends Controller
       ->route('servicios.index')
       ->withSuccess("El servicio $servicio->nombre se dio de alta correctamente");
   }
-  public function edit(servicio $servicio)
+
+  public function RegistrosDatatables()
   {
-    return redirect()->route('servicios.index', [
-      'servicio' => $servicio
-        ->get()
-    ]);
-  }
-  public function update(ServicioRequest $request, servicio $servicio)
-  {
-    $servicio->update($request->validated());
-    $servicio->save();
-    return redirect()
-      ->route('servicios.index')
-      ->withSuccess("El servicio $servicio->nombre ha sido modificado correctamente");
+    return datatables()
+      ->eloquent(Servicio::query())->toJson();
   }
 }
+
