@@ -10,7 +10,6 @@ class ServiciosController extends Controller
 {
   public function index()
   {
-    $servicios = Servicio::all();
     return view("system.servicios.index");
   }
 
