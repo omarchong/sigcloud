@@ -10,25 +10,41 @@ class ContactosController extends Controller
 {
     public function index()
     {
-      /*   $contactos = Contacto::all(); */
         return view('system.contactos.index');
     }
 
-    public function create()
-    {
-        return view('system.contactos.create');
-    }
 
-    public function store(ContactoRequest $request)
+
+    public function store(Request $request)
     {
-        /* dd($request->all()); */
-        $contacto = Contacto::create($request->validated());
-        /*  Alert::success("El contacto $contacto->nombre se guardo correctamente"); */
+        $contacto = Contacto::updatedOrCreate(
+            ['id' => $request->id],
+            [
+                'nombre' => $request->nombre,
+                'email' => $request->email,
+                'telefono' => $request->telefono,
+                'descripcion' => $request->descripcion
+            ]
+        );
+    return response()->json(['success' => true]);
+
+        /*  $contacto = Contacto::create($request->validated());
 
         return redirect()
             ->route('contactos.index')
-            ->withSuccess("El contacto $contacto->nombre se dio de alta correctamente");
+            ->withSuccess("El contacto $contacto->nombre se dio de alta correctamente"); */
     }
+    public function edit(Request $request)
+    {
+      $where = array('id' => $request->id);
+      $contacto = Contacto::where($where)->first();
+      return response()->json($contacto);
+    }
+  
+
+
+
+
     public function RegistrosDatatables()
     {
         return datatables()
