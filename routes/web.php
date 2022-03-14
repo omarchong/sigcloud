@@ -29,5 +29,10 @@ Route::get('datatables/contactos', [ContactosController::class, 'RegistrosDatata
 
 /* cristhian */
 Route::resource('servicios', ServiciosController::class);
+Route::post('add-update-servicio', [ServiciosController::class, 'store']);
+Route::post('edit-servicio', [ServiciosController::class, 'edit']);
+Route::post('delete-servicio', [ServiciosController::class, 'destroy']);
+
 Route::get('datatables/servicios', [ServiciosController::class, 'RegistrosDatatables'])->name('servicios.datatables');
+
 
