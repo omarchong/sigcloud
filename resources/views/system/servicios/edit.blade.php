@@ -8,7 +8,7 @@
                     <h3 class="panel-title">Editar servicio</h3>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('servicio.update',['servicio' => $servicio->id]) }}" method="POST">
+                    <form action="{{ url('/servicios/' .$servicio->id) }}" method="POST">
                         {{ csrf_field() }}
                         <div class="form-row">
                             <div class="form-group col-md-6">

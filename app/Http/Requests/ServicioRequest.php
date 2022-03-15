@@ -16,11 +16,14 @@ class ServicioRequest extends FormRequest
     public function rules()
     {
         return [
+            
             'nombre' => ['required'],
+            
             'descripcion' => ['required'],
-            'precio_final' => ['required'],
-            'precio_inicial' => ['required'],
-
+            
+            'precio_final' => ['required', 'numeric'],
+            
+            'precio_inicial' => ['required', 'numeric'],
         ];
     }
 }

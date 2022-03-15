@@ -1,9 +1,10 @@
-@extends('system.dashboard.principal')
+@include('layouts.admin')
+
 @section('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.css
 ">
 @endsection
-@section('contenido')
+
     <div class="main col-md-12 mt-5 encabezado">
         <div class="main-content">
             <div class="panel panel-headline">
@@ -24,30 +25,19 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputPrecioi">Precio inicial</label>
-                                <input type="int" class="form-control" id="inputPrecioi" name="precio_inicial" value="{{ old('precio_inicial')}}">
+                                <input type="number" class="form-control" id="inputPrecioi" name="precio_inicial" value="{{ old('precio_inicial')}}">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputPreciof">Precio final</label>
-                                <input type="int" class="form-control" id="inputPreciof" name="precio_final" value="{{ old('precio_final')}}">
+                                <input type="number" class="form-control" id="inputPreciof" name="precio_final" value="{{ old('precio_final')}}">
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="submit" class="btn btn-primary float-right">Guardar</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-@endsection
-@section('js')
-@if ( session()->has('success') )
-                        <script>
-                            Swal.fire(
-                            'Exitoso!',
-                            '{{ session()->get('success')}}',
-                            'success'
-                            )
-                        </script>
-                    @endif
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-@endsection
+
+

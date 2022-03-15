@@ -10,25 +10,60 @@ class ContactosController extends Controller
 {
     public function index()
     {
-      /*   $contactos = Contacto::all(); */
+
         return view('system.contactos.index');
+       /*  return $contacto; */
     }
 
-    public function create()
+
+
+    public function store(Request $request)
+
+  {
+
+    $contacto = Contacto::updateOrCreate(
+      [
+        'id' => $request->id
+      ],
+      [
+        'nombre' => $request->nombre,
+        'email' => $request->email,
+        'telefono'  => $request->telefono,
+        'descripcion' => $request->descripcion,
+      ]
+    );
+    return response()->json(['success' => true]);
+    /* dd($request->all()); */
+    /*  $servicio = Servicio::create($request->validated());
+
+    return redirect()
+      ->route('servicios.index')
+      ->withSuccess("El servicio $servicio->nombre se dio de alta correctamente"); */
+  }
+
+    public function edit(Request $request)
     {
-        return view('system.contactos.create');
+      $where = array('id' => $request->id);
+      $contacto = Contacto::where($where)->first();
+      return response()->json($contacto);
     }
 
-    public function store(ContactoRequest $request)
+
+    public function show($id)
     {
-        /* dd($request->all()); */
-        $contacto = Contacto::create($request->validated());
-        /*  Alert::success("El contacto $contacto->nombre se guardo correctamente"); */
+        $contacto = Contacto::findOrFail($id);
 
-        return redirect()
-            ->route('contactos.index')
-            ->withSuccess("El contacto $contacto->nombre se dio de alta correctamente");
+        return view('system.contactos.show', compact('contacto'));
     }
+
+
+
+    public function destroy(Request $request)
+    {
+      $contacto = Contacto::where('id', $request->id)->delete();
+      return response()->json(['success' => true]);
+    }
+
     public function RegistrosDatatables()
     {
         return datatables()

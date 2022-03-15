@@ -10,35 +10,52 @@ class ServiciosController extends Controller
 {
   public function index()
   {
-    $servicios = Servicio::all();
-    return view("system.servicios.index")->with('servicios', $servicios);
+    return view("system.servicios.index");
   }
-  public function create()
+
+
+
+
+  public function store(Request $request)
+
   {
-    return view('system.servicios.create');
-  }
-  public function store(ServicioRequest $request)
-  {
+
+    $servicio = Servicio::updateOrCreate(
+      [
+        'id' => $request->id
+      ],
+      [
+        'nombre' => $request->nombre,
+        'descripcion' => $request->descripcion,
+        'precio_inicial'  => $request->precio_inicial,
+        'precio_final' => $request->precio_final,
+      ]
+    );
+    return response()->json(['success' => true]);
     /* dd($request->all()); */
-    $servicio = Servicio::create($request->validated());
+    /*  $servicio = Servicio::create($request->validated());
 
     return redirect()
       ->route('servicios.index')
-      ->withSuccess("El servicio $servicio->nombre se dio de alta correctamente");
+      ->withSuccess("El servicio $servicio->nombre se dio de alta correctamente"); */
   }
-  public function edit(servicio $servicio)
+
+  public function edit(Request $request)
   {
-    return redirect()->route('servicios.index', [
-      'servicio' => $servicio
-        ->get()
-    ]);
+    $where = array('id' => $request->id);
+    $servicio = Servicio::where($where)->first();
+    return response()->json($servicio);
   }
-  public function update(ServicioRequest $request, servicio $servicio)
+
+  public function RegistrosDatatables()
   {
-    $servicio->update($request->validated());
-    $servicio->save();
-    return redirect()
-      ->route('servicios.index')
-      ->withSuccess("El servicio $servicio->nombre ha sido modificado correctamente");
+    return datatables()
+      ->eloquent(Servicio::query())->toJson();
+  }
+
+  public function destroy(Request $request)
+  {
+    $servicio = Servicio::where('id', $request->id)->delete();
+    return response()->json(['success' => true]);
   }
 }

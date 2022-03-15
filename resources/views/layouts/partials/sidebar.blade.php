@@ -23,7 +23,7 @@
                 </a>
             </li>
             <li class="nav-link">
-                <a href="">
+                <a href="{{route('servicios.index')}}">
                     <img class="mr-2" src="img/usuario.svg" alt="" width="35px">
                     <span class="text nav-text"> Clientes</span>
                 </a>
