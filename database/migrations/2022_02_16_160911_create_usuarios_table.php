@@ -20,13 +20,15 @@ class CreateUsuariosTable extends Migration
             $table->string('password');
             $table->string('password_confirmar');
             $table->string('departamento');
-            $table->string('imagen');
+            $table->string('imagen')->nullable();
             $table->string('estatus');
-            $table->foreignId('rol_id')
+            /* $table->foreignId('rol_id')
                 ->references('id')
-                ->on('roles');
+                ->on('roles'); */
+                /* $table->foreignId('rol_id')->constrained(); */
+            
             $table->timestamps();
-            $table->softDeletes();
+            $table->softDeletes();  
         });
     }
 

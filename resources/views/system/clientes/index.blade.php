@@ -1,8 +1,5 @@
-@extends('system.dashboard.principal')
+@include('layouts.admin')
 
-
-
-@section('contenido')
 <div class="main col-md-12 mt-5 encabezado">
     <div class="main-content">
         <div class="panel panel-headline">
@@ -11,8 +8,8 @@
                 <p class="panel-subtitle">Listado de productos</p>
             </div>
             <div class="panel-body">
-                  <a href="{{ route('clientes.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar Cliente</a>
-                 <!-- <a href="{{url('pdfclientes') }}"><button class="btn btn-danger"><i class="fas fa-file-pdf"></i></button></a>  -->
+                <a href="{{ route('clientes.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar Cliente</a>
+                <!-- <a href="{{url('pdfclientes') }}"><button class="btn btn-danger"><i class="fas fa-file-pdf"></i></button></a>  -->
             </div>
             <div class="card">
                 <div class="card-body">
@@ -31,11 +28,40 @@
 
                         </tbody>
                     </table>
+                    <script>
+                        $("#clientes").DataTable({
+                            "responsive": true,
+                            "processing": true,
+                            "serverSide": true,
+                            "autoWidth": false,
+                            language: {
+                                url: "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
+                            },
+                            "ajax": "{{ route('clientes.datatables') }}",
+                            "columns": [{
+                                    data: 'id',
+                                },
+                                {
+                                    data: 'nombreempresa',
+                                },
+                                {
+                                    data: 'estado',
+                                },
+                                {
+                                    data: 'servicio',
+                                }, {
+                                    data: 'estatuscliente',
+                                },
+                            ]
+                        })
+
+                        function reloadTable() {
+                            $('#clientes').DataTable().ajax.reload();
+
+                        }
+                        
+                    </script>
                 </div>
             </div>
         </div>
     </div>
-
-
-</div>
-@endsection

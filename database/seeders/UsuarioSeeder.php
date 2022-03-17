@@ -22,7 +22,7 @@ class UsuarioSeeder extends Seeder
             'departamento' => 'Tic',
             'imagen' => 'imagen',
             'estatus' => 'Si',
-            'rol_id' => 1,
+            /* 'rol_id' => 1, */
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
 
@@ -39,7 +39,7 @@ class UsuarioSeeder extends Seeder
             'departamento' => 'Negocios',
             'imagen' => 'imagen',
             'estatus' => 'Si',
-            'rol_id' => 2,
+            /* 'rol_id' => 2, */
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
 
@@ -56,7 +56,7 @@ class UsuarioSeeder extends Seeder
             'departamento' => 'Ventas',
             'imagen' => 'imagen',
             'estatus' => 'Si',
-            'rol_id' => 3,
+            /* 'rol_id' => 3, */
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
 
@@ -73,7 +73,7 @@ class UsuarioSeeder extends Seeder
             'departamento' => 'Marketing',
             'imagen' => 'imagen',
             'estatus' => 'Si',
-            'rol_id' => 2,
+            /* 'rol_id' => 2, */
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
 
@@ -90,7 +90,7 @@ class UsuarioSeeder extends Seeder
             'departamento' => 'Tic',
             'imagen' => 'imagen',
             'estatus' => 'Si',
-            'rol_id' => 2,
+            /* 'rol_id' => 2, */
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
 

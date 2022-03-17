@@ -32,7 +32,7 @@ class ClientesSeeder extends Seeder
 
         DB::table('clientes')->insert([
             'tipocliente' => 'Empresarial',
-            'nombreempresa' => 'DSW',
+            'nombreempresa' => 'Selkar',
             'rfc' => 'COLO9910230HMCHPM06',
             'estado' => 'Edo Mex',
             'municipio' => 'Metepec',

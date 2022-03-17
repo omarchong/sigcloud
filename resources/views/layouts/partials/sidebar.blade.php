@@ -23,9 +23,21 @@
                 </a>
             </li>
             <li class="nav-link">
-                <a href="{{route('servicios.index')}}">
+                <a href="{{route('usuarios.index')}}">
+                    <img class="mr-2" src="img/usuario.svg" alt="" width="35px">
+                    <span class="text nav-text"> Usuarios</span>
+                </a>
+            </li>
+            <li class="nav-link">
+                <a href="{{route('clientes.index')}}">
                     <img class="mr-2" src="img/usuario.svg" alt="" width="35px">
                     <span class="text nav-text"> Clientes</span>
+                </a>
+            </li>
+            <li class="nav-link">
+                <a href="{{route('servicios.index')}}">
+                    <img class="mr-2" src="img/usuario.svg" alt="" width="35px">
+                    <span class="text nav-text"> Servicios</span>
                 </a>
             </li>
 

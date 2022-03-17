@@ -5,6 +5,7 @@ use App\Http\Controllers\ContactosController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ServiciosController;
+use App\Http\Controllers\UsuariosController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -20,6 +21,7 @@ route::get('inicio',[LoginController::class, 'inicio'])->name('inicio');
 route::get('recuperacion',[LoginController::class, 'recuperacion'])->name('recuperacion');
 route::get('recuperarcontrasena',[LoginController::class, 'recuperarcontrasena'])->name('recuperarcontrasena');
 Route::resource('clientes', ClientesController::class);
+Route::get('datatables/clientes', [ClientesController::class, 'RegistrosDatatables'])->name('clientes.datatables');
 /* omar chong */
 Route::resource('contactos', ContactosController::class);
 Route::post('add-update-contactos', [ContactosController::class, 'store']);
@@ -35,3 +37,5 @@ Route::post('delete-servicio', [ServiciosController::class, 'destroy']);
 Route::get('datatables/servicios', [ServiciosController::class, 'RegistrosDatatables'])->name('servicios.datatables');
 
 
+Route::resource('usuarios', UsuariosController::class);
+Route::get('datatables/usuarios',[UsuariosController::class, 'RegistrosDatatables'])->name('usuarios.datatables');

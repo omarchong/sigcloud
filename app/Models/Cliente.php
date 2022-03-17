@@ -41,4 +41,5 @@ class Cliente extends Model
     {
         return $this->belongsTo(Cita::class);
     }
+   
 }

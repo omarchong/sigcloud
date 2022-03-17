@@ -21,13 +21,13 @@ class Usuario extends Model
         'password_confirmar',
         'departamento',
         'imagen',
-        'rol_id',
+        /* 'rol_id', */
         'estatus'
     ];
 
-    public function rol()
+    public function roles()
     {
-        return $this->belongsTo(Rol::class);
+        return $this->hasOne(Rol::class);
     }
 
     public function proyecto()

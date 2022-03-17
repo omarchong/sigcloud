@@ -8,16 +8,16 @@ use Illuminate\Http\Request;
 
 class ContactosController extends Controller
 {
-    public function index()
-    {
+  public function index()
+  {
 
-        return view('system.contactos.index');
-       /*  return $contacto; */
-    }
+    return view('system.contactos.index');
+    /*  return $contacto; */
+  }
 
 
 
-    public function store(Request $request)
+  public function store(Request $request)
 
   {
 
@@ -41,35 +41,35 @@ class ContactosController extends Controller
       ->withSuccess("El servicio $servicio->nombre se dio de alta correctamente"); */
   }
 
-    public function edit(Request $request)
-    {
-      $where = array('id' => $request->id);
-      $contacto = Contacto::where($where)->first();
-      return response()->json($contacto);
-    }
+  public function edit(Request $request)
+  {
+    $where = array('id' => $request->id);
+    $contacto = Contacto::where($where)->first();
+    return response()->json($contacto);
+  }
 
 
-    public function show($id)
-    {
-        $contacto = Contacto::findOrFail($id);
+  public function show($id)
+  {
+    $contacto = Contacto::findOrFail($id);
 
-        return view('system.contactos.show', compact('contacto'));
-    }
+    return view('system.contactos.show', compact('contacto'));
+  }
 
 
 
-    public function destroy(Request $request)
-    {
-      $contacto = Contacto::where('id', $request->id)->delete();
-      return response()->json(['success' => true]);
-    }
+  public function destroy(Request $request)
+  {
+    $contacto = Contacto::where('id', $request->id)->delete();
+    return response()->json(['success' => true]);
+  }
 
-    public function RegistrosDatatables()
-    {
-        return datatables()
-            ->eloquent(
-                Contacto::query()
-            )
-            ->toJson();
-    }
+  public function RegistrosDatatables()
+  {
+    return datatables()
+      ->eloquent(
+        Contacto::query()
+      )
+      ->toJson();
+  }
 }
