@@ -19,12 +19,13 @@ class CreateTareasTable extends Migration
             $table->foreignId('usuario_id')
                 ->references('id')
                 ->on('usuarios');
-            $table->foreignId('estatustareas_id')
+            $table->foreignId('estatutarea_id')
                 ->references('id')
-                ->on('estatus_tareas');
+                ->on('estatutareas');
             $table->foreignId('cita_id')
                 ->references('id')
                 ->on('citas');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

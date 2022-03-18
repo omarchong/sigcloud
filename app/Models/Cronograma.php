@@ -15,7 +15,7 @@ class Cronograma extends Model
         'fecha_fin',
         'hora_entrega',
         'usuario_id',
-        'estatustareas_id',
+        'estatutarea_id',
         'proyecto_id',
     ];
 

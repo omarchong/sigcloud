@@ -16,9 +16,9 @@ class Tarea extends Model
         'fecha_limite',
         'hora_limite',
         'tipo_tarea',
-        'usuario_id',
-        'estatustareas_id',
-        'cita_id'
+        'usuarios_id',
+        'estatutareas_id',
+        'citas_id'
     ];
 
     public function usuarios()
@@ -26,7 +26,7 @@ class Tarea extends Model
         return $this->hasMany(Usuario::class);
     }
 
-    public function estatustareas()
+    public function estatutareas()
     {
         return $this->hasOne(Estatutarea::class);
     }
