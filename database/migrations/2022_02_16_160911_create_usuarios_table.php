@@ -15,8 +15,8 @@ class CreateUsuariosTable extends Migration
             $table->string('app');
             $table->string('apm');
             $table->string('telefono');
-            $table->string('usuario');
-            $table->string('email');
+            $table->string('usuario')->unique();
+            $table->string('email')->unique();
             $table->string('password');
             $table->string('password_confirmar');
             $table->string('departamento');
