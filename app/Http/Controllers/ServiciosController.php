@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ServicioRequest;
+use App\Models\Estatutarea;
 use App\Models\Servicio;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 
 class ServiciosController extends Controller
@@ -22,7 +24,7 @@ class ServiciosController extends Controller
 
     $servicio = Servicio::updateOrCreate(
       [
-        'id' => $request->id
+        'id' => $request->id,
       ],
       [
         'nombre' => $request->nombre,

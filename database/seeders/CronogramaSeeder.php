@@ -16,7 +16,7 @@ class CronogramaSeeder extends Seeder
             'fecha_fin' => date('Y-m-d H:i:s'),
             'hora_entrega' => date('Y-m-d H:i:s'),
             'usuario_id' => 1,
-            'estatustareas_id' => 1,
+            'estatutarea_id' => 1,
             'proyecto_id' => 1,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')

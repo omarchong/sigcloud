@@ -10,7 +10,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Estatutarea extends Model
 {
     use HasFactory, softDeletes;
-    protected $fillable = ['nombre'];
+    protected $fillable = [
+        'nombre'
+    ];
 
     public function tareas()
     {
