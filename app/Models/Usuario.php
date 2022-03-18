@@ -17,8 +17,8 @@ class Usuario extends Model
         'telefono',
         'usuario',
         'email',
-        'password',
-        'password_confirmar',
+        'contraseña',
+        'contraseña_confirmar',
         'departamento',
         'imagen',
         /* 'rol_id', */

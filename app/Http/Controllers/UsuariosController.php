@@ -22,8 +22,8 @@ class UsuariosController extends Controller
 
     public function store(UsuarioRequest $request)
     {
-        /* dd($request->all()); */
-       
+      /*   dd($request->all()); */
+
         $usuario = Usuario::create($request->validated());
         if ($imagen = $request->file('imagen')) {
             $rutaGuardarImg = 'imagen/';
@@ -34,6 +34,7 @@ class UsuariosController extends Controller
             $imagen = null;
         }
 
+        $usuario = Usuario::create($request->validated());
         return redirect()
             ->route('usuarios.index')
             ->withSuccess("El usuario $usuario->nombre se guardo correctamente");
