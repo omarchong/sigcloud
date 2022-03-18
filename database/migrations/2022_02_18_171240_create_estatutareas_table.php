@@ -4,14 +4,15 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEstatusTareasTable extends Migration
+class CreateEstatutareasTable extends Migration
 {
 
     public function up()
     {
-        Schema::create('estatus_tareas', function (Blueprint $table) {
+        Schema::create('estatutareas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -19,6 +20,6 @@ class CreateEstatusTareasTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('estatus_tareas');
+        Schema::dropIfExists('estatustareas');
     }
 }

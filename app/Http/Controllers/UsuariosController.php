@@ -30,6 +30,8 @@ class UsuariosController extends Controller
             $imagenUsuario = date('YmdHis') . "." . $imagen->getClientOriginalExtension();
             $imagen->move($rutaGuardarImg, $imagenUsuario);
             $imagen = "$imagenUsuario";
+           /*  \Storage::disk('local')->put($imagen, \File::get($imagen)); */
+
         } else {
             $imagen = null;
         }

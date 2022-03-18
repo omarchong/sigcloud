@@ -18,9 +18,9 @@ class CreateCronogramasTable extends Migration
             $table->foreignId('usuario_id')
                 ->references('id')
                 ->on('usuarios');
-            $table->foreignId('estatustareas_id')
+            $table->foreignId('estatutarea_id')
                 ->references('id')
-                ->on('estatus_tareas');
+                ->on('estatutareas');
             $table->foreignId('proyecto_id')
                 ->references('id')
                 ->on('proyectos');
