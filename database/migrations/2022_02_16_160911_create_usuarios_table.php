@@ -17,8 +17,8 @@ class CreateUsuariosTable extends Migration
             $table->string('telefono');
             $table->string('usuario')->unique();
             $table->string('email')->unique();
-            $table->string('contraseña');
-            $table->string('contraseña_confirmar');
+            $table->string('contrasena');
+            $table->string('contrasena_confirmar');
             $table->string('departamento');
             $table->string('imagen')->nullable();
             $table->string('estatus');

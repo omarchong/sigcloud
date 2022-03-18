@@ -7,6 +7,7 @@ use App\Http\Requests\UsuarioRequest;
 use App\Models\Rol;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsuariosController extends Controller
 {
@@ -24,7 +25,6 @@ class UsuariosController extends Controller
     {
       /*   dd($request->all()); */
 
-        $usuario = Usuario::create($request->validated());
         if ($imagen = $request->file('imagen')) {
             $rutaGuardarImg = 'imagen/';
             $imagenUsuario = date('YmdHis') . "." . $imagen->getClientOriginalExtension();
@@ -35,8 +35,20 @@ class UsuariosController extends Controller
         } else {
             $imagen = null;
         }
-
-        $usuario = Usuario::create($request->validated());
+        $usuario = Usuario::create([
+            'nombre' => $request->nombre,
+            'app' => $request->app,
+            'apm' => $request->apm,
+            'telefono' => $request->telefono,
+            'usuario' => $request->usuario,
+            'email' => $request->email,
+            'contrasena' => Hash::make($request->contrasena),
+            'contrasena_confirmar' => Hash::make($request->contrasena_confirmar),
+            'departamento' => $request->departamento,
+            'imagen' => $request->imagen,
+            'estatus' => $request->estatus,
+        ]);
+        /* $usuario = Usuario::create($request->validated()); */
         return redirect()
             ->route('usuarios.index')
             ->withSuccess("El usuario $usuario->nombre se guardo correctamente");

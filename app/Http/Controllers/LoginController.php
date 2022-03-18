@@ -19,11 +19,11 @@ class LoginController extends Controller
     public function validar(Request $request)
     {
         $usuario = $request->usuario;
-        $password = $request->password;
+        $contrasena = $request->contrasena;
 
         $this->validate($request, [
             'usuario' => 'required',
-            'password' => 'required',
+            'contrasena' => 'required',
         ]);
 
         $consulta = Usuario::where('usuario', $request->usuario)
@@ -31,7 +31,7 @@ class LoginController extends Controller
             ->get();
         $cuantos = count($consulta);
 
-        if ($cuantos == 1 and Hash::check($request->password, $consulta[0]->password)) {
+        if ($cuantos == 1 and Hash::check($request->contrasena, $consulta[0]->contrasena)) {
             Session::put('sessionusuario', $consulta[0]->nombre. ' ' .$consulta[0]->app);
             return redirect()->route('inicio');
         } else {
@@ -62,7 +62,7 @@ class LoginController extends Controller
             $letras = "abcdefghijklmnopqrstuvwxyz0123456789";
             $nuevopassword = substr (str_shuffle($letras),0,8);
             $passwordEncryptado = Hash::make($nuevopassword);
-            DB::SELECT("UPDATE usuarios SET password = '$passwordEncryptado' WHERE email = '$email'");
+            DB::SELECT("UPDATE usuarios SET contrasena = '$passwordEncryptado' WHERE email = '$email'");
 
 
             $datos = array('destinatario'=>$email, 'nuevopassword'=>$nuevopassword);
@@ -76,7 +76,7 @@ class LoginController extends Controller
             return redirect()->route('login');
         }
         else{
-            return redirect('recuperarcontrasena')->with("mensaje","El correo electrónico ingresado no esta registrado");
+            return redirect('recuperarpassword')->with("mensaje","El correo electrónico ingresado no esta registrado");
         }
         /* dd($request->all()) */
     }
