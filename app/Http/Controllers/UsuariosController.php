@@ -23,19 +23,18 @@ class UsuariosController extends Controller
 
     public function store(UsuarioRequest $request)
     {
-      /*   dd($request->all()); */
+        /* dd($request->all()); */
+
+        $usuario = $request->all();
 
         if ($imagen = $request->file('imagen')) {
             $rutaGuardarImg = 'imagen/';
             $imagenUsuario = date('YmdHis') . "." . $imagen->getClientOriginalExtension();
             $imagen->move($rutaGuardarImg, $imagenUsuario);
-            $imagen = "$imagenUsuario";
-           /*  \Storage::disk('local')->put($imagen, \File::get($imagen)); */
+            $usuario['imagen'] = "$imagenUsuario";
 
-        } else {
-            $imagen = null;
         }
-        $usuario = Usuario::create([
+        /* $usuario = Usuario::create([
             'nombre' => $request->nombre,
             'app' => $request->app,
             'apm' => $request->apm,
@@ -47,12 +46,30 @@ class UsuariosController extends Controller
             'departamento' => $request->departamento,
             'imagen' => $request->imagen,
             'estatus' => $request->estatus,
-        ]);
-        /* $usuario = Usuario::create($request->validated()); */
+        ]); */
+        $usuario = Usuario::create($usuario); 
         return redirect()
             ->route('usuarios.index')
             ->withSuccess("El usuario $usuario->nombre se guardo correctamente");
+             /*   dd($request->all()); */
+     /*  $request->validate([
+        'nombre' => 'required',
+        'app' => 'required',
+        'apm' => 'required',
+        'telefono' => 'required',
+        'usuario' => 'required|unique:usuarios',
+        'email' => 'required|email|unique:usuarios',
+        'contrasena' => 'required',
+        'contrasena_confirmar' => 'required|same:contrasena',
+        'departamento' => 'required',
+        'imagen' => 'image|mimes:jpg,png,jpeg|max:2048',
+        'estatus' => 'required',
+      ]); */
+     
+       
     }
+     
+       
 
     public function edit(Usuario $usuario)
     {
@@ -63,16 +80,19 @@ class UsuariosController extends Controller
 
     public function update(UsuarioEditRequest $request, usuario $usuario)
     {
+        dd($request->all());
+        $usu = $request->all();
         if ($imagen = $request->file('imagen')) {
             $rutaGuardarImg = 'imagen/';
-            $imagenProducto = date('YmdHis') . "." . $imagen->getClientOriginalExtension();
-            $imagen->move($rutaGuardarImg, $imagenProducto);
-            $imagen = "$imagenProducto";
-        } else {
-            $imagen = null;
+            $imagenUsuario = date('YmdHis') . "." . $imagen->getClientOriginalExtension();
+            $imagen->move($rutaGuardarImg, $imagenUsuario);
+            $usuario['imagen'] = "$imagenUsuario";
+
         }
-        $usuario->update($request->validated());
-        $usuario->save();
+        
+        $usuario->update($usu);
+        
+        
         return redirect()
             ->route('usuarios.index')
             ->withSuccess("El usuario $usuario->nombre se actualizo exitosamente");

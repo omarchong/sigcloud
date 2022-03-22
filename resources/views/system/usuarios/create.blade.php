@@ -3,7 +3,7 @@
     <div class="card">
         <h5 class="card-header">Agregar usuarios</h5>
         <div class="card-body">
-            <form action="{{ route('usuarios.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('usuarios.store') }}" method="POST" enctype="multipart/form-data" id="usuariosvalidate">
                 @csrf
                 <div class="form-row">
                     <div class="col-md-4">
@@ -64,7 +64,7 @@
                     <div class="col-md-4">
                         <label for="exampleInputEmail1" class="form-label">Contrasena</label>
                         <div class="form-group">
-                            <input type="password" class="form-control @error('contrasena') is-invalid @enderror"value="{{old('contrasena')}}" id="contrasena" name="contrasena">
+                            <input type="password" class="form-control @error('contrasena') is-invalid @enderror" value="{{old('contrasena')}}" id="contrasena" name="contrasena">
                             @error('contrasena')
                             <small class="text-danger">{{$message}}</small>
                             @enderror
@@ -96,13 +96,13 @@
                         <label for="exampleInputEmail1" class="form-label">Imagen</label>
                         <div class="form-group">
                             <input type="file" class="form-control @error('imagen') is-invalid @enderror" id="imagen" name="imagen">
-                       @error('imagen')
-                       <small class="text-danger">{{$message}}</small>
-                       @enderror
+                            @error('imagen')
+                            <small class="text-danger">{{$message}}</small>
+                            @enderror
                         </div>
                     </div>
                     <div>
-                    <div id="preview"></div>
+                        <div id="preview"></div>
                     </div>
                     <div class="col-md-4">
                         <label for="exampleInputEmail1" class="form-label">Estatus</label>
@@ -128,28 +128,76 @@
     </div>
 </div>
 <script>
-$(document).ready(function(e) {
-    document.getElementById("imagen").onchange = function(e) {
-        // Creamos el objeto de la clase FileReader
-        let reader = new FileReader();
+    $(document).ready(function(e) {
+        document.getElementById("imagen").onchange = function(e) {
+            // Creamos el objeto de la clase FileReader
+            let reader = new FileReader();
 
-        // Leemos el archivo subido y se lo pasamos a nuestro fileReader
-        reader.readAsDataURL(e.target.files[0]);
+            // Leemos el archivo subido y se lo pasamos a nuestro fileReader
+            reader.readAsDataURL(e.target.files[0]);
 
-        // Le decimos que cuando este listo ejecute el código interno
-        reader.onload = function() {
-            let preview = document.getElementById('preview'),
+            // Le decimos que cuando este listo ejecute el código interno
+            reader.onload = function() {
+                let preview = document.getElementById('preview'),
 
-                image = document.createElement('img', {
-                    width: '50px',
-                    height: '50px'
-                });
+                    image = document.createElement('img', {
+                        width: '50px',
+                        height: '50px'
+                    });
 
-            image.src = reader.result;
+                image.src = reader.result;
 
-            preview.innerHTML = '';
-            preview.append(image);
-        };
-    }
-});
+                preview.innerHTML = '';
+                preview.append(image);
+            };
+        }
+    });
+</script>
+
+<script>
+    // just for the demos, avoids form submit
+    jQuery.validator.setDefaults({
+        debug: true,
+        success: "valid"
+    });
+    $("#usuariosvalidate").validate({
+        rules: {
+            nombre: {
+                required: true,
+                
+            },
+            app: {
+                required: true,
+                
+            },
+            apm: {
+                required: true,
+
+            },
+            telefono: {
+                required: true,
+                digits: true,
+                maxlength: 10,
+
+            },
+            usuario: {
+                required: true
+
+            },
+            email: {
+                required: true,
+
+            },
+            contrasena: {
+                required: true,
+                minlength: 5,
+
+            },
+            contrasena_confirmar: {
+                required: true,
+                minlength: 5,
+                equalTo: "#contrasena"
+            }
+        }
+    });
 </script>

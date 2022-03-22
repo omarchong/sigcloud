@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="{{ asset('datatables/css/dataTables.bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('datatables/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.css">
+    <!-- validacion -->
+    <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
 
 </head>
 
@@ -48,7 +50,8 @@
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-
+    <!-- validacion -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
 
 
     {{-- alertas --}}
