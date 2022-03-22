@@ -69,11 +69,11 @@
                                                 <a href="/usuarios/${data}/edit"
                                                 class="btn"
                                                 ${full.deleted_at ? 'hidden' : ''}>
-                                                <img src="img/editar.svg" width="20px">
+                                                <img src="/img/editar.svg" width="20px">
                                                 <a href="/usuarios/${data}/show"
                                                 class="btn"
                                                 ${full.deleted_at ? 'hidden' : ''}>
-                                                <img src="img/basurero.svg" width="20px">
+                                                <img src="/img/basurero.svg" width="20px">
                                                 </a>
                                     `
                                     }

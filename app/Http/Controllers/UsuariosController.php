@@ -80,7 +80,7 @@ class UsuariosController extends Controller
 
     public function update(UsuarioEditRequest $request, usuario $usuario)
     {
-        dd($request->all());
+      /*   dd($request->all()); */
         $usu = $request->all();
         if ($imagen = $request->file('imagen')) {
             $rutaGuardarImg = 'imagen/';
