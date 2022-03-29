@@ -251,6 +251,8 @@
                 }
             }
         })
+        $("#departamento_id").select2();
+
     })
 </script>
 <script>

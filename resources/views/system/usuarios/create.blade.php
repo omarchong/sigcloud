@@ -182,6 +182,7 @@
                 preview.append(image);
             };
         }
+        $("#departamento_id").select2();
     });
 </script>
 
