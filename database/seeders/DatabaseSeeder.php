@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UsuarioSeeder::class);
         $this->call(ContactoSeeder::class);
         $this->call(ClientesSeeder::class);
+        $this->call(EstatuservicioSeeder::class);
         $this->call(ServicioSeeder::class);
         $this->call(CotizacionSeeder::class);
         $this->call(EstatuordenSeeder::class);
@@ -31,5 +32,6 @@ class DatabaseSeeder extends Seeder
         $this->call(EstatutareaSeeder::class);
         $this->call(TareaSeeder::class);
         $this->call(CronogramaSeeder::class);
+        $this->call(ActividadSeeder::class);
     }
 }

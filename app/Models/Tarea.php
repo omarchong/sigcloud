@@ -18,7 +18,8 @@ class Tarea extends Model
         'tipo_tarea',
         'usuarios_id',
         'estatutareas_id',
-        'citas_id'
+        'clientes_id'
+        /* 'citas_id' */
     ];
 
     public function usuarios()
@@ -31,8 +32,12 @@ class Tarea extends Model
         return $this->hasOne(Estatutarea::class);
     }
 
-    public function citas()
+    public function clientes()
     {
         return $this->hasMany(Cita::class);
     }
+    /* public function citas()
+    {
+        return $this->hasMany(Cita::class);
+    } */
 }

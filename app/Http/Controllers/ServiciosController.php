@@ -15,9 +15,6 @@ class ServiciosController extends Controller
     return view("system.servicios.index");
   }
 
-
-
-
   public function store(Request $request)
 
   {

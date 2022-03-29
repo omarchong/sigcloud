@@ -23,7 +23,7 @@ class UsuarioRequest extends FormRequest
             'usuario' => 'required|unique:usuarios',
             'email' => 'required|email|unique:usuarios',
             'password' => 'required',
-            'password_confirmar' => 'required',
+            'password_confirmar' => 'required|same:password',
             'departamento' => 'required',
             'imagen' => 'image|mimes:jpg,png,jpeg|max:2048',
             'estatus' => 'required',

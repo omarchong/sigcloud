@@ -37,9 +37,14 @@ class Cliente extends Model
         return $this->belongsTo(Proyecto::class);
     }
 
-    public function citas()
+    public function clientes()
+    {
+        return $this->belongsTo(Cliente::class);
+    }
+    
+    /* public function citas()
     {
         return $this->belongsTo(Cita::class);
-    }
+    } */
    
 }

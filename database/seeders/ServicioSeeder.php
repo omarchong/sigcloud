@@ -15,6 +15,7 @@ class ServicioSeeder extends Seeder
             'descripcion' => 'E-commerce sencillo',
             'precio_inicial' => '6000',
             'precio_final' => '55000',
+            'estatuservicio_id' => 1,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         ]);

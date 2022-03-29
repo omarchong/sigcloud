@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="{{ asset('datatables/css/dataTables.bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('datatables/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.css">
-
 </head>
 
 <body>

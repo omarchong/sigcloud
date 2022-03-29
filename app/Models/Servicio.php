@@ -13,5 +13,11 @@ class Servicio extends Model
         'descripcion',
         'precio_inicial',
         'precio_final',
+        'estatuservicios_id'
     ];
+
+    public function estatuservicios()
+    {
+        return $this->hasOne(Estatuservicio::class);
+    }
 }
