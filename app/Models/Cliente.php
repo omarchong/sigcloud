@@ -23,7 +23,6 @@ class Cliente extends Model
         'referenciasfiscal',
         'estatuscliente',
         'giro',
-        'servicio',
         'rfc',
         'contacto_id'
     ];

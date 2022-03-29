@@ -14,4 +14,9 @@ class Servicio extends Model
         'precio_inicial',
         'precio_final',
     ];
+
+    public function contactos()
+    {
+        return $this->hasMany(Contacto::class);
+    }
 }

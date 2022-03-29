@@ -67,6 +67,7 @@
                 <a href="#">
                     <img class="mr-2" src="/img/logout.svg" alt="" width="35px">
                     <span class="text nav-text">Cerrar sesión</span>
+                    
                 </a>
             </li>
 

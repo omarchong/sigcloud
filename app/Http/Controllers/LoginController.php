@@ -79,5 +79,15 @@ class LoginController extends Controller
             return redirect('recuperarpassword')->with("mensaje","El correo electrónico ingresado no esta registrado");
         }
         /* dd($request->all()) */
+
+    
+    }
+
+    public function cerrarsesion()
+    {
+        Session::forget('sesionusuario');
+        Session::flush();
+        Session::flash('mensaje',"session cerrada"); 
+    return redirect()->route('login');
     }
 }

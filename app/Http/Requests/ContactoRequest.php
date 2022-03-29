@@ -16,10 +16,17 @@ class ContactoRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => ['required'],
-            'email' => ['required'],
-            'telefono' => ['required'],
+            'contacto1' => ['required'],
+            'email1' => ['required'],
+            'telefono1' => ['required'],
+            'contacto2' => [''],
+            'email2' => [''],
+            'telefono2' => [''],
+            'contacto3' => [''],
+            'email3' => [''],
+            'telefono3' => [''],
             'descripcion' => ['required'],
+            'servicios_id' => ['required']
         ];
     }
 }

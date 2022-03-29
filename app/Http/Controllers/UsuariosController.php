@@ -32,7 +32,6 @@ class UsuariosController extends Controller
             $imagenUsuario = date('YmdHis') . "." . $imagen->getClientOriginalExtension();
             $imagen->move($rutaGuardarImg, $imagenUsuario);
             $usuario['imagen'] = "$imagenUsuario";
-
         }
         /* $usuario = Usuario::create([
             'nombre' => $request->nombre,
@@ -47,12 +46,12 @@ class UsuariosController extends Controller
             'imagen' => $request->imagen,
             'estatus' => $request->estatus,
         ]); */
-        $usuario = Usuario::create($usuario); 
+        $usuario = Usuario::create($usuario);
         return redirect()
             ->route('usuarios.index')
             ->withSuccess("El usuario $usuario->nombre se guardo correctamente");
-             /*   dd($request->all()); */
-     /*  $request->validate([
+        /*   dd($request->all()); */
+        /*  $request->validate([
         'nombre' => 'required',
         'app' => 'required',
         'apm' => 'required',
@@ -65,11 +64,9 @@ class UsuariosController extends Controller
         'imagen' => 'image|mimes:jpg,png,jpeg|max:2048',
         'estatus' => 'required',
       ]); */
-     
-       
     }
-     
-       
+
+
 
     public function edit(Usuario $usuario)
     {
@@ -80,19 +77,20 @@ class UsuariosController extends Controller
 
     public function update(UsuarioEditRequest $request, usuario $usuario)
     {
-      /*   dd($request->all()); */
+        /*   dd($request->all()); */
         $usu = $request->all();
         if ($imagen = $request->file('imagen')) {
             $rutaGuardarImg = 'imagen/';
             $imagenUsuario = date('YmdHis') . "." . $imagen->getClientOriginalExtension();
             $imagen->move($rutaGuardarImg, $imagenUsuario);
-            $usuario['imagen'] = "$imagenUsuario";
-
+            $usu['imagen'] = "$imagenUsuario";
+        } else {
+            unset($usu['imagen']);
         }
-        
+
         $usuario->update($usu);
-        
-        
+
+
         return redirect()
             ->route('usuarios.index')
             ->withSuccess("El usuario $usuario->nombre se actualizo exitosamente");
