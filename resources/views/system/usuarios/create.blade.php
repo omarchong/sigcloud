@@ -62,19 +62,19 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label for="exampleInputEmail1" class="form-label">Password</label>
+                        <label for="exampleInputEmail1" class="form-label">Contraseña</label>
                         <div class="form-group">
-                            <input type="password" class="form-control @error('password') is-invalid @enderror" value="{{old('password')}}" id="password" name="password">
-                            @error('password')
+                            <input type="password" class="form-control @error('password') is-invalid @enderror"value="{{old('contraseña')}}" id="contraseña" name="contraseña">
+                            @error('contraseña')
                             <small class="text-danger">{{$message}}</small>
                             @enderror
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label for="exampleInputEmail1" class="form-label">Password confirmar</label>
+                        <label for="exampleInputEmail1" class="form-label">Confirmar Contraseña</label>
                         <div class="form-group">
-                            <input type="password" class="form-control @error('password_confirmar') is-invalid @enderror" value="{{old('password_confirmar')}}" id="password_confirmar" name="password_confirmar">
-                            @error('password_confirmar')
+                            <input type="password" class="form-control @error('contraseña_confirmar') is-invalid @enderror" value="{{old('contraseña_confirmar')}}" id="contraseña_confirmar" name="contraseña_confirmar">
+                            @error('contraseña_confirmar')
                             <small class="text-danger">{{$message}}</small>
                             @enderror
                         </div>
