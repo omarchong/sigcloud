@@ -1,14 +1,17 @@
 @include('layouts.admin')
 
-<div class="main col-md-12 mt-5 encabezado">
+<div class="main my-3">
     <div class="main-content">
-        <div class="panel panel-headline">
 
-            <div class="panel-body">
-                <a href="{{ route('usuarios.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar usuario</a>
-
-            </div>
+        <div class="container-fluid col-md-10">
             <div class="card">
+                <div class="card-header">
+                    <span>usuarios</span>
+                </div>
+                <div class="card-body">
+                    <a href="{{ route('usuarios.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar usuario</a>
+                </div>
+
                 <div class="card-body">
                     <table class="table table-striped table-inverse mt-3 responsive" id="usuarios">
                         <thead class="thead-inverse striped responsive">
@@ -49,9 +52,10 @@
                                 },
                                 {
                                     data: 'nombre',
-                                    /*  render: function(data, type, full, meta){
-                                         return `${full.usuario.nombre} ${full.usuario.app} ${full.usuario.apm}`;
-                                     } */
+                                    render: function(data, type, full, meta) {
+                                        return `${data} ${full.app} ${full.apm}`;
+                                    }
+                                   
                                 },
                                 {
                                     data: 'usuario',
@@ -69,11 +73,11 @@
                                                 <a href="/usuarios/${data}/edit"
                                                 class="btn"
                                                 ${full.deleted_at ? 'hidden' : ''}>
-                                                <img src="img/editar.svg" width="20px">
+                                                <img src="/img/editar.svg" width="20px">
                                                 <a href="/usuarios/${data}/show"
                                                 class="btn"
                                                 ${full.deleted_at ? 'hidden' : ''}>
-                                                <img src="img/basurero.svg" width="20px">
+                                                <img src="/img/basurero.svg" width="20px">
                                                 </a>
                                     `
                                     }
@@ -92,3 +96,4 @@
             </div>
         </div>
     </div>
+</div>

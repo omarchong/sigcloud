@@ -1,25 +1,24 @@
 @include('layouts.admin')
 
-<div class="main col-md-12 mt-5 encabezado">
+<div class="main my-3">
     <div class="main-content">
-        <div class="panel panel-headline">
-            <div class="panel-heading">
-                <h3 class="panel-title">Reporte Clientes</h3>
-                <p class="panel-subtitle">Listado de productos</p>
-            </div>
-            <div class="panel-body">
-                <a href="{{ route('clientes.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar Cliente</a>
-                <!-- <a href="{{url('pdfclientes') }}"><button class="btn btn-danger"><i class="fas fa-file-pdf"></i></button></a>  -->
-            </div>
+        <div class="container-fluid col-md-10">
             <div class="card">
+                <div class="card-header">
+                    <span>Clientes </span>
+                </div>
                 <div class="card-body">
+                    <a href="{{ route('clientes.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar Cliente</a>
+                </div>
+                <div class="card-body">
+
+
                     <table class="table table-striped table-inverse mt-3 responsive" id="clientes">
-                        <thead class="thead-inverse striped responsive">
+                        <thead class="thead-inverse responsive">
                             <tr>
                                 <th>Clave</th>
                                 <th>Nombre</th>
                                 <th>Telefono</th>
-                                <th>Servicio</th>
                                 <th>Estatus</th>
                                 <th>Operaciones</th>
                             </tr>
@@ -48,10 +47,24 @@
                                     data: 'estado',
                                 },
                                 {
-                                    data: 'servicio',
-                                }, {
                                     data: 'estatuscliente',
-                                },
+                                }, {
+                                    data: 'id',
+                                    render: function(data, type, full, meta) {
+                                        return `
+                                    
+                                                <a href="/usuarios/${data}/edit"
+                                                class="btn"
+                                                ${full.deleted_at ? 'hidden' : ''}>
+                                                <img src="/img/editar.svg" width="20px">
+                                                <a href="/usuarios/${data}/show"
+                                                class="btn"
+                                                ${full.deleted_at ? 'hidden' : ''}>
+                                                <img src="/img/basurero.svg" width="20px">
+                                                </a>
+                                    `
+                                    }
+                                }
                             ]
                         })
 
@@ -59,9 +72,12 @@
                             $('#clientes').DataTable().ajax.reload();
 
                         }
-                        
                     </script>
                 </div>
             </div>
+
+
+
         </div>
     </div>
+</div>

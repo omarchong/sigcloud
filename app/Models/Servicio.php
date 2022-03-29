@@ -16,8 +16,14 @@ class Servicio extends Model
         'estatuservicios_id'
     ];
 
+<<<<<<< HEAD
     public function estatuservicios()
     {
         return $this->hasOne(Estatuservicio::class);
+=======
+    public function contactos()
+    {
+        return $this->hasMany(Contacto::class);
+>>>>>>> main
     }
 }

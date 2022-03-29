@@ -28,10 +28,10 @@ body {
     min-height: 100vh;
     transition: var(--tran-05);
 }
-
-::selection {
+/* este es el que pone en blanco las letras */
+/* ::selection {
     color: #fff;
-}
+} */
 
 /* body.dark{
     --body-color: #18191a;

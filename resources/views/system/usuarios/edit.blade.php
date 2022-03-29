@@ -3,7 +3,7 @@
     <div class="card">
         <h5 class="card-header">Agregar usuarios</h5>
         <div class="card-body">
-            <form action="{{ route('usuarios.update', ['usuario' => $usuario->id]) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('usuarios.update', ['usuario' => $usuario->id]) }}" method="POST" enctype="multipart/form-data" id="usuarios" class="needs-validation" novalidate>
                 @csrf
                 @method('PUT')
 
@@ -66,8 +66,8 @@
                     <div class="col-md-4">
                         <label for="exampleInputEmail1" class="form-label">Password</label>
                         <div class="form-group">
-                            <input type="password" class="form-control @error('contraseña') is-invalid @enderror" id="contraseña" name="contraseña" value="{{$usuario->contraseña}}">
-                            @error('contraseña')
+                            <input type="password" class="form-control @error('contrasena') is-invalid @enderror" id="contrasena" name="contrasena" value="{{$usuario->contrasena}}">
+                            @error('contrasena')
                             <small class="text-danger">{{$message}}</small>
                             @enderror
                         </div>
@@ -75,8 +75,8 @@
                     <div class="col-md-4">
                         <label for="exampleInputEmail1" class="form-label">Password confirmar</label>
                         <div class="form-group">
-                            <input type="password" class="form-control @error('contraseña_confirmar') is-invalid @enderror" value="{{$usuario->contraseña_confirmar}}" id="contraseña_confirmar" name="contraseña_confirmar">
-                            @error('contraseña_confirmar')
+                            <input type="password" class="form-control @error('contrasena_confirmar') is-invalid @enderror" value="{{$usuario->contrasena_confirmar}}" id="contrasena_confirmar" name="contrasena_confirmar">
+                            @error('contrasena_confirmar')
                             <small class="text-danger">{{$message}}</small>
                             @enderror
                         </div>
@@ -84,11 +84,17 @@
                     <div class="col-md-4">
                         <label for="" class="form-label">Departamento</label>
                         <div class="form-group">
-                            <select class="form-control  @error('departamento') is-invalid @enderror" name="departamento" id="departamento">
-                                <option selected>Selecciona</option>
-                                <option value="desarrollodesoftware">Desarrollo de software</option>
-                                <option value="diseño">Diseño</option>
-                                @error('departamento')
+                            <select class="form-control  @error('departamento_id') is-invalid @enderror" name="departamento_id" id="departamento_id">
+                                <option selected disabled value="">Seleccione una opcion</option>
+                                @foreach($departamentos as $departamento)
+                                <option value="{{$departamento->id}}" {{ $usuario->departamento_id == $departamento->id ? 'selected' : '' }}>{{$departamento->nombre}}</option>
+                                @endforeach
+
+
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                                @error('departamento_id')
                                 <small class="text-danger">{{$message}}</small>
                                 @enderror
                             </select>
@@ -133,6 +139,7 @@
         </div>
     </div>
 </div>
+
 <script>
     $(document).ready(function(e) {
         document.getElementById("imagen").onchange = function(e) {
@@ -158,4 +165,111 @@
             };
         }
     });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $("#usuarios").validate({
+            rules: {
+                nombre: {
+                    required: true,
+
+                },
+                app: {
+                    required: true,
+
+                },
+                apm: {
+                    required: true,
+
+                },
+                telefono: {
+                    required: true,
+                    digits: true,
+                    minlength: 1,
+                    maxlength: 10,
+
+                },
+                usuario: {
+                    required: true
+
+                },
+                email: {
+                    required: true,
+
+                },
+                contrasena: {
+                    required: true,
+
+
+                },
+                contrasena_confirmar: {
+                    required: true,
+
+                },
+                departamento: {
+                    required: true,
+                },
+                estatus: {
+                    required: true,
+                }
+
+            },
+            messages: {
+                nombre: {
+                    required: "El nombre es requerido"
+                },
+                app: {
+                    required: "El apellido materno es requerido"
+                },
+                apm: {
+                    required: "El apellido materno es requerido"
+                },
+                email: {
+                    required: "El email es requerido"
+                },
+                telefono: {
+                    required: "El telefono es requerido"
+                },
+                usuario: {
+                    required: "El usuario es requerido"
+                },
+                email: {
+                    required: "El email es requerido"
+                },
+                contrasena: {
+                    required: "La contraseña es requerido"
+                },
+                contrasena_confirmar: {
+                    required: "La contraseña es requerido y debe ser igual a contraseña"
+                },
+                departamento: {
+                    required: "Seleccione un departamento"
+                },
+                estatus: {
+                    required: "Seleccione una opcion"
+                }
+            }
+        })
+    })
+</script>
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 </script>

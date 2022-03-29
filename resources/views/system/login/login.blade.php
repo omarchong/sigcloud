@@ -52,8 +52,8 @@
                             @enderror
                         </div>
                         <div class="form-group mx-sm-3 mb-4">
-                            <input type="password" class="form-control" name="password" @error('password') is-invalid @enderror id="password" value="{{ old('password')}}" placeholder="Contraseña">
-                            @error('password')
+                            <input type="password" class="form-control" name="contrasena" @error('contrasena') is-invalid @enderror id="contrasena" value="{{ old('contrasena')}}" placeholder="Contraseña">
+                            @error('contrasena')
                             <small class="text-danger">{{$message}}</small>
                             @enderror
                         </div>

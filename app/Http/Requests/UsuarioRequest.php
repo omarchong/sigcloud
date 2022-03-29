@@ -3,32 +3,31 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Hash;
 
-class UsuarioEditRequest extends FormRequest
+class UsuarioRequest extends FormRequest
 {
-   
+
     public function authorize()
     {
         return true;
     }
 
-    
+
     public function rules()
     {
-        $usuario = $this->route('usuario');
         return [
             'nombre' => 'required',
             'app' => 'required',
             'apm' => 'required',
             'telefono' => 'required',
-            'usuario' => '',
-            'email' => '',
-            'contrasena' => '', 
-            'contrasena_confirmar' => '',
+            'usuario' => 'required|unique:usuarios',
+            'email' => 'required|email|unique:usuarios',
+            'contrasena' => 'required',
+            'contrasena_confirmar' => 'required|same:contrasena',
             'departamento_id' => 'required',
-            'imagen' => 'image|mimes:jpg,png,jpeg|max:2048',
+            'imagen' => 'image|mimes:jpg,png,jpeg|max:1024',
             'estatus' => 'required',
         ];
+      
     }
 }

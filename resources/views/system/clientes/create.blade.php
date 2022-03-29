@@ -6,8 +6,29 @@
             <form action="{{ route('clientes.store') }}" method="POST">
                 @csrf
                 <div class="form-row">
+                    <div class="col-md-12">
+                        <label for="">Buscar contacto</label>
+                        <div class="input-group">
+                            <input type="search" name="nombre" id="buscar" class="form-control" aria-label="Search">
+                            <span class="input-group-btn">
+                                <button type="button" id="btn-seleccionar-cliente" class="btn btn-primary">
+                                    Seleccionar
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="exampleInputEmail1" class="form-label">Seleccione el contacto</label>
+                        <div class="form-group">
+                            <select class="form-control  @error('contacto_id') is-invalid @enderror" name="contacto_id" id="contacto_id">
+                                @foreach($contactos as $contacto)
+                                <option {{ old('contacto_id') == $contacto->id ? 'selected' : '' }} value="{{ $contacto->id }}">
+                                    {{$contacto->contacto1}}
+                                    @endforeach
+                            </select>
+                        </div>
+                    </div>
                     <div class="col-md-4">
-
                         <label class="form-label">Tipo de cliente</label>
 
                         <div class="form-check">
@@ -130,18 +151,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <label for="exampleInputEmail1" class="form-label">Seleccione el contacto</label>
-                        <div class="form-group">
-                            <select class="form-control  @error('contacto_id') is-invalid @enderror" name="contacto_id" id="contacto_id">
-                              @foreach($contactos as $contacto)
-                                    <option {{ old('contacto_id') == $contacto->id ? 'selected' : '' }}
-                                        value="{{ $contacto->id }}">
-                                        {{$contacto->nombre}}
-                              @endforeach
-                            </select>
-                        </div>
-                    </div>
+
                 </div>
                 <button type="submit" class="btn btn-primary">Guardar</button>
 
@@ -149,3 +159,31 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+
+        $("#buscar").autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    url: "{{route('searchcontacto')}}",
+                    type: "POST",
+                    data: {
+                        term: request.term,
+                        _token: $("input[name=_token]").val()
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                        var resp = $.map(data, function(obj) {
+                            return obj.contacto1;
+                        });
+
+                        response(resp);
+                    }
+                });
+            },
+            minLength: 1
+        });
+
+        $("#contacto_id").select2();
+    });
+</script>

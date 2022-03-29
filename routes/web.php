@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ActividadesController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\ContactosController;
+use App\Http\Controllers\CotizacionesController;
 use App\Http\Controllers\EstatustareaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -22,14 +24,26 @@ Route::post('validar',[LoginController::class, 'validar'])->name('validar');
 route::get('inicio',[LoginController::class, 'inicio'])->name('inicio');
 route::get('recuperacion',[LoginController::class, 'recuperacion'])->name('recuperacion');
 route::get('recuperarcontrasena',[LoginController::class, 'recuperarcontrasena'])->name('recuperarcontrasena');
-Route::resource('clientes', ClientesController::class);
-Route::get('datatables/clientes', [ClientesController::class, 'RegistrosDatatables'])->name('clientes.datatables');
+Route::get('cerrarsesion', [LoginController::class, 'cerrarsesion'])->name('cerrarsesion');
+
 /* omar chong */
 Route::resource('contactos', ContactosController::class);
 Route::post('add-update-contactos', [ContactosController::class, 'store']);
 Route::post('edit-contacto',[ContactosController::class,'edit']);
 Route::post('delete-contactos',[ContactosController::class,'destroy']);
 Route::get('datatables/contactos', [ContactosController::class, 'RegistrosDatatables'])->name('contactos.datatables');
+/* clientes */
+Route::resource('clientes', ClientesController::class);
+Route::get('datatables/clientes', [ClientesController::class, 'RegistrosDatatables'])->name('clientes.datatables');
+Route::post('searchcontacto', [ClientesController::class, 'searchcontacto'])->name('searchcontacto');
+
+
+/* usuarios */
+Route::resource('usuarios', UsuariosController::class);
+Route::get('datatables/usuarios',[UsuariosController::class, 'RegistrosDatatables'])->name('usuarios.datatables');
+
+
+
 
 /* cristhian */
 Route::resource('servicios', ServiciosController::class);
@@ -52,6 +66,11 @@ Route::post('edit-estatutarea', [EstatustareaController::class, 'edit']);
 Route::post('delete-estatutarea', [EstatustareaController::class, 'destroy']);
 Route::get('datatables/estatutareas', [EstatustareaController::class, 'RegistrosDatatables'])->name('estatutareas.datatables');
 
+/* Actividades */
+Route::get('actividad', [ActividadesController::class, 'index']);
+Route::post('add-update-actividad', [ActividadesController::class, 'store']);
+Route::post('edit-actividad', [ActividadesController::class, 'edit']);
+Route::post('delete-actividad', [ActividadesController::class, 'destroy']);
 
-Route::resource('usuarios', UsuariosController::class);
-Route::get('datatables/usuarios',[UsuariosController::class, 'RegistrosDatatables'])->name('usuarios.datatables');
+
+

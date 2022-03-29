@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactoRequest;
 use App\Models\Contacto;
+use App\Models\Servicio;
 use Illuminate\Http\Request;
 
 class ContactosController extends Controller
@@ -16,12 +17,21 @@ class ContactosController extends Controller
   }
 
 
-
-  public function store(Request $request)
+public function create()
+{
+  return view('system.contactos.create',[
+    'servicios' => Servicio::select('id','nombre')->get()
+  ]);
+}
+  public function store(ContactoRequest $request)
 
   {
+    $contacto = Contacto::create($request->validated());
 
-    $contacto = Contacto::updateOrCreate(
+    return redirect()
+      ->route('contactos.index')
+      ->withSuccess("El contacto $contacto->nombre se dio de alta correctamente");
+    /* $contacto = Contacto::updateOrCreate(
       [
         'id' => $request->id
       ],
@@ -32,13 +42,9 @@ class ContactosController extends Controller
         'descripcion' => $request->descripcion,
       ]
     );
-    return response()->json(['success' => true]);
-    /* dd($request->all()); */
-    /*  $servicio = Servicio::create($request->validated());
-
-    return redirect()
-      ->route('servicios.index')
-      ->withSuccess("El servicio $servicio->nombre se dio de alta correctamente"); */
+    return response()->json(['success' => true]); */
+     /* dd($request->all());  */
+    
   }
 
   public function edit(Request $request)
@@ -69,6 +75,8 @@ class ContactosController extends Controller
     return datatables()
       ->eloquent(
         Contacto::query()
+
+          ->with(['servicios'])
       )
       ->toJson();
   }

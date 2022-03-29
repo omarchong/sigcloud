@@ -9,15 +9,26 @@ class Contacto extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nombre',
-        'email',
-        'telefono',
-        'descripcion'
+        'contacto1',
+        'email1',
+        'telefono1',
+        'contacto2',
+        'email2',
+        'telefono2',
+        'contacto3',
+        'email3',
+        'telefono3',
+        'descripcion',
+        'servicios_id'
     ];
 
     public function clientes()
     {
         return $this->belongsTo(Cliente::class);
+    }
+    public function servicios()
+    {
+        return $this->belongsTo(Servicio::class);
     }
 
 }

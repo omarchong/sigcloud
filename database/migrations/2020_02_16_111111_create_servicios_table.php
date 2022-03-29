@@ -15,9 +15,7 @@ class CreateServiciosTable extends Migration
             $table->string('descripcion');
             $table->float('precio_inicial');
             $table->float('precio_final');
-            $table->foreignId('estatuservicio_id')
-                ->references('id')
-                ->on('estatuservicios');
+         
             $table->softDeletes();
             $table->timestamps();
         });

@@ -23,7 +23,6 @@ class CreateClientesTable extends Migration
             $table->string('referenciasfiscal');
             $table->string('estatuscliente');
             $table->string('giro');
-            $table->string('servicio');
             $table->string('rfc');
             /* $table->foreignId('contacto_id')
                 ->references('id')
