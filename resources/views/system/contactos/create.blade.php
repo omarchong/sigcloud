@@ -79,7 +79,7 @@
             $('#addContacto').click(function() {
 
                 var div = '<div class="form-row">';
-                var divInput = '<div class="col-md-4"> <label for="exampleInputEmail1" class="form-label">Nombre</label>';
+                var divInput = '<div class="col-md-4"> <label for="exampleInputEmail1" class="form-label">Contacto 2</label>';
                 var inputCode = '<input type = "text" class="form-control" id="contacto2" name="contacto2"></div>' +
                     '<div class="col-md-4"><label class="form-label">Email</label>' +
                     '<input type="text" class="form-control" id="email2" name="email2"></div>' +

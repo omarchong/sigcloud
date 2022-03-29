@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UsuarioEditRequest;
 use App\Http\Requests\UsuarioRequest;
+use App\Models\Departamento;
 use App\Models\Rol;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
@@ -18,7 +19,9 @@ class UsuariosController extends Controller
 
     public function create()
     {
-        return view('system.usuarios.create');
+        return view('system.usuarios.create', [
+            'departamentos' => Departamento::select('id', 'nombre')->get()
+        ]);
     }
 
     public function store(UsuarioRequest $request)
@@ -72,6 +75,7 @@ class UsuariosController extends Controller
     {
         return view('system.usuarios.edit', [
             'usuario' => $usuario,
+            'departamentos' => Departamento::select('id','nombre')->get()
         ]);
     }
 

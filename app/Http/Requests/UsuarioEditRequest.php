@@ -26,7 +26,7 @@ class UsuarioEditRequest extends FormRequest
             'email' => '',
             'contrasena' => '', 
             'contrasena_confirmar' => '',
-            'departamento' => 'required',
+            'departamento_id' => 'required',
             'imagen' => 'image|mimes:jpg,png,jpeg|max:2048',
             'estatus' => 'required',
         ];

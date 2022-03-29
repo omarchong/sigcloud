@@ -84,11 +84,17 @@
                     <div class="col-md-4">
                         <label for="" class="form-label">Departamento</label>
                         <div class="form-group">
-                            <select class="form-control  @error('departamento') is-invalid @enderror" name="departamento" id="departamento">
-                                <option selected disabled value="">Selecciona</option>
-                                <option value="desarrollodesoftware">Desarrollo de software</option>
-                                <option value="diseño">Diseño</option>
-                                @error('departamento')
+                            <select class="form-control  @error('departamento_id') is-invalid @enderror" name="departamento_id" id="departamento_id">
+                                <option selected disabled value="">Seleccione una opcion</option>
+                                @foreach($departamentos as $departamento)
+                                <option value="{{$departamento->id}}" {{ $usuario->departamento_id == $departamento->id ? 'selected' : '' }}>{{$departamento->nombre}}</option>
+                                @endforeach
+
+
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                                @error('departamento_id')
                                 <small class="text-danger">{{$message}}</small>
                                 @enderror
                             </select>
@@ -194,12 +200,12 @@
                 },
                 contrasena: {
                     required: true,
-                   
+
 
                 },
                 contrasena_confirmar: {
                     required: true,
-                    
+
                 },
                 departamento: {
                     required: true,

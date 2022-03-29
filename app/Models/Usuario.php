@@ -19,7 +19,7 @@ class Usuario extends Model
         'email',
         'contrasena',
         'contrasena_confirmar',
-        'departamento',
+        'departamento_id',
         'imagen',
         /* 'rol_id', */
         'estatus'
@@ -47,5 +47,9 @@ class Usuario extends Model
     public function cronogramas()
     {
         return $this->belongsTo(Cronograma::class);
+    }
+    public function departamentos()
+    {
+        return $this->hasOne(Departamento::class);
     }
 }

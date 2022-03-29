@@ -24,7 +24,7 @@ class UsuarioRequest extends FormRequest
             'email' => 'required|email|unique:usuarios',
             'contrasena' => 'required',
             'contrasena_confirmar' => 'required|same:contrasena',
-            'departamento' => 'required',
+            'departamento_id' => 'required',
             'imagen' => 'image|mimes:jpg,png,jpeg|max:1024',
             'estatus' => 'required',
         ];
