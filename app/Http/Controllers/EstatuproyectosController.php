@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Estatuorden;
+use App\Models\Estatuproyecto;
 use Illuminate\Http\Request;
 
-class EstatusordenController extends Controller
+class EstatuproyectosController extends Controller
 {
     public function index()
     {
-        $data['estatuordens'] = Estatuorden::all();
+        $data['estatuproyectos'] = Estatuproyecto::all();
 
-        return view('system.estatuorden.index', $data);
+        return view('system.estatuproyecto.index', $data);
     }
 
     public function store(Request $request)
     {
 
-        $estatuorden   =   estatuorden::updateOrCreate(
+        $estatuproyecto   =   Estatuproyecto::updateOrCreate(
             [
                 'id' => $request->id
             ],
@@ -33,15 +33,15 @@ class EstatusordenController extends Controller
     {
 
         $where = array('id' => $request->id);
-        $estatuorden  = estatuorden::where($where)->first();
+        $estatuproyecto  = Estatuproyecto::where($where)->first();
 
-        return response()->json($estatuorden);
+        return response()->json($estatuproyecto);
     }
 
 
     public function destroy(Request $request)
     {
-        $estatuorden = estatuorden::where('id', $request->id)->delete();
+        $estatuproyecto = Estatuproyecto::where('id', $request->id)->delete();
 
         return response()->json(['success' => true]);
     }

@@ -4,12 +4,12 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEstatusProyectosTable extends Migration
+class CreateEstatucitasTable extends Migration
 {
-   
+    
     public function up()
     {
-        Schema::create('estatus_proyectos', function (Blueprint $table) {
+        Schema::create('estatucitas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->timestamps();
@@ -17,9 +17,8 @@ class CreateEstatusProyectosTable extends Migration
         });
     }
 
-    
     public function down()
     {
-        Schema::dropIfExists('estatus_proyectos');
+        Schema::dropIfExists('estatucitas');
     }
 }

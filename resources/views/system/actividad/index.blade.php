@@ -1,22 +1,36 @@
 @include('layouts.admin')
 
-<div class="container mt-2">
-    <div class="row">
-        <div class="col-md-12 mt-1 mb-2"><button type="button" id="addNewActividad" class="btn btn-success">Registar
-                actividad</button></div>
-        <div class="col-md-12">
-            <table class="table actividades" id="actividades">
-                <thead>
-                    <tr>
-                        <th>Clave</th>
-                        <th>Nombre</th>
-                        <th>Otros</th>
+<div class="main my-3">
+    <div class="main-content">
 
-                    </tr>
-                </thead>
-                <tbody>
-                    {{-- @foreach ($actividads as $actividad)
-                        <tr>
+        <div class="container-fluid col-md-10">
+
+            <div class="card">
+                <div class="card-header">
+                    <span>Actividad</span>
+                </div>
+                <div class="card-body">
+                    {{-- <a href="" class="btn btn-primary" id="addNewActividad"><i class="fas fa-plus"></i> Registrar actividad</a> --}}
+                    <button type="button" id="addNewActividad"
+                        class="btn btn-primary"><i class="fas fa-plus"></i> Agregar
+                        actividad</button>
+                </div>
+                <div class="col-md-12">
+                    <table class="table" id="actividades">
+                        <thead>
+                            <tr>
+                                <th>Clave</th>
+                                <th>Nombre</th>
+                                <th>Tipo de actividad</th>
+                                <th>Fecha</th>
+                                <th>Nota</th>
+                                <th>Otros</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($actividads as $actividad)
+                        {{-- <tr>
                         
                             
                                 <a href="javascript:void(0)" class="btn btn-primary edit"
@@ -24,68 +38,115 @@
                                 <a href="javascript:void(0)" class="btn btn-danger delete"
                                     data-id="{{ $actividad->id }}">Eliminar</a>
                             
-                        </tr>
-                    @endforeach --}}
-                </tbody>
-            </table>
+                        </tr> --}}
+                    @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="ajax-actividad-model" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="ajaxActividadModel"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="javascript:void(0)" id="addEditActividadForm" name="addEditActividadForm"
+                            class="form-horizontal" method="POST">
+                            <input type="hidden" name="id" id="id">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="nombre">Nombre</label>
+                                    <div class="">
+                                        <input type="text" class="form-control" name="nombre" id="nombre" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="tipoactividad">Tipo de actividad</label>
+                                    <div class="">
+                                        <select class="custom-select" name="tipoactividad" id="tipoactividad">
+                                            <option selected>Selecciona una actividad</option>
+                                            <option value="Llamadas">Llamadas</option>
+                                            <option value="Correo">Correo</option>
+                                            <option value="Reunion">Reunion</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="fecha">Fecha</label>
+                                    <div class="">
+                                        <input type="date" class="form-control" name="fecha" id="fecha" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="nota">Nota</label>
+                                    <div class="">
+                                        <input type="text" class="form-control" name="nota" id="nota" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center my-3">
+                                <button type="submit" class="btn btn-primary" id="btn-save"
+                                    value="addNewActividad">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="ajax-actividad-model" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="ajaxActividadModel"></h4>
-            </div>
-            <div class="modal-body">
-                <form action="javascript:void(0)" id="addEditActividadForm" name="addEditActividadForm"
-                    class="form-horizontal" method="POST">
-                    <input type="hidden" name="id" id="id">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label for="nombre">Nombre</label>
-                            <div class="">
-                                <input type="text" class="form-control" name="nombre" id="nombre" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="tipoactividad">Tipo de actividad</label>
-                            <div class="">
-                                <select class="custom-select" name="tipoactividad" id="tipoactividad">
-                                    <option selected>Selecciona una actividad</option>
-                                    <option value="Llamadas">Llamadas</option>
-                                    <option value="Correo">Correo</option>
-                                    <option value="Reunion">Reunion</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="fecha">Fecha</label>
-                            <div class="">
-                                <input type="date" class="form-control" name="fecha" id="fecha" required>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <label for="nota">Nota</label>
-                            <div class="">
-                                <input type="text" class="form-control" name="nota" id="nota" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary" id="btn-save"
-                            value="addNewActividad">Guardar</button>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
+<script>
+    /* var table = $(".actividades").DataTable({ */
+        $('#actividades').DataTable({
+        "responsive": true,
+        "processing": true,
+        "serverside": true,
+        "autoWidth": false,
+        language: {
+            url: "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
+        },
+        "ajax": "{{ route('actividades.datatables') }}",
+        "columns": [{
+                data: 'id',
+            },
+            {
+                data: 'nombre'
+            },
+            {
+                data: 'tipoactividad'
+            },
+            {
+                data: 'fecha'
+            },
+            {
+                data: 'nota'
+            },
 
-            </div>
-        </div>
-    </div>
-</div>
+            {
+                data: 'id',
+                render: function(data, type, full, meta) {
+                    return `
+                    <a href="javascript:void(0)" class="edit"
+                                    data-id="{{ $actividad->id }}"><img src="/img/editar.svg" width="20px"></a>
+                    <a href="javascript:void(0)" class="delete"
+                                    data-id="{{ $actividad->id }}"><img src="/img/basurero.svg" width="20px"></a>
+                    `
+                }
+            }
+        ]
+    })
 
+    function reloadTable() {
+        $("#actividades").DataTable().ajax.reload();
+    }
+</script>
 <script>
     $(document).ready(function($) {
 
@@ -171,29 +232,4 @@
             });
         });
     });
-</script>
-<script>
-    var table = $(".actividades").DataTable({
-        responsive: true,
-        processing: true,
-        serverside: true,
-        autoWidth: false,
-        columns: [{
-                data: 'id',
-            },
-            {
-                data: 'nombre'
-            },
-            {
-                data: 'otros',
-                name: 'otros',
-                orderable: false,
-                searchable: false
-            },
-        ]
-    })
-
-    function reloadTable() {
-        $("#actividades").DataTable().ajax.reload();
-    }
 </script>

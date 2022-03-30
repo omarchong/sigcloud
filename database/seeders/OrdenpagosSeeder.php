@@ -16,7 +16,7 @@ class OrdenpagosSeeder extends Seeder
             'emite' => 'DSW',
             'fecha_limite' => date('Y-m-d H:i:s'),
             'cotizacion_id' => 1,
-            'estatusorden_id' => 2,
+            'estatuorden_id' => 2,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         ]);

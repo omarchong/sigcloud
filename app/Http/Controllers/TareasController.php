@@ -60,4 +60,12 @@ class TareasController extends Controller
 
         return response()->json(['success' => true]);
     }
+
+    public function RegistroDatatables()
+    {
+        return datatables()
+        ->eloquent(
+            Tarea::query()
+        )->toJson();
+    }
 }

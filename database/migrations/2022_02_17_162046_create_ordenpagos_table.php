@@ -15,9 +15,9 @@ class CreateOrdenpagosTable extends Migration
             $table->integer('num_pago');
             $table->string('emite');
             $table->date('fecha_limite');
-            $table->foreignId('estatusorden_id')
+            $table->foreignId('estatuorden_id')
                 ->references('id')
-                ->on('estatusorden');
+                ->on('estatuordens');
             $table->foreignId('cotizacion_id')
                 ->references('id')
                 ->on('cotizaciones');

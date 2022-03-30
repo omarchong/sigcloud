@@ -10,22 +10,22 @@ class EstatuproyectoSedeer extends Seeder
 
     public function run()
     {
-        DB::table('estatus_proyectos')->insert([
+        DB::table('estatuproyectos')->insert([
             'nombre' => 'Iniciado',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s') 
         ]);
-        DB::table('estatus_proyectos')->insert([
+        DB::table('estatuproyectos')->insert([
             'nombre' => 'Cancelado',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s') 
         ]);
-        DB::table('estatus_proyectos')->insert([
+        DB::table('estatuproyectos')->insert([
             'nombre' => 'En pausa',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s') 
         ]);
-        DB::table('estatus_proyectos')->insert([
+        DB::table('estatuproyectos')->insert([
             'nombre' => 'Tentativo',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s') 

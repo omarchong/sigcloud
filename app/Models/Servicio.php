@@ -10,7 +10,7 @@ class Servicio extends Model
     use HasFactory;
     protected $fillable = [
         'nombre',
-        'estatuservicio_id',
+        /* 'estatuservicio_id', */
         'descripcion',
         'precio_inicial',
         'precio_final'
@@ -20,8 +20,8 @@ class Servicio extends Model
     {
         return $this->hasMany(Contacto::class);
     }
-    public function estatuservicio()
+    /* public function estatuservicio()
     {
         return $this->belongsTo('App\Models\Estatuservicio',"estatuservicio_id");
-    }
+    } */
 }

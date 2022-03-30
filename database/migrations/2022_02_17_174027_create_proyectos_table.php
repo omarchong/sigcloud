@@ -24,12 +24,12 @@ class CreateProyectosTable extends Migration
             $table->foreignId('cliente_id')
                 ->references('id')
                 ->on('clientes');
-            $table->foreignId('estatusproyecto_id')
+            $table->foreignId('estatuproyecto_id')
                 ->references('id')
-                ->on('estatus_proyectos');
+                ->on('estatuproyectos');
             $table->foreignId('tipoproyecto_id')
                 ->references('id')
-                ->on('tipo_proyectos');
+                ->on('tipoproyectos');
             $table->foreignId('detallecotizacion_id')
                 ->references('id')
                 ->on('detalle_cotizacion');

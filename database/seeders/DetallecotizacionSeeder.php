@@ -15,10 +15,9 @@ class DetallecotizacionSeeder extends Seeder
             'total' => '1740',
             'descuento_general' => '5',
             'cotizacion_id' => 1,
-            'estatuscotizacion_id' => 1,
+            'estatucotizacion_id' => 1,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
-
         ]);
     }
 }

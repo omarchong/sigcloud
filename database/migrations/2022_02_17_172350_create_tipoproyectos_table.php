@@ -4,12 +4,12 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEstatuscotizacionTable extends Migration
+class CreateTipoproyectosTable extends Migration
 {
     
     public function up()
     {
-        Schema::create('estatuscotizacion', function (Blueprint $table) {
+        Schema::create('tipoproyectos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->timestamps();
@@ -19,6 +19,6 @@ class CreateEstatuscotizacionTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('estatuscotizacion');
+        Schema::dropIfExists('tipoproyectos');
     }
 }

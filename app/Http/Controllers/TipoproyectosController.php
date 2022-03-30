@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Estatuorden;
+use App\Models\Tipoproyecto;
 use Illuminate\Http\Request;
 
-class EstatusordenController extends Controller
+class TipoproyectosController extends Controller
 {
     public function index()
     {
-        $data['estatuordens'] = Estatuorden::all();
+        $data['tipoproyectos'] = Tipoproyecto::all();
 
-        return view('system.estatuorden.index', $data);
+        return view('system.tipoproyecto.index', $data);
     }
 
     public function store(Request $request)
     {
 
-        $estatuorden   =   estatuorden::updateOrCreate(
+        $tipoproyecto  =  Tipoproyecto::updateOrCreate(
             [
                 'id' => $request->id
             ],
@@ -33,15 +33,15 @@ class EstatusordenController extends Controller
     {
 
         $where = array('id' => $request->id);
-        $estatuorden  = estatuorden::where($where)->first();
+        $tipoproyecto  = Tipoproyecto::where($where)->first();
 
-        return response()->json($estatuorden);
+        return response()->json($tipoproyecto);
     }
 
 
     public function destroy(Request $request)
     {
-        $estatuorden = estatuorden::where('id', $request->id)->delete();
+        $tipoproyecto = Tipoproyecto::where('id', $request->id)->delete();
 
         return response()->json(['success' => true]);
     }

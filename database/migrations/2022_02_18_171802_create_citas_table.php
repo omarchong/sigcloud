@@ -26,7 +26,7 @@ class CreateCitasTable extends Migration
                 ->on('clientes');
             $table->foreignId('estatucita_id')
                 ->references('id')
-                ->on('estatuscita');
+                ->on('estatucitas');
             $table->timestamps();
             $table->softDeletes();
         });

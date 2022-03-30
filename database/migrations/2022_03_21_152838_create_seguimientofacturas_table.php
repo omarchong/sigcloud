@@ -17,9 +17,9 @@ class CreateSeguimientofacturasTable extends Migration
             $table->date('factura_creada');
             $table->integer('num_pago');
             $table->date('fecha_vencimiento');
-            $table->foreignId('estatusfactura_id')
+            $table->foreignId('estatufactura_id')
                 ->references('id')
-                ->on('estatusfactura');
+                ->on('estatufacturas');
             $table->timestamps();
             $table->softDeletes();
         });

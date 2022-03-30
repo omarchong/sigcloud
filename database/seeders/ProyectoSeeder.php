@@ -20,7 +20,7 @@ class ProyectoSeeder extends Seeder
             'plan_pago' => '2 parcialidades',
             'usuario_id' => 1,
             'cliente_id' => 1,
-            'estatusproyecto_id' => 1,
+            'estatuproyecto_id' => 1,
             'tipoproyecto_id' => 1,
             'detallecotizacion_id' => 1,
             'created_at' => date('Y-m-d H:i:s'),

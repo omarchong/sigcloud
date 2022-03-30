@@ -11,21 +11,9 @@ class ActividadesController extends Controller
     public function index(Request $request)
 
     {
-        if ($request->ajax()) {
-            $data = Actividad::latest()->get();
-            return DataTables::of($data)
-                ->addIndexColumn()
-                ->addColumn('otros', function ($row) {
-                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip" data-id="' . $row->id . '" data-original-title="Edit"
-                    class="edit btn btn-primary btn-sm editCustomer">Editar</a>';
-                    $btn = $btn . '<a href="javascript:void(0)" data-toggle="tooltip" data-id="' . $row->id . '" data-original-title="Delete"
-                    class="btn btn-danger btn-sm deleteCustomer">Borrar</a>';
-                    return $btn;
-                })
-                ->rawColumns(['otros'])
-                ->make(true);
-        }
-        return view('system.actividad.index');
+        $data['actividads']  = Actividad::all();
+
+        return view('system.actividad.index', $data);
     }
 
     public function store(Request $request)
@@ -57,6 +45,8 @@ class ActividadesController extends Controller
     public function RegistrosDatatables()
     {
         return datatables()
-            ->eloquent(Actividad::query())->tojson();
+            ->eloquent(
+                Actividad::query()
+            )->tojson();
     }
 }
