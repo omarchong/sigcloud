@@ -6,7 +6,7 @@
             <form action="{{ route('clientes.store') }}" method="POST">
                 @csrf
                 <div class="form-row">
-                    <div class="col-md-12">
+                    <!-- <div class="col-md-12">
                         <label for="">Buscar contacto</label>
                         <div class="input-group">
                             <input type="search" name="nombre" id="buscar" class="form-control" aria-label="Search">
@@ -16,7 +16,7 @@
                                 </button>
                             </span>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-md-12">
                         <label for="exampleInputEmail1" class="form-label">Seleccione el contacto</label>
                         <div class="form-group">
@@ -28,30 +28,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Tipo de cliente</label>
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="tipocliente" id="tipocliente" value="Empresa" checked>
-                            <label class="form-check-label" for="exampleRadios1">
-                                Empresa
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="tipocliente" id="tipocliente" value="Particular">
-                            <label class="form-check-label" for="exampleRadios2">
-                                Particular
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="exampleInputEmail1" class="form-label">Nombre empresa</label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="nombreempresa" name="nombreempresa">
-
-                        </div>
-                    </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <label for="exampleInputEmail1" class="form-label">Estado</label>
                         <div class="form-group">
                             <select name="estado" id="estado" class="form-control estado">
@@ -62,7 +39,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <label for="exampleInputEmail1" class="form-label">Municipio</label>
                         <div class="form-group">
                             <select name="municipio" id="municipio" class="form-control">
@@ -70,7 +47,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <label for="exampleInputEmail1" class="form-label">Codigo postal</label>
                         <div class="form-group">
                             <input type="number" class="form-control" id="cp" name="cp">
@@ -83,21 +60,46 @@
                         </div>
                     </div>
                     <div class="col-md-4">
+                        <label for="exampleInputEmail1" class="form-label">Nombre empresa</label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="nombreempresa" name="nombreempresa">
+
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Tipo de cliente</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tipocliente" id="tipocliente" value="Particular">
+                            <label class="form-check-label" for="exampleRadios2">
+                                Particular
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tipocliente" id="tipocliente" value="Empresa" checked>
+                            <label class="form-check-label" for="exampleRadios1">
+                                Empresa
+                            </label>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3">
                         <label for="exampleInputEmail1" class="form-label">Estado fiscal</label>
                         <div class="form-group">
                             <input type="text" class="form-control" id="estadofiscal" name="estadofiscal">
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label for="exampleInputEmail1" class="form-label">Municipio fiscal</label>
                         <div class="form-group">
                             <input type="text" class="form-control" id="municipiofiscal" name="municipiofiscal">
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <label for="exampleInputEmail1" class="form-label">Cp fiscal</label>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="cpfiscal" name="cpfiscal">
+                            <input type="number" class="form-control" id="cpfiscal" name="cpfiscal">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -106,6 +108,7 @@
                             <input type="text" class="form-control" id="referenciasfiscal" name="referenciasfiscal">
                         </div>
                     </div>
+
                     <div class="col-md-4">
                         <label for="exampleInputEmail1" class="form-label">Seleccione el giro</label>
                         <div class="form-group">
@@ -191,7 +194,9 @@
             minLength: 1
         });
 
-        $("#contacto_id").select2();
+        $("#contacto_id").select2({
+            theme: "classic"
+        });
 
     });
 </script>
@@ -201,10 +206,10 @@
             var estadoId = this.value;
             $("#municipio").html('');
             $.ajax({
-                url: "{{ route('getMunicipios') }}?estado_id="+estadoId,
+                url: "{{ route('getMunicipios') }}?estado_id=" + estadoId,
                 type: 'get',
                 success: function(res) {
-                    $("#municipio").html('<option value="">Selecciona una opcion</option>');
+                    $("#municipio").html('<option value="">Selecciona un municipio</option>');
                     $.each(res, function(key, value) {
                         $("#municipio").append('<option value="' + value
                             .id + '">' + value.nombre + '</option>');
@@ -215,5 +220,20 @@
         $("#estado").select2({
             theme: "classic"
         });
+        $("#municipio").select2({
+            theme: "classic"
+        });
+
+
     })
+
+    $(function() {
+        var i = 1;
+        $("#tipocliente").click(function() {
+            var div = '<div class="form-row bg-success">hola</div>';
+            var inputs = '<div class="col-md-4"> <label for="exampleInputEmail1" class="form-label">Contacto 2</label>';
+            var code = '<input type = "text" class="form-control" id="contacto2" name="contacto2"></div>'
+            i++;
+        })
+    });
 </script>
