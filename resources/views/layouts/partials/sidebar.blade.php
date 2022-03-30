@@ -41,11 +41,19 @@
             </li>
 
             <li class="nav-link">
-                <a href="#">
+                <a href="{{route('actividades.index')}}">
                     <img class="mr-2" src="/img/usuario.svg" alt="" width="35px">
                     <span class="text nav-text"> Actividad</span>
                 </a>
             </li>
+
+            <li class="nav-link">
+                <a href="{{route('tareas.index')}}">
+                    <img class="mr-2" src="/img/documento.svg" alt="" width="35px">
+                    <span class="text nav-text"> Tarea</span>
+                </a>
+            </li>
+
 
             <li class="nav-link">
                 <a href="#">

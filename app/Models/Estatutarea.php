@@ -14,10 +14,11 @@ class Estatutarea extends Model
         'nombre'
     ];
 
-    public function tareas()
+    public function tarea()
     {
-        return $this->belongsTo(Tarea::class);
+        return $this->hasMany('App\Tarea');
     }
+    
     public function cronogramas()
     {
         return $this->belongsTo(Cronograma::class);

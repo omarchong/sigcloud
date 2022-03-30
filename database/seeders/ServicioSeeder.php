@@ -12,6 +12,7 @@ class ServicioSeeder extends Seeder
     {
         DB::table('servicios')->insert([
             'nombre' => 'E-commerce',
+            'estatuservicio_id' => 1,
             'descripcion' => 'E-commerce sencillo',
             'precio_inicial' => '6000',
             'precio_final' => '55000',
@@ -20,6 +21,7 @@ class ServicioSeeder extends Seeder
         ]);
         DB::table('servicios')->insert([
             'nombre' => 'Desarrollo de software a la medida',
+            'estatuservicio_id' => 2,
             'descripcion' => 'E-commerce sencillo',
             'precio_inicial' => '6000',
             'precio_final' => '55000',

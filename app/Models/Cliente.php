@@ -40,6 +40,11 @@ class Cliente extends Model
     {
         return $this->belongsTo(Cliente::class);
     }
+
+    public function tarea()
+    {
+        return $this->hasMany('App\Tarea');
+    }
     
     /* public function citas()
     {

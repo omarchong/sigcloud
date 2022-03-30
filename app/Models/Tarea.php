@@ -16,26 +16,26 @@ class Tarea extends Model
         'fecha_limite',
         'hora_limite',
         'tipo_tarea',
-        'usuarios_id',
-        'estatutareas_id',
-        'clientes_id'
-        /* 'citas_id' */
+        'usuario_id',
+        'estatutarea_id',
+        'cliente_id'
     ];
 
-    public function usuarios()
+    public function usuario()
     {
-        return $this->hasMany(Usuario::class);
+        return $this->belongsTo('App\Models\Usuario',"usuario_id");
     }
 
-    public function estatutareas()
+    public function cliente()
     {
-        return $this->hasOne(Estatutarea::class);
+        return $this->belongsTo('App\Models\Cliente',"cliente_id");
     }
 
-    public function clientes()
+    public function estatutarea()
     {
-        return $this->hasMany(Cita::class);
+        return $this->belongsTo('App\Models\Estatutarea',"estatutarea_id");
     }
+    
     /* public function citas()
     {
         return $this->hasMany(Cita::class);

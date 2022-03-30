@@ -11,9 +11,9 @@ class Estatuservicio extends Model
     protected $fillable = [
         'nombre'
     ];
-
-    public function servicios()
+    public function servicio()
     {
-        return $this->belongsTo(Servicio::class);
+        return $this->hasMany('App\Servicio');
     }
+
 }

@@ -16,20 +16,15 @@ class CreateTareasTable extends Migration
             $table->date('fecha_limite');
             $table->time('hora_limite');
             $table->string('tipo_tarea');
-            $table->foreignId('usuario_id')
-                ->references('id')
-                ->on('usuarios');
-            $table->foreignId('estatutarea_id')
-                ->references('id')
-                ->on('estatutareas');
-            $table->foreignId('cliente_id')
-                ->references('id')
-                ->on('clientes');
-            /* $table->foreignId('cita_id')
-                ->references('id')
-                ->on('citas'); */
-            $table->softDeletes();
+            $table->bigInteger('usuario_id')->unsigned();
+            $table->foreign('usuario_id')->references('id')->on('usuarios');
+            $table->bigInteger('cliente_id')->unsigned();
+            $table->foreign('cliente_id')->references('id')->on('clientes');
+            $table->bigInteger('estatutarea_id')->unsigned();
+            $table->foreign('estatutarea_id')->references('id')->on('estatutareas');
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 
