@@ -11,39 +11,33 @@ class DepartamentoSeeder extends Seeder
     public function run()
     {
         DB::table('departamentos')->insert([
-            'abreviatura' => 'RH',
-            'nombre' => 'Recursos humanos',
-            'descripcion' => 'El area que no hace nada',
+            'abreviatura' => 'Si',
+            'nombre' => 'Sistemas',
+            'descripcion' => '',
             'estatus' => 'Activo',
             'n_empleados' => '10'
         ]);
         DB::table('departamentos')->insert([
-            'abreviatura' => 'TIC',
-            'nombre' => 'Tecnologias de la información',
-            'descripcion' => 'Los mejores',
+            'abreviatura' => 'DDS',
+            'nombre' => 'Desarrollo de software',
+            'descripcion' => '',
             'estatus' => 'Activo',
             'n_empleados' => '20'
         ]);
         DB::table('departamentos')->insert([
-            'abreviatura' => 'MCV',
-            'nombre' => 'Compras y ventas',
+            'abreviatura' => 'DG',
+            'nombre' => 'Diseño gráfico',
             'descripcion' => 'Area de ventas y compras',
             'estatus' => 'Inactivo',
             'n_empleados' => '6'
         ]);
         DB::table('departamentos')->insert([
-            'abreviatura' => 'SEC',
-            'nombre' => 'Seguridad',
-            'descripcion' => 'Segurida de la empresa',
+            'abreviatura' => 'CONS',
+            'nombre' => 'Consultoria',
+            'descripcion' => '',
             'estatus' => 'Inactivo',
             'n_empleados' => '10'
         ]);
-        DB::table('departamentos')->insert([
-            'abreviatura' => 'ALM',
-            'nombre' => 'Almacen',
-            'descripcion' => 'Alamcen de insumos',
-            'estatus' => 'Inactivo',
-            'n_empleados' => '4'
-        ]);
+      
     }
 }

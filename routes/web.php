@@ -35,6 +35,7 @@ Route::get('datatables/contactos', [ContactosController::class, 'RegistrosDatata
 Route::resource('clientes', ClientesController::class);
 Route::get('datatables/clientes', [ClientesController::class, 'RegistrosDatatables'])->name('clientes.datatables');
 Route::post('searchcontacto', [ClientesController::class, 'searchcontacto'])->name('searchcontacto');
+Route::get('get-municipios',[ClientesController::class, 'getMunicipios'])->name('getMunicipios');
 
 
 /* usuarios */
