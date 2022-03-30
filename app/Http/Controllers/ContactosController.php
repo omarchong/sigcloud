@@ -26,6 +26,7 @@ public function create()
   public function store(ContactoRequest $request)
 
   {
+
     $contacto = Contacto::create($request->validated());
 
     return redirect()

@@ -27,8 +27,8 @@
                     <img src="img/lego.png" width="50%" alt="">
                 </div>
                 <div class="text-center">
-                    <h2 class="titulo text-white" >Tu sistema de </h2>
-                    <h2 class="titulo text-white" >administración flexible</h2>
+                    <h2 class="titulo text-white">Tu sistema de </h2>
+                    <h2 class="titulo text-white">administración flexible</h2>
                 </div>
                 <div class="text-center">
                     <p class="text-white" id="letra1">Controla tu negocio desde la palma <br>de tu mano, gestionando ventas,<br>
@@ -75,4 +75,5 @@
 
 </body>
 <script src=" {{asset('js/app.js') }}" defer></script>
+
 </html>

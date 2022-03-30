@@ -54,19 +54,26 @@
                     <div class="col-md-4">
                         <label for="exampleInputEmail1" class="form-label">Estado</label>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="estado" name="estado">
+                            <select name="estado" id="estado" class="form-control estado">
+                                <option value="">Selecione un estado</option>
+                                @foreach($estados as $estado)
+                                <option value="{{$estado->id}}">{{$estado->nombre}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <label for="exampleInputEmail1" class="form-label">Municipio</label>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="municipio" name="municipio">
+                            <select name="municipio" id="municipio" class="form-control">
+
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <label for="exampleInputEmail1" class="form-label">Codigo postal</label>
                         <div class="form-group">
-                            <input type="numeric" class="form-control" id="cp" name="cp">
+                            <input type="number" class="form-control" id="cp" name="cp">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -185,5 +192,28 @@
         });
 
         $("#contacto_id").select2();
+
     });
+</script>
+<script>
+    $(document).ready(function() {
+        $("#estado").on('change', function() {
+            var estadoId = this.value;
+            $("#municipio").html('');
+            $.ajax({
+                url: "{{ route('getMunicipios') }}?estado_id="+estadoId,
+                type: 'get',
+                success: function(res) {
+                    $("#municipio").html('<option value="">Selecciona una opcion</option>');
+                    $.each(res, function(key, value) {
+                        $("#municipio").append('<option value="' + value
+                            .id + '">' + value.nombre + '</option>');
+                    });
+                }
+            })
+        })
+        $("#estado").select2({
+            theme: "classic"
+        });
+    })
 </script>
