@@ -185,5 +185,8 @@
         });
 
         $("#contacto_id").select2();
+
+
+            
     });
 </script>
