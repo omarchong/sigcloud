@@ -10,10 +10,10 @@ class ServiciosController extends Controller
 {
   public function index()
     {
-        $estatuservicios['estatuservicio'] = Estatuservicio::all();
+        /* $estatuservicios['estatuservicio'] = Estatuservicio::all(); */
         $data['servicios'] = Servicio::all();
    
-        return view('system.servicio.index',$data, $estatuservicios);
+        return view('system.servicio.index',$data);
     }
     
     public function store(Request $request)
@@ -25,7 +25,7 @@ class ServiciosController extends Controller
                     ],
                     [
                         'nombre' => $request->nombre, 
-                        'estatuservicio_id' => $request->estatuservicio_id,
+                        /* 'estatuservicio_id' => $request->estatuservicio_id, */
                         'descripcion' => $request->descripcion,
                         'precio_inicial' => $request->precio_inicial,
                         'precio_final' => $request->precio_final,
@@ -49,5 +49,13 @@ class ServiciosController extends Controller
         $servicio = Servicio::where('id',$request->id)->delete();
    
         return response()->json(['success' => true]);
+    }
+
+    public function RegistrosDatatables()
+    {
+        return datatables()
+        ->eloquent(
+            Servicio::query()
+        )->toJson();
     }
 }

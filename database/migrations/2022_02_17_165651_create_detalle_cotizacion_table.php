@@ -18,9 +18,9 @@ class CreateDetalleCotizacionTable extends Migration
             $table->foreignId('cotizacion_id')
                 ->references('id')
                 ->on('cotizaciones');
-            $table->foreignId('estatuscotizacion_id')
+            $table->foreignId('estatucotizacion_id')
                 ->references('id')
-                ->on('estatuscotizacion');
+                ->on('estatucotizacions');
             $table->timestamps();
             $table->softDeletes();
         });

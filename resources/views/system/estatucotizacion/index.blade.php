@@ -6,11 +6,9 @@
         <div class="container-fluid col-md-10">
             <div class="card">
                 <div class="card-header">
-                    <span>Estatus servicios</span>
-                </div>
-                <div class="card-body">
-                    <button type="button" id="addNewEstatuservicio" class="btn btn-primary"><i class="fas fa-plus"></i>
-                        Agregar estatus servicio</button>
+                    <button type="button" id="addNewEstatucotizacion" class="btn btn-primary"><i
+                            class="fas fa-plus"></i> Agregar
+                        estatus de cotizacion</button>
                 </div>
                 <div class="col-md-12">
                     <table class="table">
@@ -22,16 +20,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($estatuservicios as $estatuservicio)
+                            @foreach ($estatucotizacions as $estatucotizacion)
                                 <tr>
-                                    <td>{{ $estatuservicio->id }}</td>
-                                    <td>{{ $estatuservicio->nombre }}</td>
+                                    <td>{{ $estatucotizacion->id }}</td>
+                                    <td>{{ $estatucotizacion->nombre }}</td>
                                     <td>
                                         <a href="javascript:void(0)" class="edit"
-                                            data-id="{{ $estatuservicio->id }}"><img src="/img/editar.svg"
+                                            data-id="{{ $estatucotizacion->id }}"><img src="/img/editar.svg"
                                                 width="20px"></a>
                                         <a href="javascript:void(0)" class="delete"
-                                            data-id="{{ $estatuservicio->id }}"><img src="/img/basurero.svg"
+                                            data-id="{{ $estatucotizacion->id }}"><img src="/img/basurero.svg"
                                                 width="20px"></a>
                                     </td>
                                 </tr>
@@ -43,27 +41,27 @@
         </div>
 
         <!-- boostrap model -->
-        <div class="modal fade" id="ajax-estatuservicio-model" aria-hidden="true">
+        <div class="modal fade" id="ajax-estatucotizacion-model" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="ajaxEstatuservicioModel"></h4>
+                        <h4 class="modal-title" id="ajaxEstatucotizacionModel"></h4>
                     </div>
                     <div class="modal-body">
-                        <form action="javascript:void(0)" id="addEditEstatuservicioForm"
-                            name="addEditEstatuservicioForm" class="form-horizontal" method="POST">
+                        <form action="javascript:void(0)" id="addEditEstatucotizacionForm"
+                            name="addEditEstatucotizacionForm" class="form-horizontal" method="POST">
                             <input type="hidden" name="id" id="id">
                             <div class="form-group">
                                 <label for="name" class="col-sm-2 control-label">Nombre</label>
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder=""
-                                        value="" maxlength="50" required="">
+                                    <input type="text" class="form-control" id="nombre" name="nombre"
+                                        placeholder="" value="" maxlength="50" required="">
                                 </div>
                             </div>
 
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary" id="btn-save"
-                                    value="addNewEstatuservicio">Guardar
+                                    value="addNewEstatucotizacion">Guardar
                                 </button>
                             </div>
                         </form>
@@ -87,10 +85,10 @@
             }
         });
 
-        $('#addNewEstatuservicio').click(function() {
-            $('#addEditEstatuservicioForm').trigger("reset");
-            $('#ajaxEstatuservicioModel').html("Registrar estatus del servicio");
-            $('#ajax-estatuservicio-model').modal('show');
+        $('#addNewEstatucotizacion').click(function() {
+            $('#addEditEstatucotizacionForm').trigger("reset");
+            $('#ajaxEstatucotizacionModel').html("Registrar estatus de cotizacion");
+            $('#ajax-estatucotizacion-model').modal('show');
         });
 
         $('body').on('click', '.edit', function() {
@@ -100,14 +98,14 @@
             // ajax
             $.ajax({
                 type: "POST",
-                url: "{{ url('edit-estatuservicio') }}",
+                url: "{{ url('edit-estatucotizacion') }}",
                 data: {
                     id: id
                 },
                 dataType: 'json',
                 success: function(res) {
-                    $('#ajaxEstatuservicioModel').html("Editar estatus del servicio");
-                    $('#ajax-estatuservicio-model').modal('show');
+                    $('#ajaxEstatucotizacionModel').html("Editar estatus de cotizacion");
+                    $('#ajax-estatucotizacion-model').modal('show');
                     $('#id').val(res.id);
                     $('#nombre').val(res.nombre);
                 }
@@ -123,7 +121,7 @@
                 // ajax
                 $.ajax({
                     type: "POST",
-                    url: "{{ url('delete-estatuservicio') }}",
+                    url: "{{ url('delete-estatucotizacion') }}",
                     data: {
                         id: id
                     },
@@ -148,7 +146,7 @@
             // ajax
             $.ajax({
                 type: "POST",
-                url: "{{ url('add-update-estatuservicio') }}",
+                url: "{{ url('add-update-estatucotizacion') }}",
                 data: {
                     id: id,
                     nombre: nombre,

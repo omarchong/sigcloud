@@ -10,22 +10,22 @@ class EstatufacturaSeeder extends Seeder
     
     public function run()
     {
-        DB::table('estatusfactura')->insert([
+        DB::table('estatufacturas')->insert([
             'nombre' => 'Pagado',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         ]);
-        DB::table('estatusfactura')->insert([
+        DB::table('estatufacturas')->insert([
             'nombre' => 'Enviado',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         ]);
-        DB::table('estatusfactura')->insert([
+        DB::table('estatufacturas')->insert([
             'nombre' => 'Cancelado',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         ]);
-        DB::table('estatusfactura')->insert([
+        DB::table('estatufacturas')->insert([
             'nombre' => 'Revision',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')

@@ -4,12 +4,12 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTipoProyectosTable extends Migration
+class CreateEstatucotizacionsTable extends Migration
 {
     
     public function up()
     {
-        Schema::create('tipo_proyectos', function (Blueprint $table) {
+        Schema::create('estatucotizacions', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->timestamps();
@@ -19,6 +19,6 @@ class CreateTipoProyectosTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('tipo_proyectos');
+        Schema::dropIfExists('estatuscotizacion');
     }
 }

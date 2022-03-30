@@ -4,13 +4,19 @@ use App\Http\Controllers\ActividadesController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\ContactosController;
 use App\Http\Controllers\CotizacionesController;
+use App\Http\Controllers\EstatuproyectosController;
+use App\Http\Controllers\EstatuscitaController;
+use App\Http\Controllers\EstatuscotizacionController;
 use App\Http\Controllers\EstatuserviciosController;
+use App\Http\Controllers\EstatusfacturaController;
+use App\Http\Controllers\EstatusordenController;
 use App\Http\Controllers\EstatustareaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ServiciosController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\TareasController;
+use App\Http\Controllers\TipoproyectosController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -83,6 +89,7 @@ Route::get('servicio', [ServiciosController::class, 'index']);
 Route::post('add-update-servicio', [ServiciosController::class, 'store']);
 Route::post('edit-servicio', [ServiciosController::class, 'edit']);
 Route::post('delete-servicio', [ServiciosController::class, 'destroy']);
+Route::get('datatables/servicios', [ServiciosController::class, 'RegistrosDatatables'])->name('servicios.datatables');
 
 /* Estatus de tareas */
 Route::resource('estatutareas', EstatustareaController::class);
@@ -97,3 +104,47 @@ Route::get('tarea', [TareasController::class, 'index']);
 Route::post('add-update-tarea', [TareasController::class, 'store']);
 Route::post('edit-tarea', [TareasController::class, 'edit']);
 Route::post('delete-tarea', [TareasController::class, 'destroy']);
+Route::get('datatables/tareas', [TareasController::class, 'RegistrosDatatables'])->name('tareas.datatables');
+
+
+/* Estatus de citas */
+Route::resource('estatucitas', EstatuscitaController::class);
+Route::get('estatucita', [EstatuscitaController::class, 'index']);
+Route::post('add-update-estatucita', [EstatuscitaController::class, 'store']);
+Route::post('edit-estatucita', [EstatuscitaController::class, 'edit']);
+Route::post('delete-estatucita', [EstatuscitaController::class, 'destroy']);
+
+/* Tipos proyectos */
+Route::resource('tipoproyectos', TipoproyectosController::class);
+Route::get('tipoproyecto', [TipoproyectosController::class, 'index']);
+Route::post('add-update-tipoproyecto', [TipoproyectosController::class, 'store']);
+Route::post('edit-tipoproyecto', [TipoproyectosController::class, 'edit']);
+Route::post('delete-tipoproyecto', [TipoproyectosController::class, 'destroy']);
+
+/* Estatu proyectos */
+Route::resource('estatuproyectos', EstatuproyectosController::class);
+Route::get('estatuproyecto', [EstatuproyectosController::class, 'index']);
+Route::post('add-update-estatuproyecto', [EstatuproyectosController::class, 'store']);
+Route::post('edit-estatuproyecto', [EstatuproyectosController::class, 'edit']);
+Route::post('delete-estatuproyecto', [EstatuproyectosController::class, 'destroy']);
+
+/* Estatus cotizaciones */
+Route::resource('estatucotizacions', EstatuscotizacionController::class);
+Route::get('estatucotizacion', [EstatuscotizacionController::class, 'index']);
+Route::post('add-update-estatucotizacion', [EstatuscotizacionController::class, 'store']);
+Route::post('edit-estatucotizacion', [EstatuscotizacionController::class, 'edit']);
+Route::post('delete-estatucotizacion', [EstatuscotizacionController::class, 'destroy']);
+
+/* Estatus orden */
+Route::resource('estatuordens', EstatusordenController::class);
+Route::get('estatuorden', [EstatusordenController::class, 'index']);
+Route::post('add-update-estatuorden', [EstatusordenController::class, 'store']);
+Route::post('edit-estatuorden', [EstatusordenController::class, 'edit']);
+Route::post('delete-estatuorden', [EstatusordenController::class, 'destroy']);
+
+/* Estatus factura */
+Route::resource('estatufacturas', EstatusfacturaController::class);
+Route::get('estatufactura', [EstatusfacturaController::class, 'index']);
+Route::post('add-update-estatufactura', [EstatusfacturaController::class, 'store']);
+Route::post('edit-estatufactura', [EstatusfacturaController::class, 'edit']);
+Route::post('delete-estatufactura', [EstatusfacturaController::class, 'destroy']);

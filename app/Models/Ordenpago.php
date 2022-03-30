@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Ordenpago extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $fillabe = ['folio', 'num_pago', 'emite', 'fecha_limite', 'cotizacion_id', 'estatusorden_id'];
+    protected $fillabe = ['folio', 'num_pago', 'emite', 'fecha_limite', 'cotizacion_id', 'estatuorden_id'];
 
     public function estatusorden()
     {

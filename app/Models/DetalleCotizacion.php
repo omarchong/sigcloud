@@ -15,7 +15,7 @@ class DetalleCotizacion extends Model
         'total',
         'descuento_general',
         'cotizacion_id',
-        'estatuscotizacion_id',
+        'estatucotizacion_id',
     ];
 
     public function cotizaciones()

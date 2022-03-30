@@ -10,17 +10,17 @@ class EstatucitaSeeder extends Seeder
     
     public function run()
     {
-        DB::table('estatuscita')->insert([
+        DB::table('estatucitas')->insert([
             'nombre' => 'Cancelada',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         ]);
-        DB::table('estatuscita')->insert([
+        DB::table('estatucitas')->insert([
             'nombre' => 'Pospuesta',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         ]);
-        DB::table('estatuscita')->insert([
+        DB::table('estatucitas')->insert([
             'nombre' => 'Finalizada',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')

@@ -10,17 +10,17 @@ class EstatuordenSeeder extends Seeder
     
     public function run()
     {
-        DB::table('estatusorden')->insert([
+        DB::table('estatuordens')->insert([
         'nombre' => 'Pagado',
         'created_at' => date('Y-m-d H:i:s'),
         'updated_at' => date('Y-m-d H:i:s') 
         ]);
-        DB::table('estatusorden')->insert([
+        DB::table('estatuordens')->insert([
         'nombre' => 'Pendiente',
         'created_at' => date('Y-m-d H:i:s'),
         'updated_at' => date('Y-m-d H:i:s') 
         ]);
-        DB::table('estatusorden')->insert([
+        DB::table('estatuordens')->insert([
         'nombre' => 'Enviado',
         'created_at' => date('Y-m-d H:i:s'),
         'updated_at' => date('Y-m-d H:i:s') 
