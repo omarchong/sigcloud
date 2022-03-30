@@ -17,10 +17,10 @@ class CreateClientesTable extends Migration
             $table->string('municipio');
             $table->integer('cp');
             $table->string('referencias');
-            $table->string('estadofiscal');
-            $table->string('municipiofiscal');
-            $table->integer('cpfiscal');
-            $table->string('referenciasfiscal');
+            $table->string('estadofiscal')->nullable();
+            $table->string('municipiofiscal')->nullable();
+            $table->integer('cpfiscal')->nullable();
+            $table->string('referenciasfiscal')->nullable();
             $table->string('estatuscliente');
             $table->string('giro');
             $table->string('rfc');

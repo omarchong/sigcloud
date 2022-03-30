@@ -5,7 +5,7 @@
         <div class="container-fluid col-md-10">
             <div class="card">
                 <div class="card-header">
-                    <span>Clientes </span>
+                    <span>Gestionar Clientes</span>
                 </div>
                 <div class="card-body">
                     <a href="{{ route('clientes.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar Cliente</a>
