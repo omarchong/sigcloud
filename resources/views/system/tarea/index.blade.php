@@ -166,7 +166,7 @@
     <!-- end bootstrap model -->
 
 
-    {{-- <script>
+    <script>
         $('#tareas').DataTable({
             "responsive": true,
             "processing": true,
@@ -219,7 +219,7 @@
         function reloadTable() {
             $('#tareas').DataTable().ajax.reload();
         }
-    </script> --}}
+    </script>
 
     <script type="text/javascript">
         $(document).ready(function($) {
