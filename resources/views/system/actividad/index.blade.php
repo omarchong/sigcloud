@@ -7,17 +7,17 @@
 
             <div class="card">
                 <div class="card-header">
-                    <span>Actividad</span>
+                    <span>Gestión de actividades</span>
                 </div>
                 <div class="card-body">
                     {{-- <a href="" class="btn btn-primary" id="addNewActividad"><i class="fas fa-plus"></i> Registrar actividad</a> --}}
-                    <button type="button" id="addNewActividad"
-                        class="btn btn-primary"><i class="fas fa-plus"></i> Agregar
+                    <button type="button" id="addNewActividad" class="btn btn-primary"><i class="fas fa-plus"></i>
+                        Agregar
                         actividad</button>
                 </div>
-                <div class="col-md-12">
-                    <table class="table" id="actividades">
-                        <thead>
+                <div class="card-body">
+                    <table class="table table-striped table-inverse mt-3 responsive" id="actividades">
+                        <thead class="thead-inverse striped responsive">
                             <tr>
                                 <th>Clave</th>
                                 <th>Nombre</th>
@@ -30,7 +30,7 @@
                         </thead>
                         <tbody>
                             @foreach ($actividads as $actividad)
-                        {{-- <tr>
+                                {{-- <tr>
                         
                             
                                 <a href="javascript:void(0)" class="btn btn-primary edit"
@@ -39,72 +39,70 @@
                                     data-id="{{ $actividad->id }}">Eliminar</a>
                             
                         </tr> --}}
-                    @endforeach
+                            @endforeach
                         </tbody>
                     </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="ajax-actividad-model" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="ajaxActividadModel"></h4>
-                    </div>
-                    <div class="modal-body">
-                        <form action="javascript:void(0)" id="addEditActividadForm" name="addEditActividadForm"
-                            class="form-horizontal" method="POST">
-                            <input type="hidden" name="id" id="id">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label for="nombre">Nombre</label>
-                                    <div class="">
-                                        <input type="text" class="form-control" name="nombre" id="nombre" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="tipoactividad">Tipo de actividad</label>
-                                    <div class="">
-                                        <select class="custom-select" name="tipoactividad" id="tipoactividad">
-                                            <option selected>Selecciona una actividad</option>
-                                            <option value="Llamadas">Llamadas</option>
-                                            <option value="Correo">Correo</option>
-                                            <option value="Reunion">Reunion</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="fecha">Fecha</label>
-                                    <div class="">
-                                        <input type="date" class="form-control" name="fecha" id="fecha" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <label for="nota">Nota</label>
-                                    <div class="">
-                                        <input type="text" class="form-control" name="nota" id="nota" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-center my-3">
-                                <button type="submit" class="btn btn-primary" id="btn-save"
-                                    value="addNewActividad">Guardar</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<div class="modal fade" id="ajax-actividad-model" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="ajaxActividadModel"></h4>
+            </div>
+            <div class="modal-body">
+                <form action="javascript:void(0)" id="addEditActividadForm" name="addEditActividadForm"
+                    class="form-horizontal" method="POST">
+                    <input type="hidden" name="id" id="id">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="nombre">Nombre</label>
+                            <div class="">
+                                <input type="text" class="form-control" name="nombre" id="nombre" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="tipoactividad">Tipo de actividad</label>
+                            <div class="">
+                                <select class="custom-select" name="tipoactividad" id="tipoactividad">
+                                    <option selected>Selecciona una actividad</option>
+                                    <option value="Llamadas">Llamadas</option>
+                                    <option value="Correo">Correo</option>
+                                    <option value="Reunion">Reunion</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="fecha">Fecha</label>
+                            <div class="">
+                                <input type="date" class="form-control" name="fecha" id="fecha" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="nota">Nota</label>
+                            <div class="">
+                                <input type="text" class="form-control" name="nota" id="nota" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="float-right my-3">
+                        <button type="submit" class="btn btn-primary" id="btn-save"
+                            value="addNewActividad">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
     /* var table = $(".actividades").DataTable({ */
-        $('#actividades').DataTable({
+    $('#actividades').DataTable({
         "responsive": true,
         "processing": true,
         "serverside": true,
@@ -184,7 +182,7 @@
             });
         });
 
-        $('body').on('click', 'delete', function() {
+        $('body').on('click', '.delete', function() {
             if (confirm("¿Eliminar registro?") == true) {
                 var id = $(this).data('id');
 
@@ -196,7 +194,7 @@
                     },
                     dataType: 'json',
                     success: function(res) {
-                        window.location.reaload();
+                        window.location.reload();
                     }
                 });
             }

@@ -39,6 +39,12 @@
                     <span class="text nav-text"> Servicios</span>
                 </a>
             </li>
+            <li class="nav-link">
+                <a href="{{route('estatuservicios.index')}}">
+                    <img class="mr-2" src="/img/usuario.svg" alt="" width="35px">
+                    <span class="text nav-text"> Estatus servicios</span>
+                </a>
+            </li>
 
             <li class="nav-link">
                 <a href="{{route('actividades.index')}}">
@@ -51,6 +57,50 @@
                 <a href="{{route('tareas.index')}}">
                     <img class="mr-2" src="/img/documento.svg" alt="" width="35px">
                     <span class="text nav-text"> Tarea</span>
+                </a>
+            </li>
+            <li class="nav-link">
+                <a href="{{route('estatutareas.index')}}">
+                    <img class="mr-2" src="/img/documento.svg" alt="" width="35px">
+                    <span class="text nav-text"> Estatus tarea</span>
+                </a>
+            </li>
+
+            <li class="nav-link">
+                <a href="{{route('estatucitas.index')}}">
+                    <img class="mr-2" src="/img/documento.svg" alt="" width="35px">
+                    <span class="text nav-text"> Estatus cita</span>
+                </a>
+            </li>
+
+            <li class="nav-link">
+                <a href="{{route('estatucotizacions.index')}}">
+                    <img class="mr-2" src="/img/documento.svg" alt="" width="35px">
+                    <span class="text nav-text"> Estatus cotización</span>
+                </a>
+            </li>
+            <li class="nav-link">
+                <a href="{{route('estatufacturas.index')}}">
+                    <img class="mr-2" src="/img/facturacion.svg" alt="" width="35px">
+                    <span class="text nav-text"> Estatus factura</span>
+                </a>
+            </li>
+            <li class="nav-link">
+                <a href="{{route('estatuordens.index')}}">
+                    <img class="mr-2" src="/img/documento.svg" alt="" width="35px">
+                    <span class="text nav-text"> Estatus orden</span>
+                </a>
+            </li>
+            <li class="nav-link">
+                <a href="{{route('estatuproyectos.index')}}">
+                    <img class="mr-2" src="/img/documento.svg" alt="" width="35px">
+                    <span class="text nav-text"> Estatus proyecto</span>
+                </a>
+            </li>
+            <li class="nav-link">
+                <a href="{{route('tipoproyectos.index')}}">
+                    <img class="mr-2" src="/img/documento.svg" alt="" width="35px">
+                    <span class="text nav-text"> Tipos proyectos</span>
                 </a>
             </li>
 

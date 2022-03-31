@@ -6,24 +6,24 @@
         <div class="container-fluid col-md-10">
             <div class="card">
                 <div class="card-header">
-                    <span>Estatus proyectos</span>
+                    <span>Gestión de estatus de proyectos</span>
                 </div>
                 <div class="card-body">
                     <button type="button" id="addNewEstatuproyecto" class="btn btn-primary"><i class="fas fa-plus"></i>
                         Agregar estatus de proyectos</button>
                 </div>
-                <div class="col-md-12">
-                    <table class="table">
-                        <thead>
+                <div class="card-body">
+                    <table class="table table-striped table-inverse mt-3 responsive" id="estatuproyectos">
+                        <thead class="thead-inverse striped responsive">
                             <tr>
-                                <th scope="col">Clave</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Acciones</th>
+                                <th>Clave</th>
+                                <th>Nombre</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($estatuproyectos as $estatuproyecto)
-                                <tr>
+                                {{-- <tr>
                                     <td>{{ $estatuproyecto->id }}</td>
                                     <td>{{ $estatuproyecto->nombre }}</td>
                                     <td>
@@ -34,13 +34,15 @@
                                             data-id="{{ $estatuproyecto->id }}"><img src="/img/basurero.svg"
                                                 width="20px"></a>
                                     </td>
-                                </tr>
+                                </tr> --}}
                             @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
         <!-- boostrap model -->
         <div class="modal fade" id="ajax-estatuproyecto-model" aria-hidden="true">
@@ -61,23 +63,54 @@
                                 </div>
                             </div>
 
-                            <div class="text-center">
+                            <div class="float-right my-4">
                                 <button type="submit" class="btn btn-primary" id="btn-save"
                                     value="addNewEstatuproyecto">Guardar
                                 </button>
                             </div>
                         </form>
                     </div>
-                    <div class="modal-footer">
-
-                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
 <!-- end bootstrap model -->
+
+<script>
+    $('#estatuproyectos').DataTable({
+        "responsive": true,
+        "processing": true,
+        "serverSide": true,
+        "autoWidth": false,
+        language: {
+            url: "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
+        },
+        "ajax": "{{ route('estatuproyectos.datatables') }}",
+        "columns": [{
+                data: 'id',
+            },
+            {
+                data: 'nombre',
+            },{
+                data: 'id',
+                render: function(data, type, full, meta) {
+                    return `
+                    <a href="javascript:void(0)" class="edit"
+                        data-id="{{ $estatuproyecto->id }}"><img src="/img/editar.svg"
+                            width="20px"></a>
+                    <a href="javascript:void(0)" class="delete"
+                        data-id="{{ $estatuproyecto->id }}"><img src="/img/basurero.svg"
+                            width="20px"></a>
+                        `
+                }
+            }
+        ]
+    })
+
+    function reloadTable() {
+        $('#estatuproyectos').DataTable().ajax.reload();
+    }
+</script>
+
 <script type="text/javascript">
     $(document).ready(function($) {
 

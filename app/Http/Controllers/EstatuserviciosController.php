@@ -45,4 +45,11 @@ class EstatuserviciosController extends Controller
 
         return response()->json(['success' => true]);
     }
+    public function RegistrosDatatables()
+    {
+        return datatables()
+        ->eloquent(
+            Estatuservicio::query()
+        )->toJson();
+    }
 }
