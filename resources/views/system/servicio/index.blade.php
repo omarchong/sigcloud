@@ -26,21 +26,7 @@
                         </thead>
                         <tbody>
                             @foreach ($servicios as $servicio)
-                                {{-- <tr>
-                                    <td>{{ $servicio->id }}</td>
-                                    <td>{{ $servicio->nombre }}</td> --}}
-                                    {{-- <td>{{ $servicio->estatuservicio->nombre }}</td> --}}
-                                {{-- <td>{{ $servicio->descripcion }}</td>
-                                    <td>{{ $servicio->precio_inicial }}</td>
-                                    <td>{{ $servicio->precio_final }}</td>
-                                    <td>
-                                        <a href="javascript:void(0)" class="edit"
-                                            data-id="{{ $servicio->id }}"><img src="/img/editar.svg" width="20px"></a>
-                                        <a href="javascript:void(0)" class="delete"
-                                            data-id="{{ $servicio->id }}"><img src="/img/basurero.svg"
-                                                width="20px"></a>
-                                    </td>
-                                </tr> --}}
+                           
                             @endforeach
                         </tbody>
                     </table>

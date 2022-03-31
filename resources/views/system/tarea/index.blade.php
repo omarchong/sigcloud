@@ -30,25 +30,22 @@
                         </thead>
                         <tbody>
                             @foreach ($tareas as $tarea)
-                                <tr>
-                                    <td>{{ $tarea->id }}</td>
-                                    <td>{{ $tarea->nombre }}</td>
-                                    <td>{{ $tarea->descripcion }}</td>
-                                    <td>{{ $tarea->fecha_limite }}</td>
-                                    <td>{{ $tarea->hora_limite }}</td>
-                                    <td>{{ $tarea->tipo_tarea }}</td>
-                                    <td>{{ $tarea->usuario->usuario }}</td>
-                                    <td>{{ $tarea->cliente->nombreempresa }}</td>
-                                    <td>{{ $tarea->estatutarea->nombre }}</td>
+                            <tr>
+                                <td>{{ $tarea->id }}</td>
+                                <td>{{ $tarea->nombre }}</td>
+                                <td>{{ $tarea->descripcion }}</td>
+                                <td>{{ $tarea->fecha_limite }}</td>
+                                <td>{{ $tarea->hora_limite }}</td>
+                                <td>{{ $tarea->tipo_tarea }}</td>
+                                <td>{{ $tarea->usuario->usuario }}</td>
+                                <td>{{ $tarea->cliente->nombreempresa }}</td>
+                                <td>{{ $tarea->estatutarea->nombre }}</td>
 
-                                    <td>
-                                        <a href="javascript:void(0)" class="edit"
-                                            data-id="{{ $tarea->id }}"><img src="/img/editar.svg" width="20px"></a>
-                                        <a href="javascript:void(0)" class="delete"
-                                            data-id="{{ $tarea->id }}"><img src="/img/basurero.svg"
-                                                width="20px"></a>
-                                    </td>
-                                </tr>
+                                <td>
+                                    <a href="javascript:void(0)" class="edit" data-id="{{ $tarea->id }}"><img src="/img/editar.svg" width="20px"></a>
+                                    <a href="javascript:void(0)" class="delete" data-id="{{ $tarea->id }}"><img src="/img/basurero.svg" width="20px"></a>
+                                </td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -64,44 +61,38 @@
                         <h4 class="modal-title" id="ajaxTareaModel"></h4>
                     </div>
                     <div class="modal-body">
-                        <form action="javascript:void(0)" id="addEditTareaForm" name="addEditTareaForm"
-                            class="form-horizontal" method="POST">
+                        <form action="javascript:void(0)" id="addEditTareaForm" name="addEditTareaForm" class="form-horizontal" method="POST">
                             <input type="hidden" name="id" id="id">
                             <div class="form-group">
                                 <label for="name" class="col-sm-12 control-label">Nombre</label>
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder=""
-                                        value="" maxlength="50" required="">
+                                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="" value="" maxlength="50" required="">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="descripcion" class="col-sm-12 control-label">Descripcion</label>
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" id="descripcion" name="descripcion"
-                                        placeholder="" value="" maxlength="50" required="">
+                                    <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="" value="" maxlength="50" required="">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="fecha_limite" class="col-sm-12 control-label">Fecha limite</label>
                                 <div class="col-sm-12">
-                                    <input type="date" class="form-control" id="fecha_limite" name="fecha_limite"
-                                        placeholder="" value="" maxlength="50" required="">
+                                    <input type="date" class="form-control" id="fecha_limite" name="fecha_limite" placeholder="" value="" maxlength="50" required="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="hora_limite" class="col-sm-12 control-label">Hora limite</label>
                                 <div class="col-sm-12">
-                                    <input type="time" class="form-control" id="hora_limite" name="hora_limite"
-                                        placeholder="" value="" maxlength="50" required="">
+                                    <input type="time" class="form-control" id="hora_limite" name="hora_limite" placeholder="" value="" maxlength="50" required="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="tipo_tarea" class="col-sm-12 control-label">Tipo de tarea</label>
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" id="tipo_tarea" name="tipo_tarea"
-                                        placeholder="" value="" maxlength="50" required="">
+                                    <input type="text" class="form-control" id="tipo_tarea" name="tipo_tarea" placeholder="" value="" maxlength="50" required="">
                                 </div>
                             </div>
 
@@ -124,9 +115,9 @@
                                 <label for="usuario_id">Selecciona el usuario</label>
                                 <select name="usuario_id" id="usuario_id" class="form-control">
                                     @foreach ($usuario as $usuarios)
-                                        <option value="{{ $usuarios->id }}">
-                                            {{ $usuarios->usuario }}
-                                        </option>
+                                    <option value="{{ $usuarios->id }}">
+                                        {{ $usuarios->usuario }}
+                                    </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -134,8 +125,9 @@
                                 <label for="cliente_id">Selecciona el Cliente</label>
                                 <select name="cliente_id" id="cliente_id" class="form-control">
                                     @foreach ($cliente as $clientes)
-                                        <option value="{{ $clientes->id }}">
-                                            {{ $clientes->nombreempresa }}</option>
+                                    <option value="{{ $clientes->id }}">
+                                        {{ $clientes->nombreempresa }}
+                                    </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -144,8 +136,9 @@
                                 <label for="estatutarea_id">Selecciona el estatus</label>
                                 <select name="estatutarea_id" id="estatutarea_id" class="form-control">
                                     @foreach ($estatutarea as $estatutareas)
-                                        <option value="{{ $estatutareas->id }}">
-                                            {{ $estatutareas->nombre }}</option>
+                                    <option value="{{ $estatutareas->id }}">
+                                        {{ $estatutareas->nombre }}
+                                    </option>
                                     @endforeach
                                 </select>
                             </div>
