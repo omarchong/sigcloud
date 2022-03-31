@@ -45,4 +45,11 @@ class TipoproyectosController extends Controller
 
         return response()->json(['success' => true]);
     }
+    public function RegistrosDatatables()
+    {
+        return datatables()
+        ->eloquent(
+            Tipoproyecto::query()
+        )->toJson();
+    }
 }

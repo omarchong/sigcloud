@@ -45,4 +45,11 @@ class EstatusordenController extends Controller
 
         return response()->json(['success' => true]);
     }
+    public function RegistrosDatatables()
+    {
+        return datatables()
+        ->eloquent(
+            Estatuorden::query()
+        )->toJson();
+    }
 }

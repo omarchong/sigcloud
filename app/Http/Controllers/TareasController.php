@@ -66,6 +66,9 @@ class TareasController extends Controller
         return datatables()
         ->eloquent(
             Tarea::query()
+            ->with(['usuario'])
+            ->with(['cliente'])
+            ->with(['estatutarea'])
         )->toJson();
     }
 }

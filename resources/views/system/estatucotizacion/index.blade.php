@@ -6,22 +6,25 @@
         <div class="container-fluid col-md-10">
             <div class="card">
                 <div class="card-header">
+                    <span>Gestión de estatus de cotización</span>
+                </div>
+                <div class="card-body">
                     <button type="button" id="addNewEstatucotizacion" class="btn btn-primary"><i
                             class="fas fa-plus"></i> Agregar
                         estatus de cotizacion</button>
                 </div>
-                <div class="col-md-12">
-                    <table class="table">
-                        <thead>
+                <div class="card-body">
+                    <table class="table table-striped table-inverse mt-3 responsive" id="estatucotizacions">
+                        <thead class="thead-inverse striped responsive">
                             <tr>
-                                <th scope="col">Clave</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Acciones</th>
+                                <th>Clave</th>
+                                <th>Nombre</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($estatucotizacions as $estatucotizacion)
-                                <tr>
+                                {{-- <tr>
                                     <td>{{ $estatucotizacion->id }}</td>
                                     <td>{{ $estatucotizacion->nombre }}</td>
                                     <td>
@@ -32,14 +35,15 @@
                                             data-id="{{ $estatucotizacion->id }}"><img src="/img/basurero.svg"
                                                 width="20px"></a>
                                     </td>
-                                </tr>
+                                </tr> --}}
                             @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-
+    </div>
+</div>
         <!-- boostrap model -->
         <div class="modal fade" id="ajax-estatucotizacion-model" aria-hidden="true">
             <div class="modal-dialog">
@@ -59,7 +63,7 @@
                                 </div>
                             </div>
 
-                            <div class="text-center">
+                            <div class="float-right my-4">
                                 <button type="submit" class="btn btn-primary" id="btn-save"
                                     value="addNewEstatucotizacion">Guardar
                                 </button>
@@ -72,10 +76,44 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
 <!-- end bootstrap model -->
+
+<script>
+    $('#estatucotizacions').DataTable({
+        "responsive": true,
+        "processing": true,
+        "serverSide": true,
+        "autoWidth": false,
+        language: {
+            url: "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
+        },
+        "ajax": "{{ route('estatucotizacions.datatables') }}",
+        "columns": [{
+                data: 'id',
+            },
+            {
+                data: 'nombre',
+            }, {
+                data: 'id',
+                render: function(data, type, full, meta) {
+                    return `
+                    <a href="javascript:void(0)" class="edit"
+                        data-id="{{ $estatucotizacion->id }}"><img src="/img/editar.svg"
+                            width="20px"></a>
+                    <a href="javascript:void(0)" class="delete"
+                        data-id="{{ $estatucotizacion->id }}"><img src="/img/basurero.svg"
+                            width="20px"></a>
+                        `
+                }
+            }
+        ]
+    })
+
+    function reloadTable() {
+        $('#estatucotizacions').DataTable().ajax.reload();
+    }
+</script>
+
 <script type="text/javascript">
     $(document).ready(function($) {
 

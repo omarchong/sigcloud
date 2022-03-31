@@ -45,4 +45,11 @@ class EstatusfacturaController extends Controller
 
         return response()->json(['success' => true]);
     }
+    public function RegistrosDatatables()
+    {
+        return datatables()
+        ->eloquent(
+            Estatufactura::query()
+        )->toJson();
+    }
 }

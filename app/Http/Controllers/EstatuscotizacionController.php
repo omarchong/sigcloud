@@ -45,4 +45,11 @@ class EstatuscotizacionController extends Controller
 
         return response()->json(['success' => true]);
     }
+    public function RegistrosDatatables()
+    {
+        return datatables()
+        ->eloquent(
+            Estatucotizacion::query()
+        )->toJson();
+    }
 }

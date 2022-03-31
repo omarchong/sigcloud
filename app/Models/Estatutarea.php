@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Estatutarea extends Model
 {
-    use HasFactory, softDeletes;
+    use HasFactory;
     protected $fillable = [
         'nombre'
     ];

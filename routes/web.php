@@ -50,24 +50,6 @@ Route::get('get-municipios',[ClientesController::class, 'getMunicipios'])->name(
 Route::resource('usuarios', UsuariosController::class);
 Route::get('datatables/usuarios',[UsuariosController::class, 'RegistrosDatatables'])->name('usuarios.datatables');
 
-
-
-
-/* cristhian */
-/* Route::resource('servicios', ServiciosController::class);
-Route::post('add-update-servicio', [ServiciosController::class, 'store']);
-Route::post('edit-servicio', [ServiciosController::class, 'edit']);
-Route::post('delete-servicio', [ServiciosController::class, 'destroy']);
-Route::get('datatables/servicios', [ServiciosController::class, 'RegistrosDatatables'])->name('servicios.datatables'); */
-
-
-/* cristhian */
-Route::resource('estatutareas', EstatustareaController::class);
-Route::post('add-update-estatutarea', [EstatustareaController::class, 'store']);
-Route::post('edit-estatutarea', [EstatustareaController::class, 'edit']);
-Route::post('delete-estatutarea', [EstatustareaController::class, 'destroy']);
-Route::get('datatables/estatutareas', [EstatustareaController::class, 'RegistrosDatatables'])->name('estatutareas.datatables');
-
 /* Actividades */
 Route::resource('actividades', ActividadesController::class);
 Route::get('actividad', [ActividadesController::class, 'index']);
@@ -83,6 +65,8 @@ Route::get('estatuservicio', [EstatuserviciosController::class, 'index']);
 Route::post('add-update-estatuservicio', [EstatuserviciosController::class, 'store']);
 Route::post('edit-estatuservicio', [EstatuserviciosController::class, 'edit']);
 Route::post('delete-estatuservicio', [EstatuserviciosController::class, 'destroy']);
+Route::get('datatables/estatuservicios', [EstatuserviciosController::class, 'RegistrosDatatables'])->name('estatuservicios.datatables');
+
 
 /* Servicios */
 Route::resource('servicios', ServiciosController::class);
@@ -98,6 +82,8 @@ Route::get('estatutarea', [EstatustareaController::class, 'index']);
 Route::post('add-update-estatutarea', [EstatustareaController::class, 'store']);
 Route::post('edit-estatutarea', [EstatustareaController::class, 'edit']);
 Route::post('delete-estatutarea', [EstatustareaController::class, 'destroy']);
+Route::get('datatables/estatutareas', [EstatustareaController::class, 'RegistrosDatatables'])->name('estatutareas.datatables');
+
 
 /* Tareas */
 Route::resource('tareas', TareasController::class);
@@ -114,6 +100,8 @@ Route::get('estatucita', [EstatuscitaController::class, 'index']);
 Route::post('add-update-estatucita', [EstatuscitaController::class, 'store']);
 Route::post('edit-estatucita', [EstatuscitaController::class, 'edit']);
 Route::post('delete-estatucita', [EstatuscitaController::class, 'destroy']);
+Route::get('datatables/estatucitas', [EstatuscitaController::class, 'RegistrosDatatables'])->name('estatucitas.datatables');
+
 
 /* Tipos proyectos */
 Route::resource('tipoproyectos', TipoproyectosController::class);
@@ -121,6 +109,8 @@ Route::get('tipoproyecto', [TipoproyectosController::class, 'index']);
 Route::post('add-update-tipoproyecto', [TipoproyectosController::class, 'store']);
 Route::post('edit-tipoproyecto', [TipoproyectosController::class, 'edit']);
 Route::post('delete-tipoproyecto', [TipoproyectosController::class, 'destroy']);
+Route::get('datatables/tipoproyectos', [TipoproyectosController::class, 'RegistrosDatatables'])->name('tipoproyectos.datatables');
+
 
 /* Estatu proyectos */
 Route::resource('estatuproyectos', EstatuproyectosController::class);
@@ -128,6 +118,8 @@ Route::get('estatuproyecto', [EstatuproyectosController::class, 'index']);
 Route::post('add-update-estatuproyecto', [EstatuproyectosController::class, 'store']);
 Route::post('edit-estatuproyecto', [EstatuproyectosController::class, 'edit']);
 Route::post('delete-estatuproyecto', [EstatuproyectosController::class, 'destroy']);
+Route::get('datatables/estatuproyectos', [EstatuproyectosController::class, 'RegistrosDatatables'])->name('estatuproyectos.datatables');
+
 
 /* Estatus cotizaciones */
 Route::resource('estatucotizacions', EstatuscotizacionController::class);
@@ -135,6 +127,8 @@ Route::get('estatucotizacion', [EstatuscotizacionController::class, 'index']);
 Route::post('add-update-estatucotizacion', [EstatuscotizacionController::class, 'store']);
 Route::post('edit-estatucotizacion', [EstatuscotizacionController::class, 'edit']);
 Route::post('delete-estatucotizacion', [EstatuscotizacionController::class, 'destroy']);
+Route::get('datatables/estatucotizacions', [EstatuscotizacionController::class, 'RegistrosDatatables'])->name('estatucotizacions.datatables');
+
 
 /* Estatus orden */
 Route::resource('estatuordens', EstatusordenController::class);
@@ -142,6 +136,8 @@ Route::get('estatuorden', [EstatusordenController::class, 'index']);
 Route::post('add-update-estatuorden', [EstatusordenController::class, 'store']);
 Route::post('edit-estatuorden', [EstatusordenController::class, 'edit']);
 Route::post('delete-estatuorden', [EstatusordenController::class, 'destroy']);
+Route::get('datatables/estatuordens', [EstatusordenController::class, 'RegistrosDatatables'])->name('estatuordens.datatables');
+
 
 /* Estatus factura */
 Route::resource('estatufacturas', EstatusfacturaController::class);
@@ -149,3 +145,4 @@ Route::get('estatufactura', [EstatusfacturaController::class, 'index']);
 Route::post('add-update-estatufactura', [EstatusfacturaController::class, 'store']);
 Route::post('edit-estatufactura', [EstatusfacturaController::class, 'edit']);
 Route::post('delete-estatufactura', [EstatusfacturaController::class, 'destroy']);
+Route::get('datatables/estatufacturas', [EstatusfacturaController::class, 'RegistrosDatatables'])->name('estatufacturas.datatables');
