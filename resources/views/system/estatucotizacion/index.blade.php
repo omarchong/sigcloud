@@ -2,7 +2,6 @@
 
 <div class="main my-3">
     <div class="main-content">
-
         <div class="container-fluid col-md-10">
             <div class="card">
                 <div class="card-header">
@@ -69,9 +68,6 @@
                                 </button>
                             </div>
                         </form>
-                    </div>
-                    <div class="modal-footer">
-
                     </div>
                 </div>
             </div>
@@ -151,26 +147,33 @@
 
         });
 
-        $('body').on('click', '.delete', function() {
-
-            if (confirm("¿Eliminar registro?") == true) {
-                var id = $(this).data('id');
-
-                // ajax
-                $.ajax({
-                    type: "POST",
-                    url: "{{ url('delete-estatucotizacion') }}",
-                    data: {
-                        id: id
-                    },
-                    dataType: 'json',
-                    success: function(res) {
-
-                        window.location.reload();
-                    }
-                });
-            }
-
+        $('body').on('click', '.delete', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡El estatus se eliminará definitivamente!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#007bff',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '¡Si, eliminar!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if(result.isConfirmed) {
+                    var id = $(this).data('id');
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ url('delete-estatucotizacion') }}",
+                        data: {
+                            id: id
+                        },
+                        dataType: 'json',
+                        success: function(res) {
+                            window.location.reload();
+                        }
+                    });
+                }
+            })
         });
 
         $('body').on('click', '#btn-save', function(event) {

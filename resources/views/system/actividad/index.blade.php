@@ -2,15 +2,12 @@
 
 <div class="main my-3">
     <div class="main-content">
-
         <div class="container-fluid col-md-10">
-
             <div class="card">
                 <div class="card-header">
                     <span>Gestión de actividades</span>
                 </div>
                 <div class="card-body">
-                    {{-- <a href="" class="btn btn-primary" id="addNewActividad"><i class="fas fa-plus"></i> Registrar actividad</a> --}}
                     <button type="button" id="addNewActividad" class="btn btn-primary"><i class="fas fa-plus"></i>
                         Agregar
                         actividad</button>
@@ -25,19 +22,15 @@
                                 <th>Fecha</th>
                                 <th>Nota</th>
                                 <th>Otros</th>
-
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($actividads as $actividad)
                                 {{-- <tr>
-                        
-                            
                                 <a href="javascript:void(0)" class="btn btn-primary edit"
                                     data-id="{{ $actividad->id }}">Editar</a>
                                 <a href="javascript:void(0)" class="btn btn-danger delete"
                                     data-id="{{ $actividad->id }}">Eliminar</a>
-                            
                         </tr> --}}
                             @endforeach
                         </tbody>
@@ -68,7 +61,7 @@
                         <div class="col-md-6">
                             <label for="tipoactividad">Tipo de actividad</label>
                             <div class="">
-                                <select class="custom-select" name="tipoactividad" id="tipoactividad">
+                                <select class="custom-select" name="tipoactividad" id="tipoactividad" required>
                                     <option selected>Selecciona una actividad</option>
                                     <option value="Llamadas">Llamadas</option>
                                     <option value="Correo">Correo</option>
@@ -99,9 +92,7 @@
     </div>
 </div>
 
-
 <script>
-    /* var table = $(".actividades").DataTable({ */
     $('#actividades').DataTable({
         "responsive": true,
         "processing": true,
@@ -125,9 +116,7 @@
             },
             {
                 data: 'nota'
-            },
-
-            {
+            },{
                 data: 'id',
                 render: function(data, type, full, meta) {
                     return `
@@ -140,29 +129,25 @@
             }
         ]
     })
-
     function reloadTable() {
         $("#actividades").DataTable().ajax.reload();
     }
 </script>
+
 <script>
     $(document).ready(function($) {
-
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
         $('#addNewActividad').click(function() {
             $('#addEditActividadForm').trigger("reset");
             $('#ajaxActividadModel').html("Registrar actividad");
             $('#ajax-actividad-model').modal('show');
         });
-
         $('body').on('click', '.edit', function() {
             var id = $(this).data('id');
-
             $.ajax({
                 type: "POST",
                 url: "{{ url('edit-actividad') }}",
@@ -181,23 +166,48 @@
                 }
             });
         });
-
-        $('body').on('click', '.delete', function() {
-            if (confirm("¿Eliminar registro?") == true) {
+        /* $('body').on('click', '.delete', function () {
+            if (confirm("¿Eliminar registro? {{ $actividad->id}} ") == true) {
                 var id = $(this).data('id');
 
                 $.ajax({
                     type: 'POST',
                     url: "{{ url('delete-actividad') }}",
-                    data: {
-                        id: id
-                    },
+                    data: { id: id },
                     dataType: 'json',
-                    success: function(res) {
+                    success: function(res){
                         window.location.reload();
                     }
                 });
             }
+        }); */
+        $('body').on('click', '.delete', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡La actividad {{ $actividad->id }} se eliminará definitivamente!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#007bff',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '¡Si, eliminar!',
+                cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    var id = $(this).data('id');
+                    $.ajax({
+                        type: 'post',
+                        url: "{{ url('delete-actividad') }}",
+                        data: {
+                            id: id
+                        },
+                        dataType: 'json',
+                        success: function(res) {
+                            location.reload();
+                        }
+                    });
+                }
+            }) 
         });
 
         $('body').on('click', '#btn-save', function(event) {
@@ -207,10 +217,8 @@
             var fecha = $('#fecha').val();
             var nota = $('#nota').val();
             console.log(nota);
-
             $("#btn-save").html('Espere porfavor...');
             $("#btn-save").attr("disabled", true);
-
             $.ajax({
                 type: 'POST',
                 url: "{{ url('add-update-actividad') }}",

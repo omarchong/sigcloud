@@ -21,10 +21,10 @@ class ActividadesController extends Controller
         $actividad = Actividad::updateOrCreate(
             ['id' => $request->id],
             [
-                'nombre' => $request->nombre,
-                'tipoactividad' => $request->tipoactividad,
-                'fecha' => $request->fecha,
-                'nota' => $request->nota
+                'nombre' => $request->input('nombre'),
+                'tipoactividad' => $request->input('tipoactividad'),
+                'fecha' => $request->input('fecha'),
+                'nota' => $request->input('nota')
             ]
         );
         return response()->json(['succes' => true]);
@@ -41,6 +41,7 @@ class ActividadesController extends Controller
     {
         $actividad = Actividad::where('id', $request->id)->delete();
         return response()->json(['success' => true]);
+        
     }
     public function RegistrosDatatables()
     {

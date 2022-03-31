@@ -9,9 +9,6 @@ class Actividad extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nombre',
-        'tipoactividad',
-        'fecha',
-        'nota',
+        'nombre', 'tipoactividad', 'fecha', 'nota'
     ];
 }

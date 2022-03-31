@@ -81,15 +81,12 @@
                                 }
                             ]
                         })
-                    
                         function reloadTable() {
                             $('#servicios').DataTable().ajax.reload();
                         }
                     </script>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>
@@ -111,15 +108,6 @@
                             <input type="text" class="form-control" id="nombre" name="nombre" required>
                         </div>
                     </div>
-
-                    {{-- <div class="form-group">
-                      <label for="name" class="col-sm-2 control-label">Id</label>
-                      <div class="col-sm-12">
-                          <input type="text" class="form-control" id="estatuservicio_id" name="estatuservicio_id"
-                              placeholder="" value="" maxlength="50" required="">
-                      </div>
-                  </div> --}}
-
                     {{-- <div class="col-md-12">
                                 <label for="estatuservicio_id">Selecciona el estatus</label>
                                 <select name="estatuservicio_id" id="estatuservicio_id" class="form-control">
@@ -129,7 +117,6 @@
                                     @endforeach
                                 </select>
                             </div> --}}
-
                     <div class="form-group">
                         <label for="descripcion" class="col-sm-12 control-label">Descripcion</label>
                         <div class="col-sm-12">
@@ -148,7 +135,6 @@
                             <input type="text" class="form-control" id="precio_final" name="precio_final" required>
                         </div>
                     </div>
-
                     <div class="float-right my-4">
                         <button type="submit" class="btn btn-primary" id="btn-save" value="addNewServicio">Guardar
                         </button>
@@ -161,13 +147,11 @@
 <!-- end bootstrap model -->
 <script type="text/javascript">
     $(document).ready(function($) {
-
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
         $('#addNewServicio').click(function() {
             $('#addEditServicioForm').trigger("reset");
             $('#ajaxServicioModel').html("Registrar servicio");
@@ -175,10 +159,7 @@
         });
 
         $('body').on('click', '.edit', function() {
-
             var id = $(this).data('id');
-
-            // ajax
             $.ajax({
                 type: "POST",
                 url: "{{ url('edit-servicio') }}",
@@ -200,41 +181,44 @@
 
         });
 
-        $('body').on('click', '.delete', function() {
-
-            if (confirm("¿Eliminar registro?") == true) {
-                var id = $(this).data('id');
-
-                // ajax
-                $.ajax({
-                    type: "POST",
-                    url: "{{ url('delete-servicio') }}",
-                    data: {
-                        id: id
-                    },
-                    dataType: 'json',
-                    success: function(res) {
-
-                        window.location.reload();
-                    }
-                });
-            }
-
+        $('body').on('click', '.delete', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: '¡El servicio se eliminará definitivamente!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#007bff',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '¡Si, eliminar!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var id = $(this).data('id');
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ url('delete-servicio') }}",
+                        data: {
+                            id: id
+                        },
+                        dataType: 'json',
+                        success: function(res) {
+                            window.location.reload();
+                        }
+                    });
+                }
+            })
         });
 
         $('body').on('click', '#btn-save', function(event) {
-
             var id = $("#id").val();
             var nombre = $("#nombre").val();
             /* var estatuservicio_id = $("#estatuservicio_id").val(); */
             var descripcion = $("#descripcion").val();
             var precio_inicial = $("#precio_inicial").val();
             var precio_final = $("#precio_final").val();
-
             $("#btn-save").html('Espere porfavor...');
             $("#btn-save").attr("disabled", true);
-
-            // ajax
             $.ajax({
                 type: "POST",
                 url: "{{ url('add-update-servicio') }}",
@@ -245,7 +229,6 @@
                     descripcion: descripcion,
                     precio_inicial: precio_inicial,
                     precio_final: precio_final,
-
                 },
                 dataType: 'json',
                 success: function(res) {
@@ -254,8 +237,6 @@
                     $("#btn-save").attr("disabled", false);
                 }
             });
-
         });
-
     });
 </script>

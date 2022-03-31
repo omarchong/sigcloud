@@ -39,7 +39,6 @@
                                     <td>{{ $tarea->usuario->nombre }}</td>
                                     <td>{{ $tarea->cliente->nombreempresa }}</td>
                                     <td>{{ $tarea->estatutarea->nombre }}</td>
-
                                     <td>
                                         <a href="javascript:void(0)" class="edit"
                                             data-id="{{ $tarea->id }}"><img src="/img/editar.svg" width="20px"></a>
@@ -76,7 +75,6 @@
                                 maxlength="50" required="">
                         </div>
                     </div>
-
                     <div class="col-md-6">
                         <label for="fecha_limite" class="control-label">Fecha limite</label>
                         <div class="">
@@ -98,22 +96,6 @@
                                 value="" maxlength="50" required="">
                         </div>
                     </div>
-
-                    {{-- <div class="form-group">
-                      <label for="name" class="col-sm-2 control-label">usuario</label>
-                      <div class="col-sm-12">
-                          <input type="text" class="form-control" id="usuario_id" name="usuario_id"
-                              placeholder="Ingresa el año" value="" maxlength="50" required="">
-                      </div>
-                  </div> --}}
-                    {{-- <div class="form-group">
-                    <label for="name" class="col-sm-2 control-label">cliente</label>
-                    <div class="col-sm-12">
-                        <input type="text" class="form-control" id="cliente_id" name="cliente_id"
-                            placeholder="Ingresa el año" value="" maxlength="50" required="">
-                    </div>
-                </div> --}}
-
                     <div class="col-md-6">
                         <label for="usuario_id">Selecciona el usuario</label>
                         <select name="usuario_id" id="usuario_id" class="form-control">
@@ -133,7 +115,6 @@
                             @endforeach
                         </select>
                     </div>
-
                     <div class="col-md-12">
                         <label for="estatutarea_id">Selecciona el estatus</label>
                         <select name="estatutarea_id" id="estatutarea_id" class="form-control">
@@ -143,7 +124,6 @@
                             @endforeach
                         </select>
                     </div>
-
                     <div class="col-md-12">
                         <label for="descripcion" class="control-label">Descripcion</label>
                         <div class="">
@@ -152,8 +132,7 @@
                         </div>
                     </div>
                 </div>
-
-                    <div class="float-right my-4">
+                    <div class="float-right my-3">
                         <button type="submit" class="btn btn-primary" id="btn-save" value="addNewTarea">Guardar
                         </button>
                     </div>
@@ -163,7 +142,6 @@
     </div>
 </div>
 <!-- end bootstrap model -->
-
 <script>
     $('#tareas').DataTable({
         "responsive": true,
@@ -175,32 +153,7 @@
         },
         "ajax": "{{ route('tareas.datatables') }}",
         "columns": [{
-                data: 'id',
-            },
-            {
-                data: 'nombre',
-            },
-            {
-                data: 'descripcion',
-            },
-            {
-                data: 'fecha_limite',
-            },
-            {
-                data: 'hora_limite',
-            }, 
-            { 
-                data: 'tipo_tarea',
-            }, 
-            {  
-                data: 'usuario.nombre',
-            }, 
-            {
-                data: 'cliente.nombreempresa',
-            }, 
-            {
-                data:'estatutarea.nombre',
-            },{ 
+        },{ 
                 data: 'id',
                 render: function(data, type, full, meta) {
                     return `
@@ -213,23 +166,18 @@
             }
         ]
     })
-
     function reloadTable() {
         $('#tareas').DataTable().ajax.reload();
     }
 </script>
 
-
-
 <script type="text/javascript">
     $(document).ready(function($) {
-
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
         $('#addNewTarea').click(function() {
             $('#addEditTareaForm').trigger("reset");
             $('#ajaxTareaModel').html("Registrar tarea");
@@ -237,10 +185,7 @@
         });
 
         $('body').on('click', '.edit', function() {
-
             var id = $(this).data('id');
-
-            // ajax
             $.ajax({
                 type: "POST",
                 url: "{{ url('edit-tarea') }}",
@@ -260,36 +205,40 @@
                     $('#usuario_id').val(res.usuario_id);
                     $('#cliente_id').val(res.cliente_id);
                     $('#estatutarea_id').val(res.estatutarea_id);
-
                 }
             });
-
         });
 
-        $('body').on('click', '.delete', function() {
-
-            if (confirm("¿Eliminar registro?") == true) {
-                var id = $(this).data('id');
-
-                // ajax
-                $.ajax({
-                    type: "POST",
-                    url: "{{ url('delete-tarea') }}",
-                    data: {
-                        id: id
-                    },
-                    dataType: 'json',
-                    success: function(res) {
-
-                        window.location.reload();
-                    }
-                });
-            }
-
+        $('body').on('click', '.delete', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: '¡La tarea se eliminará definitivamente!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#007bff',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '¡Si, eliminar!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var id = $(this).data('id');
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ url('delete-tarea') }}",
+                        data: {
+                            id: id
+                        },
+                        dataType: 'json',
+                        success: function(res) {
+                            window.location.reload();
+                        }
+                    });
+                }
+            })
         });
 
         $('body').on('click', '#btn-save', function(event) {
-
             var id = $("#id").val();
             var nombre = $("#nombre").val();
             var descripcion = $("#descripcion").val();
@@ -299,12 +248,8 @@
             var usuario_id = $("#usuario_id").val();
             var cliente_id = $("#cliente_id").val();
             var estatutarea_id = $("#estatutarea_id").val();
-
-
             $("#btn-save").html('Espere porfavor...');
             $("#btn-save").attr("disabled", true);
-
-            // ajax
             $.ajax({
                 type: "POST",
                 url: "{{ url('add-update-tarea') }}",
@@ -326,8 +271,6 @@
                     $("#btn-save").attr("disabled", false);
                 }
             });
-
         });
-
     });
 </script>

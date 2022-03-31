@@ -2,7 +2,6 @@
 
 <div class="main my-3">
     <div class="main-content">
-
         <div class="container-fluid col-md-10">
             <div class="card">
                 <div class="card-header">
@@ -63,7 +62,6 @@
                                         placeholder="" value="" maxlength="50" required="">
                                 </div>
                             </div>
-
                             <div class="float-right my-4">
                                 <button type="submit" class="btn btn-primary" id="btn-save"
                                     value="addNewTipoproyecto">Guardar
@@ -106,20 +104,17 @@
             }
         ]
     })
-
     function reloadTable() {
         $('#tipoproyectos').DataTable().ajax.reload();
     }
 </script>
 <script type="text/javascript">
     $(document).ready(function($) {
-
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
         $('#addNewTipoproyecto').click(function() {
             $('#addEditTipoproyectoForm').trigger("reset");
             $('#ajaxTipoproyectoModel').html("Registrar tipo de proyecto");
@@ -127,10 +122,7 @@
         });
 
         $('body').on('click', '.edit', function() {
-
             var id = $(this).data('id');
-
-            // ajax
             $.ajax({
                 type: "POST",
                 url: "{{ url('edit-tipoproyecto') }}",
@@ -145,40 +137,42 @@
                     $('#nombre').val(res.nombre);
                 }
             });
-
         });
 
-        $('body').on('click', '.delete', function() {
-
-            if (confirm("¿Eliminar registro?") == true) {
-                var id = $(this).data('id');
-
-                // ajax
-                $.ajax({
-                    type: "POST",
-                    url: "{{ url('delete-tipoproyecto') }}",
-                    data: {
-                        id: id
-                    },
-                    dataType: 'json',
-                    success: function(res) {
-
-                        window.location.reload();
-                    }
-                });
-            }
-
+        $('body').on('click', '.delete', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡El campo {{ $tipoproyecto->nombre }} se eliminará definitivamente!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#007bff',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '¡Si, eliminar!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var id = $(this).data('id');
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ url('delete-tipoproyecto') }}",
+                        data: {
+                            id: id
+                        },
+                        dataType: 'json',
+                        success: function(res) {
+                            window.location.reload();
+                        }
+                    });
+                }
+            })
         });
 
         $('body').on('click', '#btn-save', function(event) {
-
             var id = $("#id").val();
             var nombre = $("#nombre").val();
-
             $("#btn-save").html('Espere porfavor...');
             $("#btn-save").attr("disabled", true);
-
-            // ajax
             $.ajax({
                 type: "POST",
                 url: "{{ url('add-update-tipoproyecto') }}",
@@ -193,8 +187,6 @@
                     $("#btn-save").attr("disabled", false);
                 }
             });
-
         });
-
     });
 </script>

@@ -73,7 +73,7 @@ Route::resource('actividades', ActividadesController::class);
 Route::get('actividad', [ActividadesController::class, 'index']);
 Route::post('add-update-actividad', [ActividadesController::class, 'store']);
 Route::post('edit-actividad', [ActividadesController::class, 'edit']);
-Route::post('delete-actividad', [ActividadesController::class, 'destroy']);
+Route::post('delete-actividad/', [ActividadesController::class, 'destroy']);
 Route::get('datatables/actividades', [ActividadesController::class, 'RegistrosDatatables'])->name('actividades.datatables');
 
 
