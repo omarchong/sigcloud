@@ -13,22 +13,14 @@ class CreateClientesTable extends Migration
             $table->id();
             $table->string('tipocliente');
             $table->string('nombreempresa');
-            $table->string('estado');
-            $table->string('municipio');
+            $table->foreignId('estado_id')->constrained();
             $table->integer('cp');
             $table->string('referencias');
-            $table->string('estadofiscal')->nullable();
-            $table->string('municipiofiscal')->nullable();
-            $table->integer('cpfiscal')->nullable();
-            $table->string('referenciasfiscal')->nullable();
+            $table->string('direccionfiscal')->nullable();
             $table->string('estatuscliente');
-            $table->string('giro');
             $table->string('rfc');
-            /* $table->foreignId('contacto_id')
-                ->references('id')
-                ->on('contactos'); */
-            /* otra manera de crear relaciones */
             $table->foreignId('contacto_id')->constrained();
+            $table->foreignId('giro_id')->constrained();
             $table->softDeletes();
             $table->timestamps();
         });

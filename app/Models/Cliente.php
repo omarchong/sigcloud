@@ -13,18 +13,14 @@ class Cliente extends Model
     protected $fillable = [
         'tipocliente',
         'nombreempresa',
-        'estado',
-        'municipio',
+        'estado_id',
         'cp',
         'referencias',
-        'estadofiscal',
-        'municipiofiscal',
-        'cpfiscal',
-        'referenciasfiscal',
+        'direccionfiscal',
         'estatuscliente',
-        'giro',
         'rfc',
-        'contacto_id'
+        'contacto_id',
+        'giro_id'
     ];
     public function contactos()
     {
@@ -46,9 +42,14 @@ class Cliente extends Model
         return $this->hasMany('App\Tarea');
     }
     
-    /* public function citas()
+    public function giros()
     {
-        return $this->belongsTo(Cita::class);
-    } */
+        return $this->hasOne(Giro::class);
+    }
+
+    public function estados()
+    {
+        return $this->belongsTo(Estado::class);
+    }
    
 }

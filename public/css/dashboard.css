@@ -28,6 +28,13 @@ body {
     min-height: 100vh;
     transition: var(--tran-05);
 }
+
+.form-control {
+    border-radius: 0;
+    box-shadow: none;
+    border-color: #d2d6de
+}
+
 /* este es el que pone en blanco las letras */
 /* ::selection {
     color: #fff;

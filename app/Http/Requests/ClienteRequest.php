@@ -18,17 +18,13 @@ class ClienteRequest extends FormRequest
         return [
             'tipocliente' => ['required'],
             'nombreempresa' => ['required'],
-            'estado' => ['required'],
-            'municipio' => ['required'],
+            'estado_id' => ['required'],
             'cp' => ['required'],
             'referencias' => ['required'],
-            'estadofiscal' => [''],
-            'municipiofiscal' => [''],
-            'cpfiscal' => [''],
-            'referenciasfiscal' => [''],
+            'direccionfiscal' => [''],
             'estatuscliente' => ['required'],
-            'giro' => ['required'],
-            'servicio' => ['required'],
+            'giro_id' => ['required'],
+            'contacto_id' => ['required'],
             'rfc' => ['required'],
         ];
     }
