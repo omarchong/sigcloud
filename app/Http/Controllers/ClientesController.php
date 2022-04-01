@@ -6,9 +6,8 @@ use App\Http\Requests\ClienteRequest;
 use App\Models\Cliente;
 use App\Models\Contacto;
 use App\Models\Estado;
+use App\Models\Giro;
 use App\Models\Municipio;
-use App\Models\Servicio;
-use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Laravel\Ui\Presets\React;
@@ -17,8 +16,8 @@ class ClientesController extends Controller
 {
     public function index()
     {
-        $clientes = Cliente::all();
-        return view('system.clientes.index', compact('clientes'));
+        
+        return view('system.clientes.index');
     }
 
 
@@ -28,14 +27,15 @@ class ClientesController extends Controller
         return view('system.clientes.create', [
             'contactos' => Contacto::select('id', 'contacto1')->get(),
             'estados' => Estado::select('id', 'nombre')->get(),
-            'municipios' => Municipio::select('id', 'nombre')->get()
+            'municipios' => Municipio::select('id', 'nombre')->get(),
+            'giros' => Giro::select('id', 'nombre')->get()
 
         ]);
     }
 
     public function store(ClienteRequest $request)
     {
-        /* dd( $request->all() ); */
+        /* dd($request->all()); */
 
 
         $cliente = Cliente::create($request->validated());
@@ -49,19 +49,11 @@ class ClientesController extends Controller
         return datatables()
             ->eloquent(
                 Cliente::query()
+                
             )->toJson();
     }
 
-    public function searchcontacto(Request $request)
-    {
-        $term = $request->get('term');
 
-        $result = Contacto::where('contacto1', 'LIKE', '%' . $term . '%')
-            ->select("contacto1")
-            ->groupBy("contacto1")
-            ->get();
-        return response()->json($result);
-    }
 
     public function estados()
     {
@@ -77,5 +69,16 @@ class ClientesController extends Controller
         if (count($municipios) > 0) {
             return response()->json($municipios);
         }
+    }
+
+     public function searchcontacto(Request $request)
+    {
+        $term = $request->get('term');
+
+        $result = Contacto::where('contacto1', 'LIKE', '%' . $term . '%')
+            ->select("contacto1")
+            ->groupBy("contacto1")
+            ->get();
+        return response()->json($result);
     }
 }

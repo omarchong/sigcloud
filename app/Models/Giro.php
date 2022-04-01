@@ -5,23 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Municipio extends Model
+class Giro extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'clave',
         'nombre',
-        'activo',
-        'estado_id',
-
+        'descripcion',
     ];
-    public function estados()
-    {
-        return $this->hasMany(Estado::class);
-    }
-
     public function clientes()
     {
-        return $this->hasOne(Cliente::class);
+        return $this->belongsTo(Cliente::class);
     }
 }

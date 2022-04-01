@@ -17,7 +17,6 @@
                             <tr>
                                 <th>Clave</th>
                                 <th>Nombre</th>
-                                <th>Descripcion</th>
                                 <th>Fecha limite</th>
                                 <th>Hora limite</th>
                                 <th>Tipo tarea</th>
@@ -32,7 +31,6 @@
                                 <tr>
                                     <td>{{ $tarea->id }}</td>
                                     <td>{{ $tarea->nombre }}</td>
-                                    <td>{{ $tarea->descripcion }}</td>
                                     <td>{{ $tarea->fecha_limite }}</td>
                                     <td>{{ $tarea->hora_limite }}</td>
                                     <td>{{ $tarea->tipo_tarea }}</td>

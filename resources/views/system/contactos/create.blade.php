@@ -31,7 +31,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label for="exampleInputEmail1" class="form-label">Telefono</label>
                         <div class="form-group">
                             <input type="number" required class="form-control @error ('telefono1') is-invalid @enderror" id="telefono1" name="telefono1" value="{{old('telefono1')}}">
@@ -42,6 +42,21 @@
                             <small class="text-danger">{{$message}}</small>
                             @enderror
                         </div>
+                    </div>
+                    <div class="col-md-1">
+                        <label for="code" class="text-left">Agregar</label>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-success" id="addContacto">
+                                <i class="fas fa-plus"></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                 
+                    <div class="container-fluid" id="incrementa">
+
                     </div>
                     <div class="col-md-10">
                         <label for="exampleInputEmail1" class="form-label">Seleccione el servicio</label>
@@ -56,20 +71,7 @@
                     </div>
 
 
-                    <div class="col-md-1">
-                        <label for="code" class="text-left">Agregar</label>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-success" id="addContacto">
-                                <i class="fas fa-plus"></i>
-                            </button>
 
-                        </div>
-
-                    </div>
-
-                    <div class="container-fluid" id="incrementa">
-
-                    </div>
 
                     <div class="col-md-12">
                         <label for="descripcion">Descripcion</label>
@@ -88,7 +90,7 @@
 
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-primary float-right ">Guardar</button>
+                    <button type="submit" class="btn btn-primary float-right">Guardar</button>
 
                 </div>
 

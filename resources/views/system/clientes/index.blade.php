@@ -18,7 +18,6 @@
                             <tr>
                                 <th>Clave</th>
                                 <th>Nombre</th>
-                                <th>Telefono</th>
                                 <th>Estatus</th>
                                 <th>Operaciones</th>
                             </tr>
@@ -42,9 +41,6 @@
                                 },
                                 {
                                     data: 'nombreempresa',
-                                },
-                                {
-                                    data: 'estado',
                                 },
                                 {
                                     data: 'estatuscliente',

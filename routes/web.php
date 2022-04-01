@@ -50,24 +50,6 @@ Route::get('get-municipios',[ClientesController::class, 'getMunicipios'])->name(
 Route::resource('usuarios', UsuariosController::class);
 Route::get('datatables/usuarios',[UsuariosController::class, 'RegistrosDatatables'])->name('usuarios.datatables');
 
-
-
-
-/* cristhian */
-/* Route::resource('servicios', ServiciosController::class);
-Route::post('add-update-servicio', [ServiciosController::class, 'store']);
-Route::post('edit-servicio', [ServiciosController::class, 'edit']);
-Route::post('delete-servicio', [ServiciosController::class, 'destroy']);
-Route::get('datatables/servicios', [ServiciosController::class, 'RegistrosDatatables'])->name('servicios.datatables'); */
-
-
-/* cristhian */
-/* Route::resource('estatutareas', EstatustareaController::class);
-Route::post('add-update-estatutarea', [EstatustareaController::class, 'store']);
-Route::post('edit-estatutarea', [EstatustareaController::class, 'edit']);
-Route::post('delete-estatutarea', [EstatustareaController::class, 'destroy']);
-Route::get('datatables/estatutareas', [EstatustareaController::class, 'RegistrosDatatables'])->name('estatutareas.datatables');
- */
 /* Actividades */
 Route::resource('actividades', ActividadesController::class);
 Route::get('actividad', [ActividadesController::class, 'index']);

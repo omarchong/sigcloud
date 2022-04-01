@@ -18,4 +18,8 @@ class Estado extends Model
     {
         return $this->belongsToMany(Municipio::class);
     }
+    public function clientes()
+    {
+        return $this->hasMany(Cliente::class);
+    }
 }
