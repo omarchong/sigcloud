@@ -42,37 +42,67 @@
                 <h4 class="modal-title" id="ajaxDepartamentoModel">Registrar departamento</h4>
             </div>
             <div class="modal-body">
-                <form action="" id="DepartamentForm" name="DeapartamentForm" class="form-vertical">
+                <form action="" id="DepartamentForm" name="DeapartamentForm" class="form-vertical needs-validation" novalidate>
                     <input type="hidden" name="id" id="id">
                     <div class="row">
                         <div class="col-md-6">
                             <label for="">Abreviatura</label>
                             <div class="">
-                                <input type="tex" class="form-control" name="abreviatura" id="abreviatura">
+                                <input type="tex" required class="form-control @error ('abreviatura') @enderror" name="abreviatura" id="abreviatura">
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                                @error('abreviatura')
+                                <small class="text-danger">{{$message}}</small>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label for="">Nombre</label>
                             <div class="">
-                                <input type="tex" class="form-control" name="nombre" id="nombre">
+                                <input type="tex" required class="form-control @error('nombre') @enderror" name="nombre" id="nombre">
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                                @error('nombre')
+                                <small class="text-danger">{{$message}}</small>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-12">
                             <label for="">Descripcion</label>
                             <div class="">
-                                <input type="tex" class="form-control" name="descripcion" id="descripcion">
+                                <input type="tex" required class="form-control @error('descripcion') @enderror" name="descripcion" id="descripcion">
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                                @error('descripcion')
+                                <small class="text-danger">{{$message}}</small>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label for="">Estatus</label>
                             <div class="">
-                                <input type="tex" class="form-control" name="estatus" id="estatus">
+                                <input type="tex" required class="form-control @error('estatus') @enderror" name="estatus" id="estatus">
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                                @error('estatus')
+                                <small class="text-danger">{{$message}}</small>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label for="">N.empleados</label>
                             <div class="">
-                                <input type="number" class="form-control" name="n_empleados" id="n_empleados">
+                                <input type="number" required class="form-control @error('n_empleados') @enderror" name="n_empleados" id="n_empleados">
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                                @error('n_empleados')
+                                <small class="text-danger">{{$message}}</small>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -203,4 +233,63 @@
             } else {}
         });
     })
+</script>
+<script>
+    $(document).ready(function() {
+        $("#DepartamentForm").validate({
+            rules: {
+                abreviatura: {
+                    required: true
+                },
+                nombre: {
+                    required: true,
+                },
+                descripcion: {
+                    required: true
+                },
+                estatus: {
+                    required: true
+                },
+                n_empelados: {
+                    required: true
+                }
+            },
+            messages: {
+                abreviatura: {
+                    required: "Campo requerido"
+                },
+                nombre: {
+                    required: "Campo requerido"
+                },
+                descripcion: {
+                    required: "Campo requerido"
+                },
+                estatus: {
+                    required: "Campo requerido"
+                },
+                n_empleados: {
+                    required: "Campo requerido"
+                }
+            }
+        })
+    })
+</script>
+<script>
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 </script>
