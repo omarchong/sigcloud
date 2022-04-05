@@ -139,6 +139,7 @@
             $('#saveBtn').val('create-Departament');
             $('#id').val("");
             $('#DepartamentForm').trigger("reset");
+            $('#modelHeading').html("crear nuevo registros");
             $('#ajaxModel').modal("show");
         });
 
@@ -147,6 +148,7 @@
         $('body').on('click', '.editDepartament', function() {
             var id = $(this).data('id');
             $.get('editar/' + id, function(data) {
+                $('#modelHeading').html("Editar customer");
                 $('#saveBtn').val("edit-departament");
                 $('#ajaxModel').modal("show");
                 $('#id').val(data.id);

@@ -32,23 +32,17 @@ class DepartamentosController extends Controller
 
     public function store(Request $request)
     {
-        Departamento::where('id', $request->id)->update([
-            'abreviatura' => $request->abreviatura,
-            'nombre' => $request->nombre,
-            'descripcion' => $request->descripcion,
-            'estatus' => $request->estatus,
-            'n_empleados' => $request->n_empleados,
-
-        ]);
-        Departamento::create(array(
-            'id' => $request->id,
-            'abreviatura' => $request->abreviatura,
-            'nombre' => $request->nombre,
-            'descripcion' => $request->descripcion,
-            'estatus' => $request->estatus,
-            'n_empleados' => $request->n_empleados,
-        ));
-        return response()->json(['success' => 'El departamento se creo exitosamente']);
+        Departamento::updateOrCreate(
+            ['id' => $request->id],
+            [
+                'abreviatura' => $request->abreviatura,
+                'nombre' => $request->nombre,
+                'descripcion' => $request->descripcion,
+                'estatus' => $request->estatus,
+                'n_empleados' => $request->n_empleados,
+            ]
+        );
+        return response()->json(['success' => 'Registro exitoso']);
     }
 
     public function edit($id)
@@ -61,6 +55,4 @@ class DepartamentosController extends Controller
         Departamento::find($id)->delete();
         return response()->json(['success' => 'departamento Borrado!']);
     }
-
-   
 }

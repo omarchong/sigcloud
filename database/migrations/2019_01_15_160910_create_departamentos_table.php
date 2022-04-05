@@ -12,7 +12,7 @@ class CreateDepartamentosTable extends Migration
         Schema::create('departamentos', function (Blueprint $table) {
             $table->id();
             $table->string('abreviatura');
-            $table->string('nombre');
+            $table->string('nombre')->nullable();
             $table->string('descripcion');
             $table->string('estatus');
             $table->string('n_empleados');
