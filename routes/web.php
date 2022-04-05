@@ -4,6 +4,7 @@ use App\Http\Controllers\ActividadesController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\ContactosController;
 use App\Http\Controllers\CotizacionesController;
+use App\Http\Controllers\DepartamentosController;
 use App\Http\Controllers\EstatuproyectosController;
 use App\Http\Controllers\EstatuscitaController;
 use App\Http\Controllers\EstatuscotizacionController;
@@ -44,6 +45,12 @@ Route::resource('clientes', ClientesController::class);
 Route::get('datatables/clientes', [ClientesController::class, 'RegistrosDatatables'])->name('clientes.datatables');
 Route::post('searchcontacto', [ClientesController::class, 'searchcontacto'])->name('searchcontacto');
 Route::get('get-municipios',[ClientesController::class, 'getMunicipios'])->name('getMunicipios');
+
+/* departamentos */
+Route::resource('departamentos', DepartamentosController::class);
+Route::name('editar')->get('editar/{id}',[DepartamentosController::class,'edit']);
+Route::name('store')->post('store/',[DepartamentosController::class,'store']);
+Route::name('destroy')->delete('destroy/{id}',[DepartamentosController::class,'destroy']);
 
 
 /* usuarios */

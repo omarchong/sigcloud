@@ -21,7 +21,7 @@
                     <div class="col-md-12">
                         <label for="exampleInputEmail1" class="form-label">Seleccione el contacto</label>
                         <div class="form-group">
-                            <select class="form-control  @error('contacto_id') is-invalid @enderror" name="contacto_id" id="contacto_id" onchange="mifunction()">
+                            <select class="form-control @error('contacto_id') is-invalid @enderror" name="contacto_id" id="contacto_id" onchange="mifunction()">
                                 @foreach($contactos as $contacto)
                                 <option {{ old('contacto_id') == $contacto->id ? 'selected' : '' }} value="{{ $contacto->id }}">
                                     {{$contacto->contacto1}}
@@ -36,7 +36,7 @@
 
                     <div class="col-md-12">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="tipocliente" id="tipocliente" value="Empresa"  checked>
+                            <input class="form-check-input" type="radio" name="tipocliente" id="tipocliente" value="Empresa" checked>
                             <label class="form-check-label" for="exampleRadios1">
                                 Empresa
                             </label>
@@ -136,6 +136,7 @@
 
                     </div>
 
+
                     <div class="col-md-12">
 
                         <div class="form-check form-check-inline">
@@ -227,7 +228,6 @@
         $("#giro_id").select2({
             theme: "classic"
         });
-
 
     });
 </script>

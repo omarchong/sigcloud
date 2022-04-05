@@ -17,8 +17,11 @@
                         <thead class="thead-inverse responsive">
                             <tr>
                                 <th>Clave</th>
-                                <th>Nombre</th>
-                                <th>Estatus</th>
+                                <th>Nombre empresa</th>
+                                <th>Contacto 1</th>
+                                <th>Tipo cliente</th>
+                                <th>Giro comercial</th>
+                                <th>Estatus cliente</th>
                                 <th>Operaciones</th>
                             </tr>
                         </thead>
@@ -41,6 +44,14 @@
                                 },
                                 {
                                     data: 'nombreempresa',
+                                }, {
+                                    data: 'contactos.contacto1'
+                                },
+                                {
+                                    data: 'tipocliente'
+                                },
+                                {
+                                    data: 'giros.nombre'
                                 },
                                 {
                                     data: 'estatuscliente',

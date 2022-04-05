@@ -32,19 +32,6 @@ public function create()
     return redirect()
       ->route('contactos.index')
       ->withSuccess("El contacto $contacto->nombre se dio de alta correctamente");
-    /* $contacto = Contacto::updateOrCreate(
-      [
-        'id' => $request->id
-      ],
-      [
-        'nombre' => $request->nombre,
-        'email' => $request->email,
-        'telefono'  => $request->telefono,
-        'descripcion' => $request->descripcion,
-      ]
-    );
-    return response()->json(['success' => true]); */
-     /* dd($request->all());  */
     
   }
 

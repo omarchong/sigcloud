@@ -152,15 +152,7 @@
         "ajax": "{{ route('tareas.datatables') }}",
         "columns": [{
         },{ 
-                data: 'id',
-                render: function(data, type, full, meta) {
-                    return `
-                    <a href="javascript:void(0)" class="edit"
-                        data-id="{{ $tarea->id }}"><img src="/img/editar.svg" width="20px"></a>
-                    <a href="javascript:void(0)" class="delete"
-                        data-id="{{ $tarea->id }}"><img src="/img/basurero.svg" width="20px"></a>
-                        `
-                }
+               
             }
         ]
     })

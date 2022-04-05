@@ -19,12 +19,12 @@ class Cliente extends Model
         'direccionfiscal',
         'estatuscliente',
         'rfc',
-        'contacto_id',
-        'giro_id'
+        'contactos_id',
+        'giros_id'
     ];
     public function contactos()
     {
-        return $this->hasMany(Contacto::class);
+        return $this->belongsTo(Contacto::class);
     }
 
     public function proyecto()
@@ -44,7 +44,7 @@ class Cliente extends Model
     
     public function giros()
     {
-        return $this->hasOne(Giro::class);
+        return $this->belongsTo(Giro::class);
     }
 
     public function estados()

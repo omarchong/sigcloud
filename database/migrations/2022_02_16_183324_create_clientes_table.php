@@ -19,8 +19,8 @@ class CreateClientesTable extends Migration
             $table->string('direccionfiscal')->nullable();
             $table->string('estatuscliente');
             $table->string('rfc');
-            $table->foreignId('contacto_id')->constrained();
-            $table->foreignId('giro_id')->constrained();
+            $table->foreignId('contactos_id')->constrained();
+            $table->foreignId('giros_id')->constrained();
             $table->softDeletes();
             $table->timestamps();
         });

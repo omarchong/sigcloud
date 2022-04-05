@@ -19,8 +19,8 @@ class ClientesSeeder extends Seeder
             'referencias' => 'Enfrente de la iglesia',
             'direccionfiscal' => 'Edo Mex',
             'estatuscliente' => 'Habitual',
-            'contacto_id' => 2,
-            'giro_id' =>1,
+            'contactos_id' => 2,
+            'giros_id' =>1,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         ]);
@@ -34,8 +34,8 @@ class ClientesSeeder extends Seeder
             'referencias' => 'Enfrente de la iglesia',
             'direccionfiscal' => 'Edo Mex',
             'estatuscliente' => 'Prospecto',
-            'contacto_id' => 1,
-            'giro_id' =>1,
+            'contactos_id' => 1,
+            'giros_id' =>2,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         ]);
@@ -49,8 +49,8 @@ class ClientesSeeder extends Seeder
             'referencias' => 'Enfrente de la iglesia',
             'direccionfiscal' => 'Enfrente de la iglesia',
             'estatuscliente' => 'Ocacional',
-            'contacto_id' => 3,
-            'giro_id' =>1,
+            'contactos_id' => 3,
+            'giros_id' =>3,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         ]);
@@ -63,8 +63,8 @@ class ClientesSeeder extends Seeder
             'referencias' => 'a 2 min de plaza sendero',
             'direccionfiscal' => 'Campeche',
             'estatuscliente' => 'Frecuente',
-            'contacto_id' => 3,
-            'giro_id' =>1,
+            'contactos_id' => 3,
+            'giros_id' =>4,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         ]);

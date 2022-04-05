@@ -13,14 +13,14 @@ class DepartamentoSeeder extends Seeder
         DB::table('departamentos')->insert([
             'abreviatura' => 'Si',
             'nombre' => 'Sistemas',
-            'descripcion' => '',
+            'descripcion' => 'Ingenieria tic',
             'estatus' => 'Activo',
             'n_empleados' => '10'
         ]);
         DB::table('departamentos')->insert([
             'abreviatura' => 'DDS',
             'nombre' => 'Desarrollo de software',
-            'descripcion' => '',
+            'descripcion' => 'Ingenieria',
             'estatus' => 'Activo',
             'n_empleados' => '20'
         ]);
@@ -34,7 +34,7 @@ class DepartamentoSeeder extends Seeder
         DB::table('departamentos')->insert([
             'abreviatura' => 'CONS',
             'nombre' => 'Consultoria',
-            'descripcion' => '',
+            'descripcion' => 'Hola',
             'estatus' => 'Inactivo',
             'n_empleados' => '10'
         ]);

@@ -26,12 +26,11 @@
                         </thead>
                         <tbody>
                             @foreach ($actividads as $actividad)
-                                {{-- <tr>
+                            {{-- <tr>
                                 <a href="javascript:void(0)" class="btn btn-primary edit"
                                     data-id="{{ $actividad->id }}">Editar</a>
-                                <a href="javascript:void(0)" class="btn btn-danger delete"
-                                    data-id="{{ $actividad->id }}">Eliminar</a>
-                        </tr> --}}
+                            <a href="javascript:void(0)" class="btn btn-danger delete" data-id="{{ $actividad->id }}">Eliminar</a>
+                            </tr> --}}
                             @endforeach
                         </tbody>
                     </table>
@@ -48,8 +47,7 @@
                 <h4 class="modal-title" id="ajaxActividadModel"></h4>
             </div>
             <div class="modal-body">
-                <form action="javascript:void(0)" id="addEditActividadForm" name="addEditActividadForm"
-                    class="form-horizontal" method="POST">
+                <form action="javascript:void(0)" id="addEditActividadForm" name="addEditActividadForm" class="form-horizontal" method="POST">
                     <input type="hidden" name="id" id="id">
                     <div class="row">
                         <div class="col-md-12">
@@ -83,8 +81,7 @@
                         </div>
                     </div>
                     <div class="float-right my-3">
-                        <button type="submit" class="btn btn-primary" id="btn-save"
-                            value="addNewActividad">Guardar</button>
+                        <button type="submit" class="btn btn-primary" id="btn-save" value="addNewActividad">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -116,7 +113,7 @@
             },
             {
                 data: 'nota'
-            },{
+            }, {
                 data: 'id',
                 render: function(data, type, full, meta) {
                     return `
@@ -129,6 +126,7 @@
             }
         ]
     })
+
     function reloadTable() {
         $("#actividades").DataTable().ajax.reload();
     }
@@ -192,7 +190,7 @@
                 cancelButtonColor: '#d33',
                 confirmButtonText: '¡Si, eliminar!',
                 cancelButtonText: 'Cancelar'
-                }).then((result) => {
+            }).then((result) => {
                 if (result.isConfirmed) {
                     var id = $(this).data('id');
                     $.ajax({
@@ -207,7 +205,7 @@
                         }
                     });
                 }
-            }) 
+            })
         });
 
         $('body').on('click', '#btn-save', function(event) {

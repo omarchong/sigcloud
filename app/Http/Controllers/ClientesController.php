@@ -10,7 +10,6 @@ use App\Models\Giro;
 use App\Models\Municipio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Laravel\Ui\Presets\React;
 
 class ClientesController extends Controller
 {
@@ -41,7 +40,7 @@ class ClientesController extends Controller
         $cliente = Cliente::create($request->validated());
         return redirect()
             ->route('clientes.index')
-            ->withSuccess("El cliente $cliente->nombre se guardo correctamente");
+            ->withSuccess("El cliente $cliente->nombreempresa se guardo correctamente");
     }
 
     public function RegistrosDatatables()
@@ -49,6 +48,10 @@ class ClientesController extends Controller
         return datatables()
             ->eloquent(
                 Cliente::query()
+                ->with([
+                    'giros',
+                    'contactos'
+                ])
                 
             )->toJson();
     }

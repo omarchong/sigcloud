@@ -34,6 +34,12 @@
                 </a>
             </li>
             <li class="nav-link">
+                <a href="{{route('departamentos.index')}}">
+                    <img class="mr-2" src="/img/usuario.svg" alt="" width="35px">
+                    <span class="text nav-text"> Departamentos</span>
+                </a>
+            </li>
+            <li class="nav-link">
                 <a href="{{route('servicios.index')}}">
                     <img class="mr-2" src="/img/usuario.svg" alt="" width="35px">
                     <span class="text nav-text"> Servicios</span>

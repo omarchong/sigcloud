@@ -64,11 +64,11 @@ class TareasController extends Controller
     public function RegistroDatatables()
     {
         return datatables()
-        ->eloquent(
-            Tarea::query()
-            ->with(['usuario'])
-            ->with(['cliente'])
-            ->with(['estatutarea'])
-        )->toJson();
+            ->eloquent(
+                Tarea::query()
+                    ->with(['usuario'])
+                    ->with(['cliente'])
+                    ->with(['estatutarea'])
+            )->toJson();
     }
 }

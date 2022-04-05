@@ -24,7 +24,7 @@ class Contacto extends Model
 
     public function clientes()
     {
-        return $this->belongsToMany(Cliente::class);
+        return $this->hasMany(Cliente::class);
     }
     public function servicios()
     {
