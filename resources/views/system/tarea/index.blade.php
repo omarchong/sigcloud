@@ -56,7 +56,7 @@
 
 <!-- boostrap model -->
 <div class="modal fade" id="ajax-tarea-model" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="ajaxTareaModel"></h4>

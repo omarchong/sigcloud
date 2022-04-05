@@ -10,7 +10,7 @@
                     <div class="col-md-4">
                         <label for="exampleInputEmail1" class="form-label">Nombre</label>
                         <div class="form-group">
-                            <input type="text" class="form-control @error('contacto1') is-invalid @enderror" value="{{old('contacto1')}}" id="contacto1" name="contacto1">
+                            <input type="text" required class="form-control @error('contacto1') is-invalid @enderror" value="{{old('contacto1')}}" id="contacto1" name="contacto1">
                             <div class="valid-feedback">
                                 Correcto!
                             </div>
@@ -22,7 +22,7 @@
                     <div class="col-md-4">
                         <label for="exampleInputEmail1" class="form-label">Email</label>
                         <div class="form-group">
-                            <input type="email" class="form-control @error('telefono1') is-invalid @enderror" id="email1" name="email1" value="{{old('email1')}}">
+                            <input type="email" required class="form-control @error('telefono1') is-invalid @enderror" id="email1" name="email1" value="{{old('email1')}}">
                             <div class="valid-feedback">
                                 Correcto!
                             </div>
@@ -54,11 +54,11 @@
 
                     </div>
 
-                 
+
                     <div class="container-fluid" id="incrementa">
 
                     </div>
-                    <div class="col-md-10">
+                    <div class="col-md-12">
                         <label for="exampleInputEmail1" class="form-label">Seleccione el servicio</label>
                         <div class="form-group">
                             <select class="form-control  @error('servicios_id') is-invalid @enderror" name="servicios_id" id="servicios_id">
@@ -69,10 +69,6 @@
                             </select>
                         </div>
                     </div>
-
-
-
-
                     <div class="col-md-12">
                         <label for="descripcion">Descripcion</label>
                         <div class="form-group">
@@ -86,8 +82,6 @@
                         <small class="text-danger"> {{ $message }} </small>
                         @enderror
                     </div>
-
-
                 </div>
                 <div>
                     <button type="submit" class="btn btn-primary float-right">Guardar</button>
@@ -100,20 +94,20 @@
 </div>
 <script>
     $(function() {
-        var i = 1;
+        var c1 = 1;
         $('#addContacto').click(function() {
 
             var div = '<div class="form-row">';
             var divInput = '<div class="col-md-4"> <label for="exampleInputEmail1" class="form-label">Contacto 2</label>';
-            var inputCode = '<input type = "text" class="form-control" id="contacto2" name="contacto2"></div>' +
+            var inputCode = '<input type = "text" required class="form-control" id="contacto2" name="contacto2"></div>' +
                 '<div class="col-md-4"><label class="form-label">Email</label>' +
-                '<input type="text" class="form-control" id="email2" name="email2"></div>' +
+                '<input type="text" required class="form-control" id="email2" name="email2"></div>' +
                 '<div class="col-md-3"><label class="form-label">Telefono</label>' +
-                '<input type="number" class="form-control" required id="telefono2" name="telefono2"></div>';
-            i++;
+                '<input type="number" required class="form-control" required id="telefono2" name="telefono2"></div>';
+            c1++;
             //Importante esta variable debe ir debajo del autoincrementable
-            var btnDelete = '<button type="button" name="remove" id="' + i + '"class="btn btn-danger btn_remove">X</button>';
-            $('#incrementa').append('<div class="form-row' + i + '">' + div + divInput + inputCode + ' <div class="col-md-1"><br> ' + btnDelete + ' </div> </div> <br>');
+            var btnDelete = '<button type="button" name="remove" id="' + c1 + '"class="btn btn-danger btn_remove">X</button>';
+            $('#incrementa').append('<div class="form-row' + c1 + '">' + div + divInput + inputCode + ' <div class="col-md-1"><br> ' + btnDelete + ' </div> </div> <br>');
         });
 
 
@@ -124,15 +118,16 @@
         });
 
 
-        $("#servicios_id").select2({
-            theme: "classic"
-        });
+
 
         $("#addContacto").click(function(event) {
             event.preventDefault();
             $("#addContacto").prop('disabled', true)
             return false;
         })
+
+
+
 
     });
 </script>
@@ -155,13 +150,64 @@
                 },
                 descripcion: {
                     required: true
-                }
+                },
+                contacto2: {
+                    required: true
+                },
+                email2: {
+                    required: true
+                },
+                telefono2: {
+                    required: true,
+                    minlength: 1,
+                    maxlength: 10,
+                },
+                descripcion: {
+                    required: true
+                },
             },
             messages: {
                 contacto1: {
+                    required: "Campo requerido"
+                },
+                email1: {
+                    required: "Campo requerido"
+                },
+                telefono1: {
+                    required: "Campo requerido"
+                }, contacto2: {
+                    required: "Campo requerido"
+                },
+                email2: {
+                    required: "Campo requerido"
+                },
+                telefono2: {
+                    required: "Campo requerido"
+                },
+                descripcion: {
                     required: "Campo requerido"
                 }
             }
         })
     })
+</script>
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 </script>

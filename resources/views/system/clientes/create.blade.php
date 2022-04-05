@@ -3,7 +3,7 @@
     <div class="card">
         <h5 class="card-header">Gestión de clientes</h5>
         <div class="card-body">
-            <form action="{{ route('clientes.store') }}" method="POST">
+            <form action="{{ route('clientes.store') }}" method="POST" id="clientes" class="needs-validation" novalidate>
                 @csrf
                 <div class="form-row">
                     <!--  <div class="col-md-12">
@@ -21,12 +21,20 @@
                     <div class="col-md-12">
                         <label for="exampleInputEmail1" class="form-label">Seleccione el contacto</label>
                         <div class="form-group">
-                            <select class="form-control @error('contacto_id') is-invalid @enderror" name="contacto_id" id="contacto_id" onchange="mifunction()">
+                            <select class="form-control @error('contactos_id') is-invalid @enderror" name="contactos_id" id="contactos_id">
+                                <option selected disabled value="">Seleccione una opcion</option>
                                 @foreach($contactos as $contacto)
-                                <option {{ old('contacto_id') == $contacto->id ? 'selected' : '' }} value="{{ $contacto->id }}">
+                                <option {{ old('contactos_id') == $contacto->id ? 'selected' : '' }} value="{{ $contacto->id }}">
                                     {{$contacto->contacto1}}
                                     @endforeach
+                                    <div class="valid-feedback">
+                                        Correcto!
+                                    </div>
+                                    @error('contactos_id')
+                                    <small class="text-danger">{{$message}}</small>
+                                    @enderror
                             </select>
+
                         </div>
                     </div>
                     <div class="container">
@@ -54,11 +62,17 @@
                     <div class="col-md-4">
                         <label for="exampleInputEmail1" class="form-label">Estado</label>
                         <div class="form-group">
-                            <select name="estado_id" id="estado_id" class="form-control estado">
-                                <option value="">Selecione un estado</option>
+                            <select name="estado_id" id="estado_id" class="form-control estado @error('estado_id') is-invalid @enderror">
+                                <option selected disabled value="">Seleccione una opcion</option>
                                 @foreach($estados as $estado)
                                 <option value="{{$estado->id}}">{{$estado->nombre}}</option>
                                 @endforeach
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                                @error('estado_id')
+                                <small class="text-danger">{{$message}}</small>
+                                @enderror
                             </select>
                         </div>
                     </div>
@@ -75,10 +89,10 @@
                     <div class="col-md-4">
                         <label for="exampleInputEmail1" class="form-label">Seleccione el giro</label>
                         <div class="form-group">
-                            <select class="form-control  @error('giro_id') is-invalid @enderror" name="giro_id" id="giro_id">
+                            <select class="form-control" name="giros_id" id="giros_id">
 
                                 @foreach($giros as $giro)
-                                <option {{old('giro_id') == $giro->id ? 'selected' : ''}} value="{{$giro->id}}">
+                                <option {{old('giros_id') == $giro->id ? 'selected' : ''}} value="{{$giro->id}}">
                                     {{$giro->nombre}}
                                     @endforeach
                             </select>
@@ -87,27 +101,52 @@
                     <div class="col-md-2">
                         <label for="exampleInputEmail1" class="form-label">Codigo postal</label>
                         <div class="form-group">
-                            <input type="number" class="form-control" id="cp" name="cp">
+                            <input type="number" required class="form-control @error('cp') is-invalid @enderror" id="cp" name="cp" value="{{old('cp')}}">
+                            <div class="valid-feedback">
+                                Correcto!
+                            </div>
+                            @error('cp')
+                            <small class="text-danger">{{$message}}</small>
+                            @enderror
                         </div>
+
                     </div>
                     <div class="col-md-4">
                         <label for="exampleInputEmail1" class="form-label">Referencias</label>
                         <div class="form-group">
-                            <input type="numeric" class="form-control" id="referencias" name="referencias">
+                            <input type="text" required class="form-control @error('referencias') is-invalid @enderror" id="referencias" name="referencias" value="{{old('referencias')}}">
+                            <div class="valid-feedback">
+                                Correcto!
+                            </div>
+                            @error('referencias')
+                            <small class="text-danger">{{$message}}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-3">
                         <label for="exampleInputEmail1" class="form-label">Nombre empresa</label>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="nombreempresa" name="nombreempresa">
-
+                            <input type="text" required class="form-control @error('nombreempresa') is-invalid @enderror" id="nombreempresa" name="nombreempresa" value="{{old('nombreempresa')}}">
+                            <div class="valid-feedback">
+                                Correcto!
+                            </div>
+                            @error('nombreempresa')
+                            <small class="text-danger">{{$message}}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-3">
                         <label for="exampleInputEmail1" class="form-label">RFC</label>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="rfc" name="rfc">
+                            <input type="text" required class="form-control @error('rfc') is-invalid @enderror" id="rfc" name="rfc" value="{{old('rfc')}}">
+                            <div class="valid-feedback">
+                                Correcto!
+                            </div>
+                            @error('rfc')
+                            <small class="text-danger">{{$message}}</small>
+                            @enderror
                         </div>
+
                     </div>
 
 
@@ -219,15 +258,75 @@
                 }
             })
         })
-        $("#estado_id").select2({
-            theme: "classic"
-        });
-        $("#municipio").select2({
-            theme: "classic"
-        });
-        $("#giro_id").select2({
-            theme: "classic"
-        });
+        
+      
 
     });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $("#clientes").validate({
+            rules: {
+                nombreempresa: {
+                    required: true
+                },
+                cp: {
+                    required: true
+                },
+                referencias: {
+                    required: true
+                },
+                rfc: {
+                    required: true
+                },
+                contactos_id: {
+                    required: true
+                },
+                estado_id: {
+                    required: true
+                }
+            },
+            messages: {
+                nombreempresa: {
+                    required: "Campo requerido"
+                },
+                cp: {
+                    required: "Campo requerido"
+                },
+                referencias: {
+                    required: "Campo requerido"
+                },
+                rfc: {
+                    required: "Campo requerido"
+                },
+                contactos_id: {
+                    required: "Selccione un contacto"
+                },
+                estado_id: {
+                    required: "Selccione un estado"
+                },
+            }
+        })
+
+    })
+</script>
+<script>
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 </script>

@@ -7,7 +7,7 @@
                 @csrf
                 <div class="form-row">
                     <div class="col-md-4">
-                        <label for="exampleInputEmail1" class="form-label">Nombre</label>
+                        <label for="" class="form-label">Nombre</label>
                         <div class="form-group">
                             <input type="text" required class="form-control @error('nombre') is-invalid @enderror" value="{{ old('nombre')}}" id="nombre" name="nombre">
                             <div class="valid-feedback">
@@ -182,7 +182,7 @@
                 preview.append(image);
             };
         }
-        $("#departamento_id").select2();
+      
     });
 </script>
 

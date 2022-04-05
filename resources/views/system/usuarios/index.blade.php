@@ -6,7 +6,7 @@
         <div class="container-fluid col-md-10">
             <div class="card">
                 <div class="card-header">
-                    <span>usuarios</span>
+                    <span>Gestionar usuarios</span>
                 </div>
                 <div class="card-body">
                     <a href="{{ route('usuarios.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar usuario</a>

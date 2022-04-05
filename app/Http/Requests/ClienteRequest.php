@@ -23,8 +23,8 @@ class ClienteRequest extends FormRequest
             'referencias' => ['required'],
             'direccionfiscal' => [''],
             'estatuscliente' => ['required'],
-            'giro_id' => ['required'],
-            'contacto_id' => ['required'],
+            'giros_id' => ['required'],
+            'contactos_id' => ['required'],
             'rfc' => ['required'],
         ];
     }

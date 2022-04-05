@@ -7,7 +7,7 @@
         <div class="container-fluid col-md-10">
             <div class="card">
                 <div class="card-header">
-                    <span>Usuarios</span>
+                    <span>Gestionar contactos</span>
                 </div>
                <!--  <div class="card-body">
                     <button type="button" id="addContacto" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar

@@ -31,7 +31,7 @@ public function create()
 
     return redirect()
       ->route('contactos.index')
-      ->withSuccess("El contacto $contacto->nombre se dio de alta correctamente");
+      ->withSuccess("El contacto $contacto->contacto1 se dio de alta correctamente");
     
   }
 
