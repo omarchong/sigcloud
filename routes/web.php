@@ -24,22 +24,23 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/prueba', function () {
     return view('prueba');
-})->name('prueba');
+})->name('prueba');/* 
+login */
 
 Route::get('/panel-administrativo', [HomeController::class,'index'])->name('home');
+
+
 route::get('/',[LoginController::class, 'login'])->name('login');
 Route::post('validar',[LoginController::class, 'validar'])->name('validar');
 route::get('inicio',[LoginController::class, 'inicio'])->name('inicio');
 route::get('recuperacion',[LoginController::class, 'recuperacion'])->name('recuperacion');
 route::get('recuperarcontrasena',[LoginController::class, 'recuperarcontrasena'])->name('recuperarcontrasena');
 Route::get('cerrarsesion', [LoginController::class, 'cerrarsesion'])->name('cerrarsesion');
-
 /* omar chong */
+
 Route::resource('contactos', ContactosController::class);
-Route::post('add-update-contactos', [ContactosController::class, 'store']);
-Route::post('edit-contacto',[ContactosController::class,'edit']);
-Route::post('delete-contactos',[ContactosController::class,'destroy']);
 Route::get('datatables/contactos', [ContactosController::class, 'RegistrosDatatables'])->name('contactos.datatables');
+
 /* clientes */
 Route::resource('clientes', ClientesController::class);
 Route::get('datatables/clientes', [ClientesController::class, 'RegistrosDatatables'])->name('clientes.datatables');
@@ -52,6 +53,9 @@ Route::name('editar')->get('editar/{id}',[DepartamentosController::class,'edit']
 Route::name('store')->post('store/',[DepartamentosController::class,'store']);
 Route::name('destroy')->delete('destroy/{id}',[DepartamentosController::class,'destroy']);
 
+/* cotizaciones */
+
+Route::resource('cotizaciones', CotizacionesController::class);
 
 /* usuarios */
 Route::resource('usuarios', UsuariosController::class);

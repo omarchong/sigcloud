@@ -15,11 +15,9 @@ class ClientesController extends Controller
 {
     public function index()
     {
-        
+
         return view('system.clientes.index');
     }
-
-
 
     public function create()
     {
@@ -35,8 +33,6 @@ class ClientesController extends Controller
     public function store(ClienteRequest $request)
     {
         /* dd($request->all()); */
-
-
         $cliente = Cliente::create($request->validated());
         return redirect()
             ->route('clientes.index')
@@ -48,15 +44,13 @@ class ClientesController extends Controller
         return datatables()
             ->eloquent(
                 Cliente::query()
-                ->with([
-                    'giros',
-                    'contactos'
-                ])
-                
+                    ->with([
+                        'giros',
+                        'contactos'
+                    ])
+
             )->toJson();
     }
-
-
 
     public function estados()
     {
@@ -74,7 +68,7 @@ class ClientesController extends Controller
         }
     }
 
-     public function searchcontacto(Request $request)
+    public function searchcontacto(Request $request)
     {
         $term = $request->get('term');
 

@@ -21,12 +21,7 @@ class CreateUsuariosTable extends Migration
             $table->string('contrasena_confirmar');
             $table->string('imagen')->nullable();
             $table->string('estatus');
-            $table->foreignId('departamento_id')->constrained();
-            /* $table->foreignId('rol_id')
-                ->references('id')
-                ->on('roles'); */
-                /* $table->foreignId('rol_id')->constrained(); */
-            
+            $table->foreignId('departamento_id')->constrained(); 
             $table->timestamps();
             $table->softDeletes();  
         });

@@ -6,7 +6,7 @@
             <form action="{{ route('clientes.store') }}" method="POST" id="clientes" class="needs-validation" novalidate>
                 @csrf
                 <div class="form-row">
-                    <!--  <div class="col-md-12">
+                    <div class="col-md-12">
                         <label for="">Buscar contacto</label>
                         <div class="input-group">
                             <input type="search" name="nombre" id="buscar" class="form-control" aria-label="Search">
@@ -17,7 +17,9 @@
                                 </button>
                             </span>
                         </div>
-                    </div> -->
+                    </div>
+                   
+
                     <div class="col-md-12">
                         <label for="exampleInputEmail1" class="form-label">Seleccione el contacto</label>
                         <div class="form-group">
@@ -258,8 +260,8 @@
                 }
             })
         })
-        
-      
+
+
 
     });
 </script>
