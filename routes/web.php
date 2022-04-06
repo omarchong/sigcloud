@@ -61,6 +61,10 @@ Route::resource('cotizaciones', CotizacionesController::class);
 Route::resource('usuarios', UsuariosController::class);
 Route::get('datatables/usuarios',[UsuariosController::class, 'RegistrosDatatables'])->name('usuarios.datatables');
 
+
+
+
+
 /* Actividades */
 Route::resource('actividades', ActividadesController::class);
 Route::get('actividad', [ActividadesController::class, 'index']);
