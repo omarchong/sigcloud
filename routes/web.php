@@ -57,6 +57,11 @@ Route::name('destroy')->delete('destroy/{id}',[DepartamentosController::class,'d
 Route::resource('usuarios', UsuariosController::class);
 Route::get('datatables/usuarios',[UsuariosController::class, 'RegistrosDatatables'])->name('usuarios.datatables');
 
+/* cotizaciones */
+Route::resource('cotizaciones', CotizacionesController::class);
+
+
+
 /* Actividades */
 Route::resource('actividades', ActividadesController::class);
 Route::get('actividad', [ActividadesController::class, 'index']);
