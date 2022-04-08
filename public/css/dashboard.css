@@ -115,6 +115,10 @@ body.dark .sidebar li a:hover .text {
     justify-content: space-between;
     overflow-y: scroll;
 }
+.sidebar-link{
+    display: flex;
+    align-items: center;
+}
 
 .menu-bar::-webkit-scrollbar {
     display: none;
@@ -201,8 +205,6 @@ body.dark .switch::before {
     height: 100vh;
     width: calc(100% - 78px);
 }
-
-
 
 a:hover {
     text-decoration: none;

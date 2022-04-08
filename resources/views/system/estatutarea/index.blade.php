@@ -21,20 +21,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($estatutareas as $estatutarea)
-                                {{-- <tr>
-                                    <td>{{ $estatutarea->id }}</td>
-                                    <td>{{ $estatutarea->nombre }}</td>
-                                    <td>
-                                        <a href="javascript:void(0)" class="edit"
-                                            data-id="{{ $estatutarea->id }}"><img src="/img/editar.svg"
-                                            width="20px"></a>
-                                        <a href="javascript:void(0)" class="delete"
-                                            data-id="{{ $estatutarea->id }}"><img src="/img/basurero.svg"
-                                            width="20px"></a>
-                                    </td>
-                                </tr> --}}
-                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -87,19 +73,7 @@
             },
             {
                 data: 'nombre',
-            },{
-                data: 'id',
-                render: function(data, type, full, meta) {
-                    return `
-                    <a href="javascript:void(0)" class="edit"
-                        data-id="{{ $estatutarea->id }}"><img src="/img/editar.svg"
-                            width="20px"></a>
-                    <a href="javascript:void(0)" class="delete"
-                        data-id="{{ $estatutarea->id }}"><img src="/img/basurero.svg"
-                            width="20px"></a>
-                        `
-                }
-            }
+            },{data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     })
     function reloadTable() {
@@ -182,7 +156,7 @@
                 dataType: 'json',
                 success: function(res) {
                     window.location.reload();
-                    $("#btn-save").html('Submit');
+                    $("#btn-save").html('Enviando..');
                     $("#btn-save").attr("disabled", false);
                 }
             });

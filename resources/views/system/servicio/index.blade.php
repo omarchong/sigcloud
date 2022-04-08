@@ -25,23 +25,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($servicios as $servicio)
-                                {{-- <tr>
-                                    <td>{{ $servicio->id }}</td>
-                                    <td>{{ $servicio->nombre }}</td> --}}
-                                {{-- <td>{{ $servicio->estatuservicio->nombre }}</td> --}}
-                                {{-- <td>{{ $servicio->descripcion }}</td>
-                                    <td>{{ $servicio->precio_inicial }}</td>
-                                    <td>{{ $servicio->precio_final }}</td>
-                                    <td>
-                                        <a href="javascript:void(0)" class="edit"
-                                            data-id="{{ $servicio->id }}"><img src="/img/editar.svg" width="20px"></a>
-                                        <a href="javascript:void(0)" class="delete"
-                                            data-id="{{ $servicio->id }}"><img src="/img/basurero.svg"
-                                                width="20px"></a>
-                                    </td>
-                                </tr> --}}
-                            @endforeach
+                           
                         </tbody>
                     </table>
                     <script>
@@ -68,17 +52,7 @@
                                 },
                                 {
                                     data: 'precio_final'
-                                }, {
-                                    data: 'id',
-                                    render: function(data, type, full, meta) {
-                                        return `
-                                    <a href="javascript:void(0)" class="edit"
-                                        data-id="{{ $servicio->id }}"><img src="/img/editar.svg" width="20px"></a>
-                                    <a href="javascript:void(0)" class="delete"
-                                        data-id="{{ $servicio->id }}"><img src="/img/basurero.svg" width="20px"></a>
-                                            `
-                                    }
-                                }
+                                }, {data: 'action', name: 'action', orderable: false, searchable: false},
                             ]
                         })
                         function reloadTable() {
@@ -101,38 +75,40 @@
             <div class="modal-body">
                 <form action="javascript:void(0)" id="addEditServicioForm" name="addEditServicioForm"
                     class="form-horizontal" method="POST">
-                    <input type="hidden" name="id" id="id">
-                    <div class="form-group">
-                        <label for="name" class="col-sm-12 control-label">Nombre</label>
-                        <div class="col-sm-12">
-                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    <div class="row">
+                        <input type="hidden" name="id" id="id">
+                        <div class="col-md-12">
+                            <label for="name" class="col-sm-1-12 control-label">Nombre</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="nombre" name="nombre" required>
+                            </div>
                         </div>
-                    </div>
-                    {{-- <div class="col-md-12">
-                                <label for="estatuservicio_id">Selecciona el estatus</label>
-                                <select name="estatuservicio_id" id="estatuservicio_id" class="form-control">
-                                    @foreach ($estatuservicio as $estatuservicios)
-                                        <option value="{{ $estatuservicios->id }}">
-                                            {{ $estatuservicios->nombre }}</option>
-                                    @endforeach
-                                </select>
-                            </div> --}}
-                    <div class="form-group">
-                        <label for="descripcion" class="col-sm-12 control-label">Descripcion</label>
-                        <div class="col-sm-12">
-                            <input type="text" class="form-control" id="descripcion" name="descripcion" required>
+                        {{-- <div class="col-md-12">
+                                    <label for="estatuservicio_id">Selecciona el estatus</label>
+                                    <select name="estatuservicio_id" id="estatuservicio_id" class="form-control">
+                                        @foreach ($estatuservicio as $estatuservicios)
+                                            <option value="{{ $estatuservicios->id }}">
+                                                {{ $estatuservicios->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div> --}}
+                        <div class="col-md-12">
+                            <label for="descripcion" class="col-sm-2-12 control-label">Descripcion</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="descripcion" name="descripcion" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="precio_inicial" class="col-sm-12 control-label">Precio inicial</label>
-                        <div class="col-sm-12">
-                            <input type="text" class="form-control" id="precio_inicial" name="precio_inicial" required>
+                        <div class="col-md-6">
+                            <label for="precio_inicial" class="col-sm-1-12 control-label">Precio inicial</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="precio_inicial" name="precio_inicial" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="precio_final" class="col-sm-12 control-label">Precio final</label>
-                        <div class="col-sm-12">
-                            <input type="text" class="form-control" id="precio_final" name="precio_final" required>
+                        <div class="col-md-6">
+                            <label for="precio_final" class="col-sm-1-12 control-label">Precio final</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="precio_final" name="precio_final" required>
+                            </div>
                         </div>
                     </div>
                     <div class="float-right my-4">

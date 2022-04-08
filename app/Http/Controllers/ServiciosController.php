@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Estatuservicio;
 use App\Models\Servicio;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
+
 
 class ServiciosController extends Controller
 {
@@ -51,11 +53,26 @@ class ServiciosController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function RegistrosDatatables()
+    public function RegistrosDatatables(Request $request)
     {
-        return datatables()
-        ->eloquent(
-            Servicio::query()
-        )->toJson();
+        $servicios = Servicio::latest()->get();
+        
+        if ($request->ajax()) {
+            $data = Servicio::latest()->get();
+            return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+   
+                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit"><img src="/img/editar.svg" width="20px"></a>';
+   
+                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="delete"><img src="/img/basurero.svg" width="20px"></a>';
+    
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+      
+        return view('servicios.index',compact('servicios'));
     }
 }
