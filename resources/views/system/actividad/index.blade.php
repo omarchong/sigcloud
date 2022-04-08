@@ -24,15 +24,11 @@
                                 <th>Otros</th>
                             </tr>
                         </thead>
+                        
                         <tbody>
-                            @foreach ($actividads as $actividad)
-                            {{-- <tr>
-                                <a href="javascript:void(0)" class="btn btn-primary edit"
-                                    data-id="{{ $actividad->id }}">Editar</a>
-                            <a href="javascript:void(0)" class="btn btn-danger delete" data-id="{{ $actividad->id }}">Eliminar</a>
-                            </tr> --}}
-                            @endforeach
+                        
                         </tbody>
+                        
                     </table>
                 </div>
             </div>
@@ -99,7 +95,8 @@
             url: "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
         },
         "ajax": "{{ route('actividades.datatables') }}",
-        "columns": [{
+        "columns": [
+            {
                 data: 'id',
             },
             {
@@ -113,17 +110,9 @@
             },
             {
                 data: 'nota'
-            }, {
-                data: 'id',
-                render: function(data, type, full, meta) {
-                    return `
-                    <a href="javascript:void(0)" class="edit"
-                                    data-id="{{ $actividad->id }}"><img src="/img/editar.svg" width="20px"></a>
-                    <a href="javascript:void(0)" class="delete"
-                                    data-id="{{ $actividad->id }}"><img src="/img/basurero.svg" width="20px"></a>
-                    `
-                }
-            }
+            },
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+            
         ]
     })
 
@@ -164,26 +153,11 @@
                 }
             });
         });
-        /* $('body').on('click', '.delete', function () {
-            if (confirm("¿Eliminar registro? {{ $actividad->id}} ") == true) {
-                var id = $(this).data('id');
-
-                $.ajax({
-                    type: 'POST',
-                    url: "{{ url('delete-actividad') }}",
-                    data: { id: id },
-                    dataType: 'json',
-                    success: function(res){
-                        window.location.reload();
-                    }
-                });
-            }
-        }); */
         $('body').on('click', '.delete', function(e) {
             e.preventDefault();
             Swal.fire({
                 title: '¿Estás seguro?',
-                text: "¡La actividad {{ $actividad->id }} se eliminará definitivamente!",
+                text: "¡La actividad se eliminará definitivamente!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#007bff',
