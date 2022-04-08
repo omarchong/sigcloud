@@ -13,8 +13,8 @@ class CotizacionSeeder extends Seeder
         DB::table('cotizaciones')->insert([
             'descripcion' => 'Desarrollo de sitio web y logo',
             'fecha_estimadaentrega' => date('Y-m-d H:i:s'),
-            'servicio_id' => 1,
-            'cliente_id' => 1,
+            'servicios_id' => 1,
+            'clientes_id' => 1,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         ]);

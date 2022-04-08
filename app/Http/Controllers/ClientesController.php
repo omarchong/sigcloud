@@ -78,4 +78,10 @@ class ClientesController extends Controller
             ->get();
         return response()->json($result);
     }
+
+    public function seleccionarcontacto(Request $request)
+    {
+        $cliente  = Contacto::where('contacto1', $request->cliente)->first();
+        return response()->json($cliente);
+    }
 }

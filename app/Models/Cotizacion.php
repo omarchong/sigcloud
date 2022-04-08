@@ -9,14 +9,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Cotizacion extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $fillable = ['descripcion', 'fecha_estimadaentrega', 'servicio_id', 'cliente_id'];
+    protected $table = 'cotizaciones';
+    protected $fillable = [
+        'descripcion',
+        'fecha_estimadaentrega',
+        'servicios_id',
+        'clientes_id'
+    ];
     public function servicio()
     {
         return $this->hasMany(Servicio::class);
     }
-    public function cliente()
+    public function clientes()
     {
-        return $this->hasOne(Cliente::class);
+        return $this->belongsTo(Cliente::class);
     }
     public function detallecotizacion()
     {

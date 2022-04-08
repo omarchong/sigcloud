@@ -27,14 +27,14 @@ Route::get('/prueba', function () {
 })->name('prueba');/* 
 login */
 
-Route::get('/panel-administrativo', [HomeController::class,'index'])->name('home');
+Route::get('/panel-administrativo', [HomeController::class, 'index'])->name('home');
 
 
-route::get('/',[LoginController::class, 'login'])->name('login');
-Route::post('validar',[LoginController::class, 'validar'])->name('validar');
-route::get('inicio',[LoginController::class, 'inicio'])->name('inicio');
-route::get('recuperacion',[LoginController::class, 'recuperacion'])->name('recuperacion');
-route::get('recuperarcontrasena',[LoginController::class, 'recuperarcontrasena'])->name('recuperarcontrasena');
+route::get('/', [LoginController::class, 'login'])->name('login');
+Route::post('validar', [LoginController::class, 'validar'])->name('validar');
+route::get('inicio', [LoginController::class, 'inicio'])->name('inicio');
+route::get('recuperacion', [LoginController::class, 'recuperacion'])->name('recuperacion');
+route::get('recuperarcontrasena', [LoginController::class, 'recuperarcontrasena'])->name('recuperarcontrasena');
 Route::get('cerrarsesion', [LoginController::class, 'cerrarsesion'])->name('cerrarsesion');
 /* omar chong */
 
@@ -45,21 +45,29 @@ Route::get('datatables/contactos', [ContactosController::class, 'RegistrosDatata
 Route::resource('clientes', ClientesController::class);
 Route::get('datatables/clientes', [ClientesController::class, 'RegistrosDatatables'])->name('clientes.datatables');
 Route::post('searchcontacto', [ClientesController::class, 'searchcontacto'])->name('searchcontacto');
-Route::get('get-municipios',[ClientesController::class, 'getMunicipios'])->name('getMunicipios');
+Route::post('seleccionarcontacto', [ClientesController::class, 'seleccionarcontacto'])->name('seleccionarcontacto');
+
+Route::get('get-municipios', [ClientesController::class, 'getMunicipios'])->name('getMunicipios');
 
 /* departamentos */
 Route::resource('departamentos', DepartamentosController::class);
-Route::name('editar')->get('editar/{id}',[DepartamentosController::class,'edit']);
-Route::name('store')->post('store/',[DepartamentosController::class,'store']);
-Route::name('destroy')->delete('destroy/{id}',[DepartamentosController::class,'destroy']);
+Route::name('editar')->get('editar/{id}', [DepartamentosController::class, 'edit']);
+Route::name('store')->post('store/', [DepartamentosController::class, 'store']);
+Route::name('destroy')->delete('destroy/{id}', [DepartamentosController::class, 'destroy']);
 
 /* cotizaciones */
 
 Route::resource('cotizaciones', CotizacionesController::class);
+Route::post('buscacliente', [CotizacionesController::class, 'buscacliente'])->name('buscacliente');
+Route::post('buscaservicio', [CotizacionesController::class, 'buscaservicio'])->name('buscaservicio');
+Route::post('seleccionacliente', [CotizacionesController::class, 'seleccionacliente'])->name('seleccionacliente');
+Route::post('seleccionaservicio', [CotizacionesController::class, 'seleccionaservicio'])->name('seleccionaservicio');
+
+Route::get('datatables/cotizaciones', [CotizacionesController::class, 'RegistrosDatatables'])->name('cotizaciones.datatables');
 
 /* usuarios */
 Route::resource('usuarios', UsuariosController::class);
-Route::get('datatables/usuarios',[UsuariosController::class, 'RegistrosDatatables'])->name('usuarios.datatables');
+Route::get('datatables/usuarios', [UsuariosController::class, 'RegistrosDatatables'])->name('usuarios.datatables');
 
 
 

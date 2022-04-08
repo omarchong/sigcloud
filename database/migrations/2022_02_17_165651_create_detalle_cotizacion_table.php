@@ -11,6 +11,7 @@ class CreateDetalleCotizacionTable extends Migration
     {
         Schema::create('detalle_cotizacion', function (Blueprint $table) {
             $table->id();
+            $table->string('numero_servicios');
             $table->float('precio_bruto');
             $table->float('precio_iva');
             $table->float('total');

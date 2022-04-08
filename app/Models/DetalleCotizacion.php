@@ -10,6 +10,7 @@ class DetalleCotizacion extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = [
+        'numero_servicios',
         'precio_bruto',
         'precio_iva',
         'total',

@@ -22,7 +22,7 @@ class Cliente extends Model
         'contactos_id',
         'giros_id'
     ];
-    public function contactos()
+    public function contactos() 
     {
         return $this->belongsTo(Contacto::class);
     }
@@ -32,10 +32,10 @@ class Cliente extends Model
         return $this->belongsTo(Proyecto::class);
     }
 
-    public function clientes()
+/*     public function clientes()
     {
         return $this->belongsTo(Cliente::class);
-    }
+    } */
 
     public function tarea()
     {
@@ -50,6 +50,11 @@ class Cliente extends Model
     public function estados()
     {
         return $this->belongsTo(Estado::class);
+    }
+
+    public function cotizaciones()
+    {
+        return $this->hasMany(Cotizacion::class);
     }
    
 }

@@ -8,18 +8,18 @@
     <title>Login</title>
 
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    {{-- Estilos --}}
-    {{-- <link href="{{ asset('css/app.css')}}" rel="stylesheet"> --}}
-    {{-- Tipo de letras --}}
+    <!-- tipo-letras -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-
-    {{-- Estilos --}}
+    <!-- estilos -->
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
 </head>
 
 <body>
+
+
     <div class="container-fluid">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
             <div class="col-md-7" id="fondo1">
@@ -72,6 +72,8 @@
             </div>
         </div>
     </div>
+
+
 
 </body>
 <script src=" {{asset('js/app.js') }}" defer></script>
