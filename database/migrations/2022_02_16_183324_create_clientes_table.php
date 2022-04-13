@@ -21,7 +21,6 @@ class CreateClientesTable extends Migration
             $table->string('rfc');
             $table->foreignId('contactos_id')->constrained();
             $table->foreignId('giros_id')->constrained();
-            $table->softDeletes();
             $table->timestamps();
         });
     }

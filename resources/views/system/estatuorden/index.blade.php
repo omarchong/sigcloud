@@ -31,20 +31,25 @@
 
         <!-- boostrap model -->
         <div class="modal fade" id="ajax-estatuorden-model" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" id="ajaxEstatuordenModel"></h4>
                     </div>
                     <div class="modal-body">
                         <form action="javascript:void(0)" id="addEditEstatuordenForm" name="addEditEstatuordenForm"
-                            class="form-horizontal" method="POST">
+                            class="form-horizontal needs-validation" method="POST" novalidate>
                             <input type="hidden" name="id" id="id">
                             <div class="form-group">
                                 <label for="name" class="col-sm-2 control-label">Nombre</label>
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" id="nombre" name="nombre"
-                                        placeholder="" value="" maxlength="50" required="">
+                                    <input type="text" class="form-control @error('nombre') @enderror" id="nombre" name="nombre" required>
+                                    <div class="valid-feedback">
+                                        Correcto!
+                                    </div>
+                                    @error('nombre')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="float-right my-4">
@@ -61,21 +66,26 @@
 <!-- end bootstrap model -->
 
 <script>
-    $('#estatuordens').DataTable({
+    var table = $('#estatuordens').DataTable({
         "responsive": true,
         "processing": true,
         "serverSide": true,
         "autoWidth": false,
+        ajax: "",
         language: {
             url: "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
         },
-        "ajax": "{{ route('estatuordens.datatables') }}",
         "columns": [{
                 data: 'id',
             },
             {
                 data: 'nombre',
-            }, {data: 'action', name: 'action', orderable: false, searchable: false},
+            }, 
+            {
+                data: 'action', 
+                name: 'action', 
+                orderable: false, 
+                searchable: false},
         ]
     })
 
@@ -83,8 +93,8 @@
         $('#estatuordens').DataTable().ajax.reload();
     }
 </script>
-<script type="text/javascript">
-    $(document).ready(function($) {
+<script>
+    $(function() {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -110,6 +120,7 @@
                     $('#ajax-estatuorden-model').modal('show');
                     $('#id').val(res.id);
                     $('#nombre').val(res.nombre);
+                    table.draw();
                 }
             });
 
@@ -137,7 +148,7 @@
                         },
                         dataType: 'json',
                         success: function(res) {
-                            window.location.reload();
+                            table.draw();
                         }
                     });
                 }
@@ -150,7 +161,7 @@
             var nombre = $("#nombre").val();
 
             $("#btn-save").html('Espere porfavor...');
-            $("#btn-save").attr("disabled", true);
+            $("#btn-save").attr("disabled", false);
 
             // ajax
             $.ajax({
@@ -163,12 +174,46 @@
                 dataType: 'json',
                 success: function(res) {
                     window.location.reload();
-                    $("#btn-save").html('Submit');
+                    table.draw();
+                    $("#btn-save").html('Enviando...');
                     $("#btn-save").attr("disabled", false);
                 }
             });
-
         });
-
     });
 </script>
+<script>
+    $(document).ready(function() {
+        $("#addEditEstatuordenForm").validate({
+            rules: {
+                nombre: {
+                    required: true
+                }
+            },
+            messages: {
+                nombre: {
+                    required: "El nombre es requerido"
+                }
+            }
+        })
+    })
+</script>
+    <script>
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>

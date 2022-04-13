@@ -14,7 +14,7 @@ class Estatutarea extends Model
         'nombre'
     ];
 
-    public function tarea()
+    public function tareas()
     {
         return $this->hasMany('App\Tarea');
     }

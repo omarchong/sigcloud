@@ -17,7 +17,7 @@ class CreateActividadsTable extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('tipoactividad');
-            $table->string('fecha');
+            $table->date('fecha');
             $table->string('nota');
             $table->timestamps();
         });

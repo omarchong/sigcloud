@@ -20,21 +20,6 @@
                                 <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach ($estatuproyectos as $estatuproyecto)
-                                {{-- <tr>
-                                    <td>{{ $estatuproyecto->id }}</td>
-                                    <td>{{ $estatuproyecto->nombre }}</td>
-                                    <td>
-                                        <a href="javascript:void(0)" class="edit"
-                                            data-id="{{ $estatuproyecto->id }}"><img src="/img/editar.svg"
-                                                width="20px"></a>
-                                        <a href="javascript:void(0)" class="delete"
-                                            data-id="{{ $estatuproyecto->id }}"><img src="/img/basurero.svg"
-                                                width="20px"></a>
-                                    </td>
-                                </tr> --}}
-                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -45,20 +30,25 @@
 
         <!-- boostrap model -->
         <div class="modal fade" id="ajax-estatuproyecto-model" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" id="ajaxEstatuproyectoModel"></h4>
                     </div>
                     <div class="modal-body">
                         <form action="javascript:void(0)" id="addEditEstatuproyectoForm"
-                            name="addEditEstatuproyectoForm" class="form-horizontal" method="POST">
+                            name="addEditEstatuproyectoForm" class="form-horizontal needs-validation" method="POST" novalidate>
                             <input type="hidden" name="id" id="id">
                             <div class="form-group">
                                 <label for="name" class="col-sm-2 control-label">Nombre</label>
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" id="nombre" name="nombre"
-                                        placeholder="" value="" maxlength="50" required="">
+                                    <input type="text" class="form-control @error('nombre') @enderror " id="nombre" name="nombre" required>
+                                    <div class="valid-feedback">
+                                        Correcto!
+                                    </div>
+                                    @error('nombre')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -75,21 +65,26 @@
 <!-- end bootstrap model -->
 
 <script>
-    $('#estatuproyectos').DataTable({
+    var table = $('#estatuproyectos').DataTable({
         "responsive": true,
         "processing": true,
         "serverSide": true,
         "autoWidth": false,
+        ajax:"",
         language: {
             url: "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
         },
-        "ajax": "{{ route('estatuproyectos.datatables') }}",
         "columns": [{
                 data: 'id',
             },
             {
                 data: 'nombre',
-            },{data: 'action', name: 'action', orderable: false, searchable: false},
+            },
+            {
+                data: 'action', 
+                name: 'action', 
+                orderable: false, 
+                searchable: false},
         ]
     })
 
@@ -98,8 +93,8 @@
     }
 </script>
 
-<script type="text/javascript">
-    $(document).ready(function($) {
+<script>
+    $(function() {
 
         $.ajaxSetup({
             headers: {
@@ -114,10 +109,7 @@
         });
 
         $('body').on('click', '.edit', function() {
-
             var id = $(this).data('id');
-
-            // ajax
             $.ajax({
                 type: "POST",
                 url: "{{ url('edit-estatuproyecto') }}",
@@ -130,9 +122,9 @@
                     $('#ajax-estatuproyecto-model').modal('show');
                     $('#id').val(res.id);
                     $('#nombre').val(res.nombre);
+                    table.draw();
                 }
             });
-
         });
 
         $('body').on('click', '.delete', function(e) {
@@ -157,7 +149,7 @@
                         },
                         dataType: 'json',
                         success: function(res) {
-                            window.location.reload();
+                            table.draw();
                         }
                     });
                 }
@@ -165,14 +157,10 @@
         });
 
         $('body').on('click', '#btn-save', function(event) {
-
             var id = $("#id").val();
             var nombre = $("#nombre").val();
-
             $("#btn-save").html('Espere porfavor...');
-            $("#btn-save").attr("disabled", true);
-
-            // ajax
+            $("#btn-save").attr("disabled", false);
             $.ajax({
                 type: "POST",
                 url: "{{ url('add-update-estatuproyecto') }}",
@@ -183,12 +171,46 @@
                 dataType: 'json',
                 success: function(res) {
                     window.location.reload();
+                    table.draw();
                     $("#btn-save").html('Enviando...');
                     $("#btn-save").attr("disabled", false);
                 }
             });
-
         });
-
     });
+</script>
+<script>
+    $(document).ready(function() {
+        $("#addEditEstatuproyectoForm").validate({
+            rules: {
+                nombre: {
+                    required: true
+                }
+            },
+            messages: {
+                nombre: {
+                    required: "El nombre es requerido"
+                }
+            }
+        })
+    })
+</script>
+<script>
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 </script>

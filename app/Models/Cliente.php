@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Cliente extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
     protected $fillable = [
         'tipocliente',
         'nombreempresa',
@@ -37,7 +37,7 @@ class Cliente extends Model
         return $this->belongsTo(Cliente::class);
     } */
 
-    public function tarea()
+    public function tareas()
     {
         return $this->hasMany('App\Tarea');
     }
