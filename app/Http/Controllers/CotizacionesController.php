@@ -52,7 +52,7 @@ class CotizacionesController extends Controller
     public function create()
     {
         return view('system.cotizaciones.create', [
-            'estatuscotizaciones' => Estatucotizacion::select('id','nombre')->get()
+            'estatuscotizaciones' => Estatucotizacion::select('id', 'nombre')->get()
         ]);
     }
 

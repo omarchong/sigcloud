@@ -13,6 +13,7 @@ class DetallecotizacionSeeder extends Seeder
             'numero_servicios' => "2",
             'precio_bruto' => '1500',
             'precio_iva' => '240',
+            'subtotal' => '1700',
             'total' => '1740',
             'descuento_general' => '5',
             'cotizacion_id' => 1,

@@ -14,6 +14,7 @@ class CreateDetalleCotizacionTable extends Migration
             $table->string('numero_servicios');
             $table->float('precio_bruto');
             $table->float('precio_iva');
+            $table->float('subtotal');
             $table->float('total');
             $table->integer('descuento_general');
             $table->foreignId('cotizacion_id')

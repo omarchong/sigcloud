@@ -103,7 +103,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-md-4 my-3">
+                    <div class="col-md-3 my-3">
                         <label for="exampleInputEmail1" class="form-label">Numero de servicios</label>
                         <div class="form-group">
                             <input type="number" class="form-control" id="numero_servicios" name="numero_servicios">
@@ -112,40 +112,42 @@
 
                     </div>
 
-                    <div class="col-md-4 my-3">
+                    <div class="col-md-3 my-3">
                         <label for="exampleInputEmail1" class="form-label">Precio bruto</label>
                         <div class="form-group">
-                            <input type="number" class="form-control" id="precio_bruto" name="precio_bruto">
+                            <input type="number" readonly class="form-control" id="precio_bruto" name="precio_bruto">
 
                         </div>
 
                     </div>
-                    <div class="col-md-4 my-3">
+                    <!--     <div class="col-md-4 my-3">
                         <label for="exampleInputEmail1" class="form-label">Ingrese el descuento</label>
                         <div class="form-group">
-                            <input type="number" class="form-control" id="precio_inicial" name="precio_inicial">
+                            <input type="number" class="form-control" id="descuento_general" name="descuento_general">
 
                         </div>
 
-                    </div>
-                    <div class="col-md-4 my-3">
-                        <label for="exampleInputEmail1" class="form-label">Precio iva</label>
-                        <div class="form-group">
-                            <input type="number" class="form-control" id="precio_inicial" name="precio_inicial">
+                    </div> -->
 
-                        </div>
 
-                    </div>
-
-                    <div class="col-md-4 my-3">
+                    <!--     <div class="col-md-4 my-3">
                         <label for="exampleInputEmail1" class="form-label">Total</label>
                         <div class="form-group">
-                            <input type="number" class="form-control" id="total" name="total">
+                            <input type="number" readonly class="form-control" id="totald" name="total">
+
+                        </div>
+
+                    </div> -->
+
+                    <div class="col-md-3 my-3">
+                        <label for="exampleInputEmail1" class="form-label">Precio iva</label>
+                        <div class="form-group">
+                            <input type="number" readonly class="form-control" id="precio_iva" name="precio_iva">
 
                         </div>
 
                     </div>
-                    <div class="col-md-3 my-3">
+                    <div class="col-md-2 my-3">
                         <label for="exampleInputEmail1" class="form-label">Estatus factura</label>
                         <div class="form-group">
                             <select class="form-control" name="estatucotizacion_id" id="estatucotizacion_id">
@@ -161,17 +163,45 @@
                     <div class="col-md-1 my-3">
                         <label for="exampleInputEmail1" class="form-label">Agregar</label>
                         <div class="form-group">
-                            <a class="btn btn-primary" href="#" role="button">+</a>
+                            <button type="button" class="btn btn-success" id="btn_add">Agregar</button>
                         </div>
 
                     </div>
 
 
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="table-responsive">
+                            <table id="detalles" class="table table-striped table-bordered condensed table-hover">
+                                <thead class="table-success">
+                                    <th>N.servicio</th>
+                                    <th>Nombre servicio</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio unitario</th>
+                                    <th>IVA</th>
+                                    <th>Total</th>
+                                    <th>Opciones</th>
 
+                                </thead>
+                                <tfoot>
+                                    <th colspan="5">Total</th>
+                                    {{-- <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th> --}}
+                                    <th>
+                                        <h4 id="total">$0.00</h4>
+                                        <input type="hidden" name="total" id="total">
+                                    </th>
+                                </tfoot>
 
+                            </table>
+                        </div>
+                    </div>
 
+                    <div class="container col-md-12" id="guardar">
+                        <button type="submit" class="btn btn-primary float-right">Guardar</button>
 
-
+                    </div>
 
                 </div>
 
@@ -276,27 +306,70 @@
                 }
             })
         })
+    });
 
-        /* const precio_inicial = 1000;
-      const numero_servicios = 2;
-      const total = precio_inicial * numero_servicios;
-      const descuento =  total  * 0.50;
-     const iva = descuento * 0.16;
-     const subtotal = iva + descuento;
-      console.log(subtotal); */
 
-        function totalcotizacion()
-        {
-            const iva = 0.16
+    $(document).ready(function() {
+        $("#numero_servicios").keyup(function() {
+            var precio_inicial = $("#precio_inicial").val();
+            var numero_servicios = $("#numero_servicios").val();
+            var precio_bruto = precio_inicial * numero_servicios;
+            $("#precio_bruto").val(precio_bruto);
+        })
+        $("#precio_iva").keyup(function() {
+            var precio_bruto = $("#precio_bruto").val();
+            var precio_iva = precio_bruto * .16;
+            var totald = precio_iva + precio_bruto;
+            $("#precio_iva").val(precio_iva);
+
+
+        })
+
+
+
+        /* agrega productos a tabla */
+        $(document).ready(function() {
+            $("#btn_add").click(function() {
+                agregar();
+            })
+        })
+
+        function agregar() {
+            const id = $("#id").val();
+
+            const nombre = $('#nombre').val();
             const numero_servicios = $("#numero_servicios").val();
-            const total = $("#total").val();
-            const 
+            const precio_bruto = $("#precio_bruto").val();
+            const precio_iva = $("#precio_iva").val();
+
+            const total_servicios = Number(precio_iva) + parseFloat(precio_bruto);
+
+
+            const fila = '<tr>' +
+                '<td><input class="form-control" type="number" id="id" name="id[]" value="' + id + '" readonly></td>' +
+                '<td><input class="form-control" type="text" id="nombre" name="nombre[]" value="' + nombre + '" readonly></td>' +
+                '<td><input class="form-control" type="text" id="numero_servicios" name="numero_servicios[]" value="' + numero_servicios + '" readonly></td>' +
+                '<td><input class="form-control" type="text" id="precio_bruto" name="precio_bruto[]" value="' + precio_bruto + '" readonly></td>' +
+                '<td><input class="form-control" type="text" id="precio_iva" name="precio_iva[]" value="' + precio_iva + '" readonly></td>' +
+                '<td><input class="form-control" type="number" id="total_servicios" name="total_servicios[]" value="' + total_servicios + '" readonly></td>' +
+                '<td><button type="button" class="btn btn-danger" onclick="eliminarCotizacion()">X</button></td>' +
+                '</tr>';
+            limpiar();
+
+            $('#detalles').append(fila);
+        }
+
+        function eliminarServicio(id) {
+            $("#id").remove()
+        }
+
+        function limpiar() {
+            $("#numero_servicios").val("");
+            $("#precio_iva").val("");
+            $("#nombre").val("");
+            $("#precio_inicial").val("");
         }
 
 
-
-
-
-
-    });
+    })
 </script>
