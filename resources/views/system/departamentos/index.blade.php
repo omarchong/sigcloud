@@ -216,7 +216,7 @@
         /* delete departament */
 
         $('body').on('click', '.deleteDepartament', function() {
-            var id = $(this).data("id");
+            /* var id = $(this).data("id");
             if (confirm(`esta seguro de querer eliminar al departamento: ${id}`)) {
                 $.ajax({
                     type: "DELETE",
@@ -230,7 +230,32 @@
 
                 });
 
-            } else {}
+            } else {} */
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡El estatus se eliminará definitivamente",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#007bff',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '¡Si, eliminar!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var id = $(this).data('id');
+                    $.ajax({
+                        type: "DELETE",
+                        url: "{{ url('destroy') }}" + "/" + id,
+                        data: {
+                            id: id
+                        },
+                        dataType: 'json',
+                        success: function(res) {
+                            table.draw();
+                        }
+                    });
+                }
+            })
         });
     })
 </script>

@@ -44,7 +44,7 @@ class Usuario extends Model
     {
         return $this->belongsTo(Tarea::class);
     } */
-    public function tarea()
+    public function tareas()
     {
         return $this->hasMany('App\Tarea');
     }

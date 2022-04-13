@@ -9,8 +9,7 @@
                 </div>
                 <div class="card-body">
                     <button type="button" id="addNewActividad" class="btn btn-primary"><i class="fas fa-plus"></i>
-                        Agregar
-                        actividad</button>
+                        Agregar actividad</button>
                 </div>
                 <div class="card-body">
                     <table class="table table-striped table-inverse mt-3 responsive" id="actividades">
@@ -21,14 +20,12 @@
                                 <th>Tipo de actividad</th>
                                 <th>Fecha</th>
                                 <th>Nota</th>
-                                <th>Otros</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
-                        
                         <tbody>
-                        
+
                         </tbody>
-                        
                     </table>
                 </div>
             </div>
@@ -43,41 +40,70 @@
                 <h4 class="modal-title" id="ajaxActividadModel"></h4>
             </div>
             <div class="modal-body">
-                <form action="javascript:void(0)" id="addEditActividadForm" name="addEditActividadForm" class="form-horizontal" method="POST">
+                <form action="javascript:void(0)" id="addEditActividadForm" name="addEditActividadForm"
+                    class="form-horizontal needs-validation" novalidate method="POST">
                     <input type="hidden" name="id" id="id">
                     <div class="row">
                         <div class="col-md-12">
                             <label for="nombre">Nombre</label>
                             <div class="">
-                                <input type="text" class="form-control" name="nombre" id="nombre" required>
+                                <input type="text" required class="form-control @error('nombre')  @enderror"
+                                    name="nombre" id="nombre">
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                                @error('nombre')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label for="tipoactividad">Tipo de actividad</label>
                             <div class="">
-                                <select class="custom-select" name="tipoactividad" id="tipoactividad" required>
-                                    <option selected>Selecciona una actividad</option>
+                                <select class="custom-select" class="@error('tipoactividad') is-invalid @enderror "
+                                    name="tipoactividad" id="tipoactividad" required>
+                                    <option selected disabled value="">Selecciona una actividad</option>
                                     <option value="Llamadas">Llamadas</option>
                                     <option value="Correo">Correo</option>
                                     <option value="Reunion">Reunion</option>
+                                    <div class="valid-feedback">
+                                        Correcto!
+                                    </div>
+                                    @error('tipoactividad')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label for="fecha">Fecha</label>
                             <div class="">
-                                <input type="date" class="form-control" name="fecha" id="fecha" required>
+                                <input type="date" class="form-control @error('fecha')  @enderror " name="fecha"
+                                    id="fecha" required>
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                                @error('fecha')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-12">
                             <label for="nota">Nota</label>
                             <div class="">
-                                <input type="text" class="form-control" name="nota" id="nota" required>
+                                <textarea type="text" required class="form-control @error('nota')  @enderror" name="nota" id="nota"></textarea>
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                                @error('nota')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                         </div>
                     </div>
                     <div class="float-right my-3">
-                        <button type="submit" class="btn btn-primary" id="btn-save" value="addNewActividad">Guardar</button>
+                        <button type="submit" class="btn btn-primary" id="btn-save"
+                            value="addNewActividad">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -86,53 +112,58 @@
 </div>
 
 <script>
-    $('#actividades').DataTable({
+    var table = $('#actividades').DataTable({
         "responsive": true,
         "processing": true,
-        "serverside": true,
+        "serverSide": true,
         "autoWidth": false,
+        ajax: "",
         language: {
             url: "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
         },
-        "ajax": "{{ route('actividades.datatables') }}",
-        "columns": [
-            {
+        "columns": [{
                 data: 'id',
             },
             {
-                data: 'nombre'
+                data: 'nombre',
             },
             {
-                data: 'tipoactividad'
+                data: 'tipoactividad',
             },
             {
-                data: 'fecha'
+                data: 'fecha',
             },
             {
                 data: 'nota'
             },
-            {data: 'action', name: 'action', orderable: false, searchable: false},
-            
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false
+            },
         ]
     })
 
     function reloadTable() {
-        $("#actividades").DataTable().ajax.reload();
+        $('#actividades').DataTable().ajax.reload();
     }
 </script>
 
 <script>
-    $(document).ready(function($) {
+    $(function() {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
         $('#addNewActividad').click(function() {
             $('#addEditActividadForm').trigger("reset");
             $('#ajaxActividadModel').html("Registrar actividad");
             $('#ajax-actividad-model').modal('show');
         });
+
         $('body').on('click', '.edit', function() {
             var id = $(this).data('id');
             $.ajax({
@@ -150,9 +181,11 @@
                     $('#tipoactividad').val(res.tipoactividad);
                     $('#fecha').val(res.fecha);
                     $('#nota').val(res.nota);
+                    table.draw();
                 }
             });
         });
+
         $('body').on('click', '.delete', function(e) {
             e.preventDefault();
             Swal.fire({
@@ -175,7 +208,7 @@
                         },
                         dataType: 'json',
                         success: function(res) {
-                            location.reload();
+                            table.draw();
                         }
                     });
                 }
@@ -188,9 +221,8 @@
             var tipoactividad = $('#tipoactividad').val();
             var fecha = $('#fecha').val();
             var nota = $('#nota').val();
-            console.log(nota);
             $("#btn-save").html('Espere porfavor...');
-            $("#btn-save").attr("disabled", true);
+            $("#btn-save").attr("disabled", false);
             $.ajax({
                 type: 'POST',
                 url: "{{ url('add-update-actividad') }}",
@@ -204,6 +236,7 @@
                 dataType: 'json',
                 success: function(res) {
                     window.location.reload();
+                    table.draw();
                     $("#btn-save").html('Submit');
                     $("#btn-save").attr("disabled", false);
                 }
@@ -211,3 +244,59 @@
         });
     });
 </script>
+
+<script>
+    $(document).ready(function() {
+        $("#addEditActividadForm").validate({
+            rules: {
+                nombre: {
+                    required: true
+                },
+                tipoactividad: {
+                    required: true
+                },
+                fecha: {
+                    required: true
+                },
+                nota: {
+                    required: true
+                }
+            },
+            messages: {
+                nombre: {
+                    required: "El nombre es requerido"
+                },
+                tipoactividad: {
+                    required: "El campo tipo actividad es requerido"
+                },
+                fecha: {
+                    required: "El campo fecha es requerido"
+                },
+                nota: {
+                    required: "El campo nota es requerido"
+                }
+            }
+        })
+    })
+</script>
+<script>
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+
+
