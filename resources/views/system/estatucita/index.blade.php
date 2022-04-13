@@ -89,17 +89,7 @@
             },
             {
                 data: 'nombre',
-            }, {
-                data: 'id',
-                render: function(data, type, full, meta) {
-                    return `
-                    <a href="javascript:void(0)" class="edit"
-                        data-id="{{ $estatucita->id }}"><img src="/img/editar.svg" width="20px"></a>
-                    <a href="javascript:void(0)" class="delete"
-                        data-id="{{ $estatucita->id }}"><img src="/img/basurero.svg" width="20px"></a>
-                        `
-                }
-            }
+            }, {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     })
 

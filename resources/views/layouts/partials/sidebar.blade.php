@@ -22,13 +22,13 @@
                 </a>
             </li>
             <li class="nav-link">
-                <a href="{{route('usuarios.index')}}">
+                <a href="{{ route('usuarios.index') }}">
                     <img class="mr-2" src="/img/usuario.svg" alt="" width="35px">
                     <span class="text nav-text"> Usuarios</span>
                 </a>
             </li>
             <li class="nav-link">
-                <a href="{{route('clientes.index')}}">
+                <a href="{{ route('clientes.index') }}">
                     <img class="mr-2" src="/img/usuario.svg" alt="" width="35px">
                     <span class="text nav-text"> Clientes</span>
                 </a>
@@ -51,71 +51,21 @@
                     <span class="text nav-text"> Servicios</span>
                 </a>
             </li>
-            <li class="nav-link">
-                <a href="{{route('estatuservicios.index')}}">
-                    <img class="mr-2" src="/img/usuario.svg" alt="" width="35px">
-                    <span class="text nav-text"> Estatus servicios</span>
-                </a>
-            </li>
 
             <li class="nav-link">
-                <a href="{{route('actividades.index')}}">
+                <a href="{{ route('actividades.index') }}">
                     <img class="mr-2" src="/img/usuario.svg" alt="" width="35px">
                     <span class="text nav-text"> Actividad</span>
                 </a>
             </li>
 
             <li class="nav-link">
-                <a href="{{route('tareas.index')}}">
+                <a href="{{ route('tareas.index') }}">
                     <img class="mr-2" src="/img/documento.svg" alt="" width="35px">
                     <span class="text nav-text"> Tarea</span>
                 </a>
             </li>
-            <li class="nav-link">
-                <a href="{{route('estatutareas.index')}}">
-                    <img class="mr-2" src="/img/documento.svg" alt="" width="35px">
-                    <span class="text nav-text"> Estatus tarea</span>
-                </a>
-            </li>
-
-            <li class="nav-link">
-                <a href="{{route('estatucitas.index')}}">
-                    <img class="mr-2" src="/img/documento.svg" alt="" width="35px">
-                    <span class="text nav-text"> Estatus cita</span>
-                </a>
-            </li>
-
-            <li class="nav-link">
-                <a href="{{route('estatucotizacions.index')}}">
-                    <img class="mr-2" src="/img/documento.svg" alt="" width="35px">
-                    <span class="text nav-text"> Estatus cotización</span>
-                </a>
-            </li>
-            <li class="nav-link">
-                <a href="{{route('estatufacturas.index')}}">
-                    <img class="mr-2" src="/img/facturacion.svg" alt="" width="35px">
-                    <span class="text nav-text"> Estatus factura</span>
-                </a>
-            </li>
-            <li class="nav-link">
-                <a href="{{route('estatuordens.index')}}">
-                    <img class="mr-2" src="/img/documento.svg" alt="" width="35px">
-                    <span class="text nav-text"> Estatus orden</span>
-                </a>
-            </li>
-            <li class="nav-link">
-                <a href="{{route('estatuproyectos.index')}}">
-                    <img class="mr-2" src="/img/documento.svg" alt="" width="35px">
-                    <span class="text nav-text"> Estatus proyecto</span>
-                </a>
-            </li>
-            <li class="nav-link">
-                <a href="{{route('tipoproyectos.index')}}">
-                    <img class="mr-2" src="/img/documento.svg" alt="" width="35px">
-                    <span class="text nav-text"> Tipos proyectos</span>
-                </a>
-            </li>
-
+            
 
             <li class="nav-link">
                 <a href="#">
@@ -141,13 +91,47 @@
             </li>
 
             <li class="nav-link">
+                <a class="sidebar-link" data-toggle="collapse" href="#collapseExample" role="button"
+                    aria-expanded="false" aria-controls="collapseExample">
+                    <img class="mr-2" src="/img/reloj.svg" alt="" width="35px">
+                    <span class="text nav-text"> Estatus</span>
+                </a>
+            </li>
+              <div class="collapse" id="collapseExample">
+                <div>
+                    <a href="{{ route('estatucitas.index') }}" class="px-5">
+                        <span class="text nav-text">Estatu citas</span>
+                    </a>
+                    <a href="{{route('estatucotizacions.index')}}" class="px-5">
+                        <span class="text nav-text">Estatu cotizacion</span>
+                    </a>
+                    <a href="{{ route('estatufacturas.index') }}" class="px-5">
+                        <span class="text nav-text">Estatu facturas</span>
+                    </a>
+                    <a href="{{ route('estatuordens.index') }}" class="px-5">
+                        <span class="text nav-text">Estatu orden</span>
+                    </a>
+                    <a href="{{ route('estatuproyectos.index') }}" class="px-5">
+                        <span class="text nav-text">Estatu proyectos</span>
+                    </a>
+                    <a href="{{ route('estatutareas.index') }}" class="px-5">
+                        <span class="text nav-text">Estatu tareas</span>
+                    </a>
+                    <a href="{{ route('tipoproyectos.index') }}" class="px-5">
+                        <span class="text nav-text">Tipo proyecto</span>
+                    </a>
+                    <a href="{{ route('estatuservicios.index') }}" class="px-5">
+                        <span class="text nav-text">Estatu servicios</span>
+                    </a>
+                </div>
+              </div>
+
+            <li class="nav-link">
                 <a href="#">
                     <img class="mr-2" src="/img/logout.svg" alt="" width="35px">
                     <span class="text nav-text">Cerrar sesión</span>
-                    
                 </a>
             </li>
-
         </ul>
     </div>
     </div>

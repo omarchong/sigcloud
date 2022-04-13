@@ -22,20 +22,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($tipoproyectos as $tipoproyecto)
-                               {{--  <tr>
-                                    <td>{{ $tipoproyecto->id }}</td>
-                                    <td>{{ $tipoproyecto->nombre }}</td>
-                                    <td>
-                                        <a href="javascript:void(0)" class="edit"
-                                            data-id="{{ $tipoproyecto->id }}"><img src="/img/editar.svg"
-                                                width="20px"></a>
-                                        <a href="javascript:void(0)" class="delete"
-                                            data-id="{{ $tipoproyecto->id }}"><img src="/img/basurero.svg"
-                                                width="20px"></a>
-                                    </td>
-                                </tr> --}}
-                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -89,19 +75,7 @@
             },
             {
                 data: 'nombre',
-            }, {
-                data: 'id',
-                render: function(data, type, full, meta) {
-                    return `
-                    <a href="javascript:void(0)" class="edit"
-                        data-id="{{ $tipoproyecto->id }}"><img src="/img/editar.svg"
-                            width="20px"></a>
-                    <a href="javascript:void(0)" class="delete"
-                        data-id="{{ $tipoproyecto->id }}"><img src="/img/basurero.svg"
-                            width="20px"></a>
-                        `
-                }
-            }
+            }, {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     })
     function reloadTable() {
@@ -143,7 +117,7 @@
             e.preventDefault();
             Swal.fire({
                 title: '¿Estás seguro?',
-                text: "¡El campo {{ $tipoproyecto->nombre }} se eliminará definitivamente!",
+                text: "¡El campo se eliminará definitivamente!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#007bff',
@@ -183,7 +157,7 @@
                 dataType: 'json',
                 success: function(res) {
                     window.location.reload();
-                    $("#btn-save").html('Submit');
+                    $("#btn-save").html('Enviando...');
                     $("#btn-save").attr("disabled", false);
                 }
             });
