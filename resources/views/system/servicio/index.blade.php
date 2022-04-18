@@ -41,33 +41,30 @@
                 <h4 class="modal-title" id="ajaxServicioModel"></h4>
             </div>
             <div class="modal-body">
-                <form action="javascript:void(0)" id="addEditServicioForm" name="addEditServicioForm"
-                    class="form-horizontal needs-validation" novalidate method="POST">
+                <form action="javascript:void(0)" id="addEditServicioForm" name="addEditServicioForm" class="form-horizontal needs-validation" novalidate method="POST">
                     <div class="row">
                         <input type="hidden" name="id" id="id">
                         <div class="col-md-12">
                             <label for="name" class="col-sm-1-12 control-label">Nombre</label>
                             <div class="col-sm-12">
-                                <input type="text" required class="form-control @error('nombre')  @enderror" id="nombre"
-                                    name="nombre">
+                                <input type="text" required class="form-control @error('nombre')  @enderror" id="nombre" name="nombre">
                                 <div class="valid-feedback">
                                     Correcto!
                                 </div>
                                 @error('nombre')
-                                    <small class="text-danger">{{ $message }}</small>
+                                <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
                         </div>
                         <div class="col-md-12">
                             <label for="descripcion" class="col-sm-2-12 control-label">Descripcion</label>
                             <div class="col-sm-12">
-                                <textarea type="text" class="form-control @error('descripcion')  @enderror" id="descripcion" name="descripcion"
-                                    required></textarea>
+                                <textarea type="text" class="form-control @error('descripcion')  @enderror" id="descripcion" name="descripcion" required></textarea>
                                 <div class="valid-feedback">
                                     Correcto!
                                 </div>
                                 @error('descripcion')
-                                    <small class="text-danger">{{ $message }}</small>
+                                <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
                         </div>
@@ -78,13 +75,12 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">$</div>
                                     </div>
-                                    <input type="number" class="form-control @error('precio_inicial')  @enderror"
-                                        id="precio_inicial" name="precio_inicial" required>
+                                    <input type="number" class="form-control @error('precio_inicial')  @enderror" id="precio_inicial" name="precio_inicial" required>
                                     <div class="valid-feedback">
                                         Correcto!
                                     </div>
                                     @error('precio_inicial')
-                                        <small class="text-danger">{{ $message }}</small>
+                                    <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
@@ -96,13 +92,12 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">$</div>
                                     </div>
-                                    <input type="number" class="form-control @error('precio_final')  @enderror"
-                                        id="precio_final" name="precio_final" required>
+                                    <input type="number" class="form-control @error('precio_final')  @enderror" id="precio_final" name="precio_final" required>
                                     <div class="valid-feedback">
                                         Correcto!
                                     </div>
                                     @error('precio_final')
-                                        <small class="text-danger">{{ $message }}</small>
+                                    <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
@@ -224,6 +219,7 @@
         });
 
         $('body').on('click', '#btn-save', function(event) {
+
             var id = $("#id").val();
             var nombre = $("#nombre").val();
             var descripcion = $("#descripcion").val();
@@ -243,10 +239,14 @@
                 },
                 dataType: 'json',
                 success: function(res) {
-                    window.location.reload();
                     table.draw();
+
                     $("#btn-save").html('Submit');
                     $("#btn-save").attr("disabled", false);
+                },
+                error: function(res) {
+                    console.log('Error: ', data);
+                    $('#btn-save').html('Guardar cambio');
                 }
             });
         });

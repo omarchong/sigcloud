@@ -40,28 +40,25 @@
                 <h4 class="modal-title" id="ajaxActividadModel"></h4>
             </div>
             <div class="modal-body">
-                <form action="javascript:void(0)" id="addEditActividadForm" name="addEditActividadForm"
-                    class="form-horizontal needs-validation" novalidate method="POST">
+                <form action="javascript:void(0)" id="addEditActividadForm" name="addEditActividadForm" class="form-horizontal needs-validation" novalidate method="POST">
                     <input type="hidden" name="id" id="id">
                     <div class="row">
                         <div class="col-md-12">
                             <label for="nombre">Nombre</label>
                             <div class="">
-                                <input type="text" required class="form-control @error('nombre')  @enderror"
-                                    name="nombre" id="nombre">
+                                <input type="text" required class="form-control @error('nombre')  @enderror" name="nombre" id="nombre">
                                 <div class="valid-feedback">
                                     Correcto!
                                 </div>
                                 @error('nombre')
-                                    <small class="text-danger">{{ $message }}</small>
+                                <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label for="tipoactividad">Tipo de actividad</label>
                             <div class="">
-                                <select class="custom-select" class="@error('tipoactividad') is-invalid @enderror "
-                                    name="tipoactividad" id="tipoactividad" required>
+                                <select class="custom-select" class="@error('tipoactividad') is-invalid @enderror " name="tipoactividad" id="tipoactividad" required>
                                     <option selected disabled value="">Selecciona una actividad</option>
                                     <option value="Llamadas">Llamadas</option>
                                     <option value="Correo">Correo</option>
@@ -70,7 +67,7 @@
                                         Correcto!
                                     </div>
                                     @error('tipoactividad')
-                                        <small class="text-danger">{{ $message }}</small>
+                                    <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </select>
                             </div>
@@ -78,13 +75,12 @@
                         <div class="col-md-6">
                             <label for="fecha">Fecha</label>
                             <div class="">
-                                <input type="date" class="form-control @error('fecha')  @enderror " name="fecha"
-                                    id="fecha" required>
+                                <input type="date" class="form-control @error('fecha')  @enderror " name="fecha" id="fecha" required>
                                 <div class="valid-feedback">
                                     Correcto!
                                 </div>
                                 @error('fecha')
-                                    <small class="text-danger">{{ $message }}</small>
+                                <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
                         </div>
@@ -96,14 +92,13 @@
                                     Correcto!
                                 </div>
                                 @error('nota')
-                                    <small class="text-danger">{{ $message }}</small>
+                                <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
                         </div>
                     </div>
                     <div class="float-right my-3">
-                        <button type="submit" class="btn btn-primary" id="btn-save"
-                            value="addNewActividad">Guardar</button>
+                        <button type="submit" class="btn btn-primary" id="btn-save" value="addNewActividad">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -235,8 +230,9 @@
                 },
                 dataType: 'json',
                 success: function(res) {
-                    window.location.reload();
                     table.draw();
+                    window.location.reload();
+
                     $("#btn-save").html('Submit');
                     $("#btn-save").attr("disabled", false);
                 }
@@ -298,5 +294,3 @@
         }, false);
     })();
 </script>
-
-

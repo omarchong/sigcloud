@@ -110,7 +110,7 @@
                                 <option selected disabled value="">Seleccione una opcion</option>
                                 @foreach($departamentos as $departamento)
                                 <option {{old('departamento_id') == $departamento->id ? 'selected' : ''}} value="{{$departamento->id}}">
-                                    {{$departamento->nombre}}
+                                    {{$departamento->nombre}}</option>
                                     @endforeach
 
 

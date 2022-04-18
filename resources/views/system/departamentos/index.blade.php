@@ -216,21 +216,7 @@
         /* delete departament */
 
         $('body').on('click', '.deleteDepartament', function() {
-            /* var id = $(this).data("id");
-            if (confirm(`esta seguro de querer eliminar al departamento: ${id}`)) {
-                $.ajax({
-                    type: "DELETE",
-                    url: "{{ url('destroy') }}" + "/" + id,
-                    success: function(data) {
-                        table.draw();
-                    },
-                    error: function(data) {
-                        console.log("Error: ", data);
-                    }
-
-                });
-
-            } else {} */
+            
             Swal.fire({
                 title: '¿Estás seguro?',
                 text: "¡El estatus se eliminará definitivamente",

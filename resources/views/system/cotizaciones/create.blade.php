@@ -183,18 +183,24 @@
 
                                 </thead>
                                 <tfoot>
-                                    <th colspan="5">Total</th>
-                                    {{-- <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th> --}}
-                                    <th>
+
+                                    <td colspan="3">Total</td>
+                                    <td>
+                                        <h4 id="precio_b">$0.00</h4>
+                                    </td>
+                                    <td>
                                         <h4 id="total">$0.00</h4>
-                                        <input type="hidden" name="total" id="total">
-                                    </th>
+                                    </td>
+                                    <td>
+                                        <h4 id="total">$0.00</h4>
+                                    </td>
                                 </tfoot>
 
+
                             </table>
+
+
+
                         </div>
                     </div>
 
@@ -325,8 +331,6 @@
 
         })
 
-
-
         /* agrega productos a tabla */
         $(document).ready(function() {
             $("#btn_add").click(function() {
@@ -335,7 +339,7 @@
         })
 
         function agregar() {
-            const id = $("#id").val();
+            const servicios_id = $("#servicios_id").val();
 
             const nombre = $('#nombre').val();
             const numero_servicios = $("#numero_servicios").val();
@@ -346,7 +350,7 @@
 
 
             const fila = '<tr>' +
-                '<td><input class="form-control" type="number" id="id" name="id[]" value="' + id + '" readonly></td>' +
+                '<td><input class="form-control" type="number" id="servicios_id" name="servicios_id[]" value="' + servicios_id + '" readonly></td>' +
                 '<td><input class="form-control" type="text" id="nombre" name="nombre[]" value="' + nombre + '" readonly></td>' +
                 '<td><input class="form-control" type="text" id="numero_servicios" name="numero_servicios[]" value="' + numero_servicios + '" readonly></td>' +
                 '<td><input class="form-control" type="text" id="precio_bruto" name="precio_bruto[]" value="' + precio_bruto + '" readonly></td>' +
@@ -369,7 +373,6 @@
             $("#nombre").val("");
             $("#precio_inicial").val("");
         }
-
-
+       
     })
 </script>

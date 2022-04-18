@@ -50,25 +50,13 @@ class TareasController extends Controller
         return view('system.tarea.edit')->with('tareas', $tareas); */  
     }
 
-    public function update(TareaEditRequest $request, tarea $tarea)
+    public function update(TareaRequest $request, tarea $tarea)
     {   
         $tarea->update();
         return redirect()
         ->route('tareas.index')
         ->withSuccess("La tarea $tarea->nombre se actualizo exitosamente");
-        /* $tareas = Tarea::find($id);
-        $tareas->nombre = $request->get('nombre');
-        $tareas->fecha_limite = $request->get('fecha_limite');
-        $tareas->hora_limite = $request->get('hora_limite');
-        $tareas->tipo_tarea = $request->get('tipo_tarea');
-        $tareas->usuarios_id = $request->get('usuarios_id');
-        $tareas->usuarios_id = $request->get('usuarios_id');
-        $tareas->clientes_id = $request->get('clientes_id');
-        $tareas->estatutareas_id = $request->get('estatutareas_id');
-        $tareas->descripcion = $request->get('descripcion');
-        $tareas->save();
-
-        return redirect()->route('system.tarea.index'); */
+      
     }
 
     public function destroy(Request $request)
