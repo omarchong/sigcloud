@@ -35,7 +35,7 @@ class EstatusordenController extends Controller
     public function store(Request $request)
     {
 
-        $estatuorden   =   estatuorden::updateOrCreate(
+        Estatuorden::updateOrCreate(
             [
                 'id' => $request->id
             ],
@@ -47,20 +47,16 @@ class EstatusordenController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function edit(Request $request)
+    public function edit($id)
     {
-
-        $where = array('id' => $request->id);
-        $estatuorden  = estatuorden::where($where)->first();
-
+        $estatuorden  = estatuorden::find($id);
         return response()->json($estatuorden);
     }
 
 
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $estatuorden = estatuorden::where('id', $request->id)->delete();
-
+        $estatuorden = estatuorden::find($id)->delete();
         return response()->json(['success' => true]);
     }
 }

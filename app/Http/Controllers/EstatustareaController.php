@@ -33,7 +33,7 @@ class EstatustareaController extends Controller
   public function store(Request $request)
   {
 
-      $estatutarea   =   Estatutarea::updateOrCreate(
+      Estatutarea::updateOrCreate(
           [
               'id' => $request->id
           ],
@@ -45,20 +45,16 @@ class EstatustareaController extends Controller
       return response()->json(['success' => true]);
   }
 
-  public function edit(Request $request)
+  public function edit($id)
   {
-
-      $where = array('id' => $request->id);
-      $estatutarea  = Estatutarea::where($where)->first();
-
+      $estatutarea  = Estatutarea::find($id);
       return response()->json($estatutarea);
   }
 
 
-  public function destroy(Request $request)
+  public function destroy($id)
   {
-      $estatutarea = Estatutarea::where('id', $request->id)->delete();
-
+      $estatutarea = Estatutarea::find($id)->delete();
       return response()->json(['success' => true]);
   }
 }

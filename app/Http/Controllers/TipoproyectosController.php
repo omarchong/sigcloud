@@ -34,7 +34,7 @@ class TipoproyectosController extends Controller
     public function store(Request $request)
     {
 
-        $tipoproyecto  =  Tipoproyecto::updateOrCreate(
+        Tipoproyecto::updateOrCreate(
             [
                 'id' => $request->id
             ],
@@ -46,20 +46,16 @@ class TipoproyectosController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function edit(Request $request)
+    public function edit($id)
     {
-
-        $where = array('id' => $request->id);
-        $tipoproyecto  = Tipoproyecto::where($where)->first();
-
+        $tipoproyecto  = Tipoproyecto::find($id);
         return response()->json($tipoproyecto);
     }
 
 
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $tipoproyecto = Tipoproyecto::where('id', $request->id)->delete();
-
+        $tipoproyecto = Tipoproyecto::find($id)->delete();
         return response()->json(['success' => true]);
     }
 }

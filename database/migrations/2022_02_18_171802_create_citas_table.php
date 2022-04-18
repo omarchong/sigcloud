@@ -18,15 +18,9 @@ class CreateCitasTable extends Migration
             $table->string('duracion_cita');
             $table->string('lugar');
             $table->string('tipo_cita');
-            $table->foreignId('usuario_id')
-                ->references('id')
-                ->on('usuarios');
-            $table->foreignId('cliente_id')
-                ->references('id')
-                ->on('clientes');
-            $table->foreignId('estatucita_id')
-                ->references('id')
-                ->on('estatucitas');
+            $table->foreignId('usuarios_id')->constrained();
+            $table->foreignId('clientes_id')->constrained();
+            $table->foreignId('estatucitas_id')->constrained();
             $table->timestamps();
             $table->softDeletes();
         });

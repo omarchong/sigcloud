@@ -22,8 +22,6 @@ class ServicioRequest extends FormRequest
             'descripcion' => ['required'],
             
             'precio_final' => ['required', 'numeric'],
-            
-            'precio_inicial' => ['required', 'numeric'],
         ];
     }
 }

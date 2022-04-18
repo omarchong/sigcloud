@@ -33,7 +33,7 @@ class EstatuscitaController extends Controller
     public function store(Request $request)
     {
 
-        $estatucita   =   Estatucita::updateOrCreate(
+        Estatucita::updateOrCreate(
             [
                 'id' => $request->id
             ],
@@ -45,20 +45,16 @@ class EstatuscitaController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function edit(Request $request)
+    public function edit($id)
     {
-
-        $where = array('id' => $request->id);
-        $estatucita  = Estatucita::where($where)->first();
-
+        $estatucita  = Estatucita::find($id);
         return response()->json($estatucita);
     }
 
 
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $estatucita = Estatucita::where('id', $request->id)->delete();
-
-        return response()->json(['success' => true]);
+        Estatucita::find($id)->delete();
+        return response()->json(['success' => 'Estatus eliminado']);
     }
 }

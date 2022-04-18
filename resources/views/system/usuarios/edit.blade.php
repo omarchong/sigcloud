@@ -1,7 +1,7 @@
 @include('layouts.admin')
 <div class="container my-5">
     <div class="card">
-        <h5 class="card-header">Agregar usuarios</h5>
+        <h5 class="card-header">Editar usuarios</h5>
         <div class="card-body">
             <form action="{{ route('usuarios.update', ['usuario' => $usuario->id]) }}" method="POST" enctype="multipart/form-data" id="usuarios" class="needs-validation" novalidate>
                 @csrf

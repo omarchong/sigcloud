@@ -11,15 +11,11 @@ class CreateSeguimientofacturasTable extends Migration
     {
         Schema::create('seguimientofacturas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ordenpagos_id')
-                ->references('id')
-                ->on('ordenpagos');
+            $table->foreignId('ordenpagos_id')->constrained();
             $table->date('factura_creada');
             $table->integer('num_pago');
             $table->date('fecha_vencimiento');
-            $table->foreignId('estatufactura_id')
-                ->references('id')
-                ->on('estatufacturas');
+            $table->foreignId('estatufacturas_id')->constrained();
             $table->timestamps();
             $table->softDeletes();
         });

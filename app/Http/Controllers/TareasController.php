@@ -59,12 +59,6 @@ class TareasController extends Controller
       
     }
 
-    public function destroy(Request $request)
-    {
-        $tarea = Tarea::where('id', $request->id)->delete();
-
-        return response()->json(['success' => true]);
-    }
 
     public function RegistrosDatatables()
     {

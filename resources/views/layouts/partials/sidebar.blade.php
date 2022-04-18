@@ -41,7 +41,7 @@
             </li>
             <li class="nav-link">
                 <a href="{{route('cotizaciones.index')}}">
-                    <img class="mr-2" src="/img/usuario.svg" alt="" width="35px">
+                    <img class="mr-2" src="/img/documento.svg" alt="" width="35px">
                     <span class="text nav-text"> Cotizaciones</span>
                 </a>
             </li>
@@ -65,12 +65,18 @@
                     <span class="text nav-text"> Tarea</span>
                 </a>
             </li>
-            
 
             <li class="nav-link">
-                <a href="#">
+                <a href="{{ route('citas.index') }}">
                     <img class="mr-2" src="/img/documento.svg" alt="" width="35px">
-                    <span class="text nav-text"> Cotizaciones</span>
+                    <span class="text nav-text"> Citas</span>
+                </a>
+            </li>
+
+            <li class="nav-link">
+                <a href="{{ route('seguimientofacturas.index') }}">
+                    <img class="mr-2" src="/img/documento.svg" alt="" width="35px">
+                    <span class="text nav-text"> Seg. Facturas</span>
                 </a>
             </li>
 
@@ -119,9 +125,6 @@
                     </a>
                     <a href="{{ route('tipoproyectos.index') }}" class="px-5">
                         <span class="text nav-text">Tipo proyecto</span>
-                    </a>
-                    <a href="{{ route('estatuservicios.index') }}" class="px-5">
-                        <span class="text nav-text">Estatu servicios</span>
                     </a>
                 </div>
               </div>

@@ -98,6 +98,8 @@
             }
         });
         $('#addNewEstatutarea').click(function() {
+            $('#btn-save').val('create-Estatutarea');
+            $('#id').val("");
             $('#addEditEstatutareaForm').trigger("reset");
             $('#ajaxEstatutareaModel').html("Registrar estatus tareas");
             $('#ajax-estatutarea-model').modal('show');
@@ -105,29 +107,42 @@
 
         $('body').on('click', '.edit', function() {
             var id = $(this).data('id');
+            $.get('editar_estatutarea/' + id, function(data) {
+                $('#ajaxEstatutareaModel').html("Editar estatus de la cita");
+                $('#btn-save').val("edit-estatutarea");
+                $('#ajax-estatutarea-model').modal("show");
+                $('#id').val(data.id);
+                $('#nombre').val(data.nombre);
+            })
+        })
+
+        $('form').submit(function(e) {
+            e.preventDefault();
+            var formData = new FormData($(this)[0]);
             $.ajax({
+                data: formData,
+                url: "{{ route('store_estatutarea') }}",
                 type: "POST",
-                url: "{{ url('edit-estatutarea') }}",
-                data: {
-                    id: id
-                },
-                dataType: 'json',
-                success: function(res) {
-                    $('#ajaxEstatutareaModel').html("Editar estatu tareas");
-                    $('#ajax-estatutarea-model').modal('show');
-                    $('#id').val(res.id);
-                    $('#nombre').val(res.nombre);
+                contentType: false,
+                processData: false,
+                dataType: "json",
+                success: function(data) {
+                    $('#addEditEstatutareaForm').trigger('reset');
+                    $(this).html('Enviando...');
+                    $('#ajax-estatutarea-model').modal('hide');
                     table.draw();
+                },
+                error: function(data) {
+                    console.log('Error: ', data);
+                    $('#btn-save').html('Guardar');
                 }
             });
-
         });
 
-        $('body').on('click', '.delete', function(e) {  
-            e.preventDefault();
+        $('body').on('click', '.delete', function() {
             Swal.fire({
                 title: '¿Estás seguro?',
-                text: "¡El estatus se eliminará definitivamente!",
+                text: '¡El estatus se eliminará definitivamente!',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#007bff',
@@ -138,8 +153,8 @@
                 if (result.isConfirmed) {
                     var id = $(this).data('id');
                     $.ajax({
-                        type: "POST",
-                        url: "{{ url('delete-estatutarea') }}",
+                        type: "DELETE",
+                        url: "{{ url('destroy_estatutarea') }}" + "/" + id,
                         data: {
                             id: id
                         },
@@ -150,29 +165,7 @@
                     });
                 }
             })
-        });
-
-        $('body').on('click', '#btn-save', function(event) {
-            var id = $("#id").val();
-            var nombre = $("#nombre").val();
-            $("#btn-save").html('Espere porfavor...');
-            $("#btn-save").attr("disabled", false);
-            $.ajax({
-                type: "POST",
-                url: "{{ url('add-update-estatutarea') }}",
-                data: {
-                    id: id,
-                    nombre: nombre,
-                },
-                dataType: 'json',
-                success: function(res) {
-                    window.location.reload();
-                    table.draw();
-                    $("#btn-save").html('Enviando..');
-                    $("#btn-save").attr("disabled", false);
-                }
-            });
-        });
+        });        
     });
 </script>
 <script>

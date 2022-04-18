@@ -17,9 +17,8 @@
                             <tr>
                                 <th>Clave</th>
                                 <th>Nombre</th>
-                                <th>Descripcion</th>
                                 <th>Precio inicial</th>
-                                <th>Precio final</th>
+                                <th>Descripcion</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -44,7 +43,7 @@
                 <form action="javascript:void(0)" id="addEditServicioForm" name="addEditServicioForm" class="form-horizontal needs-validation" novalidate method="POST">
                     <div class="row">
                         <input type="hidden" name="id" id="id">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <label for="name" class="col-sm-1-12 control-label">Nombre</label>
                             <div class="col-sm-12">
                                 <input type="text" required class="form-control @error('nombre')  @enderror" id="nombre" name="nombre">
@@ -53,6 +52,24 @@
                                 </div>
                                 @error('nombre')
                                 <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="precio_inicial" class="col-sm-1-12 control-label">Precio inicial</label>
+                            <div class="col-sm-12">
+                                <div class="input-group mb-2">
+                                    <div class="">
+                                        <div class="input-group-text">$</div>
+                                    </div>
+                                    <input type="number" class="form-control @error('precio_inicial')  @enderror"
+                                        id="precio_inicial" name="precio_inicial" required>
+                                </div>
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                                @error('precio_inicial')
+                                    <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
                         </div>
@@ -68,6 +85,7 @@
                                 @enderror
                             </div>
                         </div>
+<<<<<<< HEAD
                         <div class="col-md-6">
                             <label for="precio_inicial" class="col-sm-1-12 control-label">Precio inicial</label>
                             <div class="col-sm-12">
@@ -102,9 +120,11 @@
                                 </div>
                             </div>
                         </div>
+=======
+>>>>>>> 8aab18893d023dcfdd3110e421025d882b29cfbe
                     </div>
                     <div class="float-right my-4">
-                        <button type="submit" class="btn btn-primary" id="btn-save" value="addNewServicio">Guardar
+                        <button type="submit" class="btn btn-primary" id="btn-save" value="btn-save">Guardar
                         </button>
                     </div>
                 </form>
@@ -131,13 +151,10 @@
                 data: 'nombre',
             },
             {
-                data: 'descripcion',
-            },
-            {
                 data: 'precio_inicial',
             },
             {
-                data: 'precio_final'
+                data: 'descripcion',
             },
             {
                 data: 'action',
@@ -160,7 +177,10 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
         $('#addNewServicio').click(function() {
+            $('#btn-save').val('create-Servicio');
+            $('#id').val("");
             $('#addEditServicioForm').trigger("reset");
             $('#ajaxServicioModel').html("Registrar servicio");
             $('#ajax-servicio-model').modal('show');
@@ -168,29 +188,43 @@
 
         $('body').on('click', '.edit', function() {
             var id = $(this).data('id');
+            $.get('editar_servicio/' + id, function(data) {
+                $('#ajaxServicioModel').html("Editar servicio");
+                $('#btn-save').val("edit-servicio");
+                $('#ajax-servicio-model').modal("show");
+                $('#id').val(data.id);
+                $('#nombre').val(data.nombre);
+                $('#precio_inicial').val(data.precio_inicial);
+                $('#descripcion').val(data.descripcion);
+            })
+        })
+
+        $('form').submit(function(e) {
+            e.preventDefault();
+            var formData = new FormData($(this)[0]);
             $.ajax({
+                data: formData,
+                url: "{{ route('store_servicio') }}",
                 type: "POST",
-                url: "{{ url('edit-servicio') }}",
-                data: {
-                    id: id
-                },
-                dataType: 'json',
-                success: function(res) {
-                    $('#ajaxServicioModel').html("Editar servicio");
-                    $('#ajax-servicio-model').modal('show');
-                    $('#id').val(res.id);
-                    $('#nombre').val(res.nombre);
-                    $('#descripcion').val(res.descripcion);
-                    $('#precio_inicial').val(res.precio_inicial);
-                    $('#precio_final').val(res.precio_final);
+                contentType: false,
+                processData: false,
+                dataType: "json",
+                success: function(data) {
+                    $('#addEditServicioForm').trigger('reset');
+                    $(this).html('Enviando...');
+                    $('#ajax-servicio-model').modal('hide');
                     table.draw();
+                },
+                error: function(data) {
+                    console.log('Error: ', data);
+                    $('#btn-save').html('Guardar');
                 }
             });
-
         });
 
-        $('body').on('click', '.delete', function(e) {
-            e.preventDefault();
+
+
+        $('body').on('click', '.delete', function() {
             Swal.fire({
                 title: '¿Estás seguro?',
                 text: '¡El servicio se eliminará definitivamente!',
@@ -204,8 +238,8 @@
                 if (result.isConfirmed) {
                     var id = $(this).data('id');
                     $.ajax({
-                        type: "POST",
-                        url: "{{ url('delete-servicio') }}",
+                        type: "DELETE",
+                        url: "{{ url('destroy_servicio') }}" + "/" + id,
                         data: {
                             id: id
                         },
@@ -217,40 +251,7 @@
                 }
             })
         });
-
-        $('body').on('click', '#btn-save', function(event) {
-
-            var id = $("#id").val();
-            var nombre = $("#nombre").val();
-            var descripcion = $("#descripcion").val();
-            var precio_inicial = $("#precio_inicial").val();
-            var precio_final = $("#precio_final").val();
-            $("#btn-save").html('Espere porfavor...');
-            $("#btn-save").attr("disabled", false);
-            $.ajax({
-                type: "POST",
-                url: "{{ url('add-update-servicio') }}",
-                data: {
-                    id: id,
-                    nombre: nombre,
-                    descripcion: descripcion,
-                    precio_inicial: precio_inicial,
-                    precio_final: precio_final,
-                },
-                dataType: 'json',
-                success: function(res) {
-                    table.draw();
-
-                    $("#btn-save").html('Submit');
-                    $("#btn-save").attr("disabled", false);
-                },
-                error: function(res) {
-                    console.log('Error: ', data);
-                    $('#btn-save').html('Guardar cambio');
-                }
-            });
-        });
-    });
+    })
 </script>
 <script>
     $(document).ready(function() {
@@ -259,13 +260,10 @@
                 nombre: {
                     required: true
                 },
-                descripcion: {
-                    required: true
-                },
                 precio_inicial: {
                     required: true
                 },
-                precio_final: {
+                descripcion: {
                     required: true
                 }
             },
@@ -273,14 +271,11 @@
                 nombre: {
                     required: "El nombre es requerido"
                 },
-                descripcion: {
-                    required: "El campo descripcion es requerido"
-                },
                 precio_inicial: {
                     required: "El precio inicial es requerido"
                 },
-                precio_final: {
-                    required: "El precio final es requerido"
+                descripcion: {
+                    required: "El campo descripcion es requerido"
                 }
             }
         })

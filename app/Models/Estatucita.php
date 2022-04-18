@@ -10,9 +10,9 @@ class Estatucita extends Model
 {
     use HasFactory;
     protected $fillable = ['nombre'];
-
+    
     public function citas()
     {
-        return $this->belongsTo(Cita::class);
+        return $this->hasMany('App\Cita');
     }
 }

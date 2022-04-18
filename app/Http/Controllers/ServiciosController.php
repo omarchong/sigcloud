@@ -30,9 +30,9 @@ class ServiciosController extends Controller
         return view('system.servicio.index');
     }
     
-    public function store(Request $request)
+    public function store_servicio(Request $request)
     {
-        $servicio   =   Servicio::updateOrCreate(
+        Servicio::updateOrCreate(
                     [
                         'id' => $request->id
                     ],
@@ -40,23 +40,21 @@ class ServiciosController extends Controller
                         'nombre' => $request->nombre, 
                         'descripcion' => $request->descripcion,
                         'precio_inicial' => $request->precio_inicial,
-                        'precio_final' => $request->precio_final,
                     ]);
         return response()->json(['success' => true]);
     }
     
-    public function edit(Request $request)
+    public function edit_servicio($id)
     {   
-        $where = array('id' => $request->id);
-        $servicio  = Servicio::where($where)->first();
+        $servicio  = Servicio::find($id);
         return response()->json($servicio);
     }
  
    
-    public function destroy(Request $request)
+    public function destroy_servicio($id)
     {
-        $servicio = Servicio::where('id',$request->id)->delete();
-        return response()->json(['success' => true]);
+        Servicio::find($id)->delete();
+        return response()->json(['success' => 'Servicio borrado']);
     }
 
 }

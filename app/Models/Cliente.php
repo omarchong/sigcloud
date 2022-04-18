@@ -56,5 +56,10 @@ class Cliente extends Model
     {
         return $this->hasMany(Cotizacion::class);
     }
+
+    public function citas()
+    {
+        return $this->hasMany('App\Cita');
+    }
    
 }
