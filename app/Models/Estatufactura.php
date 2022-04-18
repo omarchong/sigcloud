@@ -11,8 +11,9 @@ class Estatufactura extends Model
     use HasFactory;
     protected $fillable = ['nombre'];
 
+    
     public function seguimientofacturas()
     {
-        return $this->belongsTo(Seguimientofactura::class);
+        return $this->hasMany('App\Seguimientofactura');
     }
 }

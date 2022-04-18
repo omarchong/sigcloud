@@ -17,27 +17,30 @@ class Cita extends Model
         'duracion_cita',
         'lugar',
         'tipo_cita',
-        'usuario_id',
-        'cliente_id',
-        'estatucita_id'
+        'usuarios_id',
+        'clientes_id',
+        'estatucitas_id'
     ];
 
     public function usuarios()
     {
-        return $this->hasMany(Usuario::class);
-    }
+        return $this->belongsTo(Usuario::class);
+    } 
     public function clientes()
     {
-        return $this->hasMany(Cliente::class);
+        return $this->belongsTo(Cliente::class);
     }
-    public function estatuscita()
+
+    public function estatucitas()
     {
-        return $this->hasOne(Estatucita::class);
+        return $this->belongsTo(Estatucita::class);
     }
+
     public function agendas()
     {
         return $this->belongsTo(Agenda::class);
     }
+    
     public function tareas()
     {
         return $this->hasMany(Tarea::class);

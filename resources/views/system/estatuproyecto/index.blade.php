@@ -103,6 +103,8 @@
         });
 
         $('#addNewEstatuproyecto').click(function() {
+            $('#btn-save').val('create-Estatuproyecto');
+            $('#id').val("");
             $('#addEditEstatuproyectoForm').trigger("reset");
             $('#ajaxEstatuproyectoModel').html("Registrar estatus del proyecto");
             $('#ajax-estatuproyecto-model').modal('show');
@@ -110,31 +112,45 @@
 
         $('body').on('click', '.edit', function() {
             var id = $(this).data('id');
+            $.get('editar_estatuproyecto/' + id, function(data) {
+                $('#ajaxEstatuproyectoModel').html("Editar estatus de la cita");
+                $('#btn-save').val("edit-estatuproyecto");
+                $('#ajax-estatuproyecto-model').modal("show");
+                $('#id').val(data.id);
+                $('#nombre').val(data.nombre);
+            })
+        })
+
+        $('form').submit(function(e) {
+            e.preventDefault();
+            var formData = new FormData($(this)[0]);
             $.ajax({
+                data: formData,
+                url: "{{ route('store_estatuproyecto') }}",
                 type: "POST",
-                url: "{{ url('edit-estatuproyecto') }}",
-                data: {
-                    id: id
-                },
-                dataType: 'json',
-                success: function(res) {
-                    $('#ajaxEstatuproyectoModel').html("Editar estatus del proyecto");
-                    $('#ajax-estatuproyecto-model').modal('show');
-                    $('#id').val(res.id);
-                    $('#nombre').val(res.nombre);
+                contentType: false,
+                processData: false,
+                dataType: "json",
+                success: function(data) {
+                    $('#addEditEstatuproyectoForm').trigger('reset');
+                    $(this).html('Enviando...');
+                    $('#ajax-estatuproyecto-model').modal('hide');
                     table.draw();
+                },
+                error: function(data) {
+                    console.log('Error: ', data);
+                    $('#btn-save').html('Guardar');
                 }
             });
         });
 
-        $('body').on('click', '.delete', function(e) {
-            e.preventDefault();
+        $('body').on('click', '.delete', function() {
             Swal.fire({
                 title: '¿Estás seguro?',
-                text: "¡El estatus se eliminará definitivamente!",
+                text: '¡El estatus se eliminará definitivamente!',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: "#007bff",
+                confirmButtonColor: '#007bff',
                 cancelButtonColor: '#d33',
                 confirmButtonText: '¡Si, eliminar!',
                 cancelButtonText: 'Cancelar'
@@ -142,8 +158,8 @@
                 if (result.isConfirmed) {
                     var id = $(this).data('id');
                     $.ajax({
-                        type: "POST",
-                        url: "{{ url('delete-estatuproyecto') }}",
+                        type: "DELETE",
+                        url: "{{ url('destroy_estatuproyecto') }}" + "/" + id,
                         data: {
                             id: id
                         },
@@ -154,28 +170,6 @@
                     });
                 }
             })
-        });
-
-        $('body').on('click', '#btn-save', function(event) {
-            var id = $("#id").val();
-            var nombre = $("#nombre").val();
-            $("#btn-save").html('Espere porfavor...');
-            $("#btn-save").attr("disabled", false);
-            $.ajax({
-                type: "POST",
-                url: "{{ url('add-update-estatuproyecto') }}",
-                data: {
-                    id: id,
-                    nombre: nombre,
-                },
-                dataType: 'json',
-                success: function(res) {
-                    window.location.reload();
-                    table.draw();
-                    $("#btn-save").html('Enviando...');
-                    $("#btn-save").attr("disabled", false);
-                }
-            });
         });
     });
 </script>

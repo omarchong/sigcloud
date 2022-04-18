@@ -34,10 +34,10 @@ class Usuario extends Model
     {
         return $this->belongsTo(Proyecto::class);
     }
-
+    
     public function citas()
     {
-        return $this->belongsTo(Cita::class);
+        return $this->hasMany('App\Cita');
     }
 
     /* public function tareas()

@@ -159,6 +159,8 @@
         });
 
         $('#addNewActividad').click(function() {
+            $('#btn-save').val('create-Actividad');
+            $('#id').val("");
             $('#addEditActividadForm').trigger("reset");
             $('#ajaxActividadModel').html("Registrar actividad");
             $('#ajax-actividad-model').modal('show');
@@ -166,31 +168,45 @@
 
         $('body').on('click', '.edit', function() {
             var id = $(this).data('id');
+            $.get('editar_actividad/' + id, function(data) {
+                $('#ajaxActividadModel').html("Editar actividad");
+                $('#btn-save').val("edit-actividad");
+                $('#ajax-actividad-model').modal("show");
+                $('#id').val(data.id);
+                $('#nombre').val(data.nombre);
+                $('#tipoactividad').val(data.tipoactividad);
+                $('#fecha').val(data.fecha);
+                $('#nota').val(data.nota);
+            })
+        })
+
+        $('form').submit(function(e) {
+            e.preventDefault();
+            var formData = new FormData($(this)[0]);
             $.ajax({
+                data: formData,
+                url: "{{ route('store_actividad') }}",
                 type: "POST",
-                url: "{{ url('edit-actividad') }}",
-                data: {
-                    id: id
-                },
-                dataType: 'json',
-                success: function(res) {
-                    $('#ajaxActividadModel').html("Editar actividad");
-                    $('#ajax-actividad-model').modal('show');
-                    $('#id').val(res.id);
-                    $('#nombre').val(res.nombre);
-                    $('#tipoactividad').val(res.tipoactividad);
-                    $('#fecha').val(res.fecha);
-                    $('#nota').val(res.nota);
+                contentType: false,
+                processData: false,
+                dataType: "json",
+                success: function(data) {
+                    $('#addEditActividadForm').trigger('reset');
+                    $(this).html('Enviando...');
+                    $('#ajax-actividad-model').modal('hide');
                     table.draw();
+                },
+                error: function(data) {
+                    console.log('Error: ', data);
+                    $('#btn-save').html('Guardar');
                 }
             });
         });
 
-        $('body').on('click', '.delete', function(e) {
-            e.preventDefault();
+        $('body').on('click', '.delete', function() {
             Swal.fire({
                 title: '¿Estás seguro?',
-                text: "¡La actividad se eliminará definitivamente!",
+                text: '¡La actividad se eliminará definitivamente!',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#007bff',
@@ -201,8 +217,8 @@
                 if (result.isConfirmed) {
                     var id = $(this).data('id');
                     $.ajax({
-                        type: 'post',
-                        url: "{{ url('delete-actividad') }}",
+                        type: "DELETE",
+                        url: "{{ url('destroy_actividad') }}" + "/" + id,
                         data: {
                             id: id
                         },
@@ -213,34 +229,6 @@
                     });
                 }
             })
-        });
-
-        $('body').on('click', '#btn-save', function(event) {
-            var id = $('#id').val();
-            var nombre = $('#nombre').val();
-            var tipoactividad = $('#tipoactividad').val();
-            var fecha = $('#fecha').val();
-            var nota = $('#nota').val();
-            $("#btn-save").html('Espere porfavor...');
-            $("#btn-save").attr("disabled", false);
-            $.ajax({
-                type: 'POST',
-                url: "{{ url('add-update-actividad') }}",
-                data: {
-                    id: id,
-                    nombre: nombre,
-                    tipoactividad: tipoactividad,
-                    fecha: fecha,
-                    nota: nota
-                },
-                dataType: 'json',
-                success: function(res) {
-                    window.location.reload();
-                    table.draw();
-                    $("#btn-save").html('Submit');
-                    $("#btn-save").attr("disabled", false);
-                }
-            });
         });
     });
 </script>

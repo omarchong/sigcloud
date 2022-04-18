@@ -50,7 +50,7 @@ class TareasController extends Controller
         return view('system.tarea.edit')->with('tareas', $tareas); */  
     }
 
-    public function update(TareaEditRequest $request, tarea $tarea)
+    public function update(TareaRequest $request, tarea $tarea)
     {   
         $tarea->update();
         return redirect()
@@ -71,12 +71,6 @@ class TareasController extends Controller
         return redirect()->route('system.tarea.index'); */
     }
 
-    public function destroy(Request $request)
-    {
-        $tarea = Tarea::where('id', $request->id)->delete();
-
-        return response()->json(['success' => true]);
-    }
 
     public function RegistrosDatatables()
     {

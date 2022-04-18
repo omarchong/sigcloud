@@ -233,7 +233,7 @@
             } else {} */
             Swal.fire({
                 title: '¿Estás seguro?',
-                text: "¡El estatus se eliminará definitivamente",
+                text: "¡El departamento se eliminará definitivamente!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#007bff',

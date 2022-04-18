@@ -12,11 +12,8 @@ class CreateServiciosTable extends Migration
         Schema::create('servicios', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            /* $table->bigInteger('estatuservicio_id')->unsigned();
-            $table->foreign('estatuservicio_id')->references('id')->on('estatuservicios'); */
             $table->string('descripcion');
             $table->float('precio_inicial');
-            $table->float('precio_final');
             $table->timestamps();
             $table->softDeletes();
         });

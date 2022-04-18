@@ -33,7 +33,7 @@ class EstatusfacturaController extends Controller
     public function store(Request $request)
     {
 
-        $estatufactura   =   estatufactura::updateOrCreate(
+        Estatufactura::updateOrCreate(
             [
                 'id' => $request->id
             ],
@@ -45,20 +45,17 @@ class EstatusfacturaController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function edit(Request $request)
+    public function edit($id)
     {
 
-        $where = array('id' => $request->id);
-        $estatufactura  = estatufactura::where($where)->first();
-
+        $estatufactura  = estatufactura::find($id);
         return response()->json($estatufactura);
     }
 
 
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $estatufactura = estatufactura::where('id', $request->id)->delete();
-
-        return response()->json(['success' => true]);
+        $estatufactura = estatufactura::find($id)->delete();
+        return response()->json(['success' => 'Estatus eliminado']);
     }
 }

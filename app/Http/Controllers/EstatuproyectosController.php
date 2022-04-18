@@ -35,7 +35,7 @@ class EstatuproyectosController extends Controller
     public function store(Request $request)
     {
 
-        $estatuproyecto   =   Estatuproyecto::updateOrCreate(
+        Estatuproyecto::updateOrCreate(
             [
                 'id' => $request->id
             ],
@@ -47,20 +47,16 @@ class EstatuproyectosController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function edit(Request $request)
+    public function edit($id)
     {
-
-        $where = array('id' => $request->id);
-        $estatuproyecto  = Estatuproyecto::where($where)->first();
-
+        $estatuproyecto  = Estatuproyecto::find($id);
         return response()->json($estatuproyecto);
     }
 
 
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $estatuproyecto = Estatuproyecto::where('id', $request->id)->delete();
-
-        return response()->json(['success' => true]);
+        $estatuproyecto = Estatuproyecto::find($id)->delete();
+        return response()->json(['success' => 'Estatu eliminado']);
     }
 }

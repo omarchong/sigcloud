@@ -98,39 +98,51 @@
         });
 
         $('#addNewEstatucotizacion').click(function() {
+            $('#btn-save').val('create-Estatucotizacion');
+            $('#id').val("");
             $('#addEditEstatucotizacionForm').trigger("reset");
             $('#ajaxEstatucotizacionModel').html("Registrar estatus de cotizacion");
             $('#ajax-estatucotizacion-model').modal('show');
         });
 
         $('body').on('click', '.edit', function() {
-
             var id = $(this).data('id');
+            $.get('editar_estatucotizacion/' + id, function(data) {
+                $('#ajaxEstatucitaModel').html("Editar estatus de la cotizacion");
+                $('#btn-save').val("edit-estatucotizacion");
+                $('#ajax-estatucotizacion-model').modal("show");
+                $('#id').val(data.id);
+                $('#nombre').val(data.nombre);
+            })
+        })
 
-            // ajax
+        $('form').submit(function(e) {
+            e.preventDefault();
+            var formData = new FormData($(this)[0]);
             $.ajax({
+                data: formData,
+                url: "{{ route('store_estatucotizacion') }}",
                 type: "POST",
-                url: "{{ url('edit-estatucotizacion') }}",
-                data: {
-                    id: id
-                },
-                dataType: 'json',
-                success: function(res) {
-                    $('#ajaxEstatucotizacionModel').html("Editar estatus de cotizacion");
-                    $('#ajax-estatucotizacion-model').modal('show');
-                    $('#id').val(res.id);
-                    $('#nombre').val(res.nombre);
+                contentType: false,
+                processData: false,
+                dataType: "json",
+                success: function(data) {
+                    $('#addEditEstatucotizacionForm').trigger('reset');
+                    $(this).html('Enviando...');
+                    $('#ajax-estatucotizacion-model').modal('hide');
                     table.draw();
+                },
+                error: function(data) {
+                    console.log('Error: ', data);
+                    $('#btn-save').html('Guardar');
                 }
             });
-
         });
 
-        $('body').on('click', '.delete', function(e) {
-            e.preventDefault();
+        $('body').on('click', '.delete', function() {
             Swal.fire({
                 title: '¿Estás seguro?',
-                text: "¡El estatus se eliminará definitivamente!",
+                text: '¡El estatus se eliminará definitivamente!',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#007bff',
@@ -138,11 +150,11 @@
                 confirmButtonText: '¡Si, eliminar!',
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
-                if(result.isConfirmed) {
+                if (result.isConfirmed) {
                     var id = $(this).data('id');
                     $.ajax({
-                        type: "POST",
-                        url: "{{ url('delete-estatucotizacion') }}",
+                        type: "DELETE",
+                        url: "{{ url('destroy_estatucotizacion') }}" + "/" + id,
                         data: {
                             id: id
                         },
@@ -154,32 +166,6 @@
                 }
             })
         });
-
-        $('body').on('click', '#btn-save', function(event) {
-
-            var id = $("#id").val();
-            var nombre = $("#nombre").val();
-
-            $("#btn-save").html('Espere porfavor...');
-            $("#btn-save").attr("disabled", false);
-
-            // ajax
-            $.ajax({
-                type: "POST",
-                url: "{{ url('add-update-estatucotizacion') }}",
-                data: {
-                    id: id,
-                    nombre: nombre,
-                },
-                dataType: 'json',
-                success: function(res) {
-                    window.location.reload();
-                    table.draw();
-                    $("#btn-save").html('Submit');
-                    $("#btn-save").attr("disabled", false);
-                }
-            });
-        }); 
     });
 </script>
 <script>

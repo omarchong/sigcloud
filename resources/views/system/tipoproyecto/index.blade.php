@@ -100,6 +100,8 @@
             }
         });
         $('#addNewTipoproyecto').click(function() {
+            $('#btn-save').val('create-Tipoproyecto');
+            $('#id').val("");
             $('#addEditTipoproyectoForm').trigger("reset");
             $('#ajaxTipoproyectoModel').html("Registrar tipo de proyecto");
             $('#ajax-tipoproyecto-model').modal('show');
@@ -107,28 +109,42 @@
 
         $('body').on('click', '.edit', function() {
             var id = $(this).data('id');
+            $.get('editar_tipoproyecto/' + id, function(data) {
+                $('#ajaxTipoproyectoModel').html("Editar tipo de proyecto");
+                $('#btn-save').val("edit-tipoproyecto");
+                $('#ajax-tipoproyecto-model').modal("show");
+                $('#id').val(data.id);
+                $('#nombre').val(data.nombre);
+            })
+        })
+
+        $('form').submit(function(e) {
+            e.preventDefault();
+            var formData = new FormData($(this)[0]);
             $.ajax({
+                data: formData,
+                url: "{{ route('store_tipoproyecto') }}",
                 type: "POST",
-                url: "{{ url('edit-tipoproyecto') }}",
-                data: {
-                    id: id
-                },
-                dataType: 'json',
-                success: function(res) {
-                    $('#ajaxTipoproyectoModel').html("Editar tipo de proyecto");
-                    $('#ajax-tipoproyecto-model').modal('show');
-                    $('#id').val(res.id);
-                    $('#nombre').val(res.nombre);
+                contentType: false,
+                processData: false,
+                dataType: "json",
+                success: function(data) {
+                    $('#addEditTipoproyectoForm').trigger('reset');
+                    $(this).html('Enviando...');
+                    $('#ajax-tipoproyecto-model').modal('hide');
                     table.draw();
+                },
+                error: function(data) {
+                    console.log('Error: ', data);
+                    $('#btn-save').html('Guardar');
                 }
             });
         });
 
-        $('body').on('click', '.delete', function(e) {
-            e.preventDefault();
+        $('body').on('click', '.delete', function() {
             Swal.fire({
                 title: '¿Estás seguro?',
-                text: "¡El campo se eliminará definitivamente!",
+                text: '¡El Tipo de proyecto se eliminará definitivamente!',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#007bff',
@@ -139,8 +155,8 @@
                 if (result.isConfirmed) {
                     var id = $(this).data('id');
                     $.ajax({
-                        type: "POST",
-                        url: "{{ url('delete-tipoproyecto') }}",
+                        type: "DELETE",
+                        url: "{{ url('destroy_tipoproyecto') }}" + "/" + id,
                         data: {
                             id: id
                         },
@@ -151,29 +167,7 @@
                     });
                 }
             })
-        });
-
-        $('body').on('click', '#btn-save', function(event) {
-            var id = $("#id").val();
-            var nombre = $("#nombre").val();
-            $("#btn-save").html('Espere porfavor...');
-            $("#btn-save").attr("disabled", false);
-            $.ajax({
-                type: "POST",
-                url: "{{ url('add-update-tipoproyecto') }}",
-                data: {
-                    id: id,
-                    nombre: nombre,
-                },
-                dataType: 'json',
-                success: function(res) {
-                    window.location.reload();
-                    table.draw();
-                    $("#btn-save").html('Enviando...');
-                    $("#btn-save").attr("disabled", false);
-                }
-            });
-        });
+        });        
     });
 </script>
 <script>

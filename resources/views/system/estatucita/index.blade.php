@@ -92,7 +92,7 @@
         $('#citas').DataTable().ajax.reload();
     }
 </script>
-<script type="text/javascript">
+<script>
     $(function() {
 
         $.ajaxSetup({
@@ -102,51 +102,63 @@
         });
 
         $('#addNewEstatucita').click(function() {
+            $('#btn-save').val('create-Estatucita');
+            $('#id').val("");
             $('#addEditEstatucitaForm').trigger("reset");
             $('#ajaxEstatucitaModel').html("Registrar estatus de la cita");
             $('#ajax-estatucita-model').modal('show');
         });
 
         $('body').on('click', '.edit', function() {
-
             var id = $(this).data('id');
+            $.get('editar_estatucita/' + id, function(data) {
+                $('#ajaxEstatucitaModel').html("Editar estatus de la cita");
+                $('#btn-save').val("edit-estatucita");
+                $('#ajax-estatucita-model').modal("show");
+                $('#id').val(data.id);
+                $('#nombre').val(data.nombre);
+            })
+        })
 
-            // ajax
+        $('form').submit(function(e) {
+            e.preventDefault();
+            var formData = new FormData($(this)[0]);
             $.ajax({
+                data: formData,
+                url: "{{ route('store_estatucita') }}",
                 type: "POST",
-                url: "{{ url('edit-estatucita') }}",
-                data: {
-                    id: id
-                },
-                dataType: 'json',
-                success: function(res) {
-                    $('#ajaxEstatucitaModel').html("Editar estatus de la cita");
-                    $('#ajax-estatucita-model').modal('show');
-                    $('#id').val(res.id);
-                    $('#nombre').val(res.nombre);
+                contentType: false,
+                processData: false,
+                dataType: "json",
+                success: function(data) {
+                    $('#addEditEstatucitaForm').trigger('reset');
+                    $(this).html('Enviando...');
+                    $('#ajax-estatucita-model').modal('hide');
                     table.draw();
+                },
+                error: function(data) {
+                    console.log('Error: ', data);
+                    $('#btn-save').html('Guardar');
                 }
             });
-
         });
 
-        $('body').on('click', '.delete', function(e) {
-            e.preventDefault();
+        $('body').on('click', '.delete', function() {
             Swal.fire({
                 title: '¿Estás seguro?',
-                text: "¡El estatus se eliminará definitivamente!",
+                text: '¡El estatus se eliminará definitivamente!',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#007bff',
                 cancelButtonColor: '#d33',
                 confirmButtonText: '¡Si, eliminar!',
                 cancelButtonText: 'Cancelar'
-            }).then((result) =>{
-                if(result.isConfirmed){
-                var id = $(this).data('id');
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var id = $(this).data('id');
                     $.ajax({
-                        type: "POST",
-                        url: "{{ url('delete-estatucita') }}",
+                        type: "DELETE",
+                        url: "{{ url('destroy_estatucita') }}" + "/" + id,
                         data: {
                             id: id
                         },
@@ -156,33 +168,7 @@
                         }
                     });
                 }
-            })    
-        });
-
-        $('body').on('click', '#btn-save', function(event) {
-
-            var id = $("#id").val();
-            var nombre = $("#nombre").val();
-
-            $("#btn-save").html('Espere porfavor...');
-            $("#btn-save").attr("disabled", false);
-
-            // ajax
-            $.ajax({
-                type: "POST",
-                url: "{{ url('add-update-estatucita') }}",
-                data: {
-                    id: id,
-                    nombre: nombre,
-                },
-                dataType: 'json',
-                success: function(res) {
-                    window.location.reload();
-                    table.draw();
-                    $("#btn-save").html('Submit');
-                    $("#btn-save").attr("disabled", false);
-                }
-            });
+            })
         });
     });
 </script>

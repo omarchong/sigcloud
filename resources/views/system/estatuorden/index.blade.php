@@ -101,6 +101,8 @@
             }
         });
         $('#addNewEstatuorden').click(function() {
+            $('#btn-save').val('create-Estatuorden');
+            $('#id').val("");
             $('#addEditEstatuordenForm').trigger("reset");
             $('#ajaxEstatuordenModel').html("Registrar estatus de la orden");
             $('#ajax-estatuorden-model').modal('show');
@@ -108,29 +110,42 @@
 
         $('body').on('click', '.edit', function() {
             var id = $(this).data('id');
+            $.get('editar_estatuorden/' + id, function(data) {
+                $('#ajaxEstatuordenModel').html("Editar estatus del orden");
+                $('#btn-save').val("edit-estatuorden");
+                $('#ajax-estatuorden-model').modal("show");
+                $('#id').val(data.id);
+                $('#nombre').val(data.nombre);
+            })
+        })
+
+        $('form').submit(function(e) {
+            e.preventDefault();
+            var formData = new FormData($(this)[0]);
             $.ajax({
+                data: formData,
+                url: "{{ route('store_estatuorden') }}",
                 type: "POST",
-                url: "{{ url('edit-estatuorden') }}",
-                data: {
-                    id: id
-                },
-                dataType: 'json',
-                success: function(res) {
-                    $('#ajaxEstatuordenModel').html("Editar estatus de la orden");
-                    $('#ajax-estatuorden-model').modal('show');
-                    $('#id').val(res.id);
-                    $('#nombre').val(res.nombre);
+                contentType: false,
+                processData: false,
+                dataType: "json",
+                success: function(data) {
+                    $('#addEditEstatuordenForm').trigger('reset');
+                    $(this).html('Enviando...');
+                    $('#ajax-estatuorden-model').modal('hide');
                     table.draw();
+                },
+                error: function(data) {
+                    console.log('Error: ', data);
+                    $('#btn-save').html('Guardar');
                 }
             });
-
         });
 
-        $('body').on('click', '.delete', function(e) {
-            e.preventDefault();
+        $('body').on('click', '.delete', function() {
             Swal.fire({
                 title: '¿Estás seguro?',
-                text: "¡El estatus se eliminará definitivamente!",
+                text: '¡El estatus se eliminará definitivamente!',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#007bff',
@@ -141,8 +156,8 @@
                 if (result.isConfirmed) {
                     var id = $(this).data('id');
                     $.ajax({
-                        type: "POST",
-                        url: "{{ url('delete-estatuorden') }}",
+                        type: "DELETE",
+                        url: "{{ url('destroy_estatuorden') }}" + "/" + id,
                         data: {
                             id: id
                         },
@@ -155,31 +170,11 @@
             })
         });
 
-        $('body').on('click', '#btn-save', function(event) {
+        
 
-            var id = $("#id").val();
-            var nombre = $("#nombre").val();
+        
 
-            $("#btn-save").html('Espere porfavor...');
-            $("#btn-save").attr("disabled", false);
-
-            // ajax
-            $.ajax({
-                type: "POST",
-                url: "{{ url('add-update-estatuorden') }}",
-                data: {
-                    id: id,
-                    nombre: nombre,
-                },
-                dataType: 'json',
-                success: function(res) {
-                    window.location.reload();
-                    table.draw();
-                    $("#btn-save").html('Enviando...');
-                    $("#btn-save").attr("disabled", false);
-                }
-            });
-        });
+        
     });
 </script>
 <script>
