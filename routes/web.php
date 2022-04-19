@@ -64,7 +64,6 @@ Route::post('buscacliente', [CotizacionesController::class, 'buscacliente'])->na
 Route::post('buscaservicio', [CotizacionesController::class, 'buscaservicio'])->name('buscaservicio');
 Route::post('seleccionacliente', [CotizacionesController::class, 'seleccionacliente'])->name('seleccionacliente');
 Route::post('seleccionaservicio', [CotizacionesController::class, 'seleccionaservicio'])->name('seleccionaservicio');
-
 Route::get('datatables/cotizaciones', [CotizacionesController::class, 'RegistrosDatatables'])->name('cotizaciones.datatables');
 
 /* usuarios */

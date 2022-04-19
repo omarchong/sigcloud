@@ -85,43 +85,6 @@
                                 @enderror
                             </div>
                         </div>
-<<<<<<< HEAD
-                        <div class="col-md-6">
-                            <label for="precio_inicial" class="col-sm-1-12 control-label">Precio inicial</label>
-                            <div class="col-sm-12">
-                                <div class="input-group mb-2">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">$</div>
-                                    </div>
-                                    <input type="number" class="form-control @error('precio_inicial')  @enderror" id="precio_inicial" name="precio_inicial" required>
-                                    <div class="valid-feedback">
-                                        Correcto!
-                                    </div>
-                                    @error('precio_inicial')
-                                    <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="precio_final" class="col-sm-1-12 control-label">Precio final</label>
-                            <div class="col-sm-12">
-                                <div class="input-group mb-2">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">$</div>
-                                    </div>
-                                    <input type="number" class="form-control @error('precio_final')  @enderror" id="precio_final" name="precio_final" required>
-                                    <div class="valid-feedback">
-                                        Correcto!
-                                    </div>
-                                    @error('precio_final')
-                                    <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-=======
->>>>>>> 8aab18893d023dcfdd3110e421025d882b29cfbe
                     </div>
                     <div class="float-right my-4">
                         <button type="submit" class="btn btn-primary" id="btn-save" value="btn-save">Guardar

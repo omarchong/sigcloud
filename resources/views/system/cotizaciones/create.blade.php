@@ -61,16 +61,23 @@
                             </span>
                         </div>
                     </div>
-
-                    <div class="col-md-4 my-3">
-                        <label for="exampleInputEmail1" class="form-label">Servicio</label>
+                    <div class="col-md-2 my-3">
+                        <label for="exampleInputEmail1" class="form-label">Clave</label>
                         <div class="form-group">
-                            <input type="text" readonly class="form-control" id="nombre" name="nombre" value="{{old('c')}}">
+                            <input type="text" readonly class="form-control" id="id" name="id">
 
                         </div>
 
                     </div>
                     <div class="col-md-4 my-3">
+                        <label for="exampleInputEmail1" class="form-label">Servicio</label>
+                        <div class="form-group">
+                            <input type="text" readonly class="form-control" id="nombre" name="nombre">
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-2 my-3">
                         <label for="exampleInputEmail1" class="form-label">Precio inicial</label>
                         <div class="form-group">
                             <input type="text" readonly class="form-control" id="precio_inicial" name="precio_inicial">
@@ -120,24 +127,6 @@
                         </div>
 
                     </div>
-                    <!--     <div class="col-md-4 my-3">
-                        <label for="exampleInputEmail1" class="form-label">Ingrese el descuento</label>
-                        <div class="form-group">
-                            <input type="number" class="form-control" id="descuento_general" name="descuento_general">
-
-                        </div>
-
-                    </div> -->
-
-
-                    <!--     <div class="col-md-4 my-3">
-                        <label for="exampleInputEmail1" class="form-label">Total</label>
-                        <div class="form-group">
-                            <input type="number" readonly class="form-control" id="totald" name="total">
-
-                        </div>
-
-                    </div> -->
 
                     <div class="col-md-3 my-3">
                         <label for="exampleInputEmail1" class="form-label">Precio iva</label>
@@ -168,7 +157,6 @@
 
                     </div>
 
-
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="table-responsive">
                             <table id="detalles" class="table table-striped table-bordered condensed table-hover">
@@ -182,14 +170,17 @@
                                     <th>Opciones</th>
 
                                 </thead>
+                                <tbody>
+
+                                </tbody>
                                 <tfoot>
 
                                     <td colspan="3">Total</td>
                                     <td>
-                                        <h4 id="precio_b">$0.00</h4>
+                                        <h4 id="precio_b" name="precio_b">$0.00</h4>
                                     </td>
                                     <td>
-                                        <h4 id="total">$0.00</h4>
+                                        <h4 id="total" name="total">$0.00</h4>
                                     </td>
                                     <td>
                                         <h4 id="total">$0.00</h4>
@@ -198,6 +189,7 @@
 
 
                             </table>
+
 
 
 
@@ -305,6 +297,7 @@
                     _token: $("input[name=_token]").val()
                 },
                 success: function(data) {
+                    $("#id").val(data.id ?? "Sin datos")
                     $("#nombre").val(data.nombre ?? "Sin datos")
                     $("#precio_inicial").val(data.precio_inicial ?? "Sin datos")
 
@@ -330,6 +323,11 @@
 
 
         })
+        $("#precio_b").keyup(function(){
+            $("#precio_bruto").val(precio_bruto);
+
+        })
+
 
         /* agrega productos a tabla */
         $(document).ready(function() {
@@ -338,8 +336,9 @@
             })
         })
 
+
         function agregar() {
-            const servicios_id = $("#servicios_id").val();
+            const id = $("#id").val();
 
             const nombre = $('#nombre').val();
             const numero_servicios = $("#numero_servicios").val();
@@ -348,31 +347,38 @@
 
             const total_servicios = Number(precio_iva) + parseFloat(precio_bruto);
 
-
-            const fila = '<tr>' +
-                '<td><input class="form-control" type="number" id="servicios_id" name="servicios_id[]" value="' + servicios_id + '" readonly></td>' +
-                '<td><input class="form-control" type="text" id="nombre" name="nombre[]" value="' + nombre + '" readonly></td>' +
-                '<td><input class="form-control" type="text" id="numero_servicios" name="numero_servicios[]" value="' + numero_servicios + '" readonly></td>' +
-                '<td><input class="form-control" type="text" id="precio_bruto" name="precio_bruto[]" value="' + precio_bruto + '" readonly></td>' +
-                '<td><input class="form-control" type="text" id="precio_iva" name="precio_iva[]" value="' + precio_iva + '" readonly></td>' +
-                '<td><input class="form-control" type="number" id="total_servicios" name="total_servicios[]" value="' + total_servicios + '" readonly></td>' +
-                '<td><button type="button" class="btn btn-danger" onclick="eliminarCotizacion()">X</button></td>' +
-                '</tr>';
+            const fila = `<tr> +
+                <td><input class="form-control" type="number" id="id" name="id[]" value="${id}" readonly></td>
+                <td><input class="form-control" type="text" id="nombre" name="nombre[]" value="${nombre}" readonly></td>
+                <td><input class="form-control" type="text" id="numero_servicios" name="numero_servicios[]" value=" ${numero_servicios}" readonly></td>
+                <td><input class="form-control" type="text" id="precio_bruto" name="precio_bruto[]" value="${precio_bruto}" readonly></td>
+                <td><input class="form-control" type="text" id="precio_iva" name="precio_iva[]" value="${precio_iva}" readonly></td>
+                <td><input class="form-control" type="number" id="total_servicios" name="total_servicios[]" value="${total_servicios}" readonly></td> 
+                <td><button type="button" class="btn btn-danger" onclick="eliminarServicio('${id}')">X</button></td>
+                </tr>; `
             limpiar();
+
 
             $('#detalles').append(fila);
         }
 
+        function obtenervalores() {
+
+        }
+
+
+
         function eliminarServicio(id) {
-            $("#id").remove()
+            $(`#${id}`).remove()
         }
 
         function limpiar() {
+            $("#id").val("");
             $("#numero_servicios").val("");
             $("#precio_iva").val("");
             $("#nombre").val("");
             $("#precio_inicial").val("");
         }
-       
+
     })
 </script>
