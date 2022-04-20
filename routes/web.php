@@ -22,15 +22,12 @@ use App\Http\Controllers\TareasController;
 use App\Http\Controllers\TipoproyectosController;
 use Illuminate\Support\Facades\Route;
 
-
-
 Route::get('/prueba', function () {
     return view('prueba');
 })->name('prueba');/* 
 login */
 
 Route::get('/panel-administrativo', [HomeController::class, 'index'])->name('home');
-
 
 route::get('/', [LoginController::class, 'login'])->name('login');
 Route::post('validar', [LoginController::class, 'validar'])->name('validar');
@@ -39,7 +36,6 @@ route::get('recuperacion', [LoginController::class, 'recuperacion'])->name('recu
 route::get('recuperarcontrasena', [LoginController::class, 'recuperarcontrasena'])->name('recuperarcontrasena');
 Route::get('cerrarsesion', [LoginController::class, 'cerrarsesion'])->name('cerrarsesion');
 /* omar chong */
-
 Route::resource('contactos', ContactosController::class);
 Route::get('datatables/contactos', [ContactosController::class, 'RegistrosDatatables'])->name('contactos.datatables');
 
@@ -48,7 +44,6 @@ Route::resource('clientes', ClientesController::class);
 Route::get('datatables/clientes', [ClientesController::class, 'RegistrosDatatables'])->name('clientes.datatables');
 Route::post('searchcontacto', [ClientesController::class, 'searchcontacto'])->name('searchcontacto');
 Route::post('seleccionarcontacto', [ClientesController::class, 'seleccionarcontacto'])->name('seleccionarcontacto');
-
 Route::get('get-municipios', [ClientesController::class, 'getMunicipios'])->name('getMunicipios');
 
 /* departamentos */
@@ -58,7 +53,6 @@ Route::name('store')->post('store/', [DepartamentosController::class, 'store']);
 Route::name('destroy')->delete('destroy/{id}', [DepartamentosController::class, 'destroy']);
 
 /* cotizaciones */
-
 Route::resource('cotizaciones', CotizacionesController::class);
 Route::post('buscacliente', [CotizacionesController::class, 'buscacliente'])->name('buscacliente');
 Route::post('buscaservicio', [CotizacionesController::class, 'buscaservicio'])->name('buscaservicio');
@@ -70,23 +64,17 @@ Route::get('datatables/cotizaciones', [CotizacionesController::class, 'Registros
 Route::resource('usuarios', UsuariosController::class);
 Route::get('datatables/usuarios', [UsuariosController::class, 'RegistrosDatatables'])->name('usuarios.datatables');
 
-
-
-
-
 /* Actividades */
 Route::resource('actividades', ActividadesController::class);
 Route::name('store_actividad')->post('store_actividad/', [ActividadesController::class, 'store']);
 Route::name('editar-actividad')->get('editar_actividad/{id}', [ActividadesController::class, 'edit']);
 Route::name('destroy-actividad')->delete('destroy_actividad/{id}', [ActividadesController::class, 'destroy']);
 
-
 /* Estatus de servicios */
 Route::resource('estatuservicios', EstatuserviciosController::class);
 Route::post('add-update-estatuservicio', [EstatuserviciosController::class, 'store']);
 Route::post('edit-estatuservicio', [EstatuserviciosController::class, 'edit']);
 Route::post('delete-estatuservicio', [EstatuserviciosController::class, 'destroy']);
-
 
 /* Servicios */
 Route::resource('servicios', ServiciosController::class);
@@ -139,7 +127,6 @@ Route::resource('estatufacturas', EstatusfacturaController::class);
 Route::name('store_estatufactura')->post('store_estatufactura/', [EstatusfacturaController::class, 'store']);
 Route::name('editar-estatufactura')->get('editar_estatufactura/{id}', [EstatusfacturaController::class, 'edit']);
 Route::name('destroy-estatufactura')->delete('destroy_estatufactura/{id}', [EstatusfacturaController::class, 'destroy']);
-
 
 /* Citas */
 Route::resource('citas', CitasController::class);
