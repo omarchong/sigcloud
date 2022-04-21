@@ -46,7 +46,6 @@
 
                     </div>
 
-
                     <div class="col-md-12">
 
                         <label for="">Buscar servicio(Nombre servicio)</label>
@@ -88,7 +87,7 @@
                     <div class="col-md-3 my-3">
                         <label for="exampleInputEmail1" class="form-label">Cantidad</label>
                         <div class="form-group">
-                            <input type="number" class="form-control" id="numero_servicios" name="numero_servicios">
+                            <input type="number" value="1" class="form-control" id="numero_servicios" name="numero_servicios">
 
                         </div>
 
@@ -103,7 +102,7 @@
                     </div>
 
                     <div class="col-md-5 my-3">
-                        <label for="exampleInputEmail1" class="form-label">Estatus factura</label>
+                        <label for="exampleInputEmail1" class="form-label">Estatus cotización</label>
                         <div class="form-group">
                             <select class="form-control" name="estatucotizacion_id" id="estatucotizacion_id">
                                 @foreach($estatuscotizaciones as $estatuscoti)
@@ -123,7 +122,6 @@
 
                     </div>
 
-
                     <div class="col-md-12">
                         <label for="descripcion">Descripcion</label>
                         <div class="form-group">
@@ -137,10 +135,6 @@
                         <small class="text-danger"> {{ $message }} </small>
                         @enderror
                     </div>
-
-
-
-
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="table-responsive">
                             <table id="detalles" class="table table-striped table-bordered condensed table-hover">
@@ -155,30 +149,22 @@
                                     <th>Opciones</th>
 
                                 </thead>
-                                <tbody>
-
-                                </tbody>
+                               
                                 <tfoot>
 
-                                    <td colspan="3">Total</td>
+                                    <td colspan="4">Total</td>
                                     <td>
-                                        <h4 id="total" name="total">$0.00</h4>
+                                        <h4 id="total_b" name="total_b">$0.00</h4>
                                     </td>
                                     <td>
-                                        <h4 id="precio_b" name="precio_b">$0.00</h4>
+                                        <h4 id="total_i" name="total_i">$0.00</h4>
                                     </td>
 
                                     <td>
-                                        <h4 id="">$0.00</h4>
+                                        <h4 id="total_t" name="total_t">$0.00</h4>
                                     </td>
                                 </tfoot>
-
-
                             </table>
-
-
-
-
                         </div>
                     </div>
 
@@ -291,42 +277,23 @@
 
 
     $(document).ready(function() {
-        function operaciones() {
-            $("#numero_servicios").keyup(function() {
-                var precio_inicial = $("#precio_inicial").val();
-                var numero_servicios = $("#numero_servicios").val();
-                var precio_bruto = precio_inicial * numero_servicios;
-                $("#precio_bruto").val(precio_bruto);
-            })
 
-        }
-
-
-
-        $("#precio_iva").keyup(function() {
-            var precio_bruto = $("#precio_bruto").val();
-            var precio_iva = precio_bruto * .16;
-            var totald = precio_iva + precio_bruto;
-            $("#precio_iva").val(precio_iva);
-
-
-        })
-
-
-
-        /* agrega productos a tabla */
+        /* agrega servicios a tabla */
         $(document).ready(function() {
             $("#btn_add").click(function() {
-
                 agregar();
-                
+
             })
         })
 
 
         var cont = 0;
-        total = 0;
-        subtotal = [];
+        total_b = 0;
+        total_bruto = [];
+        total_i = 0;
+        total_iva = [];
+        total_t = 0;
+        total_total = [];
 
         function agregar() {
 
@@ -335,28 +302,37 @@
             const nombre = $('#nombre').val();
             const precio_inicial = $("#precio_inicial").val();
             const numero_servicios = $("#numero_servicios").val();
-            const precio_bruto = $("#precio_bruto").val();
-            const precio_iva = $("#precio_iva").val();
+            const precio_bruto = Number(precio_inicial) * parseFloat(numero_servicios);
+            const precio_iva = Number(precio_bruto) * .16;
+            const subtotal = Number(precio_iva) + parseFloat(precio_bruto);
 
-            const total_servicios = Number(precio_iva) + parseFloat(precio_bruto);
+            total_bruto[cont] = Number(precio_bruto)
+            total_b = total_b + total_bruto[cont];
 
-            subtotal[cont] = (precio_bruto * numero_servicios);
-            total = total + subtotal[cont];
+            total_iva[cont] = Number(precio_iva)
+            total_i = total_i + total_iva[cont];
+
+            total_total[cont] = Number(subtotal)
+            total_t = total_t + total_total[cont];
 
 
             const fila = `<tr> +
                 <td><input class="form-control" type="number" id="id" name="id[]" value="${id}" readonly></td>
                 <td><input class="form-control" type="text" id="nombre" name="nombre[]" value="${nombre}" readonly></td>
                 <td><input class="form-control" type="number" id="precio_inicial" name="precio_inicial[]" value="${precio_inicial}" readonly></td>
-                <td><input class="form-control" type="number" id="numero_servicios" name="numero_servicios[]" value=" ${numero_servicios}" readonly></td>
+                <td><input class="form-control" type="number" id="numero_servicios" name="numero_servicios[]" value="${numero_servicios}" readonly></td>
                 <td><input class="form-control" type="text" id="precio_bruto" name="precio_bruto[]" value="${precio_bruto}" readonly></td>
                 <td><input class="form-control" type="text" id="precio_iva" name="precio_iva[]" value="${precio_iva}" readonly></td>
-                <td><input class="form-control" type="number" id="total_servicios" name="total_servicios[]" value="${total_servicios}" readonly></td> 
+                <td><input class="form-control" type="number" id="subtotal" name="subtotal[]" value="${subtotal}" readonly></td> 
                 <td><button type="button" class="btn btn-danger" onclick="eliminarServicio('${id}')">X</button></td>
                 </tr>; `
             cont++;
-            $("#total").html("$" + total);
+            $("#total_b").html("$" + total_b);
+            $("#total_i").html("$" + total_i);
+            $("#total_t").html("$" + total_t);
 
+
+            console.log(precio_bruto);
 
             limpiar();
 
@@ -373,10 +349,11 @@
 
         function limpiar() {
             $("#id").val("");
-            $("#numero_servicios").val("");
-            $("#precio_iva").val("");
+            /* $("#numero_servicios").val(""); */
+            /* $("#precio_iva").val(""); */
             $("#nombre").val("");
             $("#precio_inicial").val("");
+            $("#buscarservicio").val("");
         }
 
 
