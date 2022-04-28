@@ -14,6 +14,7 @@ class TareaRequest extends FormRequest
 
     public function rules()
     {
+        $tarea = $this->route('tarea');
         return [
             'nombre' => ['required'],
             'fecha_limite' => ['required'],

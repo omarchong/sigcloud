@@ -44,21 +44,25 @@ class TareasController extends Controller
             'tarea' => $tarea,
             'usuarios' => Usuario::select('id','nombre')->get(),
             'clientes' => Cliente::select('id','nombreempresa')->get(),
-            'estatutareas' => Estatutarea::select('id','nombre')->get(),
+            'estatutareas' => Estatutarea::select('id','nombre')->get()
         ]);
-        /* $tareas = Tarea::find($id);
-        return view('system.tarea.edit')->with('tareas', $tareas); */  
     }
 
-    public function update(TareaRequest $request, tarea $tarea)
+    public function update(TareaRequest $request, Tarea $tarea)
     {   
+        
         $tarea->update();
         return redirect()
         ->route('tareas.index')
-        ->withSuccess("La tarea $tarea->nombre se actualizo exitosamente");
-      
+        ->withSuccess("La tarea $tarea->nombre se actualizo exitosamente"); 
     }
 
+    public function destroy($id)
+    {
+        Tarea::where('id', $id)->delete();
+        return redirect()->route('tareas.index')
+            ->withSuccess('Tarea eliminada');
+    }
 
     public function RegistrosDatatables()
     {

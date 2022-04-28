@@ -17,6 +17,7 @@ class CitaSeeder extends Seeder
             'hora' => date('H:i:s'),
             'duracion_cita' => '1 hora',
             'lugar' => 'Toluca',
+            'link' => '',
             'tipo_cita' => 'Presencial',
             'usuarios_id' => 2,
             'clientes_id' => 1,

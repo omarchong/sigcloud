@@ -16,6 +16,7 @@ class Cita extends Model
         'hora',
         'duracion_cita',
         'lugar',
+        'link',
         'tipo_cita',
         'usuarios_id',
         'clientes_id',

@@ -131,7 +131,13 @@ Route::name('destroy-estatufactura')->delete('destroy_estatufactura/{id}', [Esta
 /* Citas */
 Route::resource('citas', CitasController::class);
 Route::get('datatables/citas', [CitasController::class, 'RegistrosDatatables'])->name('citas.datatables');
+Route::post('buscaempresa', [CitasController::class, 'buscaempresa'])->name('buscaempresa');
+Route::post('seleccionaempresa', [CitasController::class, 'seleccionaempresa'])->name('seleccionaempresa');
+Route::post('buscausuario', [CitasController::class, 'buscausuario'])->name('buscausuario');
+Route::post('seleccionausuario', [CitasController::class, 'seleccionausuario'])->name('seleccionausuario');
 
 /* Seguimientofacturas */
 Route::resource('seguimientofacturas', SeguimientofacturasController::class);
 Route::get('datatables/seguimientofacturas', [SeguimientofacturasController::class, 'RegistrosDatatables'])->name('seguimientofacturas.datatables');
+Route::post('buscafolio', [SeguimientofacturasController::class, 'buscafolio'])->name('buscafolio');
+Route::post('seleccionafolio', [SeguimientofacturasController::class, 'seleccionafolio'])->name('seleccionafolio');
