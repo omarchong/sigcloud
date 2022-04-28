@@ -16,7 +16,8 @@ class CreateCitasTable extends Migration
             $table->string('tema');
             $table->time('hora');
             $table->string('duracion_cita');
-            $table->string('lugar');
+            $table->string('lugar')->nullable();
+            $table->string('link')->nullable();
             $table->string('tipo_cita');
             $table->foreignId('usuarios_id')->constrained();
             $table->foreignId('clientes_id')->constrained();

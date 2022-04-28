@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -99,7 +99,6 @@ body {
 .sidebar li a {
     list-style: none;
     height: 100%;
-    background-color: transparent;
     display: flex;
     align-items: center;
     height: 100%;
@@ -109,6 +108,35 @@ body {
     transition: var(--tran-03);
 }
 
+.sidebar ul li {
+    /* Tamaño iconos */
+    display: inline-block;
+}
+
+.sidebar ul li:hover .children {
+    display: none;
+}
+
+.sidebar ul li .children {
+    display: none;
+    width: auto;
+    position: relative;
+    z-index: 100;
+}
+
+.sidebar ul li .children li a {
+    margin-left: 10px;
+    display: block;
+    padding: 2px;
+}
+
+.sidebar ul li .children li a span {
+    float: right;
+    position: relative;
+    top: 5px;
+    margin-right: 0;
+    margin-left: 10px;
+}
 
 body.dark .sidebar li a:hover .icon,
 body.dark .sidebar li a:hover .text {
@@ -122,7 +150,8 @@ body.dark .sidebar li a:hover .text {
     justify-content: space-between;
     overflow-y: scroll;
 }
-.sidebar-link{
+
+.sidebar-link {
     display: flex;
     align-items: center;
 }
@@ -365,3 +394,4 @@ span.verde {
     background: #fff;
     font-family: 'Montserrat', sans-serif;
 }
+

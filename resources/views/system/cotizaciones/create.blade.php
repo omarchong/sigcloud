@@ -188,10 +188,7 @@
                                 <th></th>
                                 <th></th>
                                 <th></th> --}}
-                                    <th>
-                                        <h4 id="total">$0.00</h4>
-                                        <input type="hidden" name="total" id="total">
-                                    </th>
+                                    <th id="totalbruto">$</th>
                                 </tfoot>
 
                             </table>
@@ -349,7 +346,7 @@
                 '<td><input class="form-control" type="number" id="id" name="id[]" value="' + id + '" readonly></td>' +
                 '<td><input class="form-control" type="text" id="nombre" name="nombre[]" value="' + nombre + '" readonly></td>' +
                 '<td><input class="form-control" type="text" id="numero_servicios" name="numero_servicios[]" value="' + numero_servicios + '" readonly></td>' +
-                '<td><input class="form-control" type="text" id="precio_bruto" name="precio_bruto[]" value="' + precio_bruto + '" readonly></td>' +
+                '<td name="precio_bruto"><input class="form-control" type="text" id="precio_bruto" name="precio_bruto" value="' + precio_bruto + '" readonly></td>' +
                 '<td><input class="form-control" type="text" id="precio_iva" name="precio_iva[]" value="' + precio_iva + '" readonly></td>' +
                 '<td><input class="form-control" type="number" id="total_servicios" name="total_servicios[]" value="' + total_servicios + '" readonly></td>' +
                 '<td><button type="button" class="btn btn-danger" onclick="eliminarCotizacion()">X</button></td>' +

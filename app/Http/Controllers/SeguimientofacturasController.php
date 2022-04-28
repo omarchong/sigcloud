@@ -7,6 +7,7 @@ use App\Models\Estatufactura;
 use App\Models\Ordenpago;
 use App\Models\Seguimientofactura;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SeguimientofacturasController extends Controller
 {
@@ -57,4 +58,22 @@ class SeguimientofacturasController extends Controller
       )
       ->toJson();
     }
+
+    public function buscafolio(Request $request)
+    {
+        $term = $request->get('term');
+
+        $buscafolio = DB::select("SELECT * FROM ordenpagos WHERE folio LIKE '%$term%'");
+
+        return response()->json($buscafolio);
+    }
+
+    public function seleccionafolio(Request $request)    
+    {
+        $ordenpago = Ordenpago::where('folio', $request->ordenpago)->first();
+        return response()->json($ordenpago);
+    }
+
+
+
 }

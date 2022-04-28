@@ -8,6 +8,8 @@ use App\Models\Cliente;
 use App\Models\Estatucita;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 class CitasController extends Controller
 {
@@ -61,4 +63,37 @@ class CitasController extends Controller
       )
       ->toJson();
     }
+
+    public function buscaempresa(Request $request)
+    {
+        $term = $request->get('term');
+
+        $buscaempresa = DB::select("SELECT * FROM clientes WHERE nombreempresa LIKE '%$term%'");
+
+        return response()->json($buscaempresa);
+    }
+
+    public function seleccionaempresa(Request $request)    
+    {
+        $cliente = Cliente::where('nombreempresa', $request->cliente)->first();
+        return response()->json($cliente);
+    }
+
+    public function buscausuario(Request $request)
+    {
+        $term = $request->get('term');
+        /* $buscausuario = DB::select("SELECT usu.nombre, email, depa.nombre FROM usuarios  usu
+        INNER JOIN departamentos depa
+        ON usu.id = depa.id WHERE usu.nombre LIKE '%r%'
+        ORDER BY usu.nombre ASC"); */
+        $buscausuario = DB::select("SELECT * FROM usuarios where nombre like '%$term%'");
+        return response()->json($buscausuario);
+    }
+
+    public function seleccionausuario(Request $request)
+    {
+        $usuario = Usuario::where('nombre', $request->usuario)->first();
+        return response()->json($usuario);
+    }
+
 }

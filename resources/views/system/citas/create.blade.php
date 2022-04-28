@@ -1,13 +1,13 @@
 @include('layouts.admin')
 <div class="container my-5">
     <div class="card">
-        <h4 class="card-header">Agregar cita</h4>
+        <h4 class="card-header">Gestión de citas</h4>
         <div class="card-body">
             <form action="{{ route('citas.store') }}" method="POST" id="citas" class="needs-validation" novalidate>
                 @csrf
                 <input type="hidden" name="id" id="id">
                 <div class="form-row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label for="" class="control-label">Nombre</label>
                         <div class="">
                             <input type="text" required class="form-control @error('nombre')  @enderror" id="nombre"
@@ -20,7 +20,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label for="" class="control-label">Fecha</label>
                         <div class="">
                             <input type="date" required class="form-control @error('fecha')  @enderror"
@@ -33,20 +33,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <label for="" class="control-label">Tema</label>
-                        <div class="">
-                            <input type="text" required class="form-control @error('tema')  @enderror" id="tema"
-                                name="tema">
-                            <div class="valid-feedback">
-                                Correcto!
-                            </div>
-                            @error('tema')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label for="" class="control-label">Hora</label>
                         <div class="">
                             <input type="time" required class="form-control @error('hora')  @enderror"
@@ -59,21 +46,61 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <label for="" class="control-label">Duracion de la cita</label>
+                    <div class="col-md-3">
+                        <label for="" class="control-label">Duración de la cita</label>
                         <div class="">
-                            <input type="text" required class="form-control @error('duracion_cita')  @enderror" id="duracion_cita"
-                                name="duracion_cita">
-                            <div class="valid-feedback">
-                                Correcto!
-                            </div>
-                            @error('duracion_cita')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
+                            <select class="custom-select" class="@error('duracion_cita') is-invalid @enderror "
+                                name="duracion_cita" id="duracion_cita" required>
+                                <option selected disabled value="">Seleccione la duración</option>
+                                <option value="30 minutos">30 minutos</option>
+                                <option value="60 minutos">60 minutos</option>
+                                <option value="90 minutos">90 minutos</option>
+                                <option value="120 minutos">120 minutos</option>
+                                <option value="150 minutos">150 minutos</option>
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                                @error('duracion_cita')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <label for="" class="control-label">Lugar</label>
+
+                    <div class="col-md-2 my-3">
+                        <label for="exampleInputEmail1" class="col-sm-2-12 col-form-label">Tipo de cita</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tipo_cita" value="Presencial" required="" onclick="Presencial();">
+                            <label class="form-check-label">
+                                Presencial
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tipo_cita" value="On-line" required="" onclick="Online();">
+                            <label class="form-check-label">
+                                On-line
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-10 col-sm-2-12 col-form-label my-3" id="Presencial" style="display: none;">
+                        <label for="col-sm-2-12 col-form-label">Ingrese el lugar</label>
+                        <input type="text" class="form-control" id="lugar" name="lugar" placeholder="" >
+                    </div>
+
+                    <div class="col-md-10 col-sm-2-12 col-form-label my-3" id="Online" style="display: none;">
+                        <label for="col-sm-2-12 col-form-label">Ingrese la url</label>
+                        <input type="text" class="form-control" id="link" name="link" placeholder="" >
+                    </div>
+
+
+
+                    {{-- <div class="container-fluid" id="online">
+
+                    </div> --}}
+
+                    {{-- <div class="col-md-12">
+                        <label for="" class="col-sm-2-12 col-form-label">Lugar/Link</label>
                         <div class="">
                             <input type="text" required class="form-control @error('lugar')  @enderror" id="lugar"
                                 name="lugar">
@@ -84,25 +111,65 @@
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
+                    </div> --}}
+                    <div class="col-md-12">
+                        <label for="" class="col-sm-2-12 col-form-label">Tema</label>
+                        <div class="form-group">
+                            <input type="hidden" required class="form-control @error('tema')  @enderror" name="tema"
+                                id="tema" value="{{ old('tema') }}">
+                            <trix-editor input="tema"></trix-editor>
+                        </div>
+                        <div class="valid-feedback">
+                            Correcto!
+                        </div>
+                        @error('tema')
+                            <small class="text-danger"> {{ $message }} </small>
+                        @enderror
                     </div>
-                    <div class="col-md-4">
-                        <label for="" class="col-sm-2-12 col-form-label">Tipo de cita</label>
-                        <div class="">
-                            <select class="custom-select" class="@error('tipo_cita') is-invalid @enderror "
-                                name="tipo_cita" id="tipo_cita" required>
-                                <option selected disabled value="">Seleccione el tipo de cita</option>
-                                <option value="Online">On-line</option>
-                                <option value="Pesencial">Pesencial</option>
-                                <div class="valid-feedback">
-                                    Correcto!
-                                </div>
-                                @error('tipo_cita')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </select>
+
+                    <div class="col-md-12">
+
+                        <label for="">Buscar usuario (Nombre usuario)</label>
+                        <div class="input-group">
+                            <input type="search" required name="buscarusuario" id="buscarusuario"
+                                class="form-control @error('usuarios_id')  @enderror" placeholder=""
+                                aria-label="Search">
+
+
+                            <span class="input-group-btn">
+                                <button type="button" id="selectUsuario" class="btn btn-primary">
+                                    Seleccionar
+                                </button>
+                            </span>
+                            <div class="valid-feedback">
+                                Correcto!
+                            </div>
+                            @error('usuarios_id')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <input type="hidden" readonly class="form-control" name="usuarios_id" id="usuarios_id">
+                    <div class="col-md-4 my-3">
+                        <label for="" class="form-label"> Usuario</label>
+                        <div class="form-group">
+                            <input type="text" readonly class="form-control" name="usuario" id="usuario">
+                        </div>
+                    </div>
+                    <div class="col-md-4 my-3">
+                        <label for="" class="form-label"> E-mail</label>
+                        <div class="form-group">
+                            <input type="text" readonly class="form-control" name="email" id="email">
+                        </div>
+                    </div>
+                    <div class="col-md-4 my-3">
+                        <label for="" class="form-label"> Telefono</label>
+                        <div class="form-group">
+                            <input type="text" readonly class="form-control" name="telefono" id="telefono">
+                        </div>
+                    </div>
+
+                    {{-- <div class="col-md-4">
                         <label for="" class="col-sm-2-12 col-form-label">Seleccione un usuario</label>
                         <div class="">
                             <select class="form-control  @error('usuarios_id') is-invalid @enderror" name="usuarios_id"
@@ -120,8 +187,49 @@
                                 @enderror
                             </select>
                         </div>
+                    </div> --}}
+                    <div class="col-md-12">
+                        <label for="" class="col-sm-2-12 col-form-label">Buscar cliente (Nombre empresa)</label>
+                        <div class="input-group">
+                            <input type="search" required name="buscarempresa" id="buscarempresa"
+                                class="form-control @error('clientes_id') is-invalid @enderror" placeholder=""
+                                aria-label="Search">
+                            <span class="input-group-btn">
+                                <button type="button" id="selectEmpresa" class="btn btn-primary">
+                                    Seleccionar
+                                </button>
+                            </span>
+                            <div class="valid-feedback">
+                                Correcto!
+                            </div>
+                            @error('clientes_id')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
                     </div>
-                    <div class="col-md-4">
+
+
+                    <input type="hidden" readonly class="form-control" id="clientes_id" name="clientes_id">
+                    <div class="col-md-4 my-3">
+                        <label for="" class="form-label"> Tipo de cliente</label>
+                        <div class="form-group">
+                            <input type="text" readonly class="form-control" id="tipocliente" name="tipocliente">
+                        </div>
+                    </div>
+                    <div class="col-md-4 my-3">
+                        <label for="" class="form-label">Nombre de la empresa</label>
+                        <div class="form-group">
+                            <input type="text" readonly class="form-control" id="nombreempresa" name="nombreempresa">
+                        </div>
+                    </div>
+                    <div class="col-md-4 my-3">
+                        <label for="" class="form-label"> Estatus</label>
+                        <div class="form-group">
+                            <input type="text" readonly class="form-control" id="estatuscliente"
+                                name="estatuscliente">
+                        </div>
+                    </div>
+                    {{-- <div class="col-md-4">
                         <label for="" class="col-sm-2-12 col-form-label">Seleccione un cliente</label>
                         <div class="">
                             <select class="custom-select  @error('clientes_id') is-invalid @enderror" name="clientes_id"
@@ -139,7 +247,7 @@
                                 @enderror
                             </select>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-md-4">
                         <label for="" class="col-sm-2-12 col-form-label">Seleccione el estatus</label>
                         <div class="">
@@ -158,6 +266,7 @@
                                 @enderror
                             </select>
                         </div>
+
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary float-right my-3">Guardar</button>
@@ -166,8 +275,66 @@
         </div>
     </div>
 </div>
-
 <script>
+    function Presencial() {
+      document.getElementById("Presencial").style.display = "block";
+      document.getElementById("Online").style.display = "none";
+    }
+    function Online() {
+      document.getElementById("Presencial").style.display = "none";
+      document.getElementById("Online").style.display = "block";
+    }
+  </script>
+  
+{{-- <script>
+    $("input[name='gender']").change(function() {
+        if ($(this).val() == 'texto') {
+            $('#imagen').show();
+            $('#nota').hide();
+        } else {
+            $('#imagen').hide();
+            $('#nota').show();
+        }
+    });
+</script> --}}
+{{-- <script>
+    $(function(){
+        var o1 = 1;
+        $('#tipo_cita').click(function(){
+            var div = '<div class="form-row my-3">';
+            var divInput = '<div class="col-md-12"> <label for="" class="form-label"> Link </label>';
+            var inputCode = '<input type="text" required class="form-control" id="lugar" name="lugar"></div>';
+            
+            $('#online').append('<div class="form-row'+ o1 +' ">'+ div + divInput + inputCode + '<div class="col-md-1"><br>')
+        });
+
+        
+    })
+</script>
+<script>
+    $(function(){
+        var p1 = 1;
+        $('#presencial').click(function(){
+            var div = '<div class="form-row my-3">';
+            var divInput = '<div class="col-md-12"> <label for="" class="form-label"> Lugar </label>';
+            var inputCode = '<input type="text" required class="form-control" id="lugar" name="lugar"></div>';
+            p1++;
+            $('#online').append('<div class="form-row'+ p1 +' ">'+ div + divInput + inputCode + '<div class="col-md-1"><br>')
+        });
+
+        $("presencial").click(function(event){
+            event.preventDefault();
+            $("#presencial").prop('disabled', tru)
+            return false;
+        })
+    })
+</script> --}}
+<script>
+    /* $("#online").click(function() {
+        $("form").append("<div class='col-md-4'><label class='col-sm-2-12 col-form-label'>Link:</label><input type='text' class='form-control' name='input1' value='1'></div>");
+        $("form").append("<input type='text' name='input2' value='2'>");
+        $("form").append("<input type='text' name='input3' value='3'>");
+    }); */
     $(document).ready(function() {
         $("#citas").validate({
             rules: {
@@ -206,7 +373,7 @@
                 nombre: {
                     required: "El nombre es requerido"
                 },
-                fecha:{
+                fecha: {
                     required: "La fecha es requerida"
                 },
                 tema: {
@@ -255,4 +422,90 @@
             });
         }, false);
     })();
+</script>
+
+<script>
+    $(document).ready(function() {
+
+        $("#buscarempresa").autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    url: "{{ route('buscaempresa') }}",
+                    type: 'POST',
+                    data: {
+                        term: request.term,
+                        _token: $("input[name=_token]").val()
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        var resp = $.map(data, function(obj) {
+                            return obj.nombreempresa;
+                            response(data);
+                        });
+                        response(resp);
+                    }
+                })
+            },
+            minLength: 1,
+        })
+
+        $("#selectEmpresa").click(function() {
+            const cliente = $('#buscarempresa').val()
+            $.ajax({
+                url: "{{ route('seleccionaempresa') }}",
+                type: "POST",
+                data: {
+                    cliente: cliente,
+                    _token: $("input[name=_token]").val()
+                },
+                success: function(data) {
+                    $("#clientes_id").val(data.id ?? "Sin datos")
+                    $("#tipocliente").val(data.tipocliente ?? "Sin datos")
+                    $("#nombreempresa").val(data.nombreempresa ?? "Sin datos")
+                    $("#estatuscliente").val(data.estatuscliente ?? "Sin datos")
+                }
+            })
+        })
+
+        $("#buscarusuario").autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    url: "{{ route('buscausuario') }}",
+                    type: "POST",
+                    data: {
+                        term: request.term,
+                        _token: $("input[name=_token]").val()
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        var resp = $.map(data, function(obj) {
+                            return obj.nombre;
+                            response(data);
+                        })
+                        response(resp);
+                    }
+                })
+            },
+            minLenght: 1,
+        })
+
+        $("#selectUsuario").click(function() {
+            const usuario = $('#buscarusuario').val()
+            $.ajax({
+                url: "{{ route('seleccionausuario') }}",
+                type: "POST",
+                data: {
+                    usuario: usuario,
+                    _token: $("input[name=_token]").val()
+                },
+                success: function(data) {
+                    $("#usuarios_id").val(data.id ?? "Sin datos")
+                    $("#usuario").val(data.usuario ?? "Sin datos")
+                    $("#email").val(data.email ?? "sin datos")
+                    $("#telefono").val(data.telefono ?? "Sin datos")
+                }
+            })
+        })
+
+    });
 </script>

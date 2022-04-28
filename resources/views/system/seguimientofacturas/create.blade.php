@@ -1,13 +1,50 @@
 @include('layouts.admin')
 <div class="container my-5">
     <div class="card">
-        <h4 class="card-header">Agregar seguimiento de facturas</h4>
+        <h4 class="card-header">Gestión de seguimiento de facturas</h4>
         <div class="card-body">
             <form action="{{ route('seguimientofacturas.store') }}" method="POST" id="seguimientofacturas" class="needs-validation" novalidate>
                 @csrf
                 <input type="hidden" name="id" id="id">
                 <div class="form-row">
-                    <div class="col-md-4">
+                    <div class="col-md-12">
+                        <label for="">Buscar folio</label>
+                        <div class="input-group">
+                            <input type="search" required name="buscarfolio" id="buscarfolio" class="form-control @error('ordenpagos_id') @enderror" aria-label="Search">
+                            <span class="input-group-btn">
+                                <button type="button" id="selectFolio" class="btn btn-primary">
+                                    Seleccionar
+                                </button>
+                            </span>
+                        </div><div class="valid-feedback">
+                            Correcto!
+                        </div>
+                        @error('ordenpagos_id')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="col-md-4 my-3">
+                        <label for="" class="form-label"> Folio</label>
+                        <div class="form-group">
+                            <input type="text" readonly class="form-control" name="folio" id="folio">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 my-3">
+                        <label for="" class="form-label"> Numero de pago</label>
+                        <div class="form-group">
+                            <input type="text" readonly class="form-control" name="num_pago" id="num_pago">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 my-3">
+                        <label for="" class="form-label"> Emite</label>
+                        <div class="form-group">
+                            <input type="text" readonly class="form-control" name="emite" id="emite">
+                        </div>
+                    </div>
+
+                    {{-- <div class="col-md-4">
                         <label for="" class="col-sm-2-12 col-form-label">Seleccione un folio</label>
                         <div class="">
                             <select class="custom-select  @error('ordenpagos_id') is-invalid @enderror" name="ordenpagos_id"
@@ -25,7 +62,7 @@
                                 @enderror
                             </select>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="col-md-4">
                         <label for="" class="col-sm-2-12 col-form-label">Fecha de creación</label>
@@ -41,7 +78,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label for="" class="control-label">Numero de pago</label>
+                        <label for="" class=" col-sm-2-12 col-form-label">Numero de pago</label>
                         <div class="">
                             <input type="number" required class="form-control @error('num_pago')  @enderror"
                                 value="{{ old('num_pago') }}" name="num_pago" id="num_pago">
@@ -67,7 +104,7 @@
                         </div>
                     </div>
         
-                    <div class="col-md-4">
+                    <div class="col-md-4 my-3">
                         <label for="" class="col-sm-2-12 col-form-label">Seleccione el estatus</label>
                         <div class="">
                             <select class="form-control  @error('estatufacturas_id') is-invalid @enderror"
@@ -152,4 +189,49 @@
             });
         }, false);
     })();
+</script>
+
+<script>
+    $(document).ready(function(){
+
+        $("#buscarfolio").autocomplete({
+            source: function(request, response){
+                $.ajax({
+                    url: "{{route('buscafolio')}}",
+                    type: 'POST',
+                    data: {
+                        term: request.term,
+                        _token: $("input[name=_token]").val()
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        var resp = $.map(data, function(obj) {
+                            return obj.folio;
+                            response(data);
+                        });
+                        response(resp);
+                    }
+                })
+            },
+            minLength: 1,
+        })
+
+        $("#selectFolio").click(function(){
+            const ordenpago = $('#buscarfolio').val()
+            $.ajax({
+                url: "{{route('seleccionafolio')}}",
+                type: "POST",
+                data: {
+                    ordenpago: ordenpago,
+                    _token: $("input[name=_token]").val()
+                },
+                success: function(data){
+                    $("#folio").val(data.folio ?? "Sin datos")
+                    $("#num_pago").val(data.num_pago ?? "Sin datos")
+                    $("#emite").val(data.emite ?? "Sin datos")
+                }
+            })
+        })
+
+    });
 </script>
