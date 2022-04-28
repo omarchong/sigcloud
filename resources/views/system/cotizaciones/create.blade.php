@@ -3,7 +3,7 @@
     <div class="card">
         <h5 class="card-header">Gestión de cotizaciones</h5>
         <div class="card-body">
-            <form action="{{ route('clientes.store') }}" method="POST" id="clientes" class="needs-validation" novalidate>
+            <form action="{{ route('cotizaciones.store') }}" method="POST" id="cotizaciones" class="needs-validation" novalidate>
                 @csrf
                 <div class="form-row">
 
@@ -12,8 +12,6 @@
                         <label for="">Buscar cliente(Nombre empresa)</label>
                         <div class="input-group">
                             <input type="search" name="nombre" id="buscarcliente" class="form-control" placeholder="Comx" aria-label="Search">
-
-
                             <span class="input-group-btn">
                                 <button type="button" id="selectContact" class="btn btn-primary">
                                     Seleccionar
@@ -21,19 +19,24 @@
                             </span>
                         </div>
                     </div>
-                    <div class="col-md-4 my-3">
-                        <label for="exampleInputEmail1" class="form-label">RFC</label>
+                    <div class="col-md-3 my-3" hidden>
+                        <label for="exampleInputEmail1" class="form-label">Clave</label>
                         <div class="form-group">
-                            <input type="text" readonly class="form-control" id="rfc" name="rfc" value="{{old('c')}}">
+                            <input type="text" readonly class="form-control" id="clientes_id" name="clientes_id">
 
                         </div>
 
                     </div>
                     <div class="col-md-4 my-3">
+                        <label for="exampleInputEmail1" class="form-label">RFC</label>
+                        <div class="form-group">
+                            <input type="text" readonly class="form-control" id="rfc" name="rfc" value="{{old('c')}}">
+                        </div>
+                    </div>
+                    <div class="col-md-4 my-3">
                         <label for="exampleInputEmail1" class="form-label">Tipo de cliente</label>
                         <div class="form-group">
                             <input type="text" readonly class="form-control" id="tipocliente" name="tipocliente">
-
                         </div>
 
                     </div>
@@ -63,7 +66,7 @@
                     <div class="col-md-3 my-3">
                         <label for="exampleInputEmail1" class="form-label">Clave</label>
                         <div class="form-group">
-                            <input type="text" readonly class="form-control" id="id" name="id">
+                            <input type="text" readonly class="form-control" id="servicios_id" name="servicios_id">
 
                         </div>
 
@@ -72,35 +75,26 @@
                         <label for="exampleInputEmail1" class="form-label">Servicio</label>
                         <div class="form-group">
                             <input type="text" readonly class="form-control" id="nombre" name="nombre">
-
                         </div>
-
                     </div>
                     <div class="col-md-3 my-3">
                         <label for="exampleInputEmail1" class="form-label">Precio inicial</label>
                         <div class="form-group">
-                            <input type="text" readonly class="form-control" id="precio_inicial" name="precio_inicial">
-
+                            <input type="text" class="form-control" id="precio_inicial" name="precio_inicial">
                         </div>
-
                     </div>
                     <div class="col-md-3 my-3">
                         <label for="exampleInputEmail1" class="form-label">Cantidad</label>
                         <div class="form-group">
                             <input type="number" value="1" class="form-control" id="numero_servicios" name="numero_servicios">
-
                         </div>
-
                     </div>
                     <div class="col-md-5 my-3">
                         <label for="exampleInputEmail1" class="form-label">Fecha estimada entrega</label>
                         <div class="form-group">
-                            <input type="date" class="form-control" id="estatuscliente" name="estatuscliente">
-
+                            <input type="date" class="form-control" id="fecha_estimadaentrega" name="fecha_estimadaentrega">
                         </div>
-
                     </div>
-
                     <div class="col-md-5 my-3">
                         <label for="exampleInputEmail1" class="form-label">Estatus cotización</label>
                         <div class="form-group">
@@ -109,19 +103,15 @@
                                 <option {{old('estatucotizacion_id') == $estatuscoti->id ? 'selected' : ''}}value="{{$estatuscoti->id}}">
                                     {{$estatuscoti->nombre}}
                                     @endforeach
-
                             </select>
                         </div>
-
                     </div>
                     <div class="col-md-2 my-3">
                         <label for="exampleInputEmail1" class="form-label">Agregar</label>
                         <div class="form-group">
                             <button type="button" class="btn btn-success" id="btn_add">Agregar</button>
                         </div>
-
                     </div>
-
                     <div class="col-md-12">
                         <label for="descripcion">Descripcion</label>
                         <div class="form-group">
@@ -138,7 +128,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="table-responsive">
                             <table id="detalles" class="table table-striped table-bordered condensed table-hover">
-                                <thead class="table-success">
+                                <thead class="table-primary">
                                     <th>N.servicio</th>
                                     <th>Nombre servicio</th>
                                     <th>Precio inicial</th>
@@ -147,12 +137,10 @@
                                     <th>IVA</th>
                                     <th>Total</th>
                                     <th>Opciones</th>
-
                                 </thead>
-                               
                                 <tfoot>
-
                                     <td colspan="4">Total</td>
+
                                     <td>
                                         <h4 id="total_b" name="total_b">$0.00</h4>
                                     </td>
@@ -172,10 +160,7 @@
                         <button type="submit" class="btn btn-primary float-right">Guardar</button>
 
                     </div>
-
                 </div>
-
-
             </form>
         </div>
     </div>
@@ -246,6 +231,7 @@
                     _token: $("input[name=_token]").val()
                 },
                 success: function(data) {
+                    $('#clientes_id').val(data.id ?? "Sin datos")
                     $("#rfc").val(data.rfc ?? "Sin datos")
                     $("#tipocliente").val(data.tipocliente ?? "Sin datos")
                     $("#estatuscliente").val(data.estatuscliente ?? "Sin datos")
@@ -265,7 +251,7 @@
                     _token: $("input[name=_token]").val()
                 },
                 success: function(data) {
-                    $("#id").val(data.id ?? "Sin datos")
+                    $("#servicios_id").val(data.id ?? "Sin datos")
                     $("#nombre").val(data.nombre ?? "Sin datos")
                     $("#precio_inicial").val(data.precio_inicial ?? "Sin datos")
 
@@ -286,7 +272,6 @@
             })
         })
 
-
         var cont = 0;
         total_b = 0;
         total_bruto = [];
@@ -295,10 +280,11 @@
         total_t = 0;
         total_total = [];
 
+       
+
         function agregar() {
 
-
-            const id = $("#id").val();
+            const servicios_id = $("#servicios_id").val();
             const nombre = $('#nombre').val();
             const precio_inicial = $("#precio_inicial").val();
             const numero_servicios = $("#numero_servicios").val();
@@ -308,56 +294,40 @@
 
             total_bruto[cont] = Number(precio_bruto)
             total_b = total_b + total_bruto[cont];
-
             total_iva[cont] = Number(precio_iva)
             total_i = total_i + total_iva[cont];
-
             total_total[cont] = Number(subtotal)
             total_t = total_t + total_total[cont];
 
-
-            const fila = `<tr> +
-                <td><input class="form-control" type="number" id="id" name="id[]" value="${id}" readonly></td>
+            const fila = `<tr id="fila"> 
+                <td><input class="form-control" type="number" id="servicios_id" name="servicios_id[]" value="${servicios_id}" readonly></td>
                 <td><input class="form-control" type="text" id="nombre" name="nombre[]" value="${nombre}" readonly></td>
                 <td><input class="form-control" type="number" id="precio_inicial" name="precio_inicial[]" value="${precio_inicial}" readonly></td>
                 <td><input class="form-control" type="number" id="numero_servicios" name="numero_servicios[]" value="${numero_servicios}" readonly></td>
                 <td><input class="form-control" type="text" id="precio_bruto" name="precio_bruto[]" value="${precio_bruto}" readonly></td>
                 <td><input class="form-control" type="text" id="precio_iva" name="precio_iva[]" value="${precio_iva}" readonly></td>
                 <td><input class="form-control" type="number" id="subtotal" name="subtotal[]" value="${subtotal}" readonly></td> 
-                <td><button type="button" class="btn btn-danger" onclick="eliminarServicio('${id}')">X</button></td>
+                <td><button type="button" class="btn btn-danger delete" value="Eliminar">X</button></td>
                 </tr>; `
             cont++;
             $("#total_b").html("$" + total_b);
             $("#total_i").html("$" + total_i);
             $("#total_t").html("$" + total_t);
-
-
-            console.log(precio_bruto);
-
             limpiar();
-
-
             $('#detalles').append(fila);
         }
 
-
-
-
-        function eliminarServicio(id) {
-            $(`#${id}`).remove()
-        }
+        $(document).on('click', '.delete', function(event) {
+            event.preventDefault();
+            $(this).closest('tr').remove();
+        });
 
         function limpiar() {
-            $("#id").val("");
-            /* $("#numero_servicios").val(""); */
-            /* $("#precio_iva").val(""); */
+            /*   $("#servicios_id").val(""); */
+            /*  $("#numero_servicios").val(""); */
             $("#nombre").val("");
             $("#precio_inicial").val("");
             $("#buscarservicio").val("");
         }
-
-
-
-
     })
 </script>

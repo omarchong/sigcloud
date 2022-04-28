@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CotizacionRequest;
 use App\Models\Cliente;
 use App\Models\Cotizacion;
-use App\Models\Departamento;
+use App\Models\DetalleCotizacion;
 use App\Models\Estatucotizacion;
 use App\Models\Servicio;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -58,7 +60,29 @@ class CotizacionesController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
+        return DB::transaction(function () use ($request) {
+
+            $cotizacion = Cotizacion::create($request->all());
+        
+           
+        
+
+            
+            foreach ($request->servicios_id as $index => $servicios_id) {
+                $cotizacion->cotizaciones()->create([
+                    'numero_servicios' => $request->numero_servicios[$index],
+                    'fecha_estimadaentrega' => Carbon::now(),
+                    'precio_bruto' => $request->precio_bruto[$index],
+                    'precio_iva' => $request->precio_iva[$index],
+                    'subtotal' => $request->subtotal[$index],                   
+                    'cotizacion_id' => $cotizacion->id,
+                    'servicios_id' => $servicios_id,
+                ]);
+            }
+
+            return redirect()
+                ->route('cotizaciones.index');
+        });
     }
 
     public function edit()

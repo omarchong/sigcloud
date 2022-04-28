@@ -33,10 +33,10 @@ class ClientesController extends Controller
     public function store(ClienteRequest $request)
     {
         /* dd($request->all()); */
-        $cliente = Cliente::create($request->validated());
-        return redirect()
-            ->route('clientes.index')
-            ->withSuccess("El cliente $cliente->nombreempresa se guardo correctamente");
+            $cliente = Cliente::create($request->validated());
+            return redirect()
+                ->route('clientes.index')
+                ->withSuccess("El cliente $cliente->nombreempresa se guardo correctamente");
     }
 
     public function RegistrosDatatables()

@@ -16,10 +16,10 @@ class DetalleCotizacion extends Model
         'precio_bruto',
         'precio_iva',
         'subtotal',
-        'total',
+        /* 'total', */
         'descuento_general',
         'cotizacion_id',
-        'estatucotizacion_id',
+        'servicios_id'
     ];
 
     public function cotizaciones()
@@ -29,6 +29,10 @@ class DetalleCotizacion extends Model
     public function estatuscotizaciones()
     {
         return $this->hasOne(Estatucotizacion::class);
+    }
+    public function servicios()
+    {
+        return $this->hasMany(Servicio::class);
     }
 
     public function proyectos()

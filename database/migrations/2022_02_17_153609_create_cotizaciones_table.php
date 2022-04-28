@@ -11,14 +11,14 @@ class CreateCotizacionesTable extends Migration
     {
         Schema::create('cotizaciones', function (Blueprint $table) {
             $table->id();
-            $table->string('descripcion');
-            $table->string('fecha_estimadaentrega');
-            $table->foreignId('servicios_id')
-                ->references('id')
-                ->on('servicios');
             $table->foreignId('clientes_id')
                 ->references('id')
                 ->on('clientes');
+            $table->foreignId('estatucotizacion_id')
+                ->references('id')
+                ->on('estatucotizacions');
+            $table->string('fecha_estimadaentrega');
+            $table->string('descripcion');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -49,14 +49,9 @@
                             <button type="button" class="btn btn-success" id="addContacto">
                                 <i class="fas fa-plus"></i>
                             </button>
-
                         </div>
-
                     </div>
-
-
                     <div class="container-fluid" id="incrementa">
-
                     </div>
                     <div class="col-md-12">
                         <label for="exampleInputEmail1" class="form-label">Seleccione el servicio</label>
@@ -85,9 +80,7 @@
                 </div>
                 <div>
                     <button type="submit" class="btn btn-primary float-right">Guardar</button>
-
                 </div>
-
             </form>
         </div>
     </div>
@@ -96,7 +89,6 @@
     $(function() {
         var c1 = 1;
         $('#addContacto').click(function() {
-
             var div = '<div class="form-row">';
             var divInput = '<div class="col-md-4"> <label for="exampleInputEmail1" class="form-label">Contacto 2</label>';
             var inputCode = '<input type = "text" required class="form-control" id="contacto2" name="contacto2"></div>' +
@@ -110,15 +102,11 @@
             $('#incrementa').append('<div class="form-row' + c1 + '">' + div + divInput + inputCode + ' <div class="col-md-1"><br> ' + btnDelete + ' </div> </div> <br>');
         });
 
-
         $(document).on('click', '.btn_remove', function() {
             var button_id = $(this).attr("id");
             console.log(button_id);
             $('.form-row' + button_id + '').remove();
         });
-
-
-
 
         $("#addContacto").click(function(event) {
             event.preventDefault();
@@ -126,12 +114,8 @@
             return false;
         })
 
-
-
-
     });
 </script>
-
 
 <script>
     $(document).ready(function() {
@@ -175,7 +159,8 @@
                 },
                 telefono1: {
                     required: "Campo requerido"
-                }, contacto2: {
+                },
+                contacto2: {
                     required: "Campo requerido"
                 },
                 email2: {

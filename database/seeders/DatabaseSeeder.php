@@ -20,12 +20,12 @@ class DatabaseSeeder extends Seeder
         $this->call(EstadoSeeder::class);
         $this->call(MunicipioSeeder::class);
         $this->call(ClientesSeeder::class);
+        $this->call(EstatucotizacionSeeder::class);
         $this->call(CotizacionSeeder::class);
         $this->call(EstatuordenSeeder::class);
         $this->call(OrdenpagosSeeder::class);
         $this->call(EstatufacturaSeeder::class);
         $this->call(SeguimientofacturaSeeder::class);
-        $this->call(EstatucotizacionSeeder::class);
         $this->call(DetallecotizacionSeeder::class);
         $this->call(TipoproyectoSeeder::class);
         $this->call(EstatuproyectoSedeer::class);

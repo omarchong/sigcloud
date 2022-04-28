@@ -13,13 +13,10 @@ class Cotizacion extends Model
     protected $fillable = [
         'descripcion',
         'fecha_estimadaentrega',
-        'servicios_id',
-        'clientes_id'
+        'clientes_id',
+        'estatucotizacion_id',
     ];
-    public function servicio()
-    {
-        return $this->hasMany(Servicio::class);
-    }
+
     public function clientes()
     {
         return $this->belongsTo(Cliente::class);
@@ -31,5 +28,13 @@ class Cotizacion extends Model
     public function ordenpagos()
     {
         return $this->belongsTo(Ordenpago::class);
+    }
+    public function cotizaciones()
+    {
+        return $this->belongsTo(
+            DetalleCotizacion::class,
+            'id',
+            'cotizacion_id',
+        );
     }
 }

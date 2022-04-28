@@ -15,14 +15,14 @@ class CreateDetalleCotizacionTable extends Migration
             $table->float('precio_bruto');
             $table->float('precio_iva');
             $table->float('subtotal');
-            $table->float('total');
-            $table->integer('descuento_general');
+            /* $table->float('total'); */
+            $table->integer('descuento_general')->nullable();
             $table->foreignId('cotizacion_id')
                 ->references('id')
                 ->on('cotizaciones');
-            $table->foreignId('estatucotizacion_id')
+            $table->foreignId('servicios_id')
                 ->references('id')
-                ->on('estatucotizacions');
+                ->on('servicios');
             $table->timestamps();
             $table->softDeletes();
         });
