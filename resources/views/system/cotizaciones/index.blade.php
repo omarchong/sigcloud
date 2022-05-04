@@ -9,6 +9,8 @@
                 </div>
                 <div class="card-body">
                     <a href="{{ route('cotizaciones.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Crear Cotización</a>
+                    <!-- <a href="{{url('coti') }}"><button class="btn btn-danger"><i class="fas fa-file-pdf"></i></button></a> -->
+
                 </div>
                 <div class="card-body">
 
@@ -45,14 +47,20 @@
                                     render: function(data, type, full, meta) {
                                         return `
                                     
-                                                <a href="/cotizaciones  /${data}/edit"
+                                                <a href="/cotizaciones/${data}/edit"
                                                 class="btn"
                                                 ${full.deleted_at ? 'hidden' : ''}>
-                                                <img src="/img/editar.svg" width="20px">
-                                                <a href="/cotizaciones  /${data}/show"
-                                                class="btn"
+                                                <img src="/img/editar.svg" width="20px"> </a>
+
+                                                <a href="/cotizaciones/${data}"
+                                                class="btn btn-info"
                                                 ${full.deleted_at ? 'hidden' : ''}>
-                                                <img src="/img/basurero.svg" width="20px">
+                                                 <i class="fas fa-eye"></i> </a>
+
+                                                <a href="{{url('coti') }}"
+                                                class="btn btn-danger"
+                                                ${full.deleted_at ? 'hidden' : ''}>
+                                                <i class="fas fa-file-pdf"></i>
                                                 </a>
                                     `
                                     }
@@ -61,7 +69,7 @@
                         })
 
                         function reloadTable() {
-                            $('#cotizaciones').DataTable().ajax.reload();
+                            $('#cotizaciones').DataTable().ajax.draw();
 
                         }
                     </script>
