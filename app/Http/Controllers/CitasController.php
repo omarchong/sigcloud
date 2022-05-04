@@ -33,14 +33,15 @@ class CitasController extends Controller
 
         $cita = Cita::create($request->validated());
         return redirect()
-        ->route('citas.index');
+        ->route('citas.index')
+        ->withSuccess("La cita $cita->nombre se creo correctamente");
     }
 
     public function edit(Cita $cita)
     {
         return view('system.citas.edit', [
             'cita' => $cita,
-            'usuarios' => Usuario::select('id','nombre')->get(),
+            'usuarios' => Usuario::select('id','nombre', 'usuario', 'email', 'telefono')->get(),
             'clientes' => Cliente::select('id','nombreempresa')->get(),
             'estatucitas' => Estatucita::select('id','nombre')->get(),
         ]);

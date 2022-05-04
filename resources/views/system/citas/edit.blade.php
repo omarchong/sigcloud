@@ -7,7 +7,50 @@
                 @csrf
                 @method('PUT')
                 <div class="form-row">
-                    <div class="col-md-4">
+                   
+                    <input type="hidden" readonly class="form-control" name="usuarios_id" id="usuarios_id">
+                    <div class="col-md-4 my-3">
+                        <label for="" class="form-label"> Usuario</label>
+                        <div class="form-group">
+                            <input type="text" readonly class="form-control" value="{{$cita->usuarios->usuario}}" name="usuario" id="usuario">
+                            
+                        </div>
+                    </div>
+
+                   
+                    <div class="col-md-4 my-3">
+                        <label for="" class="form-label"> E-mail</label>
+                        <div class="form-group">
+                            <input type="text" readonly class="form-control" value="{{$cita->usuarios->email}}" name="email" id="email">
+                        </div>
+                    </div>
+                    <div class="col-md-4 my-3">
+                        <label for="" class="form-label"> Telefono</label>
+                        <div class="form-group">
+                            <input type="text" readonly class="form-control" value="{{$cita->usuarios->telefono}}" name="telefono" id="telefono">
+                        </div>
+                    </div>
+                    <input type="hidden" readonly class="form-control" id="clientes_id" name="clientes_id">
+                    <div class="col-md-4 my-3">
+                        <label for="" class="form-label"> Tipo de cliente</label>
+                        <div class="form-group">
+                            <input type="text" readonly class="form-control" value="{{$cita->clientes->tipocliente}}" id="tipocliente" name="tipocliente">
+                        </div>
+                    </div>
+                    <div class="col-md-4 my-3">
+                        <label for="" class="form-label">Nombre de la empresa</label>
+                        <div class="form-group">
+                            <input type="text" readonly class="form-control" value="{{$cita->clientes->nombreempresa}}" id="nombreempresa" name="nombreempresa">
+                        </div>
+                    </div>
+                    <div class="col-md-4 my-3">
+                        <label for="" class="form-label"> Estatus</label>
+                        <div class="form-group">
+                            <input type="text" readonly class="form-control" value="{{$cita->clientes->estatuscliente}}" id="estatuscliente"
+                                name="estatuscliente">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
                         <label for="" class="control-label">Nombre</label>
                         <div class="">
                             <input type="text" required class="form-control @error('nombre')  @enderror" id="nombre"
@@ -20,7 +63,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label for="" class="control-label">Fecha</label>
                         <div class="">
                             <input type="date" required class="form-control @error('fecha')  @enderror"
@@ -33,20 +76,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <label for="" class="control-label">Tema</label>
-                        <div class="">
-                            <input type="text" required class="form-control @error('tema')  @enderror" id="tema"
-                                name="tema" value="{{$cita->tema}}">
-                            <div class="valid-feedback">
-                                Correcto!
-                            </div>
-                            @error('tema')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label for="" class="control-label">Hora</label>
                         <div class="">
                             <input type="time" required class="form-control @error('hora')  @enderror"
@@ -59,17 +89,24 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <label for="" class="control-label">Duracion de la cita</label>
+                    <div class="col-md-3">
+                        <label for="" class="control-label">Duración de la cita</label>
                         <div class="">
-                            <input type="text" required class="form-control @error('duracion_cita')  @enderror" id="duracion_cita"
-                                name="duracion_cita" value="{{$cita->duracion_cita}}">
-                            <div class="valid-feedback">
-                                Correcto!
-                            </div>
-                            @error('duracion_cita')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
+                            <select class="custom-select" class="@error('duracion_cita') is-invalid @enderror "
+                                name="duracion_cita" id="duracion_cita" required>
+                                <option selected disabled value="">{{$cita->duracion_cita}}</option>
+                                <option value="30 minutos">30 minutos</option>
+                                <option value="60 minutos">60 minutos</option>
+                                <option value="90 minutos">90 minutos</option>
+                                <option value="120 minutos">120 minutos</option>
+                                <option value="150 minutos">150 minutos</option>
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                                @error('duracion_cita')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -97,6 +134,20 @@
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="" class="col-sm-2-12 col-form-label">Tema</label>
+                        <div class="form-group">
+                            <input type="hidden" required class="form-control @error('tema')  @enderror" name="tema"
+                                id="tema" value="{{$cita->tema}}">
+                            <trix-editor input="tema"></trix-editor>
+                        </div>
+                        <div class="valid-feedback">
+                            Correcto!
+                        </div>
+                        @error('tema')
+                            <small class="text-danger"> {{ $message }} </small>
+                        @enderror
                     </div>
                     <div class="col-md-4">
                         <label for="" class="col-sm-2-12 col-form-label">Seleccione un usuario</label>
