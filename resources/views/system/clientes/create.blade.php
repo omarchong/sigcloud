@@ -31,6 +31,7 @@
                                 @foreach($contactos as $contacto)
                                 <option {{ old('contactos_id') == $contacto->id ? 'selected' : '' }} value="{{ $contacto->id }}">
                                     {{$contacto->contacto1}}
+                                </option>
                                     @endforeach
                                     <div class="valid-feedback">
                                         Correcto!

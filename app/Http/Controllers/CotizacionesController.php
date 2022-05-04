@@ -11,6 +11,8 @@ use App\Models\Servicio;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PDF;
+
 
 class CotizacionesController extends Controller
 
@@ -63,26 +65,44 @@ class CotizacionesController extends Controller
         return DB::transaction(function () use ($request) {
 
             $cotizacion = Cotizacion::create($request->all());
-        
-           
-        
 
-            
             foreach ($request->servicios_id as $index => $servicios_id) {
                 $cotizacion->cotizaciones()->create([
                     'numero_servicios' => $request->numero_servicios[$index],
                     'fecha_estimadaentrega' => Carbon::now(),
                     'precio_bruto' => $request->precio_bruto[$index],
                     'precio_iva' => $request->precio_iva[$index],
-                    'subtotal' => $request->subtotal[$index],                   
+                    'subtotal' => $request->subtotal[$index],
                     'cotizacion_id' => $cotizacion->id,
                     'servicios_id' => $servicios_id,
                 ]);
             }
 
             return redirect()
-                ->route('cotizaciones.index');
+                ->route('cotizaciones.index')->withSuccess("La cotizacion $cotizacion->id se creo exitosamente");
         });
+    }
+
+    public function pdfCoti()
+    {
+        $detallecotizacion = Cotizacion::select('descripcion', 'fecha_estimadaentrega')->get();
+        $pdf = PDF::loadView('system.cotizaciones.cotizacionPdf', compact('detallecotizacion'));
+        return $pdf->stream('ejemplo.pdf');
+    }
+
+
+    public function show($id)
+
+    {
+
+
+        $cotizaciones = DetalleCotizacion::findOrFail($id);
+
+        $consulta = DB::select("SELECT dco.cotizacion_id, dco.numero_servicios, dco.precio_bruto, dco.subtotal, serv.nombre
+        FROM detalle_cotizacion dco, servicios as serv
+        WHERE cotizacion_id = $id
+        ORDER BY numero_servicios ASC");
+        return  view('system.cotizaciones.show', compact('cotizaciones', 'consulta'));
     }
 
     public function edit()
