@@ -41,8 +41,7 @@
                      <td>{{$detalle->fecha_estimadaentrega}}</td>
                      <td>{{$detalle->clientes_id}}</td>
 
-
-
+        
                  </tr>
 
                  @endforeach
