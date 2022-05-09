@@ -94,15 +94,13 @@ class CotizacionesController extends Controller
     public function show($id)
 
     {
-
-
-        $cotizaciones = DetalleCotizacion::findOrFail($id);
-
         $consulta = DB::select("SELECT dco.cotizacion_id, dco.numero_servicios, dco.precio_bruto, dco.subtotal, serv.nombre
-        FROM detalle_cotizacion dco, servicios as serv
+        FROM detalle_cotizacion AS dco
+        INNER JOIN servicios AS serv
+        ON dco.servicios_id = serv.id
         WHERE cotizacion_id = $id
         ORDER BY numero_servicios ASC");
-        return  view('system.cotizaciones.show', compact('cotizaciones', 'consulta'));
+        return  view('system.cotizaciones.show', compact('consulta'));
     }
 
     public function edit()
