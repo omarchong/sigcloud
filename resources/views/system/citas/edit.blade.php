@@ -122,18 +122,28 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <label for="" class="col-sm-2-12 col-form-label">Tipo de cita</label>
-                        <div class="">
-                            <input type="text" required class="form-control @error('tipo_cita')  @enderror"
-                            value="{{$cita->tipo_cita}}" name="tipo_cita" id="tipo_cita">
-                            <div class="valid-feedback">
-                                Correcto!
-                            </div>
-                            @error('tipo_cita')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
+                    <div class="col-md-2 my-3">
+                        <label for="exampleInputEmail1" class="col-sm-2-12 col-form-label">Tipo de cita</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tipo_cita" value="Presencial" {{old('tipo_cita') == 'Presencial' ? 'checked': ($cita->tipo_cita == 'Presencial' ? 'checked': '')}} required="" onclick="Presencial();">
+                            <label class="form-check-label">
+                                Presencial
+                            </label>
                         </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tipo_cita" value="On-line" {{old('tipo_cita') == 'On-line' ? 'checked': ($cita->tipo_cita == 'On-line' ? 'checked': '')}} required="" onclick="Online();">
+                            <label class="form-check-label">
+                                On-line
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-10 col-sm-2-12 col-form-label my-3" id="Presencial" style="display: none;">
+                        <label for="col-sm-2-12 col-form-label">Ingrese el lugar</label>
+                        <input type="text" class="form-control" id="lugar" name="lugar" value="{{$cita->lugar}}" placeholder="" >
+                    </div>
+                    <div class="col-md-10 col-sm-2-12 col-form-label my-3" id="Online" style="display: none;">
+                        <label for="col-sm-2-12 col-form-label">Ingrese la url</label>
+                        <input type="text" class="form-control" id="link" name="link" value="{{$cita->link}}" placeholder="" >
                     </div>
                     <div class="col-md-12">
                         <label for="" class="col-sm-2-12 col-form-label">Tema</label>
@@ -148,42 +158,6 @@
                         @error('tema')
                             <small class="text-danger"> {{ $message }} </small>
                         @enderror
-                    </div>
-                    <div class="col-md-4">
-                        <label for="" class="col-sm-2-12 col-form-label">Seleccione un usuario</label>
-                        <div class="">
-                            <select class="form-control @error('usuarios_id') is-invalid @enderror" name="usuarios_id"
-                                id="usuarios_id" required>
-                                @foreach ($usuarios as $usuario)
-                                    <option value="{{$usuario->id}}" {{ $cita->usuarios_id == $usuario->id ? 'selected' : '' }}>{{$usuario->nombre}}
-                                    </option>
-                                @endforeach
-                                <div class="valid-feedback">
-                                    Correcto!
-                                </div>
-                                @error('usuarios_id')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="" class="col-sm-2-12 col-form-label">Seleccione al cliente</label>
-                        <div class="">
-                            <select class="custom-select  @error('clientes_id') is-invalid @enderror" name="clientes_id"
-                                id="clientes_id">
-                                @foreach ($clientes as $cliente)
-                                    <option value="{{$cliente->id}}" {{ $cita->clientes_id == $cliente->id ? 'selected' : '' }}>{{$cliente->nombreempresa}}
-                                    </option>
-                                @endforeach
-                                <div class="valid-feedback">
-                                    Correcto!
-                                </div>
-                                @error('clientes_id')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </select>
-                        </div>
                     </div>
                     <div class="col-md-4">
                         <label for="" class="col-sm-2-12 col-form-label">Seleccione el estatus</label>
@@ -209,7 +183,16 @@
         </div>
     </div>
 </div>
-
+<script>
+    function Presencial() {
+      document.getElementById("Presencial").style.display = "block";
+      document.getElementById("Online").style.display = "none";
+    }
+    function Online() {
+      document.getElementById("Presencial").style.display = "none";
+      document.getElementById("Online").style.display = "block";
+    }
+  </script>
 <script>
     $(document).ready(function() {
         $("#citas").validate({

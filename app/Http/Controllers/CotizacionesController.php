@@ -100,7 +100,7 @@ class CotizacionesController extends Controller
         ON dco.servicios_id = serv.id
         WHERE cotizacion_id = $id
         ORDER BY numero_servicios ASC");
-        return  view('system.cotizaciones.show', compact('cotizaciones', 'consulta'));
+        return  view('system.cotizaciones.show', compact('consulta'));
     }
 
     public function edit()
