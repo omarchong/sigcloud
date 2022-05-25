@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Departamento extends Model
 {
     use HasFactory;
+    protected $table = 'departamentos';
+
     protected $fillable = [
         'abreviatura',
         'nombre',
@@ -18,6 +20,6 @@ class Departamento extends Model
 
     public function usuarios()
     {
-        return $this->belongsTo(Usuario::class);
+        return $this->hasOne(Usuario::class);
     }
 }

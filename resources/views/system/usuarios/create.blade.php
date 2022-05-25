@@ -110,16 +110,17 @@
                                 <option selected disabled value="">Seleccione una opcion</option>
                                 @foreach($departamentos as $departamento)
                                 <option {{old('departamento_id') == $departamento->id ? 'selected' : ''}} value="{{$departamento->id}}">
-                                    {{$departamento->nombre}}</option>
-                                    @endforeach
+                                    {{$departamento->nombre}}
+                                </option>
+                                @endforeach
 
 
-                                    <div class="valid-feedback">
-                                        Correcto!
-                                    </div>
-                                    @error('departamento_id')
-                                    <small class="text-danger">{{$message}}</small>
-                                    @enderror
+                                <div class="valid-feedback">
+                                    Correcto!
+                                </div>
+                                @error('departamento_id')
+                                <small class="text-danger">{{$message}}</small>
+                                @enderror
                             </select>
                         </div>
                     </div>
@@ -182,7 +183,7 @@
                 preview.append(image);
             };
         }
-      
+
     });
 </script>
 
