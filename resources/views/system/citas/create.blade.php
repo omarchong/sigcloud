@@ -146,26 +146,31 @@
                     <div class="col-md-2 my-3">
                         <label for="exampleInputEmail1" class="col-sm-2-12 col-form-label">Tipo de cita</label>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="tipo_cita" value="Presencial" required="" onclick="Presencial();">
+                            <input class="form-check-input" type="radio" name="tipo_cita" value="Presencial" required="" {{-- onclick="Presencial();" --}}>
                             <label class="form-check-label">
                                 Presencial
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="tipo_cita" value="On-line" required="" onclick="Online();">
+                            <input class="form-check-input" type="radio" name="tipo_cita" value="On-line" required="" {{-- onclick="Online();" --}}>
                             <label class="form-check-label">
                                 On-line
                             </label>
                         </div>
                     </div>
-                    <div class="col-md-10 col-sm-2-12 col-form-label my-3" id="Presencial" style="display: none;">
+                    <div class="col-md-10 col-sm-2-12 col-form-label my-3">
+                        <label for="col-sm-2-12 col-form-label">Lugar/Link</label>
+                        <input type="text" class="form-control" id="lugar" name="lugar" placeholder="" >
+                    </div>
+                    {{-- <div class="col-md-10 col-sm-2-12 col-form-label my-3" id="Presencial" style="display: none;">
                         <label for="col-sm-2-12 col-form-label">Ingrese el lugar</label>
                         <input type="text" class="form-control" id="lugar" name="lugar" placeholder="" >
                     </div>
                     <div class="col-md-10 col-sm-2-12 col-form-label my-3" id="Online" style="display: none;">
                         <label for="col-sm-2-12 col-form-label">Ingrese la url</label>
                         <input type="text" class="form-control" id="link" name="link" placeholder="" >
-                    </div>
+                    </div> --}}
+
                     <div class="col-md-12">
                         <label for="" class="col-sm-2-12 col-form-label">Tema</label>
                         <div class="form-group">

@@ -41,15 +41,16 @@ class CitasController extends Controller
     {
         return view('system.citas.edit', [
             'cita' => $cita,
-            'usuarios' => Usuario::select('id','nombre', 'usuario', 'email', 'telefono')->get(),
+            'usuarios' => Usuario::select('id','nombre')->get(),
             'clientes' => Cliente::select('id','nombreempresa')->get(),
-            'estatucitas' => Estatucita::select('id','nombre')->get(),
+            'estatucitas' => Estatucita::select('id','nombre')->get()
         ]);
     }
 
-    public function update(CitaRequest $request, cita $cita)
+    public function update(CitaRequest $request, Cita $cita)
     {   
-        $cita->update();
+        $cit = $request->all();
+        $cita->update($cit);
         return redirect()
         ->route('citas.index')
         ->withSuccess("La cita $cita->nombre se actualizo exitosamente");

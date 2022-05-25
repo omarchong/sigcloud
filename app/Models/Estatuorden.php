@@ -13,7 +13,7 @@ class Estatuorden extends Model
 
     public function ordenpagos()
     {
-        return $this->belongsTo(Ordenpago::class);
+        return $this->hasOne(Ordenpago::class);
     }
 
 }

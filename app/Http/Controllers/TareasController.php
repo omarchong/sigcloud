@@ -16,7 +16,8 @@ class TareasController extends Controller
 
     public function index()
     {
-        return view('system.tarea.index');
+        $tareas = Tarea::paginate(5);
+        return view('system.tarea.index', compact('tareas'));
     }
 
     public function create()
@@ -50,19 +51,21 @@ class TareasController extends Controller
 
     public function update(TareaRequest $request, Tarea $tarea)
     {   
-        
-        $tarea->update();
+        $tar = $request->all();
+        $tarea->update($tar);
         return redirect()
         ->route('tareas.index')
         ->withSuccess("La tarea $tarea->nombre se actualizo exitosamente"); 
     }
 
-    public function destroy($id)
+    public function destroy(TareaRequest $request, Tarea $tarea)
     {
-        Tarea::where('id', $id)->delete();
-        return redirect()->route('tareas.index')
-            ->withSuccess('Tarea eliminada');
-    }
+        $tar = $request->all();
+        $tarea->delete($tar);
+        return redirect ()
+              ->route("tareas.index")
+              ->withSuccess("La tarea se ha dado de baja exitosamente");
+      }
 
     public function RegistrosDatatables()
     {

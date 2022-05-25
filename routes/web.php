@@ -15,6 +15,8 @@ use App\Http\Controllers\EstatusordenController;
 use App\Http\Controllers\EstatustareaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OrdenController;
+use App\Http\Controllers\OrdenpagosController;
 use App\Http\Controllers\SeguimientofacturasController;
 use App\Http\Controllers\ServiciosController;
 use App\Http\Controllers\UsuariosController;
@@ -138,8 +140,14 @@ Route::post('seleccionaempresa', [CitasController::class, 'seleccionaempresa'])-
 Route::post('buscausuario', [CitasController::class, 'buscausuario'])->name('buscausuario');
 Route::post('seleccionausuario', [CitasController::class, 'seleccionausuario'])->name('seleccionausuario');
 
+/* Orden */
+Route::resource('orden', OrdenpagosController::class);
+Route::get('datatables/ordenpagos', [OrdenpagosController::class, 'RegistrosDatatables'])->name('ordenpagos.datatables');
+
+
 /* Seguimientofacturas */
 Route::resource('seguimientofacturas', SeguimientofacturasController::class);
 Route::get('datatables/seguimientofacturas', [SeguimientofacturasController::class, 'RegistrosDatatables'])->name('seguimientofacturas.datatables');
 Route::post('buscafolio', [SeguimientofacturasController::class, 'buscafolio'])->name('buscafolio');
 Route::post('seleccionafolio', [SeguimientofacturasController::class, 'seleccionafolio'])->name('seleccionafolio');
+

@@ -43,7 +43,8 @@ class SeguimientofacturasController extends Controller
 
     public function update(SeguimientofacturaRequest $request, seguimientofactura $seguimientofactura)
     {   
-        $seguimientofactura->update();
+        $segf = $request->all();
+        $seguimientofactura->update($segf);
         return redirect()
         ->route('seguimientofacturas.index')
         ->withSuccess("El seguimiento factura se actualizo exitosamente");

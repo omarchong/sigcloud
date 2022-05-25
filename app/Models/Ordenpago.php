@@ -9,15 +9,22 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Ordenpago extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $fillabe = ['folio', 'num_pago', 'emite', 'fecha_limite', 'cotizacion_id', 'estatuorden_id'];
+    protected $fillable = [
+        'folio', 
+        'num_pago', 
+        'emite', 
+        'fecha_limite', 
+        'cotizacion_id', 
+        'estatuorden_id'
+    ];
 
-    public function estatusorden()
+    public function estatuorden()
     {
-        return $this->hasOne(Estatuorden::class);
+        return $this->belongsTo(Estatuorden::class);
     }
     public function cotizacion()
-    {
-        return $this->hasMany(Cotizacion::class);
+    {   
+        return $this->belongsTo(Cotizacion::class);
     }
     
     public function seguimientofacturas()

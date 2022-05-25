@@ -10,19 +10,22 @@
                     <div class="col-md-12">
                         <label for="">Buscar folio</label>
                         <div class="input-group">
-                            <input type="search" required name="buscarfolio" id="buscarfolio" class="form-control @error('ordenpagos_id') @enderror" aria-label="Search">
+                            <input type="search" required name="buscarfolio" id="buscarfolio" 
+                            class="form-control @error('ordenpagos_id')  @enderror" placeholder="" aria-label="Search">
                             <span class="input-group-btn">
                                 <button type="button" id="selectFolio" class="btn btn-primary">
                                     Seleccionar
                                 </button>
                             </span>
-                        </div><div class="valid-feedback">
+                        </div>
+                        <div class="valid-feedback">
                             Correcto!
                         </div>
                         @error('ordenpagos_id')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
+                    <input type="hidden" readonly class="form-control" name="ordenpagos_id" id="ordenpagos_id">
                     <div class="col-md-4 my-3">
                         <label for="" class="form-label"> Folio</label>
                         <div class="form-group">
@@ -33,7 +36,7 @@
                     <div class="col-md-4 my-3">
                         <label for="" class="form-label"> Numero de pago</label>
                         <div class="form-group">
-                            <input type="text" readonly class="form-control" name="num_pago" id="num_pago">
+                            <input type="text" readonly class="form-control" name="num_pagoo" id="num_pago">
                         </div>
                     </div>
 
@@ -44,31 +47,11 @@
                         </div>
                     </div>
 
-                    {{-- <div class="col-md-4">
-                        <label for="" class="col-sm-2-12 col-form-label">Seleccione un folio</label>
-                        <div class="">
-                            <select class="custom-select  @error('ordenpagos_id') is-invalid @enderror" name="ordenpagos_id"
-                                id="ordenpagos_id">
-                                @foreach ($ordenpagos as $ordenpago)
-                                    <option value="{{ $ordenpago->id }}">
-                                        {{ $ordenpago->folio }}
-                                    </option>
-                                @endforeach
-                                <div class="valid-feedback">
-                                    Correcto!
-                                </div>
-                                @error('ordenpagos_id')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </select>
-                        </div>
-                    </div> --}}
-
                     <div class="col-md-4">
                         <label for="" class="col-sm-2-12 col-form-label">Fecha de creación</label>
                         <div class="">
                             <input type="date" required class="form-control @error('factura_creada')  @enderror"
-                                value="{{ old('factura_creada') }}" name="factura_creada" id="factura_creada">
+                                value="<?php echo date("Y-m-d") ?>" name="factura_creada" id="factura_creada">
                             <div class="valid-feedback">
                                 Correcto!
                             </div>
@@ -135,9 +118,6 @@
     $(document).ready(function() {
         $("#seguimientofacturas").validate({
             rules: {
-                ordenpagos:{
-                    required: true
-                },
                 factura_creada: {
                     required: true
                 },
@@ -145,6 +125,9 @@
                     required: true
                 },
                 fecha_vencimiento: {
+                    required: true
+                },
+                ordenpagos_id: {
                     required: true
                 },
                 estatufacturas_id: {
@@ -226,6 +209,7 @@
                     _token: $("input[name=_token]").val()
                 },
                 success: function(data){
+                    $("#ordenpagos_id").val(data.id ?? "Sin datos")
                     $("#folio").val(data.folio ?? "Sin datos")
                     $("#num_pago").val(data.num_pago ?? "Sin datos")
                     $("#emite").val(data.emite ?? "Sin datos")

@@ -8,7 +8,26 @@
                 @csrf
                 @method('PUT')
                 <div class="form-row">
-                    <div class="col-md-4">
+                    <input type="text" readonly class="form-control" name="ordenpagos_id" id="ordenpagos_id" value="{{$seguimientofactura->ordenpagos_id}}">
+                    <div class="col-md-4 my-3">
+                        <label for="" class="form-label"> Folio</label>
+                        <div class="form-group">
+                            <input type="text" readonly class="form-control" value="{{$seguimientofactura->ordenpagos->folio}}" name="folio" id="folio">
+                        </div>
+                    </div> 
+                    <div class="col-md-4 my-3">
+                        <label for="" class="form-label"> Número de pago</label>
+                        <div class="form-group">
+                            <input type="text" readonly class="form-control" value="{{$seguimientofactura->ordenpagos->num_pago}}" name="num_pago" id="num_pago">
+                        </div>
+                    </div> 
+                    <div class="col-md-4 my-3">
+                        <label for="" class="form-label"> Emite</label>
+                        <div class="form-group">
+                            <input type="text" readonly class="form-control" value="{{$seguimientofactura->ordenpagos->emite}}" name="emite" id="emite">
+                        </div>
+                    </div> 
+                   {{--  <div class="col-md-4">
                         <label for="" class="col-sm-2-12 col-form-label">Seleccione un folio</label>
                         <div class="">
                             <select class="form-control @error('ordenpagos_id') is-invalid @enderror" name="ordenpagos_id"
@@ -25,11 +44,11 @@
                                 @enderror
                             </select>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-md-4">
-                        <label for="" class="col-sm-2-12 col-form-label">Fecha</label>
+                        <label for="" class="col-sm-2-12 col-form-label">Fecha de creación</label>
                         <div class="">
-                            <input type="date" required class="form-control @error('factura_creada')  @enderror"
+                            <input type="date" required class="form-control @error('factura_creada') is-invalid @enderror"
                             value="{{$seguimientofactura->factura_creada}}" name="factura_creada" id="factura_creada">
                             <div class="valid-feedback">
                                 Correcto!
@@ -42,7 +61,7 @@
                     <div class="col-md-4">
                         <label for="" class="col-sm-2-12 col-form-label">Numero de pago</label>
                         <div class="">
-                            <input type="number" required class="form-control @error('num_pago')  @enderror"
+                            <input type="number" required class="form-control @error('num_pago') is-invalid @enderror"
                             value="{{$seguimientofactura->num_pago}}" name="num_pago" id="num_pago">
                             <div class="valid-feedback">
                                 Correcto!
@@ -55,7 +74,7 @@
                     <div class="col-md-4">
                         <label for="" class="col-sm-2-12 col-form-label">Fecha de vencimiento</label>
                         <div class="">
-                            <input type="date" required class="form-control @error('fecha_vencimiento')  @enderror"
+                            <input type="date" required class="form-control @error('fecha_vencimiento') is-invalid @enderror"
                             value="{{$seguimientofactura->fecha_vencimiento}}" name="fecha_vencimiento" id="fecha_vencimiento">
                             <div class="valid-feedback">
                                 Correcto!
@@ -69,7 +88,8 @@
                         <label for="" class="col-sm-2-12 col-form-label">Seleccione el estatus</label>
                         <div class="">
                             <select class="form-control @error('estatufacturas_id') is-invalid @enderror"
-                                name="estatufacturas_id" id="estatufacturas_id" required>
+                                name="estatufacturas_id" id="estatufacturas_id">
+                                <option selected disabled value="">Seleccione una opción</option>
                                 @foreach ($estatufacturas as $estatufactura)
                                     <option value="{{$estatufactura->id}}" {{ $seguimientofactura->estatufacturas_id == $estatufactura->id ? 'selected' : '' }}>{{$estatufactura->nombre}}
                                 @endforeach

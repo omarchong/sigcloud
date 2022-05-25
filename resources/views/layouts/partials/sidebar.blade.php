@@ -73,6 +73,13 @@
             </li>
 
             <li class="nav-link">
+                <a href="{{ route('orden.index') }}">
+                    <img class="mr-2" src="/img/documento.svg" alt="" width="30px">
+                    <span class="text nav-text"> Orden</span>
+                </a>
+            </li>
+
+            <li class="nav-link">
                 <a href="{{ route('seguimientofacturas.index') }}">
                     <img class="mr-2" src="/img/documento.svg" alt="" width="30px">
                     <span class="text nav-text"> Seg. Facturas</span>

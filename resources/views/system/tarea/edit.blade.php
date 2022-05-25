@@ -10,7 +10,7 @@
                     <div class="col-md-4">
                         <label for="" class="control-label">Nombre</label>
                         <div class="">
-                            <input type="text" required class="form-control @error('nombre')  @enderror" value="{{$tarea->nombre}}" id="nombre" name="nombre">
+                            <input type="text" required class="form-control @error('nombre') is-invalid @enderror" value="{{$tarea->nombre}}" id="nombre" name="nombre">
                             <div class="valid-feedback">
                                 Correcto!
                             </div>
@@ -22,7 +22,7 @@
                     <div class="col-md-4">
                         <label for="" class="control-label">Hora</label>
                         <div class="">
-                            <input type="time" required class="form-control @error('hora_limite')  @enderror" value="{{$tarea->hora_limite}}" name="hora_limite" id="hora_limite">
+                            <input type="time" required class="form-control @error('hora_limite') is-invalid @enderror" value="{{$tarea->hora_limite}}" name="hora_limite" id="hora_limite">
                             <div class="valid-feedback">
                                 Correcto!
                             </div>
@@ -34,7 +34,7 @@
                     <div class="col-md-4">
                         <label for="" class="control-label">Fecha</label>
                         <div class="">
-                            <input type="date" required class="form-control @error('fecha_limite')  @enderror" value="{{$tarea->fecha_limite}}" name="fecha_limite" id="fecha_limite">
+                            <input type="date" required class="form-control @error('fecha_limite') is-invalid @enderror" value="{{$tarea->fecha_limite}}" name="fecha_limite" id="fecha_limite">
                             <div class="valid-feedback">
                                 Correcto!
                             </div>
@@ -46,7 +46,7 @@
                     <div class="col-md-4">
                         <label for="" class="col-sm-2-12 col-form-label">Tipo de tarea</label>
                         <div class="">
-                            <input type="text" required class="form-control @error('tipo_tarea')  @enderror" value="{{$tarea->tipo_tarea}}" name="tipo_tarea" id="tipo_tarea">
+                            <input type="text" required class="form-control @error('tipo_tarea') is-invalid @enderror" value="{{$tarea->tipo_tarea}}" name="tipo_tarea" id="tipo_tarea">
                             <div class="valid-feedback">
                                 Correcto!
                             </div>
@@ -57,11 +57,11 @@
                     </div>
                     <div class="col-md-4">
                         <label for="" class="col-sm-2-12 col-form-label">Seleccione un usuario</label>
-                        <div class="">
-                            <select class="form-control @error('usuarios_id') is-invalid @enderror" name="usuarios_id" id="usuarios_id" required>
-                                @foreach ($usuarios as $usuario)
-                                <option value="{{$usuario->id}}" {{ $tarea->usuarios_id == $usuario->id ? 'selected' : '' }}>{{$usuario->nombre}}
-                                </option>
+                        <div class="form-group">
+                            <select class="form-control @error('usuarios_id') is-invalid @enderror" name="usuarios_id" id="usuarios_id">
+                                <option selected disabled value="">Seleccione una opcion</option>
+                                @foreach($usuarios as $usuario)
+                                <option value="{{$usuario->id}}" {{ $tarea->usuarios_id == $usuario->id ? 'selected' : '' }}>{{$usuario->nombre}}</option>
                                 @endforeach
                                 <div class="valid-feedback">
                                     Correcto!
@@ -74,11 +74,11 @@
                     </div>
                     <div class="col-md-4">
                         <label for="" class="col-sm-2-12 col-form-label">Seleccione al cliente</label>
-                        <div class="">
-                            <select class="custom-select  @error('clientes_id') is-invalid @enderror" name="clientes_id" id="clientes_id">
+                        <div class="form-group">
+                            <select class="form-control  @error('clientes_id') is-invalid @enderror" name="clientes_id" id="clientes_id">
+                                <option selected disabled value="">Seleccione una opcion</option>
                                 @foreach ($clientes as $cliente)
-                                <option value="{{$cliente->id}}" {{ $tarea->clientes_id == $cliente->id ? 'selected' : '' }}>{{$cliente->nombreempresa}}
-                                </option>
+                                <option value="{{$cliente->id}}" {{ $tarea->clientes_id == $cliente->id ? 'selected' : '' }}>{{$cliente->nombreempresa}}</option>
                                 @endforeach
                                 <div class="valid-feedback">
                                     Correcto!
@@ -91,8 +91,9 @@
                     </div>
                     <div class="col-md-4">
                         <label for="" class="col-sm-2-12 col-form-label">Seleccione el estatus</label>
-                        <div class="">
-                            <select class="form-control @error('estatutareas_id') is-invalid @enderror" name="estatutareas_id" id="estatutareas_id" required>
+                        <div class="form-group">
+                            <select class="form-control @error('estatutareas_id') is-invalid @enderror" name="estatutareas_id" id="estatutareas_id">
+                                <option selected disabled value="">Seleccione una opción</option>
                                 @foreach ($estatutareas as $estatutarea)
                                 <option value="{{$estatutarea->id}}" {{ $tarea->estatutareas_id == $estatutarea->id ? 'selected' : '' }}>{{$estatutarea->nombre}}
                                     @endforeach
@@ -108,7 +109,7 @@
                     <div class="col-md-12">
                         <label for="" class="col-sm-2-12 col-form-label">Descripción</label>
                         <div class="">
-                            <input type="hidden" required class="form-control @error('descripcion')  @enderror" value="{{$tarea->descripcion}}" id="descripcion" name="descripcion">
+                            <input type="hidden" required class="form-control @error('descripcion') is-invalid @enderror" value="{{$tarea->descripcion}}" id="descripcion" name="descripcion">
                             <trix-editor input="descripcion"></trix-editor>
                             <div class="valid-feedback">
                                 Correcto!
