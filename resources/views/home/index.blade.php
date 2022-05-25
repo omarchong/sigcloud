@@ -10,7 +10,7 @@
                     <div class="card-header" id="servicios">
                         <div class="row">
                             <div class="col-md-3">
-                                <h6><span class="azul">12</span></h6>
+                                <h6><span class="azul">{{$servicios}}</span></h6>
                             </div>
                             <div class="col-md-9">
                                 <h5><b>Servicios en cotizacion</b></h5>

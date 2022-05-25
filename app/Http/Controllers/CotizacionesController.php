@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CotizacionRequest;
 use App\Models\Cliente;
 use App\Models\Cotizacion;
-use App\Models\DetalleCotizacion;
+
 use App\Models\Estatucotizacion;
 use App\Models\Servicio;
 use Carbon\Carbon;
@@ -17,7 +17,11 @@ use PDF;
 class CotizacionesController extends Controller
 
 {
-
+    public function servicios_cotizados()
+    {
+        $servicios = Cliente::count();
+        return $servicios;
+    }
     public function buscacliente(Request $request)
     {
         $term = $request->get('term');
@@ -85,10 +89,12 @@ class CotizacionesController extends Controller
 
     public function pdfCoti()
     {
+
         $detallecotizacion = Cotizacion::select('descripcion', 'fecha_estimadaentrega')->get();
         $pdf = PDF::loadView('system.cotizaciones.cotizacionPdf', compact('detallecotizacion'));
         return $pdf->stream('ejemplo.pdf');
     }
+
 
 
     public function show($id)

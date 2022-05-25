@@ -75,7 +75,7 @@ class UsuariosController extends Controller
     {
         return view('system.usuarios.edit', [
             'usuario' => $usuario,
-            'departamentos' => Departamento::select('id','nombre')->get()
+            'departamentos' => Departamento::select('id', 'nombre')->get()
         ]);
     }
 
@@ -105,5 +105,12 @@ class UsuariosController extends Controller
             ->eloquent(
                 Usuario::query()
             )->toJson();
+    }
+
+
+    public function show($id)
+    {
+        $usuarios = Usuario::findOrFail($id);
+        return view('system.usuarios.show', compact('usuarios'));
     }
 }

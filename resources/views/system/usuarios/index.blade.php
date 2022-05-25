@@ -71,14 +71,19 @@
                                         return `
                                     
                                                 <a href="/usuarios/${data}/edit"
-                                                class="btn"
-                                                ${full.deleted_at ? 'hidden' : ''}>
-                                                <img src="/img/editar.svg" width="20px">
-                                                <a href="/usuarios/${data}/show"
-                                                class="btn"
-                                                ${full.deleted_at ? 'hidden' : ''}>
-                                                <img src="/img/basurero.svg" width="20px">
+                                                class="btn">
+                                                <img src="/img/editar.svg" width="15px">
+                                                
                                                 </a>
+
+                                                <a href="/usuarios/${data}/show"
+                                                class="btn">
+                                                <img src="/img/basurero.svg" width="15px">
+                                                </a>
+
+                                                <a href="/usuarios/${data}"
+                                                class="btn">
+                                                 <i class="fas fa-eye"></i> </a>
                                     `
                                     }
                                 }

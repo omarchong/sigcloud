@@ -10,6 +10,8 @@ use Symfony\Component\CssSelector\Node\FunctionNode;
 class Usuario extends Model
 {
     use HasFactory, SoftDeletes;
+    protected $table = 'usuarios';
+
     protected $fillable = [
         'nombre',
         'app',
@@ -40,10 +42,7 @@ class Usuario extends Model
         return $this->hasMany('App\Cita');
     }
 
-    /* public function tareas()
-    {
-        return $this->belongsTo(Tarea::class);
-    } */
+   
     public function tareas()
     {
         return $this->hasMany('App\Tarea');
@@ -55,6 +54,6 @@ class Usuario extends Model
     }
     public function departamentos()
     {
-        return $this->hasOne(Departamento::class);
+        return $this->belongsTo(Departamento::class);
     }
 }
