@@ -32,7 +32,7 @@ class UsuarioSeeder extends Seeder
             'apm' => 'Diaz',
             'telefono' => '7223608148',
             'usuario' => 'Cris',
-            'email' => 'cristhian.zacarias@dswestudio.com',
+            'email' => 'al221811670@gmail.com',
             'contrasena' => bcrypt('cris12345'),
             'contrasena_confirmar' => bcrypt('cris12345'),
             'imagen' => 'imagen',

@@ -57,13 +57,12 @@ class TareasController extends Controller
         ->withSuccess("La tarea $tarea->nombre se actualizo exitosamente"); 
     }
 
-    public function destroy(TareaRequest $request, Tarea $tarea)
+    public function destroy(Tarea $tarea)
     {
-        $tar = $request->all();
-        $tarea->delete($tar);
-        return redirect ()
+        $tarea->delete();
+        return redirect()
               ->route("tareas.index")
-              ->withSuccess("La tarea se ha dado de baja exitosamente");
+              ->withSuccess("La tarea se eliminó correctamente");
       }
 
     public function RegistrosDatatables()
