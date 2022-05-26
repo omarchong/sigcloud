@@ -16,7 +16,7 @@ class TareaSeeder extends Seeder
             'fecha_limite' =>  date('Y-m-d H:i:s'),
             'hora_limite' =>  date('H:i:s'),
             'tipo_tarea' => 'Cita',
-            'usuarios_id' => 1,
+            'usuario_id' => 1,
             'clientes_id' => 1,
             'estatutareas_id' => 1,
             'created_at' => date('Y-m-d H:i:s'),

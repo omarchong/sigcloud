@@ -16,8 +16,7 @@ class TareasController extends Controller
 
     public function index()
     {
-        $tareas = Tarea::paginate(5);
-        return view('system.tarea.index', compact('tareas'));
+        return view('system.tarea.index');
     }
 
     public function create()

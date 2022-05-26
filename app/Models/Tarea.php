@@ -10,20 +10,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Tarea extends Model
 {
     use HasFactory;
+    protected $table= 'tareas';
     protected $fillable = [
         'nombre',
         'descripcion',
         'fecha_limite',
         'hora_limite',
         'tipo_tarea',
-        'usuarios_id',
+        'usuario_id',
         'clientes_id',
         'estatutareas_id',
     ];
 
     public function usuarios()
     {
-        return $this->belongsTo(Usuario::class);
+        return $this->belongsToMany(Usuario::class);
     }
 
     public function clientes()

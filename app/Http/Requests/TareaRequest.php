@@ -20,7 +20,7 @@ class TareaRequest extends FormRequest
             'fecha_limite' => ['required'],
             'hora_limite' => ['required'],
             'tipo_tarea' => ['required'],
-            'usuarios_id' => ['required'],
+            'usuario_id' => ['required'],
             'clientes_id' => ['required'],
             'estatutareas_id' => ['required'],
             'descripcion' => ['required']

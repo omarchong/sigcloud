@@ -62,8 +62,8 @@
                     <div class="col-md-4">
                         <label for="" class="col-sm-2-12 col-form-label">Seleccione un usuario</label>
                         <div class="">
-                            <select class="form-control  @error('usuarios_id') is-invalid @enderror" name="usuarios_id"
-                                id="usuarios_id">
+                            <select class="form-control  @error('usuario_id') is-invalid @enderror" name="usuario_id"
+                                id="usuario_id">
                                 @foreach ($usuarios as $usuario)
                                     <option value="{{ $usuario->id }}">
                                         {{ $usuario->nombre }}

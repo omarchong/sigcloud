@@ -51,8 +51,7 @@
             },
             {
                 data: 'fecha_limite'
-            },
-            {
+            }, {
                 data: 'usuarios.nombre'
             },
             {
@@ -71,51 +70,45 @@
                     <a href="/tareas/${data}/delete" class="btn">
                         <img src="/img/basurero.svg" width="20px">
                     </a>  
-                    @foreach($tareas as $tarea)
-                    <form action="#" method="POST" class="formEliminar">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Borrar</button>
-                    </form>
-                    @endforeach
+                  
                     
                     `
                 }
             }
         ]
     });
-    
+
     function reloadTable() {
         $('#tareas').DataTable().ajax.reload();
     }
 </script>
 <script>
-    (function () {
-    'use strict'
-    //debemos crear la clase formeliminar dentro del form del boton borrar
-    //recordar que cada registro a eliminar esta contenido de un form
-    var forms = document.querySelectorAll('.formEliminar')
+    (function() {
+        'use strict'
+        //debemos crear la clase formeliminar dentro del form del boton borrar
+        //recordar que cada registro a eliminar esta contenido de un form
+        var forms = document.querySelectorAll('.formEliminar')
 
-    Array.prototype.slice.call(forms)
-        .forEach(function (form) {
-        form.addEventListener('submit', function (event) {
-            event.preventDefault()
-            event.stopPropagation()
-            Swal.fire({
-                title: '¿Confirmar la eliminacion del registro?',
-                icon: 'info',
-                showCancelButton: true,
-                confirmButtonColor: '#20c997',
-                cancelButtonColor: '#6c757d',
-                confirmButtonText: 'Confirmar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if(result.isConfirmed) {
-                    this.submit();
-                    Swal.fire('¡Eliminado!', 'El registro ha sido eliminado correctamente...', 'success');
-                }
+        Array.prototype.slice.call(forms)
+            .forEach(function(form) {
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                    Swal.fire({
+                        title: '¿Confirmar la eliminacion del registro?',
+                        icon: 'info',
+                        showCancelButton: true,
+                        confirmButtonColor: '#20c997',
+                        cancelButtonColor: '#6c757d',
+                        confirmButtonText: 'Confirmar',
+                        cancelButtonText: 'Cancelar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            this.submit();
+                            Swal.fire('¡Eliminado!', 'El registro ha sido eliminado correctamente...', 'success');
+                        }
+                    })
+                }, false)
             })
-        }, false)
-        })
     })()
 </script>

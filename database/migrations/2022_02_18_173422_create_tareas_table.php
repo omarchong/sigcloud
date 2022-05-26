@@ -16,7 +16,7 @@ class CreateTareasTable extends Migration
             $table->date('fecha_limite');
             $table->time('hora_limite');
             $table->string('tipo_tarea');
-            $table->foreignId('usuarios_id')->constrained();
+            $table->foreignId('usuario_id')->constrained();
             $table->foreignId('clientes_id')->constrained();
             $table->foreignId('estatutareas_id')->constrained();
             $table->timestamps();

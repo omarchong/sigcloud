@@ -5,18 +5,20 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UsuarioEditRequest;
 use App\Http\Requests\UsuarioRequest;
 use App\Models\Departamento;
-use App\Models\Rol;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UsuariosController extends Controller
 {
+    /* retorna ala vista inicial del modulo usuarios */
     public function index()
     {
         return view('system.usuarios.index');
     }
 
+    /* retorna a la vista de crear usuario */
     public function create()
     {
         return view('system.usuarios.create', [
@@ -24,6 +26,7 @@ class UsuariosController extends Controller
         ]);
     }
 
+    /* crea un usuario */
     public function store(UsuarioRequest $request)
     {
         /* dd($request->all()); */
@@ -70,7 +73,7 @@ class UsuariosController extends Controller
     }
 
 
-
+    /*  actualiza un usuario */
     public function edit(Usuario $usuario)
     {
         return view('system.usuarios.edit', [
@@ -99,6 +102,8 @@ class UsuariosController extends Controller
             ->route('usuarios.index')
             ->withSuccess("El usuario $usuario->nombre se actualizo exitosamente");
     }
+
+    /* retorna los valores a la tabla inicial del modulo */
     public function RegistrosDatatables()
     {
         return datatables()
@@ -108,9 +113,20 @@ class UsuariosController extends Controller
     }
 
 
+    /* muestra el detalle de actividades asignadas y de usuario */
     public function show($id)
     {
         $usuarios = Usuario::findOrFail($id);
-        return view('system.usuarios.show', compact('usuarios'));
+        $departamentos = DB::select("SELECT usu.nombre, depa.nombre, depa.abreviatura, depa.estatus
+        FROM usuarios AS usu
+        INNER JOIN departamentos AS depa
+        ON usu.departamento_id = depa.id
+        WHERE usu.id = $id");
+
+        $tareas = DB::select("SELECT tar.nombre FROM tareas  AS tar
+        INNER JOIN usuarios AS usu
+        ON tar.usuario_id = usu.id
+        WHERE usuario_id = $id");
+        return view('system.usuarios.show', compact('usuarios', 'tareas', 'departamentos'));
     }
 }
