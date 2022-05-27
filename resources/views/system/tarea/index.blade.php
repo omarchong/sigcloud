@@ -25,9 +25,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($tareas as $tarea)
-                                
-                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -54,8 +51,9 @@
             },
             {
                 data: 'fecha_limite'
-            }, {
-                data: 'usuarios.nombre'
+            }, 
+            {
+                data: 'usuario.nombre'
             },
             {
                 data: 'clientes.nombreempresa'

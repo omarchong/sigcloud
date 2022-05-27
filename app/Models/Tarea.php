@@ -22,9 +22,9 @@ class Tarea extends Model
         'estatutareas_id',
     ];
 
-    public function usuarios()
+    public function usuario()
     {
-        return $this->belongsToMany(Usuario::class);
+        return $this->belongsTo(Usuario::class);
     }
 
     public function clientes()

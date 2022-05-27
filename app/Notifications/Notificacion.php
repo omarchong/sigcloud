@@ -16,9 +16,9 @@ class Notificacion extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($tarea)
     {
-        //
+        $this->tarea = $tarea;
     }
 
     /**
@@ -29,29 +29,26 @@ class Notificacion extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
     public function toMail($notifiable)
     {
         return (new MailMessage)
                     ->line('Has recibido una nueva tarea.')
+                    ->line('La tarea es: ' . $this->tarea)
                     ->action('Ver', url('/'))
                     ->line('Gracias por enviar!');
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
+    // Notificaciones en la base de datos
+    public function toDatabase($notifiable)
+    {
+        return [
+            'tarea' => $this->tarea
+        ];
+    }
+
     public function toArray($notifiable)
     {
         return [
