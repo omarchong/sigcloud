@@ -1,10 +1,10 @@
-
 <div class="encabezado w-100">
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <img class="mr-2" src="/img/logosigcloud.svg" alt="" width="200px">
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -25,33 +25,34 @@
                     <li class="nav-item">
                         <a class="nav-link disabled"> <b>Bienvenido Omar </b><br> Ver perfil</a>
                     </li>
-                    <!-- Notifications Dropdown Menu -->
-        <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="#">
-              <i class="fas fa-bell"></i>
-              <span class="badge badge-warning navbar-badge">15</span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-              <span class="dropdown-header">15 Notifications</span>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <i class="fas fa-envelope mr-2"></i> 4 new messages
-                <span class="float-right text-muted text-sm">3 mins</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <i class="fas fa-users mr-2"></i> 8 friend requests
-                <span class="float-right text-muted text-sm">12 hours</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
-                <i class="fas fa-file mr-2"></i> 3 new reports
-                <span class="float-right text-muted text-sm">2 days</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-            </div>
-          </li>
+                    <li class="nav-item dropdown submenu">
+                      <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"><img class="mr-2" src="/img/notificacion.svg" alt="" width="40px"></a>
+                      <div class="dropdown-menu children">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Separated link</a>
+                      </div>
+                    </li>
+                    {{-- <li class="submenu nav-link">
+                        <a href="#">
+                            <img class="mr-2" src="/img/notificacion.svg" alt="" width="40px"><span
+                                class="badge badge-warning navbar-badge">15</span>
+                        </a>
+                        <ul class="children">
+                            <li><a href="{{ route('estatucitas.index') }}">
+                                    <span class="text">Estatu citas</span>
+                                </a></li>
+                            <li><a href="{{ route('estatucotizacions.index') }}">
+                                    <span class="text">Estatu cotizacion</span>
+                                </a></li>
+                            <li><a href="{{ route('tipoproyectos.index') }}">
+                                    <span class="text">Tipo proyecto </span>
+                                </a></li>
+                        </ul>
+                    </li> --}}
+
                 </ul>
             </div>
         </div>

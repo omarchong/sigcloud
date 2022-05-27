@@ -25,6 +25,9 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($tareas as $tarea)
+                                
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
