@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CotizacionRequest;
 use App\Models\Cliente;
 use App\Models\Cotizacion;
-
 use App\Models\Estatucotizacion;
 use App\Models\Servicio;
 use Carbon\Carbon;
@@ -106,7 +104,7 @@ class CotizacionesController extends Controller
         ON dco.servicios_id = serv.id
         WHERE cotizacion_id = $id
         ORDER BY numero_servicios ASC");
-        return  view('system.cotizaciones.show', compact('consulta','cotizaciones'));
+        return  view('system.cotizaciones.show', compact('consulta', 'cotizaciones'));
     }
 
     public function edit()
