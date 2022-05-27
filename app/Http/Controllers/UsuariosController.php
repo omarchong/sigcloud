@@ -9,13 +9,22 @@ use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Session;
 
 class UsuariosController extends Controller
 {
     /* retorna ala vista inicial del modulo usuarios */
     public function index()
     {
+        $sessionusuario = session('sessionusuario');
+        if($sessionusuario<> "")
+        {
         return view('system.usuarios.index');
+        } 
+        else{
+            Session::flash('mensaje', "Iniciar sesión antes de continuar");
+            return redirect()->route('login');
+        }
     }
 
     /* retorna a la vista de crear usuario */

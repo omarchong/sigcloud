@@ -143,7 +143,7 @@
             </li>
             
             <li class="nav-link">
-                <a href="#">
+                <a href="{{route('cerrarsesion')}}">
                     <img class="mr-2" src="/img/logout.svg" alt="" width="30px">
                     <span class="text nav-text">Cerrar sesión</span>
                 </a>

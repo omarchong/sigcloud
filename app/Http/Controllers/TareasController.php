@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TareaEditRequest;
 use App\Http\Requests\TareaRequest;
 use App\Models\Cliente;
 use App\Models\Estatutarea;
@@ -10,6 +9,8 @@ use App\Models\Tarea;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use App\Notifications\Notificacion;
+
 
 class TareasController extends Controller
 {
@@ -26,6 +27,7 @@ class TareasController extends Controller
             'clientes' => Cliente::select('id','nombreempresa')->get(),
             'estatutareas' => Estatutarea::select('id','nombre')->get()
           ]);
+         
     }
 
     public function store(TareaRequest $request)
@@ -33,6 +35,10 @@ class TareasController extends Controller
         /* dd($request->all()); */
 
         $tarea = Tarea::create($request->validated());
+
+        $usuario = $tarea->usuario;
+        $usuario->notify( new Notificacion( $tarea->nombre ) );
+
         return redirect()
         ->route('tareas.index');
     }
@@ -70,7 +76,7 @@ class TareasController extends Controller
         return datatables()
       ->eloquent(
         Tarea::query()
-          ->with(['usuarios', 'clientes', 'estatutareas'])
+          ->with(['usuario', 'clientes', 'estatutareas'])
       )
       ->toJson();
     }

@@ -31,17 +31,29 @@ class LoginController extends Controller
             ->get();
         $cuantos = count($consulta);
 
-        if ($cuantos == 1 and Hash::check($request->contrasena, $consulta[0]->contrasena)) {
-            Session::put('sessionusuario', $consulta[0]->nombre. ' ' .$consulta[0]->app);
+        if ($cuantos == 1 and Hash::check($request->contrasena, $consulta[0]->contrasena)) 
+        {
+            Session::put('sessionusuario', $consulta[0]->nombre);
+            Session::put('sessionid', $consulta[0]->id);
             return redirect()->route('inicio');
-        } else {
-
+        } 
+        else 
+        {
+            Session::flash('mensaje', "El usuario o password no son validos");
             return redirect()->route('login');
         }
     }
     public function inicio()
     {
+        $sessionusuario = session('sessionusuario');
+        if($sessionusuario<> "")
+        {
             return view('system.dashboard.principal');
+        }
+        else{
+            Session::flash('mensaje', "Iniciar sesión antes de continuar");
+            return redirect()->route('login');
+        }
 
     }
 
@@ -87,7 +99,7 @@ class LoginController extends Controller
     {
         Session::forget('sesionusuario');
         Session::flush();
-        Session::flash('mensaje',"session cerrada"); 
-    return redirect()->route('login');
+        Session::flash('mensaje',"Sesion cerrada correctamente"); 
+        return redirect()->route('login');
     }
 }
