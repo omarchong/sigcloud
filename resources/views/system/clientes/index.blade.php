@@ -60,13 +60,11 @@
                                     render: function(data, type, full, meta) {
                                         return `
                                     
-                                                <a href="/usuarios/${data}/edit"
-                                                class="btn"
-                                                ${full.deleted_at ? 'hidden' : ''}>
+                                                <a href="/clientes/${data}/edit"
+                                                class="btn">
                                                 <img src="/img/editar.svg" width="20px">
                                                 <a href="/usuarios/${data}/show"
-                                                class="btn"
-                                                ${full.deleted_at ? 'hidden' : ''}>
+                                                class="btn">
                                                 <img src="/img/basurero.svg" width="20px">
                                                 </a>
                                     `

@@ -30,13 +30,37 @@ class ClientesController extends Controller
         ]);
     }
 
+
+    public function edit(Cliente $cliente)
+    {
+        return view('system.clientes.edit', [
+            'cliente' => $cliente,
+            'contactos' => Contacto::select('id', 'contacto1')->get(),
+            'estados' => Estado::select('id', 'nombre')->get(),
+            'municipios' => Municipio::select('id', 'nombre')->get(),
+            'giros' => Giro::select('id', 'nombre')->get()
+        ]);
+    }
+
+
+    /* actualizar cliente */
+
+    public function update(ClienteRequest $request, cliente $cliente)
+    {
+        $cliente->update($request->validated());
+        $cliente->save();
+        return redirect()
+            ->route('clientes.index')
+            ->withSuccess("El cliente $cliente->nombreempresa se actualizo exitosamente");
+    }
+
     public function store(ClienteRequest $request)
     {
         /* dd($request->all()); */
-            $cliente = Cliente::create($request->validated());
-            return redirect()
-                ->route('clientes.index')
-                ->withSuccess("El cliente $cliente->nombreempresa se guardo correctamente");
+        $cliente = Cliente::create($request->validated());
+        return redirect()
+            ->route('clientes.index')
+            ->withSuccess("El cliente $cliente->nombreempresa se guardo correctamente");
     }
 
     public function RegistrosDatatables()

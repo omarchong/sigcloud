@@ -90,7 +90,7 @@ class CotizacionesController extends Controller
     public function pdfCoti()
     {
 
-        $detallecotizacion = Cotizacion::select('descripcion', 'fecha_estimadaentrega')->get();
+        $detallecotizacion = Cotizacion::select('descripcion_global', 'fecha_estimadaentrega')->get();
         $pdf = PDF::loadView('system.cotizaciones.cotizacionPdf', compact('detallecotizacion'));
         return $pdf->stream('ejemplo.pdf');
     }
@@ -100,7 +100,7 @@ class CotizacionesController extends Controller
     public function show($id)
     {
         $cotizaciones = Cotizacion::findOrFail($id);
-        $consulta = DB::select("SELECT dco.cotizacion_id, dco.numero_servicios, dco.precio_bruto, dco.precio_iva, dco.subtotal, serv.nombre
+        $consulta = DB::select("SELECT dco.cotizacion_id, dco.numero_servicios, dco.precio_bruto, dco.precio_iva, dco.subtotal, serv.nombre, serv.descripcion
         FROM detalle_cotizacion AS dco
         INNER JOIN servicios AS serv
         ON dco.servicios_id = serv.id

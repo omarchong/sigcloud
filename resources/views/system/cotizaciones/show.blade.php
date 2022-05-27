@@ -51,7 +51,7 @@
                 @foreach($consulta as $detalle)
                 <tr>
                     <td>{{$detalle->cotizacion_id}}</td>
-                    <td>{!!$cotizaciones->descripcion!!}</td>
+                    <td>{{$detalle->descripcion}}</td>
                     <td>{{$detalle->nombre}}</td>
                     <td>{{$detalle->numero_servicios}}</td>
                     <td>{{$detalle->precio_bruto}}</td>

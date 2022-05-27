@@ -11,7 +11,7 @@ class CotizacionSeeder extends Seeder
     public function run()
     {
         DB::table('cotizaciones')->insert([
-            'descripcion' => 'Desarrollo de sitio web y logo',
+            'descripcion_global' => 'Desarrollo de sitio web y logo',
             'fecha_estimadaentrega' => date('Y-m-d H:i:s'),
             'clientes_id' => 1,
             'estatucotizacion_id' => 1,

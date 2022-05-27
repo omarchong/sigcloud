@@ -63,13 +63,19 @@
                             </span>
                         </div>
                     </div>
-                    <div class="col-md-3 my-3">
+                    <div class="col-md-1 my-3">
                         <label for="exampleInputEmail1" class="form-label">Clave</label>
                         <div class="form-group">
                             <input type="text" readonly class="form-control" id="servicios_id" name="servicios_id">
 
                         </div>
 
+                    </div>
+                    <div class="col-md-3 my-3">
+                        <label for="exampleInputEmail1" class="form-label">Descripcion</label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="descripcion" name="descripcion">
+                        </div>
                     </div>
                     <div class="col-md-3 my-3">
                         <label for="exampleInputEmail1" class="form-label">Servicio</label>
@@ -83,7 +89,7 @@
                             <input type="text" class="form-control" id="precio_inicial" name="precio_inicial">
                         </div>
                     </div>
-                    <div class="col-md-3 my-3">
+                    <div class="col-md-2 my-3">
                         <label for="exampleInputEmail1" class="form-label">Cantidad</label>
                         <div class="form-group">
                             <input type="number" value="1" class="form-control" id="numero_servicios" name="numero_servicios">
@@ -115,8 +121,8 @@
                     <div class="col-md-12">
                         <label for="descripcion">Descripcion</label>
                         <div class="form-group">
-                            <input type="hidden" required name="descripcion" id="descripcion" value="{{old('descripcion')}}">
-                            <trix-editor input="descripcion"></trix-editor>
+                            <input type="hidden" required name="descripcion_global" id="descripcion_global" value="{{old('descripcion_global')}}">
+                            <trix-editor input="descripcion_global"></trix-editor>
                         </div>
                         <div class="valid-feedback">
                             Correcto!
@@ -237,6 +243,7 @@
                     $("#estatuscliente").val(data.estatuscliente ?? "Sin datos")
 
 
+
                 }
             })
         })
@@ -254,6 +261,8 @@
                     $("#servicios_id").val(data.id ?? "Sin datos")
                     $("#nombre").val(data.nombre ?? "Sin datos")
                     $("#precio_inicial").val(data.precio_inicial ?? "Sin datos")
+                    $("#descripcion").val(data.descripcion ?? "Sin datos")
+
 
 
                 }
@@ -280,7 +289,7 @@
         total_t = 0;
         total_total = [];
 
-       
+
 
         function agregar() {
 

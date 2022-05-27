@@ -18,7 +18,7 @@ class CreateCotizacionesTable extends Migration
                 ->references('id')
                 ->on('estatucotizacions');
             $table->string('fecha_estimadaentrega');
-            $table->string('descripcion');
+            $table->string('descripcion_global');
             $table->softDeletes();
             $table->timestamps();
         });
