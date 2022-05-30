@@ -23,7 +23,7 @@ class UsuarioRequest extends FormRequest
             'telefono' => 'required',
             'usuario' => 'required|unique:usuarios',
             'email' => 'required|email|unique:usuarios',
-            'contrasena' => 'required',
+            'contrasena' => 'required|same:contrasena',
             'contrasena_confirmar' => 'required|same:contrasena',
             'departamento_id' => 'required',
             'imagen' => 'image|mimes:jpg,png,jpeg|max:1024',
