@@ -17,7 +17,11 @@ class CotizacionRequest extends FormRequest
     {
         return [
             'numero_servicios' => ['required'],
-            'servicios_id' => ['']
+            'servicios_id' => [''],
+            'fecha_estimadaentrega' => ['required'],
+            'buscarcliente' => ['required'],
+            'buscarservicio' => ['required'],
+            
         ];
     }
 }

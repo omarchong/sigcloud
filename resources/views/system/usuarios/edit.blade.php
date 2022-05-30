@@ -200,11 +200,16 @@
                 },
                 contrasena: {
                     required: true,
+                    minlength: 5,
+                    maxlength: 10,
 
 
                 },
                 contrasena_confirmar: {
                     required: true,
+                    minlength: 5,
+                    maxlength: 10,
+                    equalTo: "#contrasena"
 
                 },
                 departamento: {
@@ -238,10 +243,11 @@
                     required: "El email es requerido"
                 },
                 contrasena: {
-                    required: "La contraseña es requerido"
+                    required: "La contraseña es requerido y debe ser igual a contraseña, por favor ingrese 5 caracteres minimo o maximo 10"
+
                 },
                 contrasena_confirmar: {
-                    required: "La contraseña es requerido y debe ser igual a contraseña"
+                    required: "La contraseña es requerido y debe ser igual a contraseña, por favor ingrese 5 caracteres minimo o maximo 10"
                 },
                 departamento: {
                     required: "Seleccione un departamento"

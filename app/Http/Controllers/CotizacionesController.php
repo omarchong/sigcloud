@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CotizacionRequest;
 use App\Models\Cliente;
 use App\Models\Cotizacion;
 use App\Models\Estatucotizacion;
@@ -62,10 +63,9 @@ class CotizacionesController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(CotizacionRequest $request)
     {
         return DB::transaction(function () use ($request) {
-
             $cotizacion = Cotizacion::create($request->all());
 
             foreach ($request->servicios_id as $index => $servicios_id) {
