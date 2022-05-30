@@ -110,8 +110,8 @@ class UsuariosController extends Controller
 
     public function update(UsuarioEditRequest $request, usuario $usuario)
     {
-          dd($request->all());
-        /* $usu = $request->all();
+        /*   dd($request->all()); */
+        $usu = $request->all();
         if ($imagen = $request->file('imagen')) {
             $rutaGuardarImg = 'imagen/';
             $imagenUsuario = date('YmdHis') . "." . $imagen->getClientOriginalExtension();
@@ -126,7 +126,7 @@ class UsuariosController extends Controller
 
         return redirect()
             ->route('usuarios.index')
-            ->withSuccess("El usuario $usuario->nombre se actualizo exitosamente"); */
+            ->withSuccess("El usuario $usuario->nombre se actualizo exitosamente");
     }
 
     /* retorna los valores a la tabla inicial del modulo */
