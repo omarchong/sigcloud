@@ -8,21 +8,26 @@
                 <div class="form-row">
 
                     <div class="col-md-12">
-
                         <label for="">Buscar cliente(Nombre empresa)</label>
                         <div class="input-group">
-                            <input type="search" name="nombre" id="buscarcliente" class="form-control" placeholder="Comx" aria-label="Search">
+                            <input type="search" name="buscarcliente" id="buscarcliente" class="form-control @error('buscarcliente') is-invalid @enderror" value="{{old('buscarcliente')}}" placeholder="Comx" aria-label="Search">
+
                             <span class="input-group-btn">
                                 <button type="button" id="selectContact" class="btn btn-primary">
                                     Seleccionar
                                 </button>
                             </span>
                         </div>
+                        <div>
+                            @error('buscarcliente')
+                            <small class="text-danger">{{$message}}</small>
+                            @enderror
+                        </div>
                     </div>
                     <div class="col-md-3 my-3" hidden>
                         <label for="exampleInputEmail1" class="form-label">Clave</label>
                         <div class="form-group">
-                            <input type="text" readonly class="form-control" id="clientes_id" name="clientes_id">
+                            <input type="text" readonly class="form-control" id="clientes_id" name="clientes_id" value="{{old('clientes_id')}}">
 
                         </div>
 
@@ -30,20 +35,20 @@
                     <div class="col-md-4 my-3">
                         <label for="exampleInputEmail1" class="form-label">RFC</label>
                         <div class="form-group">
-                            <input type="text" readonly class="form-control" id="rfc" name="rfc" value="{{old('c')}}">
+                            <input type="text" readonly class="form-control" id="rfc" name="rfc" value="{{old('rfc')}}">
                         </div>
                     </div>
                     <div class="col-md-4 my-3">
                         <label for="exampleInputEmail1" class="form-label">Tipo de cliente</label>
                         <div class="form-group">
-                            <input type="text" readonly class="form-control" id="tipocliente" name="tipocliente">
+                            <input type="text" readonly class="form-control" id="tipocliente" name="tipocliente" value="{{old('tipocliente')}}">
                         </div>
 
                     </div>
                     <div class="col-md-4 my-3">
                         <label for="exampleInputEmail1" class="form-label">Estatus</label>
                         <div class="form-group">
-                            <input type="text" readonly class="form-control" id="estatuscliente" name="estatuscliente">
+                            <input type="text" readonly class="form-control" id="estatuscliente" name="estatuscliente" value="{{old('estatuscliente')}}">
 
                         </div>
 
@@ -53,20 +58,26 @@
 
                         <label for="">Buscar servicio(Nombre servicio)</label>
                         <div class="input-group">
-                            <input type="search" name="nombre" id="buscarservicio" class="form-control" aria-label="Search">
-
-
+                            <input type="search" name="buscarservicio" id="buscarservicio" class="form-control @error('buscarservicio') is-invalid @enderror" value="{{old('buscarservicio')}}" aria-label="Search">
                             <span class="input-group-btn">
                                 <button type="button" id="selectServicio" class="btn btn-primary">
                                     Seleccionar
                                 </button>
                             </span>
                         </div>
+                        <div>
+                            @error('buscarservicio')
+                            <small class="text-danger">{{$message}}</small>
+                            @enderror
+                        </div>
                     </div>
                     <div class="col-md-1 my-3">
                         <label for="exampleInputEmail1" class="form-label">Clave</label>
                         <div class="form-group">
-                            <input type="text" readonly class="form-control" id="servicios_id" name="servicios_id">
+                            <input type="text" readonly class="form-control " id="servicios_id" name="servicios_id" value="{{old('servicios_id')}}">
+                            @error('servicios_id')
+                            <small class="text-danger">{{$message}}</small>
+                            @enderror
 
                         </div>
 
@@ -74,31 +85,46 @@
                     <div class="col-md-3 my-3">
                         <label for="exampleInputEmail1" class="form-label">Descripcion</label>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="descripcion" name="descripcion">
+                            <input type="text" class="form-control @error('descripcion') is-invalid @enderror" id="descripcion" name="descripcion" value="{{old('descripcion')}}">
+                            @error('descripcion')
+                            <small class="text-danger">{{$message}}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-3 my-3">
                         <label for="exampleInputEmail1" class="form-label">Servicio</label>
                         <div class="form-group">
-                            <input type="text" readonly class="form-control" id="nombre" name="nombre">
+                            <input type="text" readonly class="form-control @error('nombre') is-invalid @enderror" id="nombre" name="nombre" value="{{old('nombre')}}">
+                            @error('nombre')
+                            <small class="text-danger">{{$message}}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-3 my-3">
                         <label for="exampleInputEmail1" class="form-label">Precio inicial</label>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="precio_inicial" name="precio_inicial">
+                            <input type="text" class="form-control  @error('precio_inicial') is-invalid @enderror" id="precio_inicial" name="precio_inicial" value="{{old('precio_inicial')}}">
+                            @error('precio_inicial')
+                            <small class="text-danger">{{$message}}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-2 my-3">
                         <label for="exampleInputEmail1" class="form-label">Cantidad</label>
                         <div class="form-group">
-                            <input type="number" value="1" class="form-control" id="numero_servicios" name="numero_servicios">
+                            <input type="number" value="1" class="form-control @error('numero_servicios') is-invalid @enderror" id="numero_servicios" name="numero_servicios" value="{{old('numero_servicios')}}">
+                            @error('numero_servicios')
+                            <small class="text-danger">{{$message}}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-5 my-3">
                         <label for="exampleInputEmail1" class="form-label">Fecha estimada entrega</label>
                         <div class="form-group">
-                            <input type="date" class="form-control" id="fecha_estimadaentrega" name="fecha_estimadaentrega">
+                            <input type="date" class="form-control @error('fecha_estimadaentrega') is-invalid  @enderror" id="fecha_estimadaentrega" name="fecha_estimadaentrega" value="{{old('fecha_estimadaentrega')}}">
+                            @error('fecha_estimadaentrega')
+                            <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-5 my-3">
@@ -137,6 +163,7 @@
                                 <thead class="table-primary">
                                     <th>N.servicio</th>
                                     <th>Nombre servicio</th>
+                                    <th>Descripcion</th>
                                     <th>Precio inicial</th>
                                     <th>Cantidad</th>
                                     <th>Precio unitario</th>
@@ -145,7 +172,7 @@
                                     <th>Opciones</th>
                                 </thead>
                                 <tfoot>
-                                    <td colspan="4">Total</td>
+                                    <td colspan="5">Total</td>
 
                                     <td>
                                         <h4 id="total_b" name="total_b">$0.00</h4>
@@ -262,9 +289,6 @@
                     $("#nombre").val(data.nombre ?? "Sin datos")
                     $("#precio_inicial").val(data.precio_inicial ?? "Sin datos")
                     $("#descripcion").val(data.descripcion ?? "Sin datos")
-
-
-
                 }
             })
         })
@@ -295,6 +319,7 @@
 
             const servicios_id = $("#servicios_id").val();
             const nombre = $('#nombre').val();
+            const descripcion = $('#descripcion').val();
             const precio_inicial = $("#precio_inicial").val();
             const numero_servicios = $("#numero_servicios").val();
             const precio_bruto = Number(precio_inicial) * parseFloat(numero_servicios);
@@ -311,6 +336,7 @@
             const fila = `<tr id="fila"> 
                 <td><input class="form-control" type="number" id="servicios_id" name="servicios_id[]" value="${servicios_id}" readonly></td>
                 <td><input class="form-control" type="text" id="nombre" name="nombre[]" value="${nombre}" readonly></td>
+                <td><input class="form-control" type="text" id="descripcion" name="descripcion[]" value="${descripcion}"></td>
                 <td><input class="form-control" type="number" id="precio_inicial" name="precio_inicial[]" value="${precio_inicial}" readonly></td>
                 <td><input class="form-control" type="number" id="numero_servicios" name="numero_servicios[]" value="${numero_servicios}" readonly></td>
                 <td><input class="form-control" type="text" id="precio_bruto" name="precio_bruto[]" value="${precio_bruto}" readonly></td>
@@ -337,6 +363,8 @@
             $("#nombre").val("");
             $("#precio_inicial").val("");
             $("#buscarservicio").val("");
+            $("#descripcion").val("");
+
         }
     })
 </script>

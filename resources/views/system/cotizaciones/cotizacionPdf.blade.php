@@ -37,9 +37,9 @@
              <tbody>
                  @foreach($detallecotizacion as $detalle)
                  <tr>
-                     <td> {!!$detalle->descripcion!!}</td>
+                     <td> {!!$detalle->descripcion_global!!}</td>
                      <td>{{$detalle->fecha_estimadaentrega}}</td>
-                     <td>{{$detalle->clientes_id}}</td>
+                     <td>{{$cotizaciones->clientes->nombreempresa}}</td>
 
         
                  </tr>
