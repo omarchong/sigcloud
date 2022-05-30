@@ -11,6 +11,7 @@ class CreateCotizacionesTable extends Migration
     {
         Schema::create('cotizaciones', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre_proyecto');
             $table->foreignId('clientes_id')
                 ->references('id')
                 ->on('clientes');

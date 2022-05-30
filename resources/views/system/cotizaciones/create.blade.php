@@ -6,8 +6,19 @@
             <form action="{{ route('cotizaciones.store') }}" method="POST" id="cotizaciones" class="needs-validation" novalidate>
                 @csrf
                 <div class="form-row">
-
                     <div class="col-md-12">
+                        <label for="">Nombre del proyecto</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control @error('nombre_proyecto') is-invalid @enderror" id="nombre_proyecto" name="nombre_proyecto" value="{{old('nombre_proyecto')}}">
+
+                        </div>
+                        @error('nombre_proyecto')
+                        <small class="text-danger">{{$message}}</small>
+                        @enderror
+
+                    </div>
+
+                    <div class="col-md-12 my-3">
                         <label for="">Buscar cliente(Nombre empresa)</label>
                         <div class="input-group">
                             <input type="search" name="buscarcliente" id="buscarcliente" class="form-control @error('buscarcliente') is-invalid @enderror" value="{{old('buscarcliente')}}" placeholder="Comx" aria-label="Search">
@@ -153,7 +164,7 @@
                         <div class="valid-feedback">
                             Correcto!
                         </div>
-                        @error('descripcion')
+                        @error('descripcion_global')
                         <small class="text-danger"> {{ $message }} </small>
                         @enderror
                     </div>

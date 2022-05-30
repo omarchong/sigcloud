@@ -16,11 +16,12 @@ class CotizacionRequest extends FormRequest
     public function rules()
     {
         return [
+            'clientes_id' => ['required','exists:clientes,id'],
             'numero_servicios' => ['required'],
-            'servicios_id' => [''],
+            'servicios_id' => ['required','exists:servicios,id'],
             'fecha_estimadaentrega' => ['required'],
-            'buscarcliente' => ['required'],
-            'buscarservicio' => ['required'],
+            'descripcion_global' => ['required'],
+            'nombre_proyecto' => ['required']
             
         ];
     }
