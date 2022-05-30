@@ -10,41 +10,60 @@ use App\Models\Giro;
 use App\Models\Municipio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Session;
 class ClientesController extends Controller
 {
     public function index()
     {
-
-        return view('system.clientes.index');
+        $sessionusuario = session('sessionusuario');
+        if($sessionusuario<>"")
+        {
+            return view('system.clientes.index');
+        }
+        else{
+            Session::flash('mensaje', "Iniciar sesión antes de continuar");
+            return redirect()->route('login');
+        }
     }
 
     public function create()
     {
-        return view('system.clientes.create', [
-            'contactos' => Contacto::select('id', 'contacto1')->get(),
-            'estados' => Estado::select('id', 'nombre')->get(),
-            'municipios' => Municipio::select('id', 'nombre')->get(),
-            'giros' => Giro::select('id', 'nombre')->get()
-
-        ]);
+        $sessionusuario = session('sessionusuario');
+        if($sessionusuario<>"")
+        {
+            return view('system.clientes.create', [
+                'contactos' => Contacto::select('id', 'contacto1')->get(),
+                'estados' => Estado::select('id', 'nombre')->get(),
+                'municipios' => Municipio::select('id', 'nombre')->get(),
+                'giros' => Giro::select('id', 'nombre')->get()
+            ]);
+        }
+        else{
+            Session::flash('mensaje', "Iniciar sesión antes de continuar");
+            return redirect()->route('login');
+        }
     }
 
 
     public function edit(Cliente $cliente)
     {
-        return view('system.clientes.edit', [
-            'cliente' => $cliente,
-            'contactos' => Contacto::select('id', 'contacto1')->get(),
-            'estados' => Estado::select('id', 'nombre')->get(),
-            'municipios' => Municipio::select('id', 'nombre')->get(),
-            'giros' => Giro::select('id', 'nombre')->get()
-        ]);
+        $sessionusuario = session('sessionusuario');
+        if($sessionusuario<>"")
+        {
+            return view('system.clientes.edit', [
+                'cliente' => $cliente,
+                'contactos' => Contacto::select('id', 'contacto1')->get(),
+                'estados' => Estado::select('id', 'nombre')->get(),
+                'municipios' => Municipio::select('id', 'nombre')->get(),
+                'giros' => Giro::select('id', 'nombre')->get()
+            ]);
+        }
+        else{
+            Session::flash('mensaje', "Iniciar sesión antes de continuar");
+            return redirect()->route('login');
+        }
     }
-
-
     /* actualizar cliente */
-
     public function update(ClienteRequest $request, cliente $cliente)
     {
         $cliente->update($request->validated());

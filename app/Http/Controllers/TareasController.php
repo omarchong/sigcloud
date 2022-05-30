@@ -10,24 +10,38 @@ use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use App\Notifications\Notificacion;
-
-
+use Session;
 class TareasController extends Controller
 {
 
     public function index()
     {
-        return view('system.tarea.index');
+        $sessionusuario = session('sessionusuario');
+        if($sessionusuario<>"")
+        {
+            return view('system.tarea.index');
+        }
+        else{
+            Session::flash('mensaje', "Iniciar sesión antes de continuar");
+            return redirect()->route('login');
+        }
     }
 
     public function create()
     {   
-        return view('system.tarea.create',[
-            'usuarios' => Usuario::select('id','nombre')->get(),
-            'clientes' => Cliente::select('id','nombreempresa')->get(),
-            'estatutareas' => Estatutarea::select('id','nombre')->get()
-          ]);
-         
+        $sessionusuario = session('sessionusuario');
+        if($sessionusuario<>"")
+        {
+            return view('system.tarea.create',[
+                'usuarios' => Usuario::select('id','nombre')->get(),
+                'clientes' => Cliente::select('id','nombreempresa')->get(),
+                'estatutareas' => Estatutarea::select('id','nombre')->get()
+            ]);
+        }
+        else{
+            Session::flash('mensaje', "Iniciar sesión antes de continuar");
+            return redirect()->route('login');
+        }
     }
 
     public function store(TareaRequest $request)
@@ -46,12 +60,20 @@ class TareasController extends Controller
 
     public function edit(Tarea $tarea)
     {
-        return view('system.tarea.edit', [
-            'tarea' => $tarea,
-            'usuarios' => Usuario::select('id','nombre')->get(),
-            'clientes' => Cliente::select('id','nombreempresa')->get(),
-            'estatutareas' => Estatutarea::select('id','nombre')->get()
-        ]);
+        $sessionusuario = session('sessionusuario');
+        if($sessionusuario<>"")
+        {
+            return view('system.tarea.edit', [
+                'tarea' => $tarea,
+                'usuarios' => Usuario::select('id','nombre')->get(),
+                'clientes' => Cliente::select('id','nombreempresa')->get(),
+                'estatutareas' => Estatutarea::select('id','nombre')->get()
+            ]);
+        }
+        else{
+            Session::flash('mensaje', "Iniciar sesión antes de continuar");
+            return redirect()->route('login');
+        }
     }
 
     public function update(TareaRequest $request, Tarea $tarea)

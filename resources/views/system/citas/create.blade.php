@@ -22,9 +22,11 @@
                         <div class="valid-feedback">
                             Correcto!
                         </div>
-                        @error('usuarios_id')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
+                        <div class="">
+                            @error('usuarios_id')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
                     <input type="hidden" readonly class="form-control" name="usuarios_id" id="usuarios_id">
                     <div class="col-md-4 my-3">
@@ -59,6 +61,8 @@
                             <div class="valid-feedback">
                                 Correcto!
                             </div>
+                        </div>
+                        <div class="">
                             @error('clientes_id')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror

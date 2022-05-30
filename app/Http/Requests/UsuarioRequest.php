@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Support\Facades\Hash;
 class UsuarioRequest extends FormRequest
 {
 
@@ -16,6 +16,7 @@ class UsuarioRequest extends FormRequest
     public function rules()
     {
         return [
+             
             'nombre' => 'required',
             'app' => 'required',
             'apm' => 'required',

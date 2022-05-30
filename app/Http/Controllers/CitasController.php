@@ -10,21 +10,38 @@ use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
-
+use Session;
+ 
 class CitasController extends Controller
 {
     public function index()
     {
-        return view('system.citas.index');
+        $sessionusuario = session('sessionusuario');
+        if($sessionusuario<>"")
+        {
+            return view('system.citas.index');
+        }
+        else{
+            Session::flash('mensaje', "Iniciar sesión antes de continuar");
+            return redirect()->route('login');
+        }
     }
 
     public function create()
     {   
-        return view('system.citas.create',[
-            'usuarios' => Usuario::select('id','nombre')->get(),
-            'clientes' => Cliente::select('id','nombreempresa')->get(),
-            'estatucitas' => Estatucita::select('id','nombre')->get()
-          ]);
+        $sessionusuario = session('sessionusuario');
+        if($sessionusuario<>"")
+        {
+            return view('system.citas.create',[
+                'usuarios' => Usuario::select('id','nombre')->get(),
+                'clientes' => Cliente::select('id','nombreempresa')->get(),
+                'estatucitas' => Estatucita::select('id','nombre')->get()
+            ]);
+        }
+        else{
+            Session::flash('mensaje', "Iniciar sesión antes de continuar");
+            return redirect()->route('login');
+        }
     }
 
     public function store(CitaRequest $request)
@@ -39,12 +56,20 @@ class CitasController extends Controller
 
     public function edit(Cita $cita)
     {
-        return view('system.citas.edit', [
-            'cita' => $cita,
-            'usuarios' => Usuario::select('id','nombre')->get(),
-            'clientes' => Cliente::select('id','nombreempresa')->get(),
-            'estatucitas' => Estatucita::select('id','nombre')->get()
-        ]);
+        $sessionusuario = session('sessionusuario');
+        if($sessionusuario<>"")
+        {
+            return view('system.citas.edit', [
+                'cita' => $cita,
+                'usuarios' => Usuario::select('id','nombre')->get(),
+                'clientes' => Cliente::select('id','nombreempresa')->get(),
+                'estatucitas' => Estatucita::select('id','nombre')->get()
+            ]);
+        }
+        else{
+            Session::flash('mensaje', "Iniciar sesión antes de continuar");
+            return redirect()->route('login');
+        }
     }
 
     public function update(CitaRequest $request, Cita $cita)

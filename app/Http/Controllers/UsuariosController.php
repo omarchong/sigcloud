@@ -30,65 +30,82 @@ class UsuariosController extends Controller
     /* retorna a la vista de crear usuario */
     public function create()
     {
-        return view('system.usuarios.create', [
-            'departamentos' => Departamento::select('id', 'nombre')->get()
-        ]);
+        $sessionusuario = session('sessionusuario');
+        if($sessionusuario<>"")
+        {
+            return view('system.usuarios.create', [
+                'departamentos' => Departamento::select('id', 'nombre')->get()
+            ]);
+        }
+        else{
+            Session::flash('mensaje', 'Inicar sesión antes de continuar');
+            return redirect()->route('login');
+        }
     }
 
     /* crea un usuario */
     public function store(UsuarioRequest $request)
     {
-        /* dd($request->all()); */
+            /* dd($request->all()); */
 
-        $usuario = $request->all();
+            $usuario = $request->all();
 
-        if ($imagen = $request->file('imagen')) {
-            $rutaGuardarImg = 'imagen/';
-            $imagenUsuario = date('YmdHis') . "." . $imagen->getClientOriginalExtension();
-            $imagen->move($rutaGuardarImg, $imagenUsuario);
-            $usuario['imagen'] = "$imagenUsuario";
-        }
-        /* $usuario = Usuario::create([
-            'nombre' => $request->nombre,
-            'app' => $request->app,
-            'apm' => $request->apm,
-            'telefono' => $request->telefono,
-            'usuario' => $request->usuario,
-            'email' => $request->email,
-            'contrasena' => Hash::make($request->contrasena),
-            'contrasena_confirmar' => Hash::make($request->contrasena_confirmar),
-            'departamento' => $request->departamento,
-            'imagen' => $request->imagen,
-            'estatus' => $request->estatus,
-        ]); */
-        $usuario = Usuario::create($usuario);
-        return redirect()
-            ->route('usuarios.index')
-            ->withSuccess("El usuario $usuario->nombre se guardo correctamente");
-        /*   dd($request->all()); */
-        /*  $request->validate([
-        'nombre' => 'required',
-        'app' => 'required',
-        'apm' => 'required',
-        'telefono' => 'required',
-        'usuario' => 'required|unique:usuarios',
-        'email' => 'required|email|unique:usuarios',
-        'contrasena' => 'required',
-        'contrasena_confirmar' => 'required|same:contrasena',
-        'departamento' => 'required',
-        'imagen' => 'image|mimes:jpg,png,jpeg|max:2048',
-        'estatus' => 'required',
-      ]); */
-    }
+            if ($imagen = $request->file('imagen')) {
+                $rutaGuardarImg = 'imagen/';
+                $imagenUsuario = date('YmdHis') . "." . $imagen->getClientOriginalExtension();
+                $imagen->move($rutaGuardarImg, $imagenUsuario);
+                $usuario['imagen'] = "$imagenUsuario";
+            }
+            /* $usuario = Usuario::create([
+                'nombre' => $request->nombre,
+                'app' => $request->app,
+                'apm' => $request->apm,
+                'telefono' => $request->telefono,
+                'usuario' => $request->usuario,
+                'email' => $request->email,
+                'contrasena' => Hash::make($request->contrasena),
+                'contrasena_confirmar' => Hash::make($request->contrasena_confirmar),
+                'departamento' => $request->departamento,
+                'imagen' => $request->imagen,
+                'estatus' => $request->estatus,
+            ]); */
+            $usuario = Usuario::create($usuario);
+            return redirect()
+                ->route('usuarios.index')
+                ->withSuccess("El usuario $usuario->nombre se guardo correctamente");
+            /*   dd($request->all()); */
+            /*  $request->validate([
+            'nombre' => 'required',
+            'app' => 'required',
+            'apm' => 'required',
+            'telefono' => 'required',
+            'usuario' => 'required|unique:usuarios',
+            'email' => 'required|email|unique:usuarios',
+            'contrasena' => 'required',
+            'contrasena_confirmar' => 'required|same:contrasena',
+            'departamento' => 'required',
+            'imagen' => 'image|mimes:jpg,png,jpeg|max:2048',
+            'estatus' => 'required',
+            ]); */
+
+     }
 
 
     /*  actualiza un usuario */
     public function edit(Usuario $usuario)
     {
-        return view('system.usuarios.edit', [
-            'usuario' => $usuario,
-            'departamentos' => Departamento::select('id', 'nombre')->get()
-        ]);
+        $sessionusuario = session('sessionusuario');
+        if($sessionusuario<>"")
+        {
+            return view('system.usuarios.edit', [
+                'usuario' => $usuario,
+                'departamentos' => Departamento::select('id', 'nombre')->get()
+            ]);
+        }
+        else{
+            Session::flash('mensaje', 'Inicar sesión antes de continuar');
+            return redirect()->route('login');
+        }
     }
 
     public function update(UsuarioEditRequest $request, usuario $usuario)
@@ -125,17 +142,25 @@ class UsuariosController extends Controller
     /* muestra el detalle de actividades asignadas y de usuario */
     public function show($id)
     {
-        $usuarios = Usuario::findOrFail($id);
-        $departamentos = DB::select("SELECT usu.nombre, depa.nombre, depa.abreviatura, depa.estatus
-        FROM usuarios AS usu
-        INNER JOIN departamentos AS depa
-        ON usu.departamento_id = depa.id
-        WHERE usu.id = $id");
-
-        $tareas = DB::select("SELECT tar.nombre FROM tareas  AS tar
-        INNER JOIN usuarios AS usu
-        ON tar.usuario_id = usu.id
-        WHERE usuario_id = $id");
-        return view('system.usuarios.show', compact('usuarios', 'tareas', 'departamentos'));
+        $sessionusuario = session('sessionusuario');
+        if($sessionusuario<>"")
+        {
+            $usuarios = Usuario::findOrFail($id);
+            $departamentos = DB::select("SELECT usu.nombre, depa.nombre, depa.abreviatura, depa.estatus
+            FROM usuarios AS usu
+            INNER JOIN departamentos AS depa
+            ON usu.departamento_id = depa.id
+            WHERE usu.id = $id");
+    
+            $tareas = DB::select("SELECT tar.nombre FROM tareas  AS tar
+            INNER JOIN usuarios AS usu
+            ON tar.usuario_id = usu.id
+            WHERE usuario_id = $id");
+            return view('system.usuarios.show', compact('usuarios', 'tareas', 'departamentos'));
+        }
+        else{
+            Session::flash('mensaje', 'Iniciar sesión antes de continuar');
+            return redirect()->route('login');
+        }
     }
 }

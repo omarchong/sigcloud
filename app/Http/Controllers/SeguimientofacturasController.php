@@ -8,20 +8,36 @@ use App\Models\Ordenpago;
 use App\Models\Seguimientofactura;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Session;
 class SeguimientofacturasController extends Controller
 {
     public function index()
     {
-        return view('system.seguimientofacturas.index');
+        $sessionusuario = session('sessionusuario');
+        if($sessionusuario<>"")
+        {
+            return view('system.seguimientofacturas.index');
+        }
+        else{
+            Session::flash('mensaje', 'Iniciar sesión antes de continuar');
+            return redirect()->route('login');
+        }
     }
 
     public function create()
     {   
-        return view('system.seguimientofacturas.create',[
-            'ordenpagos' => Ordenpago::select('id','folio')->get(),
-            'estatufacturas' => Estatufactura::select('id','nombre')->get()
-          ]);
+        $sessionusuario = session('sessionusuario');
+        if($sessionusuario<>"")
+        {
+            return view('system.seguimientofacturas.create',[
+                'ordenpagos' => Ordenpago::select('id','folio')->get(),
+                'estatufacturas' => Estatufactura::select('id','nombre')->get()
+            ]);
+        }
+        else{
+            Session::flash('mensaje', 'Iniciar sesión antes de continuar');
+            return redirect()->route('login');
+        }
     }
 
     public function store(SeguimientofacturaRequest $request)
@@ -34,11 +50,19 @@ class SeguimientofacturasController extends Controller
 
     public function edit(Seguimientofactura $seguimientofactura)
     {
-        return view('system.seguimientofacturas.edit', [
-            'seguimientofactura' => $seguimientofactura,
-            'ordenpagos' => Ordenpago::select('id','folio')->get(),
-            'estatufacturas' => Estatufactura::select('id','nombre')->get(),
-        ]); 
+        $sessionusuario = session('sessionusuario');
+        if($sessionusuario<>"")
+        {
+            return view('system.seguimientofacturas.edit', [
+                'seguimientofactura' => $seguimientofactura,
+                'ordenpagos' => Ordenpago::select('id','folio')->get(),
+                'estatufacturas' => Estatufactura::select('id','nombre')->get(),
+            ]); 
+        }
+        else{
+            Session::flash('mensaje', 'Iniciar sesión antes de continuar');
+            return redirect()->route('login');
+        }
     }
 
     public function update(SeguimientofacturaRequest $request, seguimientofactura $seguimientofactura)

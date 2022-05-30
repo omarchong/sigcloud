@@ -10,8 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PDF;
-
-
+use Session;
 class CotizacionesController extends Controller
 
 {
@@ -52,14 +51,30 @@ class CotizacionesController extends Controller
 
     public function index()
     {
-        return view('system.cotizaciones.index');
+        $sessionusuario = session('sessionusuario');
+        if($sessionusuario<>"")
+        {
+            return view('system.cotizaciones.index');
+        }
+        else{
+            Session::flash('mensaje', "Iniciar sesión antes de continuar");
+            return redirect()->route('login');
+        }
     }
 
     public function create()
     {
-        return view('system.cotizaciones.create', [
-            'estatuscotizaciones' => Estatucotizacion::select('id', 'nombre')->get()
-        ]);
+        $sessionusuario = session('sessionusuario');
+        if($sessionusuario<>"")
+        {
+            return view('system.cotizaciones.create', [
+                'estatuscotizaciones' => Estatucotizacion::select('id', 'nombre')->get()
+            ]);
+        }
+        else{
+            Session::flash('mensaje', "Iniciar sesión antes de continuar");
+            return redirect()->route('login');
+        }
     }
 
     public function store(Request $request)
@@ -97,14 +112,23 @@ class CotizacionesController extends Controller
 
     public function show($id)
     {
-        $cotizaciones = Cotizacion::findOrFail($id);
-        $consulta = DB::select("SELECT dco.cotizacion_id, dco.numero_servicios, dco.precio_bruto, dco.precio_iva, dco.subtotal, serv.nombre, serv.descripcion
-        FROM detalle_cotizacion AS dco
-        INNER JOIN servicios AS serv
-        ON dco.servicios_id = serv.id
-        WHERE cotizacion_id = $id
-        ORDER BY numero_servicios ASC");
-        return  view('system.cotizaciones.show', compact('consulta', 'cotizaciones'));
+        $sessionusuario = session('sessionusuario');
+        if($sessionusuario<>"")
+        {
+            $cotizaciones = Cotizacion::findOrFail($id);
+            $consulta = DB::select("SELECT dco.cotizacion_id, dco.numero_servicios, dco.precio_bruto, dco.precio_iva, dco.subtotal, serv.nombre, serv.descripcion
+            FROM detalle_cotizacion AS dco
+            INNER JOIN servicios AS serv
+            ON dco.servicios_id = serv.id
+            WHERE cotizacion_id = $id
+            ORDER BY numero_servicios ASC");
+            return  view('system.cotizaciones.show', compact('consulta', 'cotizaciones'));
+        }
+        else
+        {
+            Session::flash('message', 'Iniciar sesión antes de continuar');
+            return redirect()->route('login');
+        }
     }
 
     public function edit()
