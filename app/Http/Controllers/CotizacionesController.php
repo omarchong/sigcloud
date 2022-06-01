@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PDF;
 use Session;
+
 class CotizacionesController extends Controller
 
 {
@@ -53,11 +54,9 @@ class CotizacionesController extends Controller
     public function index()
     {
         $sessionusuario = session('sessionusuario');
-        if($sessionusuario<>"")
-        {
+        if ($sessionusuario <> "") {
             return view('system.cotizaciones.index');
-        }
-        else{
+        } else {
             Session::flash('mensaje', "Iniciar sesión antes de continuar");
             return redirect()->route('login');
         }
@@ -66,13 +65,11 @@ class CotizacionesController extends Controller
     public function create()
     {
         $sessionusuario = session('sessionusuario');
-        if($sessionusuario<>"")
-        {
+        if ($sessionusuario <> "") {
             return view('system.cotizaciones.create', [
                 'estatuscotizaciones' => Estatucotizacion::select('id', 'nombre')->get()
             ]);
-        }
-        else{
+        } else {
             Session::flash('mensaje', "Iniciar sesión antes de continuar");
             return redirect()->route('login');
         }
@@ -100,11 +97,22 @@ class CotizacionesController extends Controller
         });
     }
 
-    public function pdfCoti()
+    public function pdfCoti($id)
     {
+        $detallecotizacion = DB::select("SELECT  coti.nombre_proyecto, coti.fecha_estimadaentrega, coti.descripcion_global, cli.nombreempresa
+        FROM cotizaciones AS coti
+        INNER JOIN clientes AS cli
+        ON coti.clientes_id = cli.id 
+        WHERE cli.id = $id");
 
-        $detallecotizacion = Cotizacion::select('descripcion_global', 'fecha_estimadaentrega')->get();
-        $pdf = PDF::loadView('system.cotizaciones.cotizacionPdf', compact('detallecotizacion'));
+        $consulta = DB::select("SELECT dco.cotizacion_id, dco.numero_servicios, dco.precio_bruto, dco.precio_iva, dco.subtotal, serv.nombre, serv.descripcion
+         FROM detalle_cotizacion AS dco
+         INNER JOIN servicios AS serv
+         ON dco.servicios_id = serv.id
+         WHERE cotizacion_id = $id
+         ORDER BY numero_servicios ASC");
+
+        $pdf = PDF::loadView('system.cotizaciones.cotizacionPdf', compact('detallecotizacion', 'consulta'))->setPaper('a4', 'landscape');
         return $pdf->stream('ejemplo.pdf');
     }
 
@@ -113,8 +121,7 @@ class CotizacionesController extends Controller
     public function show($id)
     {
         $sessionusuario = session('sessionusuario');
-        if($sessionusuario<>"")
-        {
+        if ($sessionusuario <> "") {
             $cotizaciones = Cotizacion::findOrFail($id);
             $consulta = DB::select("SELECT dco.cotizacion_id, dco.numero_servicios, dco.precio_bruto, dco.precio_iva, dco.subtotal, serv.nombre, serv.descripcion
             FROM detalle_cotizacion AS dco
@@ -123,9 +130,7 @@ class CotizacionesController extends Controller
             WHERE cotizacion_id = $id
             ORDER BY numero_servicios ASC");
             return  view('system.cotizaciones.show', compact('consulta', 'cotizaciones'));
-        }
-        else
-        {
+        } else {
             Session::flash('message', 'Iniciar sesión antes de continuar');
             return redirect()->route('login');
         }

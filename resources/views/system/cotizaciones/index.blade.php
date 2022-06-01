@@ -57,7 +57,7 @@
                                                 ${full.deleted_at ? 'hidden' : ''}>
                                                  <i class="fas fa-eye"></i> </a>
 
-                                                <a href="{{url('coti') }}"
+                                                <a href="/coti/${data}"
                                                 class="btn btn-danger"
                                                 ${full.deleted_at ? 'hidden' : ''}>
                                                 <i class="fas fa-file-pdf"></i>
