@@ -189,14 +189,7 @@
                     minlength: 1,
                     maxlength: 10,
 
-                },
-                usuario: {
-                    required: true
-
-                },
-                email: {
-                    required: true,
-
+                }
                 },
                 contrasena: {
                     required: true,
@@ -230,17 +223,8 @@
                 apm: {
                     required: "El apellido materno es requerido"
                 },
-                email: {
-                    required: "El email es requerido"
-                },
                 telefono: {
                     required: "El telefono es requerido"
-                },
-                usuario: {
-                    required: "El usuario es requerido"
-                },
-                email: {
-                    required: "El email es requerido"
                 },
                 contrasena: {
                     required: "La contraseña es requerido y debe ser igual a contraseña, por favor ingrese 5 caracteres minimo o maximo 10"
