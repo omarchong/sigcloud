@@ -19,7 +19,8 @@ class TareasController extends Controller
         $sessionusuario = session('sessionusuario');
         if($sessionusuario<>"")
         {
-            return view('system.tarea.index');
+            $tareas = Tarea::all();
+            return view('system.tarea.index', compact('tareas'));
         }
         else{
             Session::flash('mensaje', "Iniciar sesión antes de continuar");
@@ -85,8 +86,9 @@ class TareasController extends Controller
         ->withSuccess("La tarea $tarea->nombre se actualizo exitosamente"); 
     }
 
-    public function destroy(Tarea $tarea)
+    public function destroy($id)
     {
+        $tarea = Tarea::find($id);
         $tarea->delete();
         return redirect()
               ->route("tareas.index")
@@ -95,11 +97,13 @@ class TareasController extends Controller
 
     public function RegistrosDatatables()
     {
+        $tareas = Tarea::latest()->get();
         return datatables()
-      ->eloquent(
-        Tarea::query()
-          ->with(['usuario', 'clientes', 'estatutareas'])
-      )
-      ->toJson();
+            ->eloquent(
+                Tarea::query()
+                ->with(['usuario', 'clientes', 'estatutareas'])
+            )
+            ->toJson();
     }
+    
 }

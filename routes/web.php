@@ -95,6 +95,7 @@ Route::name('destroy-estatutarea')->delete('destroy_estatutarea/{id}', [Estatust
 /* Tareas */
 Route::resource('tareas', TareasController::class);
 Route::get('datatables/tareas', [TareasController::class, 'RegistrosDatatables'])->name('tareas.datatables');
+Route::name('delete')->delete('delete/{id}', [TareasController::class], 'destroy');
 
 /* Estatus de citas */
 Route::resource('estatucitas', EstatuscitaController::class);

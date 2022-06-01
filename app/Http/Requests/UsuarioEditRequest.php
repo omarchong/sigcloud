@@ -24,7 +24,7 @@ class UsuarioEditRequest extends FormRequest
             'telefono' => 'required',
             'usuario' => '',
             'email' => '',
-            'contrasena' => 'required',Hash::make("contrasena"), 
+            'contrasena' => 'required', 
             'contrasena_confirmar' => 'required',
             'departamento_id' => 'required',
             'imagen' => 'image|mimes:jpg,png,jpeg|max:2048',
