@@ -30,6 +30,12 @@ class Cotizacion extends Model
     {
         return $this->hasOne(Ordenpago::class);
     }
+  
+
+    public function estatucotizacion()
+    {
+        return $this->belongsTo(Estatucotizacion::class);
+    }
     public function cotizaciones()
     {
         return $this->belongsTo(

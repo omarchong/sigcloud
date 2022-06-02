@@ -20,6 +20,9 @@
                             <tr>
                                 <th>Clave</th>
                                 <th>Nombre empresa</th>
+                                <th>Nombre proyecto</th>
+                                <th>Fecha estimada de entrega</th>
+                                <th>Estatus</th>
                                 <th>Operaciones</th>
                             </tr>
                         </thead>
@@ -42,7 +45,17 @@
                                 },
                                 {
                                     data: 'clientes.nombreempresa',
-                                }, {
+                                },
+                                {
+                                    data: 'nombre_proyecto',
+                                },
+                                {
+                                    data: 'fecha_estimadaentrega',
+                                },
+                                {
+                                    data: 'estatucotizacion.nombre'
+                                },
+                                {
                                     data: 'id',
                                     render: function(data, type, full, meta) {
                                         return `

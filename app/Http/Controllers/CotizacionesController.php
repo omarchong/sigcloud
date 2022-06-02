@@ -99,11 +99,13 @@ class CotizacionesController extends Controller
 
     public function pdfCoti($id)
     {
-        $detallecotizacion = DB::select("SELECT  coti.nombre_proyecto, coti.fecha_estimadaentrega, coti.descripcion_global, cli.nombreempresa
+        $cotizaciones = Cotizacion::findOrFail($id);
+
+      /*   $detallecotizacion = DB::select("SELECT  coti.nombre_proyecto, coti.fecha_estimadaentrega, cli.nombreempresa
         FROM cotizaciones AS coti
         INNER JOIN clientes AS cli
         ON coti.clientes_id = cli.id 
-        WHERE cli.id = $id");
+        WHERE cli.id = $id"); */
 
         $consulta = DB::select("SELECT dco.cotizacion_id, dco.numero_servicios, dco.precio_bruto, dco.precio_iva, dco.subtotal, serv.nombre, serv.descripcion
          FROM detalle_cotizacion AS dco
@@ -112,7 +114,7 @@ class CotizacionesController extends Controller
          WHERE cotizacion_id = $id
          ORDER BY numero_servicios ASC");
 
-        $pdf = PDF::loadView('system.cotizaciones.cotizacionPdf', compact('detallecotizacion', 'consulta'))->setPaper('a4', 'landscape');
+        $pdf = PDF::loadView('system.cotizaciones.cotizacionPdf', compact('consulta','cotizaciones'))->setPaper('a4', 'landscape');
         return $pdf->stream('ejemplo.pdf');
     }
 
@@ -157,8 +159,8 @@ class CotizacionesController extends Controller
             ->eloquent(
                 Cotizacion::query()
                     ->with([
-                        'clientes'
-
+                        'clientes',
+                        'estatucotizacion',
                     ])
             )->toJson();
     }

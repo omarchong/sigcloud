@@ -104,7 +104,7 @@
          background-color: #247;
          color: white;
          font-family: 'Roboto', sans-serif;
-         
+
      }
 
      tbody {
@@ -119,19 +119,17 @@
          <div class="col1">
              <h5 class="vertical-orientation">Inversión</h5>
          </div>
-         
+
 
          <div class="col2">
              <div class="contenido">
-                 @foreach($detallecotizacion as $coti)
-                 <h3>Nombre del cliente: {{$coti->nombreempresa}}</h3>
-                 <h3>Proyecto: {{$coti->nombre_proyecto}}</h3>
-                 @endforeach
+                 <h3>Nombre del cliente: {{$cotizaciones->clientes->nombreempresa}}</h3>
+                 <h3>Proyecto: {{$cotizaciones->nombre_proyecto}}</h3>
              </div>
              <h4 class="beneficio">Agradecemos su interés en colaborar con Diseño y Soluciones Web para la adquisicón de los materiales para
                  su infraestructura</h4>
              <div class="">
-                 <h4 class="descripcion">Descripcion: {!!$coti->descripcion_global!!}</h4>
+                 <h4 class="descripcion">Descripcion: {!!$cotizaciones->descripcion_global!!}</h4>
 
              </div>
              <div class="contenido2">
@@ -161,10 +159,10 @@
                      <tfoot>
                          <tr>
                              <th colspan="2" class="">Total:</th>
-                             <th>Total</th>
-                             <th>Total</th>
-                             <th>Total</th>
-                             <th>Total</th>
+                             <th>Total  </th>
+                             <th>Total {{$detalle->precio_bruto}}</th>
+                             <th>Total {{$detalle->precio_iva}}</th>
+                             <th>Total {{$detalle->subtotal}}</th>
                          </tr>
                      </tfoot>
                  </table>
@@ -172,9 +170,27 @@
          </div>
 
      </div>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+     <script>
+    $(document).ready(function() {
+        var total0 = 0;
+        var total1 = 0;
+        var total2 = 0;
+        var total3 = 0;
+        $('#detalle-servicios tbody').find('tr').each(function(i, el) {
+            total0 += parseFloat($(this).find('td').eq(2).text());
+            total1 += parseFloat($(this).find('td').eq(3).text());
+            total2 += parseFloat($(this).find('td').eq(4).text());
+            total3 += parseFloat($(this).find('td').eq(5).text());
+
+        });
+        $('#detalle-servicios tfoot tr th').eq(1).text("# " + total0);
+        $('#detalle-servicios tfoot tr th').eq(2).text("$ " + total1);
+        $('#detalle-servicios tfoot tr th').eq(3).text("$ " + total2);
+        $('#detalle-servicios tfoot tr th').eq(4).text("$ " + total3);
+
+    });
+</script>
  </body>
  
-
- 
-
  </html>

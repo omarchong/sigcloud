@@ -30,5 +30,9 @@ class Contacto extends Model
     {
         return $this->belongsTo(Servicio::class);
     }
+    public function cotizaciones()
+    {
+        return $this->hasMany(Cotizacion::class);
+    }
 
 }

@@ -17,7 +17,7 @@ class CreateCotizacionesTable extends Migration
                 ->on('clientes');
             $table->foreignId('estatucotizacion_id')
                 ->references('id')
-                ->on('estatucotizacions');
+                ->on('estatucotizaciones');
             $table->string('fecha_estimadaentrega');
             $table->text('descripcion_global');
             $table->softDeletes();
