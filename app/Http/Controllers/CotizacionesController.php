@@ -101,12 +101,6 @@ class CotizacionesController extends Controller
     {
         $cotizaciones = Cotizacion::findOrFail($id);
 
-      /*   $detallecotizacion = DB::select("SELECT  coti.nombre_proyecto, coti.fecha_estimadaentrega, cli.nombreempresa
-        FROM cotizaciones AS coti
-        INNER JOIN clientes AS cli
-        ON coti.clientes_id = cli.id 
-        WHERE cli.id = $id"); */
-
         $consulta = DB::select("SELECT dco.cotizacion_id, dco.numero_servicios, dco.precio_bruto, dco.precio_iva, dco.subtotal, serv.nombre, serv.descripcion
          FROM detalle_cotizacion AS dco
          INNER JOIN servicios AS serv

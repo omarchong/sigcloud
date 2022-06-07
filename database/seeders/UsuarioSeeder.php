@@ -10,6 +10,7 @@ class UsuarioSeeder extends Seeder
 
     public function run()
     {
+     /* Inserting data into the database. */
         DB::table('usuarios')->insert([
             'nombre' => 'Omar',
             'app' => 'Chong',
