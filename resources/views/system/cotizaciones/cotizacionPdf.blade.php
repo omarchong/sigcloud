@@ -6,12 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demostracion de cotizacion</title>
-
 </head>
 <style>
-  
+    
     html{
         margin: 0;
+    }
+
+    body{
+        font-family: 'Roboto', sans-serif;
+        font-weight: light;
     }
 
     .principal {
@@ -34,7 +38,6 @@
         opacity: 0.9;
         font-size: 2.5em;
         color: #FFF;
-        font-family: 'Roboto', sans-serif;
     }
 
     .contenedor2 {
@@ -45,12 +48,16 @@
     }
 
     .datos-principales {
+        margin: 0px 90px;
         margin-top: 60px;
-        margin-left: 90px;
+    }
+
+    .descripcion{
+        margin: 0px 90px;
+        font-weight: normal;
     }
 
     .datos-proyecto {
-        font-family: 'Kdam Thmor Pro', sans-serif;
         color: #247;
     }
 
@@ -62,28 +69,26 @@
 
     .descripcion-global {
         margin-top: 25px;
-        margin-left: 95px;
-        font-family: 'Roboto', sans-serif;
+        font-size: 50px;
         color: #1c1c1c;
     }
-     table{
-         margin-top: 50px;
-         margin-left: auto;
-         margin-right: auto;
-         border-collapse: collapse;
-        font-family: 'Roboto', sans-serif;
-
-     }
+    table{
+        margin-top: 50px;
+        margin-left: auto;
+        margin-right: auto;
+        border-collapse: collapse;
+        width: 800px;
+    }
      .encabezado{
          background-color: #247;
          color: white;
      }
      td, th{
-         border: 2px solid black;
-         padding-left:20px ;
-         padding-right: 20px;
-         padding-top: 10px;
-         padding-bottom: 10px;
+        border: 2px solid black;
+        padding-left:20px ;
+        padding-right: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
      }
 </style>
 
