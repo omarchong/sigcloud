@@ -113,9 +113,9 @@ class CotizacionesController extends Controller
 
         Mail::send('system.cotizaciones.cotizacionPdf',compact("cotizaciones","consulta"), function ($mail) use ($pdf) {
             $mail->to('omar.13.chong@gmail.com');
-            $mail->attachData($pdf->output(), 'ejemplo.pdf');
+            $mail->attachData($pdf->output(), 'cotización.pdf');
         });
-        return $pdf->stream('ejemplo.pdf');
+        return $pdf->stream('cotización.pdf');
     }
 
 
