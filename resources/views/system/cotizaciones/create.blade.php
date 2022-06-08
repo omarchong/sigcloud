@@ -161,6 +161,9 @@
                             <input type="hidden" required name="descripcion_global" id="descripcion_global" value="{{old('descripcion_global')}}">
                             <trix-editor input="descripcion_global"></trix-editor>
                         </div>
+                        @error('descripcion_global')
+                                    <small class="text-danger"> {{ $message }} </small>
+                                @enderror
                         <div class="valid-feedback">
                             Correcto!
                         </div>

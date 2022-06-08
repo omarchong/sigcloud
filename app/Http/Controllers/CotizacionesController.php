@@ -10,6 +10,7 @@ use App\Models\Servicio;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use PDF;
 use Session;
 
@@ -93,7 +94,7 @@ class CotizacionesController extends Controller
             }
 
             return redirect()
-                ->route('cotizaciones.index')->withSuccess("La cotizacion $cotizacion->id se creo exitosamente");
+                ->route('cotizaciones.index')->withSuccess("La cotizacion $cotizacion->nombre_proyecto se creo exitosamente");
         });
     }
 
@@ -109,7 +110,12 @@ class CotizacionesController extends Controller
          ORDER BY numero_servicios ASC");
 
         $pdf = PDF::loadView('system.cotizaciones.cotizacionPdf', compact('consulta','cotizaciones'))->setPaper('a4', 'landscape');
-        return $pdf->stream('ejemplo.pdf');
+
+        Mail::send('system.cotizaciones.cotizacionPdf',compact("cotizaciones","consulta"), function ($mail) use ($pdf) {
+            $mail->to('omar.13.chong@gmail.com');
+            $mail->attachData($pdf->output(), 'cotización.pdf');
+        });
+        return $pdf->stream('cotización.pdf');
     }
 
 
