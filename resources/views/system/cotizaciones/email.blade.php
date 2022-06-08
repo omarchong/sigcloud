@@ -11,10 +11,7 @@
 
 <body>
     <div class="card-body">
-        <h5 class="card-text"><b>Nombre del proyecto: </b>{{$cotizaciones->nombre_proyecto}}</h5>
-        <h5 class="card-text"><b>Fecha estimada de entrega: </b>{{$cotizaciones->fecha_estimadaentrega}}</h5>
-        <h5 class="card-text"><b>Descripción: </b> {!!$cotizaciones->descripcion_global!!}</h5>
-
+       <h3>Hola ghbjnk</h3>
     </div>
 </body>
 

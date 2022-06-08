@@ -162,14 +162,12 @@
                             <trix-editor input="descripcion_global"></trix-editor>
                         </div>
                         @error('descripcion_global')
-                                    <small class="text-danger"> {{ $message }} </small>
-                                @enderror
+                        <small class="text-danger"> {{ $message }} </small>
+                        @enderror
                         <div class="valid-feedback">
                             Correcto!
                         </div>
-                        @error('descripcion_global')
-                        <small class="text-danger"> {{ $message }} </small>
-                        @enderror
+                       
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="table-responsive">

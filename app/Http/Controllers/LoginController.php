@@ -80,7 +80,7 @@ class LoginController extends Controller
             $datos = array('destinatario'=>$email, 'nuevopassword'=>$nuevopassword);
             Mail::send('system.login.passwordrecuperada', $datos, function($msj)
             use($email, $nuevopassword, $asunto){
-                $msj->from("al221811717@gmail.com", "SigCloud");
+                $msj->from("omar.chong@dswestudio.com", "SigCloud");
                 $msj->subject($asunto);
                 $msj->to($email);
             });

@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CotizacionRequest;
 use App\Models\Cliente;
+use App\Models\Contacto;
 use App\Models\Cotizacion;
 use App\Models\Estatucotizacion;
 use App\Models\Servicio;
+use App\Models\Usuario;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -98,9 +100,10 @@ class CotizacionesController extends Controller
         });
     }
 
-    public function pdfCoti($id)
+    public function pdfCoti(Request $request, $id)
     {
         $cotizaciones = Cotizacion::findOrFail($id);
+
 
         $consulta = DB::select("SELECT dco.cotizacion_id, dco.numero_servicios, dco.precio_bruto, dco.precio_iva, dco.subtotal, serv.nombre, serv.descripcion
          FROM detalle_cotizacion AS dco
@@ -109,15 +112,18 @@ class CotizacionesController extends Controller
          WHERE cotizacion_id = $id
          ORDER BY numero_servicios ASC");
 
-        $pdf = PDF::loadView('system.cotizaciones.cotizacionPdf', compact('consulta','cotizaciones'))->setPaper('a4', 'landscape');
 
-        Mail::send('system.cotizaciones.cotizacionPdf',compact("cotizaciones","consulta"), function ($mail) use ($pdf) {
-            $mail->to('omar.13.chong@gmail.com');
+        $pdf = PDF::loadView('system.cotizaciones.cotizacionPdf', compact('consulta', 'cotizaciones'))->setPaper('a4', 'landscape');
+
+        Mail::send('system.cotizaciones.cotizacionPdf', compact('cotizaciones', 'consulta'), function ($mail) use ($pdf, $cotizaciones) {
+            $mail->to([$cotizaciones->clientes->contactos->email1]);
             $mail->attachData($pdf->output(), 'cotización.pdf');
         });
+       
         return $pdf->stream('cotización.pdf');
     }
 
+    
 
 
     public function show($id)

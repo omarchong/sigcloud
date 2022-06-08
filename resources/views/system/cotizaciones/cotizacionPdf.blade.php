@@ -44,7 +44,7 @@
 
     .contenedor2 {
         width: 85%;
-        background-color: #CBD1CD;
+        background-color: #d4d6d8;
         float: right;
         height: 100%;
     }
@@ -86,7 +86,7 @@
          color: white;
      }
      td, th{
-        border: 2px solid black;
+        border: 1px solid black;
         padding-left:20px ;
         padding-right: 20px;
         padding-top: 10px;
