@@ -10,6 +10,10 @@
 </head>
 <style>
   
+    html{
+        margin: 0;
+    }
+
     .principal {
         margin: 0px;
         padding: 0px;
@@ -18,7 +22,7 @@
     .contenedor1 {
         background-color: #247;
         width: 15%;
-        height: auto;
+        height: 100vh;
         float: left;
     }
 
@@ -113,7 +117,7 @@
                             <th>Subtotal</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody style="text-align: center">
                         <?php
                         $numservicios = 0;
                         $preciobruto = 0;
