@@ -104,8 +104,8 @@
             total1 += parseFloat($(this).find('td').eq(3).text());
             total2 += parseFloat($(this).find('td').eq(4).text());
             total3 += parseFloat($(this).find('td').eq(5).text());
-
         });
+        
         $('#detalle-servicios tfoot tr th').eq(1).text("# " + total0);
         $('#detalle-servicios tfoot tr th').eq(2).text("$ " + total1);
         $('#detalle-servicios tfoot tr th').eq(3).text("$ " + total2);

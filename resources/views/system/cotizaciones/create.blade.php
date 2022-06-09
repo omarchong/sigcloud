@@ -167,7 +167,7 @@
                         <div class="valid-feedback">
                             Correcto!
                         </div>
-                       
+
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="table-responsive">
@@ -214,6 +214,7 @@
 <script src=""></script>
 @endsection
 <script>
+    let borrada;
     $(document).ready(function() {
 
         $("#buscarcliente").autocomplete({
@@ -324,19 +325,33 @@
         total_iva = [];
         total_t = 0;
         total_total = [];
+        const elemento = [];
+        const elemento1 = [];
+        const elemento2 = [];
+        const arrayServicios = [];
 
 
 
-        function agregar() {
+        let servicios_id
+        let nombre
+        let descripcion
+        let precio_inicial
+        let numero_servicios
+        let precio_bruto
+        let precio_iva
+        let subtotal
 
-            const servicios_id = $("#servicios_id").val();
-            const nombre = $('#nombre').val();
-            const descripcion = $('#descripcion').val();
-            const precio_inicial = $("#precio_inicial").val();
-            const numero_servicios = $("#numero_servicios").val();
-            const precio_bruto = Number(precio_inicial) * parseFloat(numero_servicios);
-            const precio_iva = Number(precio_bruto) * .16;
-            const subtotal = Number(precio_iva) + parseFloat(precio_bruto);
+        function sumas_tfot() {
+
+
+            nombre = $('#nombre').val();
+            descripcion = $('#descripcion').val();
+            servicios_id = $("#servicios_id").val();
+            precio_inicial = $("#precio_inicial").val();
+            numero_servicios = $("#numero_servicios").val();
+            precio_bruto = Number(precio_inicial) * parseFloat(numero_servicios);
+            precio_iva = Number(precio_bruto) * .16;
+            subtotal = Number(precio_iva) + parseFloat(precio_bruto);
 
             total_bruto[cont] = Number(precio_bruto)
             total_b = total_b + total_bruto[cont];
@@ -344,6 +359,24 @@
             total_i = total_i + total_iva[cont];
             total_total[cont] = Number(subtotal)
             total_t = total_t + total_total[cont];
+            arrayServicios.push(
+                {
+                    'idServicio': servicios_id, 
+                    'precioInicial': precio_inicial,
+                    'precioIva': precio_iva,
+                    'subtotal': subtotal,
+
+                }
+            );
+            elemento1.push(precio_bruto);
+            elemento2.push(precio_iva);
+            elemento.push(subtotal);
+            let sumatoria = 0;
+            sumatoria = sumaarray(elemento);
+
+            total_b = sumaarray(elemento1);
+            total_i = sumaarray(elemento2);
+            total_t = sumaarray(elemento);
 
             const fila = `<tr id="fila"> 
                 <td><input class="form-control" type="number" id="servicios_id" name="servicios_id[]" value="${servicios_id}" readonly></td>
@@ -364,9 +397,44 @@
             $('#detalles').append(fila);
         }
 
+
+
+        function agregar() {
+            
+            sumas_tfot()
+        }
+
+        function sumaarray(array) {
+            let sum = 0;
+            let iva = 0;
+            let inicial = 0;
+            let total = 0;
+
+            array.forEach((el) => {
+                iva += el.precioIva;
+                inicial += el.precioInicial;
+                total += el.subtotal
+            });
+
+            return {
+                iva, inicial, total
+            };
+        }
+
         $(document).on('click', '.delete', function(event) {
             event.preventDefault();
+            borrada = $(this).closest('tr')[0].getElementsByTagName('td')[0].getElementsByTagName('input')[0].value;
+
+                let  arreglolimpio = arrayServicios.filter((el=>el.idServicio !== borrada));
             $(this).closest('tr').remove();
+            total_t = sumaarray(elemento);
+            total_b = sumaarray(elemento1);
+            total_i = sumaarray(elemento2);
+            $("#total_b").html("$" + total_b);
+            $("#total_i").html("$" + total_i);
+            $("#total_t").html("$" + total_t);
+            console.log("Eñ",sumaarray(arreglolimpio));
+            /* sumas_tfot() */
         });
 
         function limpiar() {

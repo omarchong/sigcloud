@@ -24,7 +24,7 @@ class ContactoSeeder extends Seeder
         ]);
         DB::table('contactos')->insert([
             'contacto1' => 'Sonia',
-            'email1' => 'sonia@gmail.com',
+            'email1' => 'omar.13.chong@gmail.com',
             'telefono1' => '009823914',
             'descripcion' => 'Pruebas piloto',
             'servicios_id' => 2,

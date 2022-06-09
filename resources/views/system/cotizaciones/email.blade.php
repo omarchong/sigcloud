@@ -11,7 +11,7 @@
 
 <body>
     <div class="card-body">
-       <h3>Hola ghbjnk</h3>
+       <h3 class="text-primary">Apreciable cliente esperando estes teniendo un excelente dia aprovecho para enviarte la cotizacion solicitada quedando a sus ordenes.</h3>
     </div>
 </body>
 

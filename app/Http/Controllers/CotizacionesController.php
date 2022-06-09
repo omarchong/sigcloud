@@ -104,7 +104,6 @@ class CotizacionesController extends Controller
     {
         $cotizaciones = Cotizacion::findOrFail($id);
 
-
         $consulta = DB::select("SELECT dco.cotizacion_id, dco.numero_servicios, dco.precio_bruto, dco.precio_iva, dco.subtotal, serv.nombre, serv.descripcion
          FROM detalle_cotizacion AS dco
          INNER JOIN servicios AS serv
@@ -115,15 +114,24 @@ class CotizacionesController extends Controller
 
         $pdf = PDF::loadView('system.cotizaciones.cotizacionPdf', compact('consulta', 'cotizaciones'))->setPaper('a4', 'landscape');
 
-        Mail::send('system.cotizaciones.cotizacionPdf', compact('cotizaciones', 'consulta'), function ($mail) use ($pdf, $cotizaciones) {
+        Mail::send('system.cotizaciones.email', compact('cotizaciones', 'consulta'), function ($mail) use ($pdf, $cotizaciones) {
+            /* quien lo envia */
+            $mail->from("omar.chong@dswestudio.com", "SigCloud");
+            /* envia al email del contacto accediendo a relaciones */
             $mail->to([$cotizaciones->clientes->contactos->email1]);
+           /*  asunto se escribe en la vista email */
+            $subject = "Envio de cotización";
+            $mail->subject($subject);
+            /* envia el pdf y lo descarga */
             $mail->attachData($pdf->output(), 'cotización.pdf');
         });
-       
+
+        
+
         return $pdf->stream('cotización.pdf');
     }
 
-    
+
 
 
     public function show($id)
