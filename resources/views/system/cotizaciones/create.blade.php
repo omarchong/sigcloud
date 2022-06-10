@@ -328,7 +328,7 @@
         const elemento = [];
         const elemento1 = [];
         const elemento2 = [];
-        const arrayServicios = [];
+        let arrayServicios = [];
 
 
 
@@ -359,20 +359,24 @@
             total_i = total_i + total_iva[cont];
             total_total[cont] = Number(subtotal)
             total_t = total_t + total_total[cont];
-            arrayServicios.push(
-                {
-                    'idServicio': servicios_id, 
-                    'precioInicial': precio_inicial,
-                    'precioIva': precio_iva,
-                    'subtotal': subtotal,
+            arrayServicios.push({
+                'idServicio': servicios_id,
+                'precioInicial': Number(precio_inicial),
+                'precioIva': precio_iva,
+                'subtotal': subtotal,
 
-                }
-            );
+            });
             elemento1.push(precio_bruto);
             elemento2.push(precio_iva);
             elemento.push(subtotal);
             let sumatoria = 0;
-            sumatoria = sumaarray(elemento);
+            //sumatoria = sumaarray(elemento);
+            let {
+                inicial,
+                iva,
+                total
+            } = sumaarray(arrayServicios);
+
 
             total_b = sumaarray(elemento1);
             total_i = sumaarray(elemento2);
@@ -390,9 +394,9 @@
                 <td><button type="button" class="btn btn-danger delete" value="Eliminar">X</button></td>
                 </tr>; `
             cont++;
-            $("#total_b").html("$" + total_b);
-            $("#total_i").html("$" + total_i);
-            $("#total_t").html("$" + total_t);
+            $("#total_b").html("$" + inicial);
+            $("#total_i").html("$" + iva);
+            $("#total_t").html("$" + total);
             limpiar();
             $('#detalles').append(fila);
         }
@@ -400,12 +404,11 @@
 
 
         function agregar() {
-            
+
             sumas_tfot()
         }
 
         function sumaarray(array) {
-            let sum = 0;
             let iva = 0;
             let inicial = 0;
             let total = 0;
@@ -417,7 +420,9 @@
             });
 
             return {
-                iva, inicial, total
+                iva,
+                inicial,
+                total
             };
         }
 
@@ -425,15 +430,17 @@
             event.preventDefault();
             borrada = $(this).closest('tr')[0].getElementsByTagName('td')[0].getElementsByTagName('input')[0].value;
 
-                let  arreglolimpio = arrayServicios.filter((el=>el.idServicio !== borrada));
+            arrayServicios = arrayServicios.filter((el => el.idServicio !== borrada));
             $(this).closest('tr').remove();
-            total_t = sumaarray(elemento);
-            total_b = sumaarray(elemento1);
-            total_i = sumaarray(elemento2);
-            $("#total_b").html("$" + total_b);
-            $("#total_i").html("$" + total_i);
-            $("#total_t").html("$" + total_t);
-            console.log("Eñ",sumaarray(arreglolimpio));
+            let {
+                inicial,
+                iva,
+                total
+            } = sumaarray(arrayServicios);
+
+            $("#total_b").html("$" + inicial);
+            $("#total_i").html("$" + iva);
+            $("#total_t").html("$" + total);
             /* sumas_tfot() */
         });
 

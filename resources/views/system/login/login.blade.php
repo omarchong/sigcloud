@@ -20,7 +20,7 @@
 
 
     <div class="container-fluid">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 min-vh-100">
             <div class="col-md-7" id="fondo1">
                 <div class="text-center my-4">
                     <img src="img/lego.png" width="50%" alt="">
