@@ -24,7 +24,7 @@ class ContactoSeeder extends Seeder
         ]);
         DB::table('contactos')->insert([
             'contacto1' => 'Sonia',
-            'email1' => 'omar.13.chong@gmail.com',
+            'email1' => 'al221811717@gmail.com',
             'telefono1' => '009823914',
             'descripcion' => 'Pruebas piloto',
             'servicios_id' => 2,
@@ -34,7 +34,7 @@ class ContactoSeeder extends Seeder
         ]);
         DB::table('contactos')->insert([
             'contacto1' => 'Cristhian Zacarias Diaz',
-            'email1' => 'cris.diaz@gmail.com',
+            'email1' => 'cristhianzacarias@gmail.com',
             'telefono1' => '889123456',
             'descripcion' => 'diseño logos',
             'servicios_id' => 1,
@@ -44,7 +44,7 @@ class ContactoSeeder extends Seeder
         ]);
         DB::table('contactos')->insert([
             'contacto1' => 'Karen Perez Juarez',
-            'email1' => 'Karen.perez@gmail.com',
+            'email1' => 'al221811670@gmail.com',
             'telefono1' => '7711223300',
             'descripcion' => 'Informacion servicios',
             'servicios_id' => 1,
@@ -54,7 +54,7 @@ class ContactoSeeder extends Seeder
         ]);
         DB::table('contactos')->insert([
             'contacto1' => 'Hector Bastida Barcenas',
-            'email1' => 'hector@dsw.com',
+            'email1' => 'omar.chong@dswestudio.com',
             'telefono1' => '0925712345',
             'descripcion' => 'Sitio web',
             'servicios_id' => 1,

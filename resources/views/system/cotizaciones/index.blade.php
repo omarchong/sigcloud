@@ -61,19 +61,16 @@
                                         return `
                                     
                                                 <a href="/cotizaciones/${data}/edit"
-                                                class="btn"
-                                                ${full.deleted_at ? 'hidden' : ''}>
+                                                class="btn">
                                                 <img src="/img/editar.svg" width="20px"> </a>
 
                                                 <a href="/cotizaciones/${data}"
-                                                class="btn btn-info"
-                                                ${full.deleted_at ? 'hidden' : ''}>
+                                                class="btn btn-info">
                                                  <i class="fas fa-eye"></i> </a>
 
                                                 <a href="/coti/${data}"
-                                                class="btn btn-danger"
-                                                ${full.deleted_at ? 'hidden' : ''}>
-                                                <i class="fas fa-file-pdf"></i>
+                                                class="btn">
+                                                <img src="/img/mail.svg" width="35px"></i>
                                                 </a>
                                     `
                                     }

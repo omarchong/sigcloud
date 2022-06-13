@@ -14,12 +14,17 @@ class OrdenpagosController extends Controller
       $sessionusuario = session('sessionusuario');
       if($sessionusuario<>"")
       {
-        return view('system.orden.index');
+        return view('system.ordenpagos.index');
       }
       else{
         Session::flash('mensaje', 'Iniciar sesión antes de continuar');
         return redirect()->route('login');
       }
+    }
+
+    public function create()
+    {
+      return view('system.ordenpagos.create');
     }
 
     public function RegistrosDatatables()
