@@ -16,7 +16,7 @@ class DetalleCotizacion extends Model
         'precio_bruto',
         'precio_iva',
         'subtotal',
-        /* 'total', */
+        'descripcion_global',
         'descuento_general',
         'cotizacion_id',
         'servicios_id'

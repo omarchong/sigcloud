@@ -8,7 +8,7 @@
                     <span>Gestión de orden de pagos</span>
                 </div>
                 <div class="card-body">
-                    <a href="#" class="btn btn-primary"> <i class="fas fa-plus"></i>
+                    <a href="{{route('orden.create')}}" class="btn btn-primary"> <i class="fas fa-plus"></i>
                         Agregar orden</a>
                 </div>
                 <div class="card-body">
@@ -21,7 +21,6 @@
                                 <th>Emite</th>
                                 <th>Fecha limite</th>
                                 <th>Estatus</th>
-                                <th>Cotización</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -63,17 +62,12 @@
                 data: 'estatuorden.nombre'
             },
             {
-                data: 'cotizacion.descripcion'
-            },
-            {
                 data: 'id',
                 render: function(data, type, full, meta) {
                     return `
-                    <a href="#" class="btn"
-                    ${full.deleted_at ? 'hidden' : ''}>
+                    <a href="#" class="btn">
                     <img src="/img/editar.svg" width="20px">
-                    <a href="#" class="btn"
-                    ${full.deleted_at ? 'hidden' : ''}>
+                    <a href="#" class="btn">
                     <img src="/img/basurero.svg" width="20px">
                     </a>
                     `

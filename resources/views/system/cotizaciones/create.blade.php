@@ -132,7 +132,7 @@
                     <div class="col-md-5 my-3">
                         <label for="exampleInputEmail1" class="form-label">Fecha estimada entrega</label>
                         <div class="form-group">
-                            <input type="date" class="form-control @error('fecha_estimadaentrega') is-invalid  @enderror" id="fecha_estimadaentrega" name="fecha_estimadaentrega" value="{{old('fecha_estimadaentrega')}}">
+                            <input type="text" class="form-control @error('fecha_estimadaentrega') is-invalid  @enderror" id="fecha_estimadaentrega" name="fecha_estimadaentrega" value="{{old('fecha_estimadaentrega')}}">
                             @error('fecha_estimadaentrega')
                             <small class="text-danger">{{ $message }}</small>
                             @enderror
@@ -175,7 +175,6 @@
                                 <thead class="table-primary">
                                     <th>N.servicio</th>
                                     <th>Nombre servicio</th>
-                                    <th>Descripcion</th>
                                     <th>Precio inicial</th>
                                     <th>Cantidad</th>
                                     <th>Precio unitario</th>
@@ -334,7 +333,6 @@
 
         let servicios_id
         let nombre
-        let descripcion
         let precio_inicial
         let numero_servicios
         let precio_bruto
@@ -345,7 +343,6 @@
 
 
             nombre = $('#nombre').val();
-            descripcion = $('#descripcion').val();
             servicios_id = $("#servicios_id").val();
             precio_inicial = $("#precio_inicial").val();
             numero_servicios = $("#numero_servicios").val();
@@ -361,7 +358,7 @@
             total_t = total_t + total_total[cont];
             arrayServicios.push({
                 'idServicio': servicios_id,
-                'precioInicial': Number(precio_inicial),
+                'precioInicial': Number(precio_bruto),
                 'precioIva': precio_iva,
                 'subtotal': subtotal,
 
@@ -385,7 +382,6 @@
             const fila = `<tr id="fila"> 
                 <td><input class="form-control" type="number" id="servicios_id" name="servicios_id[]" value="${servicios_id}" readonly></td>
                 <td><input class="form-control" type="text" id="nombre" name="nombre[]" value="${nombre}" readonly></td>
-                <td><input class="form-control" type="text" id="descripcion" name="descripcion[]" value="${descripcion}"></td>
                 <td><input class="form-control" type="number" id="precio_inicial" name="precio_inicial[]" value="${precio_inicial}" readonly></td>
                 <td><input class="form-control" type="number" id="numero_servicios" name="numero_servicios[]" value="${numero_servicios}" readonly></td>
                 <td><input class="form-control" type="text" id="precio_bruto" name="precio_bruto[]" value="${precio_bruto}" readonly></td>
@@ -454,4 +450,11 @@
 
         }
     })
+
+/*     funcion para bloquear dias pasados */
+    $(function() {
+        $("#fecha_estimadaentrega").datepicker({
+            minDate: 0
+        });
+    });
 </script>

@@ -15,11 +15,12 @@ class CreateCotizacionesTable extends Migration
             $table->foreignId('clientes_id')
                 ->references('id')
                 ->on('clientes');
+            $table->string('descripcion_global');
+
             $table->foreignId('estatucotizacion_id')
                 ->references('id')
                 ->on('estatucotizaciones');
-            $table->date('fecha_estimadaentrega');
-            $table->text('descripcion_global');
+            $table->string('fecha_estimadaentrega');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -13,7 +13,7 @@
                             <div class="valid-feedback">
                                 Correcto!
                             </div>
-                            
+
                             @error('nombre')
                             <small class="text-danger"> {{ $message }} </small>
                             @enderror
@@ -194,7 +194,7 @@
             rules: {
                 nombre: {
                     required: true,
-                    
+
                 },
                 app: {
                     required: true,

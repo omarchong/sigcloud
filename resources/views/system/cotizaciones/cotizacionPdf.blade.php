@@ -44,7 +44,7 @@
 
     .contenedor2 {
         width: 85%;
-        background-color: #d4d6d8;
+        background-color: #D2D4D6;
         float: right;
         height: 100%;
     }
