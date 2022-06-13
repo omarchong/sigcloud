@@ -1,61 +1,33 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
 
-## About Laravel
+## SIGCLOUD
+### Este sistema esta desarrolado bajo las siguientes tecnologias.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Lenguaje de programación: PHP 7.4 o en adelante
+- Framework: laravel en la version 8
+- Gestor de base de datos: MYSQL
+- Diseño: CSS3 y Bootstrap en la version 4.
+- Frontend: Blade con js y jquery.
+------
+### Instrucciones para levantar el sistema en desarrollo.
+- 1.- Para descargar el proyecto ingrese al siguiente link https://github.com/omarchong/sigcloud.git y siga las instrucciones como lo indoca githun¿b para clonar un proyecto.
+- 2.- Dirijase a la terminal de su preferencia en su computador colocando la ruta en la que se encuentra el proyecto "SIGCLOUD"
+- 3.- Una vez que abrio el proyecto en su editor de preferencia y en la terminal elejida ingrese los siguientes comandos 
+- 4.- composer install, este comando re-instala los paquetes y dependecias usados. 
+- 5.- composer update, este comando actualizara todos los paquetes que fueron instalados en el desarrollo para seguir la misma estructura.
+- 6.- Realice una copia del archivo .envexample que se encuentra dentro del proyecto y renombre por .env
+- 7.- Genere la clave de acceso a travez del comando php artisan key:generate, este comando genera la clave de encriptación de la aplicación.
+- 8.- Cree una base de datos y configure el archivo .env con sus accesos de la base de datos, nombre, servidor y contraseña.
+- 9.- La base de datos la puede generar con el comando php artisan migrate o en su defecto php artisan migrate:fresh --seed para obtener datos de prueba.
+- 10.- Con esto ya tenemos lista la aplicación para poder abrirla en desarrollo.
+- 11.- Ejecute el comando php artisan serv o si bien lo desea puede abrirlo con localhost/rutadelproyecto en el navegador.
+- 12.- para verlo en el navegador coloque el siguiente enlace en el buscador http://127.0.0.1:8000
+--------
+### Accesos para poder ingresar al sistema
+- Usuario: Chong
+- Password: omar1234
+--------- 
+### Variables de entrono .env
+- En este archivo se encuentran las variables de entorno de la base de datos, email, apis etc.
+- Dentro del mismo se puede configurar lo que sea necesario con los datos solicitados.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
