@@ -22,6 +22,7 @@ use App\Http\Controllers\ServiciosController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\TareasController;
 use App\Http\Controllers\TipoproyectosController;
+use App\Notifications\Notificacion;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/prueba', function () {
@@ -30,6 +31,8 @@ Route::get('/prueba', function () {
 login */
 
 Route::get('/panel-administrativo', [HomeController::class, 'index'])->name('home');
+
+
 
 route::get('/', [LoginController::class, 'login'])->name('login');
 Route::post('validar', [LoginController::class, 'validar'])->name('validar');
@@ -67,6 +70,15 @@ Route::name('coti')->get('coti/{id}', [CotizacionesController::class, 'pdfCoti']
 /* usuarios */
 Route::resource('usuarios', UsuariosController::class);
 Route::get('datatables/usuarios', [UsuariosController::class, 'RegistrosDatatables'])->name('usuarios.datatables');
+
+Route::post('/mark-as-read', [UsuariosController::class, 'markNotification'])->name('markNotification');
+/* Leer notificacion */
+/* $sessionusuario = session('sessionusuario');
+
+Route::get('marcarNotificaciones', function(){
+    session('sessionusuario')->usuario()->unreadNotifications->markAsRead();
+    return redirect()->back();
+})->name('marcarNotificaciones'); */
 
 /* Actividades */
 Route::resource('actividades', ActividadesController::class);

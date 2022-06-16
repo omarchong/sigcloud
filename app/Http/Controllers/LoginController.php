@@ -46,9 +46,15 @@ class LoginController extends Controller
     public function inicio()
     {
         $sessionusuario = session('sessionusuario');
+        $sessionid = session('sessionid');
         if($sessionusuario<> "")
         {
-            return view('system.dashboard.principal');
+            $notificacionusuario =Usuario::find($sessionid);   
+            if (count($notificacionusuario->unreadNotifications)){
+                
+            }
+
+            return view('system.dashboard.principal', compact('notificacionusuario'));
         }
         else{
             Session::flash('mensaje', "Iniciar sesión antes de continuar");
@@ -99,7 +105,7 @@ class LoginController extends Controller
     {
         Session::forget('sesionusuario');
         Session::flush();
-        Session::flash('mensaje',"Sesion cerrada correctamente"); 
+        Session::flash('mensaje',"Sesión cerrada correctamente"); 
         return redirect()->route('login');
     }
 }

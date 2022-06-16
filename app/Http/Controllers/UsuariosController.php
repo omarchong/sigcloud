@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UsuarioEditRequest;
-use App\Http\Requests\UsuarioRequest;
+
 use App\Models\Departamento;
 use App\Models\Usuario;
+use App\Notifications\Notificacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -16,6 +16,7 @@ class UsuariosController extends Controller
     /* retorna ala vista inicial del modulo usuarios */
     public function index()
     {
+       /*  dd(auth()->user()); */
         $sessionusuario = session('sessionusuario');
         if ($sessionusuario <> "") {
             return view('system.usuarios.index');
@@ -59,12 +60,23 @@ class UsuariosController extends Controller
 
         $usuario = $request->all();
 
-        if ($imagen = $request->file('imagen')) {
+        $file = $request->file('imagen');
+        if($file<>"")
+        {
+            $imagen = $file->getClientOriginalName();
+            $imagen2 = date("YmdHis") . $imagen;
+            \Storage::disk('local')->put($imagen2, \File::get($file));
+        }
+        else{
+            $imagen2 = "sinfoto.jpeg";
+        }
+
+        /* if ($imagen = $request->file('imagen')) {
             $rutaGuardarImg = 'imagen/';
             $imagenUsuario = date('YmdHis') . "." . $imagen->getClientOriginalExtension();
             $imagen->move($rutaGuardarImg, $imagenUsuario);
             $usuario['imagen'] = "$imagenUsuario";
-        }
+        } */
         $usuario = Usuario::create([
             'nombre' => $request->nombre,
             'app' => $request->app,
@@ -74,10 +86,20 @@ class UsuariosController extends Controller
             'email' => $request->email,
             'contrasena' => Hash::make($request->contrasena),
             'contrasena_confirmar' => Hash::make($request->contrasena_confirmar),
-            'departamento' => $request->departamento,
-            'imagen' => $request->imagen = $imagenUsuario,
+            'departamento_id' => $request->departamento_id,
+            'imagen' => $imagen2,
+            /* 'imagen' => $request->imagen = $imagenUsuario, */
             'estatus' => $request->estatus,
         ]);
+
+        // Autenticar un usuario
+        /* auth()->attempt([
+        'email' => $request->email,
+        'contrasena' => $request->contrasena
+        ]); */
+
+        /* auth()->attempt($usuario->only('usuario', 'contrasena')); */
+
         return redirect()
             ->route('usuarios.index')
             ->withSuccess("El usuario $usuario->nombre se guardo correctamente");
@@ -114,15 +136,24 @@ class UsuariosController extends Controller
             'imagen' => 'image|mimes:jpg,png,jpeg|max:2048',
             'estatus' => 'required'
         ]);
-        $usu = $request->all();
+        /* $usu = $request->all();
         if ($imagen = $request->file('imagen')) {
-            $rutaGuardarImg = 'imagen/';
-            $imagenUsuario = date('YmdHis') . "." . $imagen->getClientOriginalExtension();
-            $imagen->move($rutaGuardarImg, $imagenUsuario);
-            $usu['imagen'] = "$imagenUsuario";
+            $rutaGuardarImg = 'archivos/';
+            $imagen2 = date('YmdHis') . "." . $imagen->getClientOriginalExtension();
+            $imagen->move($rutaGuardarImg, $imagen2);
+            $usu['imagen'] = "$imagen2";
         } else {
             unset($usu['imagen']);
+        } */
+
+        $file = $request->file('imagen');
+        if($file<>"")
+        {
+            $imagen = $file->getClientOriginalName();
+            $imagen2 = date('YmdHis') . $imagen;
+            \Storage::disk('local')->put($imagen2, \File::get($file));
         }
+
 
         $usuario->update([
             'nombre' => $request->nombre,
@@ -131,10 +162,11 @@ class UsuariosController extends Controller
             'telefono' => $request->telefono,
             'contrasena' => Hash::make($request->contrasena),
             'contrasena_confirmar' => Hash::make($request->contrasena_confirmar),
-            'departamento' => $request->departamento,
-            'imagen' => $request->imagen = $imagenUsuario,
-            'estatus' => $request->estatus,
+            'departamento_id' => $request->departamento_id,
+            'estatus'=> $request->estatus,
+            'imagen' => $imagen2,
         ]);
+        
         return redirect()
             ->route('usuarios.index')
             ->withSuccess("El usuario $usuario->nombre se actualizo exitosamente");
@@ -154,6 +186,14 @@ class UsuariosController extends Controller
     {
         $sessionusuario = session('sessionusuario');
         if ($sessionusuario <> "") {
+
+            /* Mostrar las notificaciones que tiene el usuario  */
+
+            /* $usuario=Usuario::find(1);   
+            if (count($usuario->unreadNotifications)){
+                echo count($usuario->unreadNotifications);
+            } */
+            
             $usuarios = Usuario::findOrFail($id);
             $departamentos = DB::select("SELECT usu.nombre, depa.nombre, depa.abreviatura, depa.estatus
             FROM usuarios AS usu
@@ -165,10 +205,33 @@ class UsuariosController extends Controller
             INNER JOIN usuarios AS usu
             ON tar.usuario_id = usu.id
             WHERE usuario_id = $id");
-            return view('system.usuarios.show', compact('usuarios', 'tareas', 'departamentos'));
+
+            $usuario = Usuario::findOrFail($id);
+            if (count($usuarios->unreadNotifications)){
+            }
+            foreach ($usuarios->unreadNotifications as $notificacion){
+            }
+            foreach ($usuarios->readNotifications as $notificacion){
+
+            }
+
+            
+            return view('system.usuarios.show', compact('usuarios', 'tareas', 'departamentos', 'usuario', 'notificacion'));
+            
         } else {
             Session::flash('mensaje', 'Iniciar sesión antes de continuar');
             return redirect()->route('login');
         }
+    }
+
+    public function markNotification(Request $request)
+    {
+        $sessionusuario = session('sessionusuario');
+        
+        $sessionusuario->unreadNotifications
+            ->when($request->input('id'), function($query) use ($request){
+                return $query->where('id', $request->input('id'));
+            })->markAsRead();
+            return response()->noContent();
     }
 }
