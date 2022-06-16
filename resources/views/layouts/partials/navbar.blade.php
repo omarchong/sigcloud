@@ -15,21 +15,37 @@ $sessionid = session('sessionid');
                     <li class="nav-item active">
                         <img class="mr-2" src="/img/preguntas.svg" alt="" width="40px">
                     </li>
-                    <li class="nav-item dropdown submenu">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"><img class="mr-2" src="/img/notificacion.svg" alt="" width="40px"></a>
-                        <div class="dropdown-menu children">
-                          <a class="dropdown-item" href="#">Action</a>
-                          <a class="dropdown-item" href="#">Another action</a>
-                          <a class="dropdown-item" href="#">Something else here</a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                      </li>
-                      <li class="nav-item">
-                        <a href="" class="bg-success rounded-circle px-2 text-white mr-2" width="40px">
-                            {{-- {{ Auth::usuario()->unreadNotifications->count() }} --}}
-                        </a> 
-                    </li>
+
+                    <div class="notificacion nav-link dropdown submenu">
+                        <img src="/img/notificacion.svg" alt="" class="">
+                        <span class="badge">{{-- {{count($notificacionusuario->unreadNotifications)}} --}}</span>
+                        {{-- <div class="dropdown-menu children">
+                          <span class="dropdown-item bg-danger" href="#" style="color: white;">Notificaciones no leidas</span>
+                              @forelse($notificacionusuario->unreadNotifications as $notificacion)
+                             
+                              <li class="""><i class="fas fa-envelope mr-2 mx-2"></i> {{$notificacion->data['nombre'];}} 
+                                <span class="ml-3 float-right text-muted text-sm"> {{$notificacion->created_at->diffForHumans()}} </span>
+                                <a href="#" class="dropdown-item  text-center" style="color: blue"> Marcar como leida</a> 
+                              </li>
+                              @empty
+                                      Sin notificaciones
+                              @endforelse
+                            <div class="dropdown-divider"></div>
+                          <span class="dropdown-item bg-success" href="#" style="color: white;">Notificaciones leidas</span>
+                          <div class="mx-2 my-2">
+                            @forelse ($notificacionusuario->readNotifications as $notificacion)
+                            <li><i class="fas fa-envelope-open"></i> {{$notificacion->data['nombre'];}} <span class="ml-2 pull-right text-muted text-sm"> {{$notificacion->read_at->diffForHumans()}}</span>
+                            </li>
+                                @empty
+                                    Sin notificaciones leidas
+                            @endforelse
+
+                            
+                            
+                          </div>
+                            <div class="dropdown-divider"></div>
+                        </div> --}}
+                    </div>
                     <li class="nav-item">
                         <img class="mr-2" src="/img/apps.svg" alt="" width="40px">
                     </li>
@@ -37,15 +53,21 @@ $sessionid = session('sessionid');
                         <img class="mr-2" src="/img/omar.png" alt="" width="40px">
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled"> <b>Bienvenido <?php echo $sessionusuario ?> </b><br> Ver perfil</a>
+                        <a class="nav-link disabled"> <b>Bienvenido <?php echo $sessionusuario; ?></b><br> Ver perfil</a>
                     </li>
 
+
                 </ul>
+
             </div>
+
         </div>
+
     </nav>
 
     <section>
 
     </section>
 </div>
+
+

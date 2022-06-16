@@ -46,7 +46,10 @@
                                     render: function(data, type, full, meta) {
                                         const ImagenPorDefecto =
                                             `https://www.amaltasindia.in/UploadPhoto/no_img.jpg`;
-                                        return `<img src="${full.imagen ?  `/imagen/${full.imagen}` : ImagenPorDefecto}" width="100" height="80">`
+                                            return `<img src="${full.imagen ?  `/archivos/${full.imagen}` : ImagenPorDefecto}" width="100" height="80">`
+                                        /* const ImagenPorDefecto =
+                                            `https://www.amaltasindia.in/UploadPhoto/no_img.jpg`;
+                                        return `<img src="${full.imagen ?  `/imagen/${full.imagen}` : ImagenPorDefecto}" width="100" height="80">` */
                                     }
 
                                 },

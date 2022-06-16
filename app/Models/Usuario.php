@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Symfony\Component\CssSelector\Node\FunctionNode;
-
-class Usuario extends Model
+use Illuminate\Foundation\Auth\User as Authenticatable;
+class Usuario extends Authenticatable
 {
-    use HasFactory, SoftDeletes, Notifiable;
+    use HasFactory, SoftDeletes;
+    use Notifiable;
     protected $table = 'usuarios';
 
     protected $fillable = [

@@ -10,6 +10,7 @@
                 <div class="card-body">
                     <a href="{{ route('tareas.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i>
                         Agregar tarea</a>
+                        {{count($usuario->unreadNotifications);}}
                 </div>
                 <div class="card-body">
                     <table class="table table-striped table-inverse mt-3 responsive" id="tareas">
@@ -25,16 +26,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($tareas as $tarea)
-                                    <a href="/tareas/${data}/edit" class="btn">
-                                        <img src="/img/editar.svg" width="20px">
-                                        </a>
-                                    <form method="POST" action="{{ url("tareas/{$tarea->id}") }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit">Eliminar</button>
-                                    </form>
-                            @endforeach
+                            
                         </tbody>
                     </table>
                 </div>
@@ -76,18 +68,18 @@
                 render: function(data, type, full, meta) {
                     return `
                     <a href="/tareas/${data}/edit" class="btn">
-                                        <img src="/img/editar.svg" width="20px">
-                                        </a>
-                    <form method="POST" action="{{ url("tareas/{$tarea->id}") }}">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit">Eliminar</button>
-                    </form>
+                        <img src="/img/editar.svg" width="20px">
+                    </a>
+                    <a href="/tareas/${data}/delete" class="btn">
+                        <img src="/img/basurero.svg" width="20px">
+                    </a>
+                    
                     `
                 }
             }
         ]
     });
+   
 
     function reloadTable() {
         $('#tareas').DataTable().ajax.reload();

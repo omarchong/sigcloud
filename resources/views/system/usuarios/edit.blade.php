@@ -112,7 +112,7 @@
                     <div>
                         <div id="preview">
                             @if($usuario->imagen)
-                            <img src="{{asset('/imagen/'.$usuario->imagen)}}">
+                            <img src="{{asset('/archivos/'.$usuario->imagen)}}" height="150" width="150">
                             @endif
                         </div>
                     </div>
