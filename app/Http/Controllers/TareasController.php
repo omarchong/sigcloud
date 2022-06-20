@@ -32,15 +32,18 @@ class TareasController extends Controller
          dd($prueba); */
         /* dd(auth()->usuario()); */
         $sessionusuario = session('sessionusuario');
+        $sessionid = session('sessionid');
         if($sessionusuario<>"")
         {
+          $notificacionusuario = Usuario::find($sessionid);
+
             $tareas = Tarea::all();
             /* Mostrar las notificaciones que tiene el usuario  */
-            $usuario=Usuario::find(1);   
+            /* $usuario=Usuario::find(1);   
             if (count($usuario->unreadNotifications)){
                 
-            }
-            return view('system.tarea.index', compact('tareas', 'usuario'));
+            } */
+            return view('system.tarea.index', compact('tareas', 'notificacionusuario'));
         }
         else{
             Session::flash('mensaje', "Iniciar sesión antes de continuar");
@@ -57,9 +60,12 @@ class TareasController extends Controller
         } */
         
         $sessionusuario = session('sessionusuario');
+        $sessionid = session('sessionid');
         if($sessionusuario<>"")
         {
-            return view('system.tarea.create',[
+          $notificacionusuario = Usuario::find($sessionid);
+
+            return view('system.tarea.create', compact('notificacionusuario'),[
                 'usuarios' => Usuario::select('id','nombre')->get(),
                 'clientes' => Cliente::select('id','nombreempresa')->get(),
                 'estatutareas' => Estatutarea::select('id','nombre')->get()
@@ -116,9 +122,12 @@ class TareasController extends Controller
     public function edit(Tarea $tarea)
     {
         $sessionusuario = session('sessionusuario');
+        $sessionid = session('sessionid');
         if($sessionusuario<>"")
         {
-            return view('system.tarea.edit', [
+          $notificacionusuario = Usuario::find($sessionid);
+
+            return view('system.tarea.edit', compact('notificacionusuario') ,[
                 'tarea' => $tarea,
                 'usuarios' => Usuario::select('id','nombre')->get(),
                 'clientes' => Cliente::select('id','nombreempresa')->get(),

@@ -30,48 +30,49 @@
                         </tbody>
                     </table>
                     <script>
-                        $("#clientes").DataTable({
-                            "responsive": true,
-                            "processing": true,
-                            "serverSide": true,
-                            "autoWidth": false,
-                            language: {
-                                url: "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
-                            },
-                            "ajax": "{{ route('clientes.datatables') }}",
-                            "columns": [{
-                                    data: 'id',
+                            $("#clientes").DataTable({
+                                "responsive": true,
+                                "processing": true,
+                                "serverSide": true,
+                                "autoWidth": false,
+                                language: {
+                                    url: "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
                                 },
-                                {
-                                    data: 'nombreempresa',
-                                }, {
-                                    data: 'contactos.contacto1'
-                                },
-                                {
-                                    data: 'tipocliente'
-                                },
-                                {
-                                    data: 'giros.nombre'
-                                },
-                                {
-                                    data: 'estatuscliente',
-                                }, {
-                                    data: 'id',
-                                    render: function(data, type, full, meta) {
-                                        return `
-                                    
-                                                <a href="/clientes/${data}/edit"
-                                                class="btn">
-                                                <img src="/img/editar.svg" width="20px">
-                                                <a href="/usuarios/${data}/show"
-                                                class="btn">
-                                                <img src="/img/basurero.svg" width="20px">
-                                                </a>
-                                    `
+                                "ajax": "{{ route('clientes.datatables') }}",
+                                "columns": [{
+                                        data: 'id',
+                                    },
+                                    {
+                                        data: 'nombreempresa',
+                                    }, {
+                                        data: 'contactos.contacto1'
+                                    },
+                                    {
+                                        data: 'tipocliente'
+                                    },
+                                    {
+                                        data: 'giros.nombre'
+                                    },
+                                    {
+                                        data: 'estatuscliente',
+                                    }, {
+                                        data: 'id',
+                                        render: function(data, type, full, meta) {
+                                            return `
+                                        
+                                                    <a href="/clientes/${data}/edit"
+                                                    class="btn">
+                                                    <img src="/img/editar.svg" width="20px">
+                                                    <a href="/usuarios/${data}/show"
+                                                    class="btn">
+                                                    <img src="/img/basurero.svg" width="20px">
+                                                    </a>
+                                        `
+                                        }
                                     }
-                                }
-                            ]
-                        })
+                                ]
+                            });
+                        
 
                         function reloadTable() {
                             $('#clientes').DataTable().ajax.reload();

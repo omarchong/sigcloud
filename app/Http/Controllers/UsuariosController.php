@@ -18,8 +18,13 @@ class UsuariosController extends Controller
     {
        /*  dd(auth()->user()); */
         $sessionusuario = session('sessionusuario');
+        $sessionid = session('sessionid');
         if ($sessionusuario <> "") {
-            return view('system.usuarios.index');
+        /* Variable notificacion */
+        $notificacionusuario = Usuario::find($sessionid);
+
+        /* Fin de la Variable notificacion */
+            return view('system.usuarios.index', compact('notificacionusuario'));
         } else {
             Session::flash('mensaje', "Iniciar sesión antes de continuar");
             return redirect()->route('login');
@@ -30,8 +35,13 @@ class UsuariosController extends Controller
     public function create()
     {
         $sessionusuario = session('sessionusuario');
+        $sessionid = session('sessionid');
+
         if ($sessionusuario <> "") {
-            return view('system.usuarios.create', [
+        /* Variable notificacion */
+        $notificacionusuario = Usuario::find($sessionid);
+        /* Fin de la Variable notificacion */
+            return view('system.usuarios.create',  compact('notificacionusuario'), [
                 'departamentos' => Departamento::select('id', 'nombre')->get()
             ]);
         } else {
@@ -109,8 +119,12 @@ class UsuariosController extends Controller
     public function edit(Usuario $usuario)
     {
         $sessionusuario = session('sessionusuario');
+        $sessionid = session('sessionid');
         if ($sessionusuario <> "") {
-            return view('system.usuarios.edit', [
+            /* Variable notificacion */
+            $notificacionusuario = Usuario::find($sessionid);
+            /* Fin de la Variable notificacion */
+            return view('system.usuarios.edit', compact('notificacionusuario'), [
                 'usuario' => $usuario,
                 'departamentos' => Departamento::select('id', 'nombre')->get()
             ]);
@@ -185,6 +199,7 @@ class UsuariosController extends Controller
     public function show($id)
     {
         $sessionusuario = session('sessionusuario');
+        $sessionid = session('sessionid');
         if ($sessionusuario <> "") {
 
             /* Mostrar las notificaciones que tiene el usuario  */
@@ -215,8 +230,12 @@ class UsuariosController extends Controller
 
             }
 
+            /* Variable notificacion */
+            $notificacionusuario = Usuario::find($sessionid);
+            /* Fin de la Variable notificacion */
+
             
-            return view('system.usuarios.show', compact('usuarios', 'tareas', 'departamentos', 'usuario', 'notificacion'));
+            return view('system.usuarios.show', compact('usuarios', 'tareas', 'departamentos', 'usuario', 'notificacion', 'notificacionusuario'));
             
         } else {
             Session::flash('mensaje', 'Iniciar sesión antes de continuar');
@@ -226,9 +245,9 @@ class UsuariosController extends Controller
 
     public function markNotification(Request $request)
     {
-        $sessionusuario = session('sessionusuario');
-        
-        $sessionusuario->unreadNotifications
+        $sessionid = session('sessionid');
+        $usuarioid = Usuario::findOrFail($sessionid);
+        $usuarioid->unreadNotifications
             ->when($request->input('id'), function($query) use ($request){
                 return $query->where('id', $request->input('id'));
             })->markAsRead();

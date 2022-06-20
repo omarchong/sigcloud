@@ -27,10 +27,10 @@ class Notificacion extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('Has recibido una nueva tarea.')
-                    ->line('La tarea es: ')
+                    ->line('Has recibido una nueva tarea:')
+                    ->line('La tarea es: ' . $this->tarea->nombre)
                     ->action('Ver', url('/'))
-                    ->line('Gracias por enviar!');
+                    ->line('Gracias!');
     }
 
     // Notificaciones en la base de datos

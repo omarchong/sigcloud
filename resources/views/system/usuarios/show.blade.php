@@ -12,7 +12,7 @@
                         <!-- {{ $usuarios['imagen'] }} -->
                         <div class="" style="background-color: #29C0FD;">
 
-                            <img src="{{ asset('imagen/' . $usuarios['imagen']) }}"
+                            <img src="{{ asset('archivos/' . $usuarios['imagen']) }}"
                                 class="rounded-circle mx-auto d-block  my-4" alt="..." width="120px" height="100px">
                         </div>
                         <div class="card-body">
@@ -50,22 +50,40 @@
                             Lista de tareas no leidas
                         </div>
                         <div class="card-body">
+
+
+                            @forelse($usuarios->unreadNotifications as $notificacion)
+                            <div class="alert alert-danger">
+                               <b>Nombre de la tarea:</b> {{ $notificacion->data['nombre'] }}
+                                <p class="ml-3 float-right text-muted text-sm"> {{ $notificacion->created_at->diffForHumans() }}</p>
+                                <hr>
+                                <div class="text-right">
+                                    <button type="button" class="mark-as-read btn btn-outline-dark" data-id="{{ $notificacion->id }}">Marcar como leida</button>
+                                </div>
+                                
+                            </div>
+                            {{-- @if($loop->last)
+                            <a href="#" id="mark-all">Marcar todas como leidas</a>
+                            @endif --}}
+                            @empty
+                                Sin notificaciones
+                                <div class="dropdown-divider"></div>
+                            @endforelse
+
+
                             <!--   <h5 class="card-title">Nombre:</h5> -->
                             {{-- @foreach ($tareas as $tarea)
                             <li><strong>Actividad: </strong>{{$tarea->nombre}}</li>
                             @endforeach
                             <li><strong>noti: </strong>{{count($usuarios->unreadNotifications);}}
-                            </li> --}}
-                            <div class="dropdown-divider"></div>
-                            <?php
-                            $sessionusuario = session('sessionusuario');
-                            $sessionid = session('sessionid');
-                            ?>
-                            
+                            </li>  --}}
+
+
+                            {{-- <div class="dropdown-divider"></div>
                             @forelse($usuarios->unreadNotifications as $notificacion)
                                 <li><strong>Nombre: </strong>{{ $notificacion->data['nombre'] }}
                                     {{ $notificacion->created_at->diffForHumans() }}
-                                    <button type="submit" class="mark-as-read btn btn-sm btn-dark"
+                                    <button type="submit" class="mark-as-read btn" style="color: blue"
                                         data-id="{{ $notificacion->id }}">Marcar como leido</button>
                                 </li>
                             @if($loop->last)
@@ -75,8 +93,8 @@
                             @empty
                                 Sin notificaciones
                                 <div class="dropdown-divider"></div>
-                            @endforelse
-
+                            @endforelse --}}
+                                
 
 
                         </div>
@@ -88,14 +106,27 @@
                         <div class="card-body">
 
                             <div class="dropdown-divider"></div>
+
                             @forelse ($usuarios->readNotifications as $notificacion)
+                            <div class="alert alert-info">
+                                <b>Nombre de la tarea:</b> {{ $notificacion->data['nombre'] }}
+                                <p class="ml-3 float-right text-muted text-sm">  {{ $notificacion->read_at->diffForHumans() }}</p>
+                                
+                            </div>
+                            @empty
+                                Sin notificaciones
+                                <div class="dropdown-divider"></div>
+                            @endforelse
+
+
+                            {{-- @forelse ($usuarios->readNotifications as $notificacion)
                                 <li><strong>Nombre: </strong> {{ $notificacion->data['nombre'] }}
                                     {{ $notificacion->read_at->diffForHumans() }}
                                 </li>
                             @empty
                                 Sin notificaciones leidas
                             @endforelse
-                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-divider"></div> --}}
 
 
 
@@ -123,7 +154,7 @@
     $(function(){
         $('.mark-as-read').click(function(){
             let request = sendMarkRequest($(this).data('id'));
-            console.log(request);
+            /* console.log(request); */
             
             request.done(() => {
                 $(this).parents('div.alert').remove();

@@ -10,7 +10,6 @@
                 <div class="card-body">
                     <a href="{{ route('tareas.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i>
                         Agregar tarea</a>
-                        {{count($usuario->unreadNotifications);}}
                 </div>
                 <div class="card-body">
                     <table class="table table-striped table-inverse mt-3 responsive" id="tareas">

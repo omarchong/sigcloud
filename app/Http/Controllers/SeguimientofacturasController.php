@@ -6,6 +6,7 @@ use App\Http\Requests\SeguimientofacturaRequest;
 use App\Models\Estatufactura;
 use App\Models\Ordenpago;
 use App\Models\Seguimientofactura;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -14,9 +15,13 @@ class SeguimientofacturasController extends Controller
     public function index()
     {
         $sessionusuario = session('sessionusuario');
+        $sessionid = session('sessionid');
         if($sessionusuario<>"")
         {
-            return view('system.seguimientofacturas.index');
+            /* Variable notificacion */
+            $notificacionusuario = Usuario::find($sessionid);
+            /* Fin de la Variable notificacion */
+            return view('system.seguimientofacturas.index', compact('notificacionusuario'));
         }
         else{
             Session::flash('mensaje', 'Iniciar sesión antes de continuar');
@@ -27,9 +32,13 @@ class SeguimientofacturasController extends Controller
     public function create()
     {   
         $sessionusuario = session('sessionusuario');
+        $sessionid = session('sessionid');
         if($sessionusuario<>"")
         {
-            return view('system.seguimientofacturas.create',[
+            /* Variable notificacion */
+            $notificacionusuario = Usuario::find($sessionid);
+            /* Fin de la Variable notificacion */
+            return view('system.seguimientofacturas.create', compact('notificacionusuario'),[
                 'ordenpagos' => Ordenpago::select('id','folio')->get(),
                 'estatufacturas' => Estatufactura::select('id','nombre')->get()
             ]);
@@ -51,9 +60,13 @@ class SeguimientofacturasController extends Controller
     public function edit(Seguimientofactura $seguimientofactura)
     {
         $sessionusuario = session('sessionusuario');
+        $sessionid = session('sessionid');
         if($sessionusuario<>"")
         {
-            return view('system.seguimientofacturas.edit', [
+            /* Variable notificacion */
+            $notificacionusuario = Usuario::find($sessionid);
+            /* Fin de la Variable notificacion */
+            return view('system.seguimientofacturas.edit', compact('notificacionusuario'), [
                 'seguimientofactura' => $seguimientofactura,
                 'ordenpagos' => Ordenpago::select('id','folio')->get(),
                 'estatufacturas' => Estatufactura::select('id','nombre')->get(),

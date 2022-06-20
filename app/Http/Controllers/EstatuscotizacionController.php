@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Estatucotizacion;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Session;
@@ -11,6 +12,7 @@ class EstatuscotizacionController extends Controller
     public function index(Request $request)
     {
         $sessionusuario = session('sessionusuario');
+        $sessionid = session('sessionid');
         if($sessionusuario<>""){
             if ($request->ajax()) {
                 $data = Estatucotizacion::latest()->get();
@@ -28,7 +30,10 @@ class EstatuscotizacionController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
             }
-            return view('system.estatucotizacion.index');
+            /* Variable notificacion */
+            $notificacionusuario = Usuario::find($sessionid);
+            /* Fin de la Variable notificacion */
+            return view('system.estatucotizacion.index', compact('notificacionusuario'));
         }
         else
         {

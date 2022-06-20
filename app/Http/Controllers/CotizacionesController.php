@@ -57,8 +57,12 @@ class CotizacionesController extends Controller
     public function index()
     {
         $sessionusuario = session('sessionusuario');
+        $sessionid = session('sessionid');
         if ($sessionusuario <> "") {
-            return view('system.cotizaciones.index');
+            /* Variable notificacion */
+            $notificacionusuario = Usuario::find($sessionid);
+            /* Fin de la Variable notificacion */
+            return view('system.cotizaciones.index', compact('notificacionusuario'));
         } else {
             Session::flash('mensaje', "Iniciar sesión antes de continuar");
             return redirect()->route('login');
@@ -68,8 +72,12 @@ class CotizacionesController extends Controller
     public function create()
     {
         $sessionusuario = session('sessionusuario');
+        $sessionid = session('sessionid');
         if ($sessionusuario <> "") {
-            return view('system.cotizaciones.create', [
+            /* Variable notificacion */
+            $notificacionusuario = Usuario::find($sessionid);
+            /* Fin de la Variable notificacion */
+            return view('system.cotizaciones.create', compact('notificacionusuario'), [
                 'estatuscotizaciones' => Estatucotizacion::select('id', 'nombre')->get()
             ]);
         } else {
@@ -137,6 +145,7 @@ class CotizacionesController extends Controller
     public function show($id)
     {
         $sessionusuario = session('sessionusuario');
+        $sessionid = session('sessionid');
         if ($sessionusuario <> "") {
             $cotizaciones = Cotizacion::findOrFail($id);
             $consulta = DB::select("SELECT dco.cotizacion_id, dco.numero_servicios, dco.precio_bruto, dco.precio_iva, dco.subtotal, serv.nombre, serv.descripcion
@@ -145,7 +154,10 @@ class CotizacionesController extends Controller
             ON dco.servicios_id = serv.id
             WHERE cotizacion_id = $id
             ORDER BY numero_servicios ASC");
-            return  view('system.cotizaciones.show', compact('consulta', 'cotizaciones'));
+            /* Variable notificacion */
+            $notificacionusuario = Usuario::find($sessionid);
+            /* Fin de la Variable notificacion */
+            return  view('system.cotizaciones.show', compact('consulta', 'cotizaciones','notificacionusuario'));
         } else {
             Session::flash('message', 'Iniciar sesión antes de continuar');
             return redirect()->route('login');

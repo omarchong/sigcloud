@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Servicio;
 use Illuminate\Http\Request;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\Hash;
@@ -53,8 +54,9 @@ class LoginController extends Controller
             if (count($notificacionusuario->unreadNotifications)){
                 
             }
+            $servicios = Servicio::count();
 
-            return view('system.dashboard.principal', compact('notificacionusuario'));
+            return view('home.index', compact('notificacionusuario', 'servicios'));
         }
         else{
             Session::flash('mensaje', "Iniciar sesión antes de continuar");

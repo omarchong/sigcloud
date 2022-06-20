@@ -40,7 +40,7 @@
                     <div class="card-header" id="curso">
                         <div class="row">
                             <div class="col-md-3">
-                                <span class="morado">{{-- {{count($notificacionusuario->unreadNotifications)}} --}}</span>
+                                <span class="morado">10</span>
                             </div>
                             <div class="col-md-9">
                                 <h5><b>Servicios en curso</b></h5>

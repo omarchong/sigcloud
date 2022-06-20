@@ -17,9 +17,13 @@ class CitasController extends Controller
     public function index()
     {
         $sessionusuario = session('sessionusuario');
+        $sessionid = session('sessionid');
         if($sessionusuario<>"")
         {
-            return view('system.citas.index');
+             /* Variable notificacion */
+             $notificacionusuario = Usuario::find($sessionid);
+             /* Fin de la Variable notificacion */
+            return view('system.citas.index', compact('notificacionusuario'));
         }
         else{
             Session::flash('mensaje', "Iniciar sesión antes de continuar");
@@ -30,9 +34,13 @@ class CitasController extends Controller
     public function create()
     {   
         $sessionusuario = session('sessionusuario');
+        $sessionid = session('sessionid');
         if($sessionusuario<>"")
         {
-            return view('system.citas.create',[
+             /* Variable notificacion */
+             $notificacionusuario = Usuario::find($sessionid);
+             /* Fin de la Variable notificacion */
+            return view('system.citas.create', compact('notificacionusuario'),[
                 'usuarios' => Usuario::select('id','nombre')->get(),
                 'clientes' => Cliente::select('id','nombreempresa')->get(),
                 'estatucitas' => Estatucita::select('id','nombre')->get()
@@ -57,9 +65,13 @@ class CitasController extends Controller
     public function edit(Cita $cita)
     {
         $sessionusuario = session('sessionusuario');
+        $sessionid = session('sessionid');
         if($sessionusuario<>"")
         {
-            return view('system.citas.edit', [
+            /* Variable notificacion */
+            $notificacionusuario = Usuario::find($sessionid);
+            /* Fin de la Variable notificacion */
+            return view('system.citas.edit', compact('notificacionusuario'), [
                 'cita' => $cita,
                 'usuarios' => Usuario::select('id','nombre')->get(),
                 'clientes' => Cliente::select('id','nombreempresa')->get(),
@@ -79,6 +91,10 @@ class CitasController extends Controller
         return redirect()
         ->route('citas.index')
         ->withSuccess("La cita $cita->nombre se actualizo exitosamente");
+    }
+    public function destroy()
+    {
+
     }
     
     public function RegistrosDatatables()

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Estatucita;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Session;
@@ -11,6 +12,7 @@ class EstatuscitaController extends Controller
     public function index(Request $request)
     {
         $sessionusuario = session('sessionusuario');
+        $sessionid = session('sessionid');
         if($sessionusuario<>"")
         {
             if ($request->ajax()) {
@@ -29,7 +31,10 @@ class EstatuscitaController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
             }
-            return view('system.estatucita.index');
+            /* Variable notificacion */
+            $notificacionusuario = Usuario::find($sessionid);
+            /* Fin de la Variable notificacion */
+            return view('system.estatucita.index', compact('notificacionusuario'));
         }
         else{
             Session::flash('mensaje', 'Iniciar sesión antes de continuar');

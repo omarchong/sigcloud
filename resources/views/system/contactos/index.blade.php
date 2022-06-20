@@ -122,9 +122,9 @@
 
 
                                     <a href="/contactos/${data}"
-                                                class="btn btn-primary"
+                                                class="btn"
                                                 ${full.deleted_at ? 'hidden' : ''}>
-                                                <i class="far fa-eye"></i>
+                                                <i class="fas fa-eye"></i>
                                                 </a>
                                                 <a href="/contactos/${data}"
                                                 class="btn"

@@ -12,7 +12,7 @@
                         Agregar cita</a>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped table-inverse mt-3 responsive" id="citas">
+                    <table class="table table-striped table-inverse mt-3 dt-responsive nowrap" id="citas">
                         <thead class="thead-inverse striped responsive">
                             <tr>
                                 <th>Clave</th>
@@ -69,11 +69,9 @@
                 data: 'id',
                 render: function(data, type, full, meta) {
                     return `
-                    <a href="/citas/${data}/edit" class="btn"
-                    ${full.deleted_at ? 'hidden' : ''}>
+                    <a href="/citas/${data}/edit" class="btn">
                     <img src="/img/editar.svg" width="20px">
-                    <a href="/citas/${data}/delete" class="btn"
-                    ${full.deleted_at ? 'hidden' : ''}>
+                    <a href="/citas/${data}/delete" class="btn">
                     <img src="/img/basurero.svg" width="20px">
                     </a>
                     `

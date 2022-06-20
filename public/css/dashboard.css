@@ -319,13 +319,13 @@ nav .notificacion .notificacion-link{
     padding: 10px 0;
     box-shadow: 4px 4px 16px rgba(0, 0, 0, .1);
     border-radius: 10px;
-    width: 160px;
+    width: 280px;
     opacity: 0;
     pointer-events: none;
     transition: all .3s ease;
 }
 
-nav .notificacion .notificacion-link.show{
+nav .notificacion .notificacion-link{
     opacity: 1;
     pointer-events: visible;
     top: 100%;

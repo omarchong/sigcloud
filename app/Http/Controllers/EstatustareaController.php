@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Estatutarea;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Session;
@@ -11,6 +12,7 @@ class EstatustareaController extends Controller
   public function index(Request $request)
   {
       $sessionusuario = session('sessionusuario');
+      $sessionid = session('sessionid');
       if($sessionusuario<>"")
       {
           if ($request->ajax()) {
@@ -29,7 +31,10 @@ class EstatustareaController extends Controller
                   ->rawColumns(['action'])
                   ->make(true);
           }
-            return view('system.estatutarea.index');
+          /* Variable notificacion */
+          $notificacionusuario = Usuario::find($sessionid);
+          /* Fin de la Variable notificacion */
+            return view('system.estatutarea.index', compact('notificacionusuario'));
       }
       else{
           Session::flash('mensaje', 'Inciar sesión antes de continuar');

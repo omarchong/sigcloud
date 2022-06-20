@@ -15,14 +15,12 @@ use App\Http\Controllers\EstatusordenController;
 use App\Http\Controllers\EstatustareaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\OrdenpagosController;
 use App\Http\Controllers\SeguimientofacturasController;
 use App\Http\Controllers\ServiciosController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\TareasController;
 use App\Http\Controllers\TipoproyectosController;
-use App\Notifications\Notificacion;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/prueba', function () {
@@ -31,6 +29,8 @@ Route::get('/prueba', function () {
 login */
 
 Route::get('/panel-administrativo', [HomeController::class, 'index'])->name('home');
+Route::post('/mark-as-read', [HomeController::class, 'markNotification'])->name('markNotification');
+
 
 
 
@@ -147,6 +147,7 @@ Route::name('destroy-estatufactura')->delete('destroy_estatufactura/{id}', [Esta
 
 /* Citas */
 Route::resource('citas', CitasController::class);
+
 Route::get('datatables/citas', [CitasController::class, 'RegistrosDatatables'])->name('citas.datatables');
 Route::post('buscaempresa', [CitasController::class, 'buscaempresa'])->name('buscaempresa');
 Route::post('seleccionaempresa', [CitasController::class, 'seleccionaempresa'])->name('seleccionaempresa');
