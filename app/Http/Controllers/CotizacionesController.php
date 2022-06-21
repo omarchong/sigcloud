@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CotizacionRequest;
 use App\Models\Cliente;
-use App\Models\Contacto;
 use App\Models\Cotizacion;
 use App\Models\Estatucotizacion;
 use App\Models\Servicio;
-use App\Models\Usuario;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

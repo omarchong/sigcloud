@@ -8,8 +8,7 @@
                     <span>Gestión de tipos de proyectos</span>
                 </div>
                 <div class="card-body">
-                    <button type="button" id="addNewTipoproyecto" class="btn btn-primary"><i
-                            class="fas fa-plus"></i> Agregar
+                    <button type="button" id="addNewTipoproyecto" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar
                         tipo de proyectos</button>
                 </div>
                 <div class="card-body">
@@ -30,39 +29,37 @@
     </div>
 </div>
 
-        <!-- boostrap model -->
-        <div class="modal fade" id="ajax-tipoproyecto-model" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="ajaxTipoproyectoModel"></h4>
-                    </div>
-                    <div class="modal-body">
-                        <form action="javascript:void(0)" id="addEditTipoproyectoForm" name="addEditTipoproyectoForm"
-                            class="form-horizontal needs-validation" method="POST" novalidate>
-                            <input type="hidden" name="id" id="id">
-                            <div class="form-group">
-                                <label for="name" class="col-sm-2 control-label">Nombre</label>
-                                <div class="col-sm-12">
-                                    <input type="text" class="form-control @error('nombre') @enderror" id="nombre" name="nombre" required>
-                                    <div class="valid-feedback">
-                                        Correcto!
-                                    </div>
-                                    @error('nombre')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
+<!-- boostrap model -->
+<div class="modal fade" id="ajax-tipoproyecto-model" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="ajaxTipoproyectoModel"></h4>
+            </div>
+            <div class="modal-body">
+                <form action="javascript:void(0)" id="addEditTipoproyectoForm" name="addEditTipoproyectoForm" class="form-horizontal needs-validation" method="POST" novalidate>
+                    <input type="hidden" name="id" id="id">
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Nombre</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control @error('nombre') @enderror" id="nombre" name="nombre" required>
+                            <div class="valid-feedback">
+                                Correcto!
                             </div>
-                            <div class="float-right my-4">
-                                <button type="submit" class="btn btn-primary" id="btn-save"
-                                    value="addNewTipoproyecto">Guardar
-                                </button>
-                            </div>
-                        </form>
+                            @error('nombre')
+                            <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
                     </div>
-                </div>
+                    <div class="float-right my-4">
+                        <button type="submit" class="btn btn-primary" id="btn-save" value="addNewTipoproyecto">Guardar
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
+</div>
 <!-- end bootstrap model -->
 
 <script>
@@ -71,7 +68,7 @@
         "processing": true,
         "serverSide": true,
         "autoWidth": false,
-        ajax:"",
+        ajax: "",
         language: {
             url: "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
         },
@@ -80,14 +77,16 @@
             },
             {
                 data: 'nombre',
-            }, 
+            },
             {
-                data: 'action', 
-                name: 'action', 
-                orderable: false, 
-                searchable: false},
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false
+            },
         ]
     })
+
     function reloadTable() {
         $('#tipoproyectos').DataTable().ajax.reload();
     }
@@ -167,7 +166,7 @@
                     });
                 }
             })
-        });        
+        });
     });
 </script>
 <script>
@@ -186,22 +185,22 @@
         })
     })
 </script>
-    <script>
-        (function() {
-            'use strict';
-            window.addEventListener('load', function() {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.getElementsByClassName('needs-validation');
-                // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function(form) {
-                    form.addEventListener('submit', function(event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
-    </script>
+<script>
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>

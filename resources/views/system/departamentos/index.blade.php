@@ -177,6 +177,7 @@
 
         $('body').on('click', '.editDepartament', function() {
             var id = $(this).data('id');
+            console.log(id);
             $.get('editar/' + id, function(data) {
                 $('#modelHeading').html("Editar customer");
                 $('#saveBtn').val("edit-departament");
@@ -187,6 +188,7 @@
                 $('#descripcion').val(data.descripcion);
                 $('#estatus').val(data.estatus);
                 $('#n_empleados').val(data.n_empleados);
+                console.log(data);
             })
         })
         /* create-departament */
@@ -216,7 +218,7 @@
         /* delete departament */
 
         $('body').on('click', '.deleteDepartament', function() {
-            
+
             Swal.fire({
                 title: '¿Estás seguro?',
                 text: "¡El departamento se eliminará definitivamente!",

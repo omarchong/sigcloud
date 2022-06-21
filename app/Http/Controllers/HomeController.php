@@ -21,11 +21,6 @@ class HomeController extends Controller
         }
     }
 
-  /*   public function getServicios()
-    {
-        $servicios = Servicio::count();
-        return $servicios;
-    }
-} */
+  
 
 }

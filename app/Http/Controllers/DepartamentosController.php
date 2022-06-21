@@ -12,7 +12,7 @@ class DepartamentosController extends Controller
     public function index(Request $request)
     {
         $sessionusuario = session('sessionusuario');
-        if($sessionusuario<>""){
+        if ($sessionusuario <> "") {
             if ($request->ajax()) {
                 $data = Departamento::latest()->get();
                 return DataTables::of($data)
@@ -20,7 +20,7 @@ class DepartamentosController extends Controller
                     ->addColumn('otros', function ($row) {
                         $btn = '<a href="javascript:void(0)" data-toggle="tooltip" data-id="' . $row->id . '" data-original-title="Edit"
                     class="edit btn-sm editDepartament"><img src="/img/editar.svg" width="20px"></a>';
-    
+
                         $btn = $btn . '<a href="javascript:void(0)" data-toggle="tooltip" data-id="' . $row->id . '" data-original-title="Delete"
                     class="deleteDepartament"><img src="/img/basurero.svg"
                     width="20px"></a>';
@@ -30,8 +30,7 @@ class DepartamentosController extends Controller
                     ->make(true);
             }
             return view('system.departamentos.index');
-        }
-        else{
+        } else {
             Session::flash('mensaje', 'Iniciar sesión antes de continuar');
             return redirect()->route('login');
         }
@@ -56,12 +55,10 @@ class DepartamentosController extends Controller
     public function edit($id)
     {
         $sessionusuario = session('sessionusuario');
-        if($sessionusuario<>"")
-        {
+        if ($sessionusuario <> "") {
             $query = Departamento::find($id);
             return response()->json($query);
-        }
-        else{
+        } else {
             Session::flash('mensaje', 'Iniciar sesión antes de continuar');
             return redirect()->route('login');
         }
