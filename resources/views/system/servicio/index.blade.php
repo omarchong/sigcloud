@@ -12,7 +12,7 @@
                         Agregar servicio</button>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped table-inverse mt-3 responsive" id="servicios">
+                    <table class="table table-striped table-inverse mt-3 dt-responsive nowrap" id="servicios">
                         <thead class="thead-inverse striped responsive">
                             <tr>
                                 <th>Clave</th>

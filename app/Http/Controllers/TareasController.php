@@ -129,7 +129,7 @@ class TareasController extends Controller
 
             return view('system.tarea.edit', compact('notificacionusuario') ,[
                 'tarea' => $tarea,
-                'usuarios' => Usuario::select('id','nombre')->get(),
+                'usuario' => Usuario::select('id','nombre')->get(),
                 'clientes' => Cliente::select('id','nombreempresa')->get(),
                 'estatutareas' => Estatutarea::select('id','nombre')->get()
             ]);
