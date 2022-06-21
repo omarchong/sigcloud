@@ -30,7 +30,7 @@
                         </tbody>
                     </table>
                     <script>
-                            $("#clientes").DataTable({
+                            var table = $("#clientes").DataTable({
                                 "responsive": true,
                                 "processing": true,
                                 "serverSide": true,
@@ -59,14 +59,12 @@
                                         data: 'id',
                                         render: function(data, type, full, meta) {
                                             return `
-                                        
-                                                    <a href="/clientes/${data}/edit"
-                                                    class="btn">
+                                                <a href="/clientes/${data}/edit" class="btn">
                                                     <img src="/img/editar.svg" width="20px">
-                                                    <a href="/usuarios/${data}/show"
-                                                    class="btn">
-                                                    <img src="/img/basurero.svg" width="20px">
-                                                    </a>
+                                                </a>
+                                                <a href="javascript:void(0)" data-toggle="tooltip" data-id="${data}" 
+                                                data-original-title="Delete" class="deleteclientes">
+                                                <img src="/img/basurero.svg" width="20px"></a>
                                         `
                                         }
                                     }
@@ -87,3 +85,40 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('body').on('click', '.deleteclientes', function() {
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: '¡El cliente se eliminará definitivamente!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#007bff',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '¡Si, eliminar!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var id = $(this).data('id');
+                    $.ajax({
+                        type: "DELETE",
+                        url: "{{ url('destroy_clientes') }}" + "/" + id,
+                        data: {
+                            id: id
+                        },
+                        dataType: 'json',
+                        success: function(res) {
+                            table.draw();
+                        }
+                    });
+                }
+            })
+        });
+    })
+</script>

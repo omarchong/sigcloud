@@ -69,9 +69,9 @@
                     <a href="/tareas/${data}/edit" class="btn">
                         <img src="/img/editar.svg" width="20px">
                     </a>
-                    <a href="/tareas/${data}/delete" class="btn">
-                        <img src="/img/basurero.svg" width="20px">
-                    </a>
+                    <a href="javascript:void(0)" data-toggle="tooltip" data-id="${data}" 
+                    data-original-title="Delete" class="deletetarea">
+                    <img src="/img/basurero.svg" width="20px"></a>
                     
                     `
                 }
@@ -85,32 +85,38 @@
     }
 </script>
 <script>
-    (function() {
-        'use strict'
-        //debemos crear la clase formeliminar dentro del form del boton borrar
-        //recordar que cada registro a eliminar esta contenido de un form
-        var forms = document.querySelectorAll('.formEliminar')
-
-        Array.prototype.slice.call(forms)
-            .forEach(function(form) {
-                form.addEventListener('submit', function(event) {
-                    event.preventDefault()
-                    event.stopPropagation()
-                    Swal.fire({
-                        title: '¿Confirmar la eliminacion del registro?',
-                        icon: 'info',
-                        showCancelButton: true,
-                        confirmButtonColor: '#20c997',
-                        cancelButtonColor: '#6c757d',
-                        confirmButtonText: 'Confirmar',
-                        cancelButtonText: 'Cancelar'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            this.submit();
-                            Swal.fire('¡Eliminado!', 'El registro ha sido eliminado correctamente...', 'success');
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('body').on('click', '.deletetarea', function() {
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: '¡La tarea se eliminará definitivamente!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#007bff',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '¡Si, eliminar!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var id = $(this).data('id');
+                    $.ajax({
+                        type: "DELETE",
+                        url: "{{ url('destroy_tarea') }}" + "/" + id,
+                        data: {
+                            id: id
+                        },
+                        dataType: 'json',
+                        success: function(res) {
+                            table.draw();
                         }
-                    })
-                }, false)
+                    });
+                }
             })
-    })()
+        });
+    })
 </script>

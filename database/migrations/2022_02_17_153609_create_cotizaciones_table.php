@@ -21,7 +21,6 @@ class CreateCotizacionesTable extends Migration
                 ->references('id')
                 ->on('estatucotizaciones');
             $table->string('fecha_estimadaentrega');
-            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -18,7 +18,6 @@ class HomeController extends Controller
         $sessionid = session('sessionid');
         if ($sessionusuario <> "") {
             $servicios = Servicio::count();
-
             $notificacionusuario = Usuario::find($sessionid);
             
             return view('home.index', compact('servicios', 'notificacionusuario'));

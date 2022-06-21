@@ -20,10 +20,11 @@ class UsuariosController extends Controller
         $sessionusuario = session('sessionusuario');
         $sessionid = session('sessionid');
         if ($sessionusuario <> "") {
+
         /* Variable notificacion */
         $notificacionusuario = Usuario::find($sessionid);
-
         /* Fin de la Variable notificacion */
+
             return view('system.usuarios.index', compact('notificacionusuario'));
         } else {
             Session::flash('mensaje', "Iniciar sesión antes de continuar");
@@ -102,14 +103,6 @@ class UsuariosController extends Controller
             'estatus' => $request->estatus,
         ]);
 
-        // Autenticar un usuario
-        /* auth()->attempt([
-        'email' => $request->email,
-        'contrasena' => $request->contrasena
-        ]); */
-
-        /* auth()->attempt($usuario->only('usuario', 'contrasena')); */
-
         return redirect()
             ->route('usuarios.index')
             ->withSuccess("El usuario $usuario->nombre se guardo correctamente");
@@ -186,6 +179,12 @@ class UsuariosController extends Controller
             ->withSuccess("El usuario $usuario->nombre se actualizo exitosamente");
     }
 
+    public function destroy_usuarios($id)
+    {
+        Usuario::find($id)->delete();
+        return response()->json(['success' => 'Usuario borrado']);
+    }
+
     /* retorna los valores a la tabla inicial del modulo */
     public function RegistrosDatatables()
     {
@@ -203,7 +202,6 @@ class UsuariosController extends Controller
         if ($sessionusuario <> "") {
 
             /* Mostrar las notificaciones que tiene el usuario  */
-
             /* $usuario=Usuario::find(1);   
             if (count($usuario->unreadNotifications)){
                 echo count($usuario->unreadNotifications);
@@ -221,7 +219,8 @@ class UsuariosController extends Controller
             ON tar.usuario_id = usu.id
             WHERE usuario_id = $id");
 
-            $usuario = Usuario::findOrFail($id);
+            /* Notificaciones */
+            
             if (count($usuarios->unreadNotifications)){
             }
             foreach ($usuarios->unreadNotifications as $notificacion){
@@ -229,13 +228,14 @@ class UsuariosController extends Controller
             foreach ($usuarios->readNotifications as $notificacion){
 
             }
+            /* fin de Notificaciones */
 
             /* Variable notificacion */
             $notificacionusuario = Usuario::find($sessionid);
             /* Fin de la Variable notificacion */
 
             
-            return view('system.usuarios.show', compact('usuarios', 'tareas', 'departamentos', 'usuario', 'notificacion', 'notificacionusuario'));
+            return view('system.usuarios.show', compact('usuarios', 'tareas', 'departamentos', 'notificacionusuario'));
             
         } else {
             Session::flash('mensaje', 'Iniciar sesión antes de continuar');

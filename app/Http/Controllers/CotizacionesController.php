@@ -108,6 +108,12 @@ class CotizacionesController extends Controller
         });
     }
 
+    public function destroy_cotizaciones($id)
+    {
+        Cotizacion::find($id)->delete();
+        return response()->json(['success' => 'Cotización borrado']);
+    }
+
     public function pdfCoti(Request $request, $id)
     {
         $cotizaciones = Cotizacion::findOrFail($id);

@@ -2,12 +2,8 @@
 <div class="main my-3">
     <div class="main-content">
         <div class="container-fluid col-md-10">
-
-
             <div class="row">
-
                 <div class="col-md-5">
-
                     <div class="card">
                         <!-- {{ $usuarios['imagen'] }} -->
                         <div class="" style="background-color: #29C0FD;">
@@ -35,7 +31,6 @@
                             Departamento
                         </div>
                         <div class="card-body">
-                            <!-- <h5 class="card-title">Departamento: </h5> -->
                             @foreach ($departamentos as $departamento)
                                 <li><strong>Abreviatura:</strong> {{ $departamento->abreviatura }} </li>
                                 <li><strong>Nombre:</strong> {{ $departamento->nombre }} </li>
@@ -47,11 +42,9 @@
                     </div>
                     <div class="card my-3">
                         <div class="card-header text-white bg-danger">
-                            Lista de tareas no leidas
+                            Lista de notificaciones no leidas
                         </div>
                         <div class="card-body">
-
-
                             @forelse($usuarios->unreadNotifications as $notificacion)
                             <div class="alert alert-danger">
                                <b>Nombre de la tarea:</b> {{ $notificacion->data['nombre'] }}
@@ -69,39 +62,12 @@
                                 Sin notificaciones
                                 <div class="dropdown-divider"></div>
                             @endforelse
-
-
-                            <!--   <h5 class="card-title">Nombre:</h5> -->
-                            {{-- @foreach ($tareas as $tarea)
-                            <li><strong>Actividad: </strong>{{$tarea->nombre}}</li>
-                            @endforeach
-                            <li><strong>noti: </strong>{{count($usuarios->unreadNotifications);}}
-                            </li>  --}}
-
-
-                            {{-- <div class="dropdown-divider"></div>
-                            @forelse($usuarios->unreadNotifications as $notificacion)
-                                <li><strong>Nombre: </strong>{{ $notificacion->data['nombre'] }}
-                                    {{ $notificacion->created_at->diffForHumans() }}
-                                    <button type="submit" class="mark-as-read btn" style="color: blue"
-                                        data-id="{{ $notificacion->id }}">Marcar como leido</button>
-                                </li>
-                            @if($loop->last)
-                            <a href="#" id="mark-all">Marcar all as read</a>
-                            @endif
-
-                            @empty
-                                Sin notificaciones
-                                <div class="dropdown-divider"></div>
-                            @endforelse --}}
-                                
-
-
                         </div>
                     </div>
-                    <div class="card my-3">
+                    {{-- Notificaciones leidas --}}
+                    {{-- <div class="card my-3">
                         <div class="card-header text-white bg-success">
-                            Lista de tareas leidas
+                            Lista de notificaciones leidas
                         </div>
                         <div class="card-body">
 
@@ -117,21 +83,10 @@
                                 Sin notificaciones
                                 <div class="dropdown-divider"></div>
                             @endforelse
-
-
-                            {{-- @forelse ($usuarios->readNotifications as $notificacion)
-                                <li><strong>Nombre: </strong> {{ $notificacion->data['nombre'] }}
-                                    {{ $notificacion->read_at->diffForHumans() }}
-                                </li>
-                            @empty
-                                Sin notificaciones leidas
-                            @endforelse
-                            <div class="dropdown-divider"></div> --}}
-
-
-
                         </div>
-                    </div>
+                    </div> --}}
+                    {{-- Fin de Notificaciones leidas --}}
+
                 </div>
             </div>
         </div>

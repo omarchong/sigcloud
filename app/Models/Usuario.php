@@ -10,7 +10,7 @@ use Symfony\Component\CssSelector\Node\FunctionNode;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 class Usuario extends Authenticatable
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
     use Notifiable;
     protected $table = 'usuarios';
 

@@ -9,13 +9,14 @@
                 <div class="card-header">
                     <span>Gestionar contactos</span>
                 </div>
-               <!--  <div class="card-body">
+                <!--  <div class="card-body">
                     <button type="button" id="addContacto" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar
                         contacto</button>
                 </div> -->
 
                 <div class="card-body">
-                    <a href="{{ route('contactos.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar Contacto</a>
+                    <a href="{{ route('contactos.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i>
+                        Agregar Contacto</a>
                 </div>
                 <div class="card-body">
                     <table class="table table-striped table-inverse mt-3 responsive" id="contactos">
@@ -41,39 +42,45 @@
                                     <h4 class="modal-title" id="ajaxContactoModel">Agregar contacto</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="javascript:void(0)" id="addEditContacto" name="addEditContacto" class="form-horizontal" method="POST">
+                                    <form action="javascript:void(0)" id="addEditContacto" name="addEditContacto"
+                                        class="form-horizontal" method="POST">
                                         <div class="form-row">
 
                                             <div class="col-md-6">
                                                 <label for="" class="form-label">Nombre</label>
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" id="nombre" name="nombre">
+                                                    <input type="text" class="form-control" id="nombre"
+                                                        name="nombre">
                                                 </div>
                                             </div>
-                                          
+
                                             <div class="col-md-6">
                                                 <label for="" class="form-label">Email</label>
                                                 <div class="form-group">
-                                                    <input type="email" class="form-control" id="email" name="email">
+                                                    <input type="email" class="form-control" id="email"
+                                                        name="email">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-4">
                                                 <label for="" class="form-label">Telefono</label>
                                                 <div class="form-group">
-                                                    <input type="numeric" class="form-control" id="telefono" name="telefono">
+                                                    <input type="numeric" class="form-control" id="telefono"
+                                                        name="telefono">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="" class="form-label">Descripcion</label>
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" id="descripcion" name="descripcion">
+                                                    <input type="text" class="form-control" id="descripcion"
+                                                        name="descripcion">
                                                 </div>
                                             </div>
 
 
                                             <div class="col-sm-offset-2 col-sm-10">
-                                                <button type="submit" class="btn btn-primary" id="btn-save" value="addContacto">Guardar
+                                                <button type="submit" class="btn btn-primary" id="btn-save"
+                                                    value="addContacto">Guardar
                                                 </button>
                                             </div>
                                     </form>
@@ -89,7 +96,7 @@
 
 
                 <script>
-                    $('#contactos').DataTable({
+                    var table = $('#contactos').DataTable({
                         "responsive": true,
                         "processing": true,
                         "serverSide": true,
@@ -118,22 +125,13 @@
                                 data: 'id',
                                 render: function(data, type, full, meta) {
                                     return `
-
-
-
-                                    <a href="/contactos/${data}"
-                                                class="btn"
-                                                ${full.deleted_at ? 'hidden' : ''}>
-                                                <i class="fas fa-eye"></i>
-                                                </a>
-                                                <a href="/contactos/${data}"
-                                                class="btn"
-                                                ${full.deleted_at ? 'hidden' : ''}>
-                                                <img src="img/editar.svg" width="20px">
-                                    <a href="/contactos/${data}/show"
-                                    class="btn"
-                                    ${full.deleted_at ? 'hidden' : ''}>
-                                    <img src="img/basurero.svg" width="20px">
+                                    <a href="/contactos/${data}" class="btn">
+                                        <i class="fas fa-eye"></i>
+                                    <a href="/contactos/${data}" class="btn">
+                                        <img src="img/editar.svg" width="20px">
+                                    <a href="javascript:void(0)" data-toggle="tooltip" data-id="${data}" 
+                                    data-original-title="Delete" class="deletecontactos">
+                                        <img src="img/basurero.svg" width="20px">
                                     </a>
                                     `
                                 }
@@ -147,9 +145,45 @@
                         $('#contactos').DataTable().ajax.reload();
                     }
                 </script>
+                <script>
+                    $(function() {
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                        $('body').on('click', '.deletecontactos', function() {
+                            Swal.fire({
+                                title: '¿Estás seguro?',
+                                text: '¡La cita se eliminará definitivamente!',
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#007bff',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: '¡Si, eliminar!',
+                                cancelButtonText: 'Cancelar'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    var id = $(this).data('id');
+                                    $.ajax({
+                                        type: "DELETE",
+                                        url: "{{ url('destroy_contactos') }}" + "/" + id,
+                                        data: {
+                                            id: id
+                                        },
+                                        dataType: 'json',
+                                        success: function(res) {
+                                            table.draw();
+                                        }
+                                    });
+                                }
+                            })
+                        });
+                    })
+                </script>
 
-                
-               
+
+
             </div>
         </div>
     </div>

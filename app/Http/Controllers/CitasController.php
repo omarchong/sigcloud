@@ -20,9 +20,9 @@ class CitasController extends Controller
         $sessionid = session('sessionid');
         if($sessionusuario<>"")
         {
-             /* Variable notificacion */
-             $notificacionusuario = Usuario::find($sessionid);
-             /* Fin de la Variable notificacion */
+            /* Variable notificacion */
+            $notificacionusuario = Usuario::find($sessionid);
+            /* Fin de la Variable notificacion */
             return view('system.citas.index', compact('notificacionusuario'));
         }
         else{
@@ -92,9 +92,10 @@ class CitasController extends Controller
         ->route('citas.index')
         ->withSuccess("La cita $cita->nombre se actualizo exitosamente");
     }
-    public function destroy()
+    public function destroy_cita($id)
     {
-
+        Cita::find($id)->delete();
+        return response()->json(['success' => 'Cita borrado']);
     }
     
     public function RegistrosDatatables()

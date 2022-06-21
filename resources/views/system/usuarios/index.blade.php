@@ -9,7 +9,8 @@
                     <span>Gestionar usuarios</span>
                 </div>
                 <div class="card-body">
-                    <a href="{{ route('usuarios.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar usuario</a>
+                    <a href="{{ route('usuarios.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar
+                        usuario</a>
                 </div>
 
                 <div class="card-body">
@@ -29,7 +30,7 @@
                         </tbody>
                     </table>
                     <script>
-                        $('#usuarios').DataTable({
+                        var table = $('#usuarios').DataTable({
                             "responsive": true,
                             "processing": true,
                             "serverSide": true,
@@ -46,7 +47,7 @@
                                     render: function(data, type, full, meta) {
                                         const ImagenPorDefecto =
                                             `https://www.amaltasindia.in/UploadPhoto/no_img.jpg`;
-                                            return `<img src="${full.imagen ?  `/archivos/${full.imagen}` : ImagenPorDefecto}" width="100" height="80">`
+                                        return `<img class="rounded-circle mx-auto d-block" src="${full.imagen ?  `/archivos/${full.imagen}` : ImagenPorDefecto}" width="100" height="80">`
                                         /* const ImagenPorDefecto =
                                             `https://www.amaltasindia.in/UploadPhoto/no_img.jpg`;
                                         return `<img src="${full.imagen ?  `/imagen/${full.imagen}` : ImagenPorDefecto}" width="100" height="80">` */
@@ -58,7 +59,7 @@
                                     render: function(data, type, full, meta) {
                                         return `${data} ${full.app} ${full.apm}`;
                                     }
-                                   
+
                                 },
                                 {
                                     data: 'usuario',
@@ -79,9 +80,9 @@
                                                 
                                                 </a>
 
-                                                <a href="/usuarios/${data}/show"
-                                                class="btn">
-                                                <img src="/img/basurero.svg" width="15px">
+                                                <a href="javascript:void(0)" data-toggle="tooltip" data-id="${data}" 
+                                                data-original-title="Delete" class="deleteusuarios">
+                                                <img src="/img/basurero.svg" width="20px">
                                                 </a>
 
                                                 <a href="/usuarios/${data}"
@@ -99,6 +100,42 @@
                         function reloadTable() {
                             $('#usuarios').DataTable().ajax.reload();
                         }
+                    </script>
+                    <script>
+                        $(function() {
+                            $.ajaxSetup({
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                }
+                            });
+                            $('body').on('click', '.deleteusuarios', function() {
+                                Swal.fire({
+                                    title: '¿Estás seguro?',
+                                    text: '¡El usuario se eliminará definitivamente!',
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#007bff',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: '¡Si, eliminar!',
+                                    cancelButtonText: 'Cancelar'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        var id = $(this).data('id');
+                                        $.ajax({
+                                            type: "DELETE",
+                                            url: "{{ url('destroy_usuarios') }}" + "/" + id,
+                                            data: {
+                                                id: id
+                                            },
+                                            dataType: 'json',
+                                            success: function(res) {
+                                                table.draw();
+                                            }
+                                        });
+                                    }
+                                })
+                            });
+                        })
                     </script>
                 </div>
             </div>

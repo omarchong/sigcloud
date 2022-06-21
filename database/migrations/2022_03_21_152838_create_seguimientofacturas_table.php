@@ -17,7 +17,6 @@ class CreateSeguimientofacturasTable extends Migration
             $table->date('fecha_vencimiento');
             $table->foreignId('estatufacturas_id')->constrained();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

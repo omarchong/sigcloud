@@ -3,6 +3,17 @@ const body = document.querySelector('body'),
     toggle = body.querySelector(".toggle"),
     modeSwitch = body.querySelector(".toggle-switch");
 
+/* toggle.addEventListener('mouseout', () =>{
+    console.log('saliendo de la navegacion');
+
+    toggle.style.backgroundColor = 'transparent';
+})
+
+toggle.addEventListener('mouseenter', () =>{
+    console.log('Entrando a la navegacion');
+
+    toggle.style.backgroundColor = 'white';
+}) */
 
 toggle.addEventListener("mouseover", () => {
     sidebar.classList.toggle("close");

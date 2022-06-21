@@ -65,13 +65,11 @@
                 data: 'id',
                 render: function(data, type, full, meta) {
                     return `
-                    <a href="/seguimientofacturas/${data}/edit" class="btn"
-                    ${full.deleted_at ? 'hidden' : ''}>
+                    <a href="/seguimientofacturas/${data}/edit" class="btn">
                     <img src="/img/editar.svg" width="20px">
-                    <a href="/seguimientofacturas/${data}/delete" class="btn"
-                    ${full.deleted_at ? 'hidden' : ''}>
-                    <img src="/img/basurero.svg" width="20px">
-                    </a>
+                    <a href="javascript:void(0)" data-toggle="tooltip" data-id="${data}" 
+                    data-original-title="Delete" class="deletesegf">
+                    <img src="/img/basurero.svg" width="20px"></a>
                     `
                 }
             }
@@ -81,4 +79,40 @@
     function reloadTable() {
         $('#seguimientofacturas').DataTable().ajax.reload();
     }
+</script>
+<script>
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('body').on('click', '.deletesegf', function() {
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: '¡El registro se eliminará definitivamente!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#007bff',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '¡Si, eliminar!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var id = $(this).data('id');
+                    $.ajax({
+                        type: "DELETE",
+                        url: "{{ url('destroy_segf') }}" + "/" + id,
+                        data: {
+                            id: id
+                        },
+                        dataType: 'json',
+                        success: function(res) {
+                            table.draw();
+                        }
+                    });
+                }
+            })
+        });
+    })
 </script>

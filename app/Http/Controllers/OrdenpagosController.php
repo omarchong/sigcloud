@@ -36,6 +36,12 @@ class OrdenpagosController extends Controller
       return view('system.ordenpagos.create', compact('notificacionusuario'));
     }
 
+    public function destroy_orden($id)
+    {
+        Ordenpago::find($id)->delete();
+        return response()->json(['success' => 'Orden borrado']);
+    }
+
     public function RegistrosDatatables()
     {
         return datatables()

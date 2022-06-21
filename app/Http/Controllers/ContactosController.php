@@ -90,12 +90,10 @@ class ContactosController extends Controller
 
   }
 
-
-
-  public function destroy(Request $request)
+  public function destroy_contactos($id)
   {
-    $contacto = Contacto::where('id', $request->id)->delete();
-    return response()->json(['success' => true]);
+      Contacto::find($id)->delete();
+      return response()->json(['success' => 'Contacto borrado']);
   }
 
   public function RegistrosDatatables()

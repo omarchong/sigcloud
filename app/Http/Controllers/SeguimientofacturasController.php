@@ -86,6 +86,11 @@ class SeguimientofacturasController extends Controller
         ->route('seguimientofacturas.index')
         ->withSuccess("El seguimiento factura se actualizo exitosamente");
     }  
+    public function destroy_segf($id)
+    {
+        Seguimientofactura::find($id)->delete();
+        return response()->json(['success' => 'Cita borrado']);
+    }
 
     public function RegistrosDatatables()
     {

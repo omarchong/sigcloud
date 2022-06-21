@@ -86,6 +86,11 @@ class ClientesController extends Controller
             ->route('clientes.index')
             ->withSuccess("El cliente $cliente->nombreempresa se actualizo exitosamente");
     }
+    public function destroy_clientes($id)
+    {
+        Cliente::find($id)->delete();
+        return response()->json(['success' => 'Cliente borrado']);
+    }
 
     public function store(ClienteRequest $request)
     {
