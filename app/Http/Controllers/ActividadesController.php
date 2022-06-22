@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ActividadEvent;
 use App\Models\Actividad;
 use App\Models\Usuario;
+use App\Notifications\ActividadNotification;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Session;
@@ -30,7 +32,7 @@ class ActividadesController extends Controller
 
     public function store(Request $request)
     {
-        Actividad::updateOrCreate(
+        $actividad = Actividad::updateOrCreate(
             ['id' => $request->id],
             [
                 'nombre' => $request->input('nombre'),
@@ -40,8 +42,18 @@ class ActividadesController extends Controller
                 'usuario_id' => $request->input('usuario_id')
             ]
         );
+        /* Prueba de envio de notificacion */
+        /* Usuario::all()
+        ->except($actividad->usuario_id)
+        ->each(function(Usuario $usuario) use ($actividad){
+            $usuario->notify(new ActividadNotification($actividad));
+        });  */   
+        /* Fin de la prueba de envio de notificacion */
+        event(new ActividadEvent($actividad));
+
         return response()->json(['succes' => true]);
     }
+
     public function edit($id)
     {
         $actividad = Actividad::find($id);

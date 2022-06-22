@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\ActividadEvent;
 use App\Events\CitaEvent;
 use App\Events\TareaEvent;
+use App\Listeners\ActividadListener;
 use App\Listeners\CitaListener;
 use App\Listeners\TareaListener;
 use Illuminate\Auth\Events\Registered;
@@ -27,6 +29,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         CitaEvent::class => [
             CitaListener::class,
+        ],
+        ActividadEvent::class => [
+            ActividadListener::class,
         ],
     ];
 
