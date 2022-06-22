@@ -47,7 +47,7 @@
                         <div class="card-body">
                             @forelse($usuarios->unreadNotifications as $notificacion)
                             <div class="alert alert-danger">
-                               <b>Nombre de la tarea:</b> {{ $notificacion->data['nombre'] }}
+                               <b>Nombre:</b> {{ $notificacion->data['nombre'] }}
                                 <p class="ml-3 float-right text-muted text-sm"> {{ $notificacion->created_at->diffForHumans() }}</p>
                                 <hr>
                                 <div class="text-right">

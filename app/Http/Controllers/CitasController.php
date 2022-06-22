@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CitaEvent;
 use App\Http\Requests\CitaRequest;
 use App\Models\Cita;
 use App\Models\Cliente;
 use App\Models\Estatucita;
 use App\Models\Usuario;
+use App\Notifications\CitaNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -57,10 +59,18 @@ class CitasController extends Controller
         /* dd($request->all()); */
 
         $cita = Cita::create($request->validated());
+        
+        /* self::mi_cita_notificactions($cita); */
+        event(new CitaEvent($cita));
+
         return redirect()
         ->route('citas.index')
         ->withSuccess("La cita $cita->nombre se creo correctamente");
     }
+    /* public function mi_cita_notificactions($cita)
+    {
+        event(new CitaEvent($cita));
+    } */
 
     public function edit(Cita $cita)
     {

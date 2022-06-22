@@ -44,7 +44,7 @@ class Notificacion extends Notification
     public function toArray($notifiable)
     {
         return [
-            'id' => $this->tarea->id,
+            'tarea' => $this->tarea->id,
             'nombre' => $this->tarea->nombre,
             'descripcion' => $this->tarea->descripcion,
             'tipo_tarea' => $this->tarea->tipo_tarea,
