@@ -44,7 +44,6 @@ class Usuario extends Authenticatable
         return $this->hasMany('App\Cita');
     }
 
-   
     public function tareas()
     {
         return $this->hasMany(Tarea::class);
@@ -57,5 +56,10 @@ class Usuario extends Authenticatable
     public function departamentos()
     {
         return $this->belongsTo(Departamento::class);
+    }
+
+    public function actividad()
+    {
+        return $this->hasMany(Actividad::class);
     }
 }

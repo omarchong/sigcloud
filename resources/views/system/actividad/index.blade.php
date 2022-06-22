@@ -20,6 +20,7 @@
                                 <th>Tipo de actividad</th>
                                 <th>Fecha</th>
                                 <th>Nota</th>
+                                <th>Usuario</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -43,7 +44,7 @@
                 <form action="javascript:void(0)" id="addEditActividadForm" name="addEditActividadForm" class="form-horizontal needs-validation" novalidate method="POST">
                     <input type="hidden" name="id" id="id">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <label for="nombre">Nombre</label>
                             <div class="">
                                 <input type="text" required class="form-control @error('nombre')  @enderror" name="nombre" id="nombre">
@@ -68,6 +69,25 @@
                                     </div>
                                     @error('tipoactividad')
                                     <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="" class="col-sm-2-12 col-form-label">Seleccione un usuario</label>
+                            <div class="">
+                                <select class="form-control  @error('usuario_id') is-invalid @enderror" name="usuario_id"
+                                    id="usuario_id">
+                                    @foreach ($usuarios as $usuario)
+                                        <option value="{{ $usuario->id }}">
+                                            {{ $usuario->nombre }}
+                                        </option>
+                                    @endforeach
+                                    <div class="valid-feedback">
+                                        Correcto!
+                                    </div>
+                                    @error('usuarios_id')
+                                        <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </select>
                             </div>
@@ -112,10 +132,10 @@
         "processing": true,
         "serverSide": true,
         "autoWidth": false,
-        ajax: "",
         language: {
             url: "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
         },
+        "ajax": "{{ route('actividades.datatables') }}",
         "columns": [{
                 data: 'id',
             },
@@ -132,11 +152,21 @@
                 data: 'nota'
             },
             {
-                data: 'action',
-                name: 'action',
-                orderable: false,
-                searchable: false
+                data: 'usuario.nombre'
             },
+            {
+                data: 'id',
+                render: function(data, type, full, meta) {
+                    return `
+                    <a href="javascript:void(0)" data-toggle="tooltip" data-id="${data}" data-original-title="Edit" class="edit btn-sm edit">
+                        <img src="/img/editar.svg" width="20px">
+                    </a>
+                    <a href="javascript:void(0)" data-toggle="tooltip" data-id="${data}" data-original-title="Delete" class="delete">
+                        <img src="/img/basurero.svg" width="20px">
+                    </a> 
+                    `
+                }
+            }
         ]
     })
 
@@ -172,6 +202,7 @@
                 $('#tipoactividad').val(data.tipoactividad);
                 $('#fecha').val(data.fecha);
                 $('#nota').val(data.nota);
+                $('#usuario_id').val(data.usuario_id);
             })
         })
 

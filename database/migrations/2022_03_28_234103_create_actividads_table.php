@@ -15,6 +15,7 @@ class CreateActividadsTable extends Migration
             $table->string('tipoactividad');
             $table->date('fecha');
             $table->string('nota');
+            $table->foreignId('usuario_id')->constrained();
             $table->timestamps();
         });
     }

@@ -15,26 +15,12 @@ class ActividadesController extends Controller
         $sessionid = session('sessionid');
         if($sessionusuario<> "")
         {
-            if ($request->ajax()) {
-                $data = Actividad::latest()->get();
-                return DataTables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function ($row) {
-                        $btn = '<a href="javascript:void(0)" data-toggle="tooltip" data-id="' . $row->id . '
-                        " data-original-title="Edit" class="edit btn-sm edit"><img src="/img/editar.svg" width="20px"></a>';
-
-                        $btn = $btn . '<a href="javascript:void(0)" data-toggle="tooltip" data-id="' . $row->id . '
-                        " data-original-title="Delete" class="delete"><img src="/img/basurero.svg"
-                    width="20px"></a>';
-                        return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-            }
              /* Variable notificacion */
              $notificacionusuario = Usuario::find($sessionid);
              /* Fin de la Variable notificacion */
-            return view('system.actividad.index', compact('notificacionusuario'));
+             
+             $usuarios = Usuario::all();
+            return view('system.actividad.index', compact('notificacionusuario', 'usuarios'));
         }
         else{
             Session::flash('mensaje', "Iniciar sesión antes de continuar");
@@ -50,7 +36,8 @@ class ActividadesController extends Controller
                 'nombre' => $request->input('nombre'),
                 'tipoactividad' => $request->input('tipoactividad'),
                 'fecha' => $request->input('fecha'),
-                'nota' => $request->input('nota')
+                'nota' => $request->input('nota'),
+                'usuario_id' => $request->input('usuario_id')
             ]
         );
         return response()->json(['succes' => true]);
@@ -65,5 +52,16 @@ class ActividadesController extends Controller
     {
         Actividad::find($id)->delete();
         return response()->json(['success' => 'Actividad eliminada']);
+    }
+
+    public function RegistrosDatatables()
+    {
+        $actividades = Actividad::latest()->get();
+        return datatables()
+            ->eloquent(
+                Actividad::query()
+                ->with(['usuario'])
+            )
+            ->toJson();
     }
 }

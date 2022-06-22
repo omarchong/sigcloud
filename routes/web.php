@@ -89,6 +89,8 @@ Route::resource('actividades', ActividadesController::class);
 Route::name('store_actividad')->post('store_actividad/', [ActividadesController::class, 'store']);
 Route::name('editar-actividad')->get('editar_actividad/{id}', [ActividadesController::class, 'edit']);
 Route::name('destroy-actividad')->delete('destroy_actividad/{id}', [ActividadesController::class, 'destroy']);
+Route::get('datatables/actividades', [ActividadesController::class, 'RegistrosDatatables'])->name('actividades.datatables');
+
 
 /* Estatus de servicios */
 Route::resource('estatuservicios', EstatuserviciosController::class);
