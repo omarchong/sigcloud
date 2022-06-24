@@ -21,7 +21,10 @@ class SeguimientofacturasController extends Controller
             /* Variable notificacion */
             $notificacionusuario = Usuario::find($sessionid);
             /* Fin de la Variable notificacion */
-            return view('system.seguimientofacturas.index', compact('notificacionusuario'));
+            return view('system.seguimientofacturas.index', compact('notificacionusuario'),[
+                'ordenpagos' => Ordenpago::select('id','folio')->get(),
+                'estatufacturas' => Estatufactura::select('id','nombre')->get()
+            ]);
         }
         else{
             Session::flash('mensaje', 'Iniciar sesión antes de continuar');
@@ -106,8 +109,11 @@ class SeguimientofacturasController extends Controller
     {
         $term = $request->get('term');
 
-        $buscafolio = DB::select("SELECT * FROM ordenpagos WHERE folio LIKE '%$term%'");
-
+        $buscafolio = DB::select("SELECT o.folio, o.cotizacion_id, det.numero_servicios, det.subtotal, det.numero_servicios
+        FROM ordenpagos AS o
+        INNER JOIN detalle_cotizacion AS det
+        ON o.cotizacion_id = det.id
+        WHERE folio LIKE '%$term%'");
         return response()->json($buscafolio);
     }
 

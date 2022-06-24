@@ -57,7 +57,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="tipoactividad">Tipo de actividad</label>
+                            <label for="tipoactividad" class="">Tipo de actividad</label>
                             <div class="">
                                 <select class="custom-select" class="@error('tipoactividad') is-invalid @enderror " name="tipoactividad" id="tipoactividad" required>
                                     <option selected disabled value="">Selecciona una actividad</option>
@@ -93,7 +93,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="fecha">Fecha</label>
+                            <label for="fecha" class="col-sm-2-12 col-form-label">Fecha</label>
                             <div class="">
                                 <input type="date" class="form-control @error('fecha')  @enderror " name="fecha" id="fecha" required>
                                 <div class="valid-feedback">

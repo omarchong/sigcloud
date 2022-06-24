@@ -72,9 +72,7 @@
 
                     </a>
                 </li>
-
             </ul>
-        </div>
         </div>
     </nav>
 
@@ -111,10 +109,6 @@
                     </div>
                 </div>
             </nav>
-
-            <section>
-
-            </section>
         </div>
 
 

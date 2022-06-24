@@ -213,6 +213,7 @@
                     $("#folio").val(data.folio ?? "Sin datos")
                     $("#num_pago").val(data.num_pago ?? "Sin datos")
                     $("#emite").val(data.emite ?? "Sin datos")
+                    console.log(data);
                 }
             })
         })

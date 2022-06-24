@@ -7,9 +7,13 @@
                 <div class="card-header">
                     <span>Gestión de seguimiento de facturas</span>
                 </div>
-                <div class="card-body">
+                {{-- <div class="card-body">
                     <a href="{{ route('seguimientofacturas.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i>
                         Agregar seguimiento de factura</a>
+                </div> --}}
+                <div class="card-body">
+                    <button type="button" id="addNewSegFactura" class="btn btn-primary"><i class="fas fa-plus"></i>
+                        Agregar</button>
                 </div>
                 <div class="card-body">
                     <table class="table table-striped table-inverse mt-3 responsive" id="seguimientofacturas">
@@ -28,6 +32,120 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ajax-segfactura-model" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="ajaxSegFacturaModel"></h4>
+            </div>
+            <div class="modal-body">
+                <form action="javascript:void(0)" id="addEditSegFacturaForm" name="addEditSegFacturaForm" class="form-horizontal needs-validation" novalidate method="POST">
+                    <input type="hidden" name="id" id="id">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="">Buscar folio</label>
+                            <div class="input-group">
+                                <input type="search" required name="buscarfolio" id="buscarfolio" 
+                                class="form-control @error('ordenpagos_id')  @enderror" placeholder="Buscar folio..." aria-label="Search">
+                                <span class="input-group-btn">
+                                    <button type="button" id="selectFolio" class="btn btn-primary">
+                                        Seleccionar
+                                    </button>
+                                </span>
+                            </div>
+                            <div class="valid-feedback">
+                                Correcto!
+                            </div>
+                            @error('ordenpagos_id')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <input type="hidden" readonly class="form-control" name="ordenpagos_id" id="ordenpagos_id">
+                        <div class="col-md-4">
+                            <label for="" class="col-sm-4-12 col-form-label"> Folio</label>
+                            <div class="form-group">
+                                <input type="text" readonly class="form-control" name="folio" id="folio">
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <label for="fecha" class="col-sm-4-12 col-form-label">Factura creada</label>
+                            <div class="">
+                                <input type="date" class="form-control" value="<?php echo date("Y-m-d") ?>" name="" id="" required>
+                            </div>
+                        </div>
+    
+                        <div class="col-md-4">
+                            <label for="nombre" class="col-sm-4-12 col-form-label">Cantidad total</label>
+                            <div class="">
+                                <input type="text" required class="form-control" name="cotizacion_id" id="cotizacion_id">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="nombre" class="col-sm-4-12 col-form-label">Subtotal</label>
+                            <div class="">
+                                <input type="number" required class="form-control" name="subtotal" id="subtotal">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="nombre" class="col-sm-4-12 col-form-label">Num ser</label>
+                            <div class="">
+                                <input type="number" required class="form-control" name="numero_servicios" id="numero_servicios">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="" class="col-sm-4-12 col-form-label"> Emite</label>
+                            <div class="form-group">
+                                <input type="text" readonly class="form-control" name="emite" id="emite">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="" class="col-sm-4-12 col-form-label"> Numero de pagos</label>
+                            <div class="form-group">
+                                <input type="text" readonly class="form-control" name="num_pago" id="num_pago">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="nombre" class="col-sm-4-12 col-form-label">Saldo restante</label>
+                            <div class="">
+                                <input type="text" required class="form-control" name="" id="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="fecha" class="col-sm-4-12 col-form-label">Fecha de vencimiento</label>
+                            <div class="">
+                                <input type="date" class="form-control" name="" id="" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <label for="tipoactividad" class="col-sm-4-12 col-form-label">Estatus de la factura</label>
+                            <div class="">
+                                <select class="custom-select" class="@error('tipoactividad') is-invalid @enderror " name="tipoactividad" id="tipoactividad" required>
+                                    <option selected disabled value="">Selecciona una actividad</option>
+                                    <option value="Llamadas">Llamadas</option>
+                                    <option value="Correo">Correo</option>
+                                    <option value="Reunion">Reunion</option>
+                                    <div class="valid-feedback">
+                                        Correcto!
+                                    </div>
+                                    @error('tipoactividad')
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="float-right my-3">
+                        <button type="submit" class="btn btn-primary" id="btn-save" value="addNewSegFactura">Guardar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -87,6 +205,15 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
+        $('#addNewSegFactura').click(function() {
+            $('#btn-save').val('create-SegFactura');
+            $('#id').val("");
+            $('#addEditSegFacturaForm').trigger("reset");
+            $('#ajaxSegFacturaModel').html("Registrar ");
+            $('#ajax-segfactura-model').modal('show');
+        });
+
         $('body').on('click', '.deletesegf', function() {
             Swal.fire({
                 title: '¿Estás seguro?',
@@ -115,4 +242,54 @@
             })
         });
     })
+</script>
+<script>
+    $(document).ready(function(){
+
+        $("#buscarfolio").autocomplete({
+            source: function(request, response){
+                $.ajax({
+                    url: "{{route('buscafolio')}}",
+                    type: 'POST',
+                    data: {
+                        term: request.term,
+                        _token: $("input[name=_token]").val()
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        var resp = $.map(data, function(obj) {
+                            return obj.folio;
+                            response(data);
+                        });
+                        response(resp);
+                    }
+                })
+            },
+            minLength: 1,
+        })
+
+        $("#selectFolio").click(function(){
+            const ordenpago = $('#buscarfolio').val()
+            $.ajax({
+                url: "{{route('seleccionafolio')}}",
+                type: "POST",
+                data: {
+                    ordenpago: ordenpago,
+                    _token: $("input[name=_token]").val()
+                },
+                success: function(data){
+                    $("#ordenpagos_id").val(data.id ?? "Sin datos")
+                    $("#folio").val(data.folio ?? "Sin datos")
+                    $("#num_pago").val(data.num_pago ?? "Sin datos")
+                    $("#emite").val(data.emite ?? "Sin datos")
+                    $("#cotizacion_id").val(data.cotizacion_id ?? "Sin datos")
+                    $("#subtotal").val(data.subtotal ?? "Sin datos")
+                    $("#numero_servicios").val(data.numero_servicios ?? "Sin datos")
+                     console.log(data);
+
+                }
+            })
+        })
+
+    });
 </script>
