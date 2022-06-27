@@ -34,21 +34,7 @@
                     </div>
 
                     <div class="col-md-4 my-3">
-                        <label for="" class="form-label"> Numero de pago</label>
-                        <div class="form-group">
-                            <input type="text" readonly class="form-control" name="num_pagoo" id="num_pago">
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 my-3">
-                        <label for="" class="form-label"> Emite</label>
-                        <div class="form-group">
-                            <input type="text" readonly class="form-control" name="emite" id="emite">
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <label for="" class="col-sm-2-12 col-form-label">Fecha de creación</label>
+                        <label for="" class="form-label">Fecha de creación</label>
                         <div class="">
                             <input type="date" required class="form-control @error('factura_creada')  @enderror"
                                 value="<?php echo date("Y-m-d") ?>" name="factura_creada" id="factura_creada">
@@ -60,21 +46,45 @@
                             @enderror
                         </div>
                     </div>
+
+                    <div class="col-md-4 my-3">
+                        <label for="" class="form-label"> Cantidad Total</label>
+                        <div class="form-group">
+                            <input type="text" readonly class="form-control" name="cantidadtotal" id="cantidadtotal" step="0.01" oninput="calcular()">
+                        </div>
+                    </div>
+
                     <div class="col-md-4">
-                        <label for="" class=" col-sm-2-12 col-form-label">Numero de pago</label>
+                        <label for="" class="form-label"> Emite</label>
+                        <div class="form-group">
+                            <input type="text" readonly class="form-control" name="emite" id="emite">
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <label for="" class="form-label">Numero de pago</label>
                         <div class="">
                             <input type="number" required class="form-control @error('num_pago')  @enderror"
-                                value="{{ old('num_pago') }}" name="num_pago" id="num_pago">
+                                value="{{ old('num_pago') }}" name="num_pago" id="num_pago" step="0.01" oninput="calcular()">
                             <div class="valid-feedback">
                                 Correcto!
                             </div>
                             @error('num_pago')
-                                <small class="text-danger">{{ $message }}</small>
+                            <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                     </div>
+
                     <div class="col-md-4">
-                        <label for="" class="col-sm-2-12 col-form-label">Fecha de vencimiento</label>
+                        <label for="" class="form-label"> Saldo restante</label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="saldorestante" id="saldorestante" step="0.0001">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="" class="form-label">Fecha de vencimiento</label>
                         <div class="">
                             <input type="date" required class="form-control @error('fecha_vencimiento')  @enderror"
                                 value="{{ old('fecha_vencimiento') }}" name="fecha_vencimiento" id="fecha_vencimiento">
@@ -87,8 +97,8 @@
                         </div>
                     </div>
         
-                    <div class="col-md-4 my-3">
-                        <label for="" class="col-sm-2-12 col-form-label">Seleccione el estatus</label>
+                    <div class="col-md-4">
+                        <label for="" class="form-label">Seleccione el estatus</label>
                         <div class="">
                             <select class="form-control  @error('estatufacturas_id') is-invalid @enderror"
                                 name="estatufacturas_id" id="estatufacturas_id">
@@ -211,7 +221,7 @@
                 success: function(data){
                     $("#ordenpagos_id").val(data.id ?? "Sin datos")
                     $("#folio").val(data.folio ?? "Sin datos")
-                    $("#num_pago").val(data.num_pago ?? "Sin datos")
+                    $("#cantidadtotal").val(data.cantidadtotal ?? "Sin datos")
                     $("#emite").val(data.emite ?? "Sin datos")
                     console.log(data);
                 }
@@ -219,4 +229,14 @@
         })
 
     });
+</script>
+<script type="text/javascript">
+    function calcular() {
+        try{
+            var a = parseFloat(document.getElementById("cantidadtotal").value) || 0,
+                b = parseFloat(document.getElementById("num_pago").value) || 0;
+
+                document.getElementById("saldorestante").value = a / b;
+        }catch(e){}
+    }
 </script>

@@ -13,7 +13,9 @@ class CreateSeguimientofacturasTable extends Migration
             $table->id();
             $table->foreignId('ordenpagos_id')->constrained();
             $table->date('factura_creada');
+            $table->integer('cantidadtotal');
             $table->integer('num_pago');
+            $table->integer('saldorestante');
             $table->date('fecha_vencimiento');
             $table->foreignId('estatufacturas_id')->constrained();
             $table->timestamps();

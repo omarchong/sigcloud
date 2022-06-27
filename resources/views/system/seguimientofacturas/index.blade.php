@@ -1,4 +1,7 @@
 @include('layouts.admin')
+<!-- estilos buscador tiempo real -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
 <div class="main my-3">
     <div class="main-content">
@@ -7,13 +10,13 @@
                 <div class="card-header">
                     <span>Gestión de seguimiento de facturas</span>
                 </div>
-                {{-- <div class="card-body">
+                <div class="card-body">
                     <a href="{{ route('seguimientofacturas.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i>
                         Agregar seguimiento de factura</a>
-                </div> --}}
-                <div class="card-body">
+                </div>
+                {{-- <div class="card-body">
                     <button type="button" id="addNewSegFactura" class="btn btn-primary"><i class="fas fa-plus"></i>
-                        Agregar</button>
+                        Agregar</button> --}}
                 </div>
                 <div class="card-body">
                     <table class="table table-striped table-inverse mt-3 responsive" id="seguimientofacturas">
@@ -46,7 +49,7 @@
             <div class="modal-body">
                 <form action="javascript:void(0)" id="addEditSegFacturaForm" name="addEditSegFacturaForm" class="form-horizontal needs-validation" novalidate method="POST">
                     <input type="hidden" name="id" id="id">
-                    <div class="row">
+                    <div class="form-row">
                         <div class="col-md-12">
                             <label for="">Buscar folio</label>
                             <div class="input-group">
@@ -79,23 +82,10 @@
                                 <input type="date" class="form-control" value="<?php echo date("Y-m-d") ?>" name="" id="" required>
                             </div>
                         </div>
-    
                         <div class="col-md-4">
                             <label for="nombre" class="col-sm-4-12 col-form-label">Cantidad total</label>
                             <div class="">
-                                <input type="text" required class="form-control" name="cotizacion_id" id="cotizacion_id">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="nombre" class="col-sm-4-12 col-form-label">Subtotal</label>
-                            <div class="">
-                                <input type="number" required class="form-control" name="subtotal" id="subtotal">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="nombre" class="col-sm-4-12 col-form-label">Num ser</label>
-                            <div class="">
-                                <input type="number" required class="form-control" name="numero_servicios" id="numero_servicios">
+                                <input type="number" readonly required class="form-control" name="cantidadtotal" id="cantidadtotal" step="0.01" oninput="calcular()">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -107,13 +97,13 @@
                         <div class="col-md-4">
                             <label for="" class="col-sm-4-12 col-form-label"> Numero de pagos</label>
                             <div class="form-group">
-                                <input type="text" readonly class="form-control" name="num_pago" id="num_pago">
+                                <input type="number" class="form-control" name="num_pago" id="num_pago" step="0.01" oninput="calcular()">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <label for="nombre" class="col-sm-4-12 col-form-label">Saldo restante</label>
                             <div class="">
-                                <input type="text" required class="form-control" name="" id="">
+                                <input type="text" required class="form-control" name="saldorestante" id="saldorestante">
                             </div>
                         </div>
 
@@ -124,19 +114,21 @@
                             </div>
                         </div>
 
-                        <div class="col-md-8">
-                            <label for="tipoactividad" class="col-sm-4-12 col-form-label">Estatus de la factura</label>
+                        <div class="col-md-4">
+                            <label for="" class="col-sm-4-12 col-form-label">Seleccione el estatus</label>
                             <div class="">
-                                <select class="custom-select" class="@error('tipoactividad') is-invalid @enderror " name="tipoactividad" id="tipoactividad" required>
-                                    <option selected disabled value="">Selecciona una actividad</option>
-                                    <option value="Llamadas">Llamadas</option>
-                                    <option value="Correo">Correo</option>
-                                    <option value="Reunion">Reunion</option>
+                                <select class="form-control  @error('estatufacturas_id') is-invalid @enderror"
+                                    name="estatufacturas_id" id="estatufacturas_id">
+                                    @foreach ($estatufacturas as $estatufactura)
+                                        <option value="{{ $estatufactura->id }}">
+                                            {{ $estatufactura->nombre }}
+                                        </option>
+                                    @endforeach
                                     <div class="valid-feedback">
                                         Correcto!
                                     </div>
-                                    @error('tipoactividad')
-                                    <small class="text-danger">{{ $message }}</small>
+                                    @error('estatufacturas_id')
+                                        <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </select>
                             </div>
@@ -214,6 +206,8 @@
             $('#ajax-segfactura-model').modal('show');
         });
 
+
+
         $('body').on('click', '.deletesegf', function() {
             Swal.fire({
                 title: '¿Estás seguro?',
@@ -282,9 +276,7 @@
                     $("#folio").val(data.folio ?? "Sin datos")
                     $("#num_pago").val(data.num_pago ?? "Sin datos")
                     $("#emite").val(data.emite ?? "Sin datos")
-                    $("#cotizacion_id").val(data.cotizacion_id ?? "Sin datos")
-                    $("#subtotal").val(data.subtotal ?? "Sin datos")
-                    $("#numero_servicios").val(data.numero_servicios ?? "Sin datos")
+                    $("#cantidadtotal").val(data.cantidadtotal ?? "Sin datos")
                      console.log(data);
 
                 }
@@ -293,3 +285,15 @@
 
     });
 </script>
+<script type="text/javascript">
+    function calcular() {
+        try{
+            var a = parseFloat(document.getElementById("cantidadtotal").value) || 0,
+                b = parseFloat(document.getElementById("num_pago").value) || 0;
+
+                document.getElementById("saldorestante").value = a / b;
+        }catch(e){}
+    }
+</script>
+ <!-- buscador en tiempo real autocomplete -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

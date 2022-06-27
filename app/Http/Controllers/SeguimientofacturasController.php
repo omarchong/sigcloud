@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SeguimientofacturaRequest;
+use App\Models\Cotizacion;
+use App\Models\DetalleCotizacion;
 use App\Models\Estatufactura;
 use App\Models\Ordenpago;
 use App\Models\Seguimientofactura;
@@ -56,7 +58,9 @@ class SeguimientofacturasController extends Controller
     {    
         $seguimientofactura = Seguimientofactura::create($request->validated());
         return redirect()
-        ->route('seguimientofacturas.index');
+        ->route('seguimientofacturas.index')
+        ->withSuccess("El seguimiento de factura se creo correctamente");
+
     }
 
 
@@ -119,8 +123,23 @@ class SeguimientofacturasController extends Controller
 
     public function seleccionafolio(Request $request)    
     {
-        $ordenpago = Ordenpago::where('folio', $request->ordenpago)->first();
-        return response()->json($ordenpago);
+        /* $ordenpago = Ordenpago::where('folio', $request->ordenpago)->first();
+        return response()->json($ordenpago); */
+
+        /* 
+        $ordenpago = DB::select("SELECT folio, num_pago, emite, subtotal
+        FROM ordenpagos 
+        INNER JOIN cotizaciones
+        ON ordenpagos.cotizacion_id = cotizaciones.id
+        INNER JOIN detalle_cotizacion
+        ON ordenpagos.cotizacion_id = detalle_cotizacion.id 
+        where folio like '%17%'"); */
+
+        $ordenpago = Ordenpago::join('detalle_cotizacion','ordenpagos.id','=','detalle_cotizacion.id')
+            ->select('ordenpagos.id','ordenpagos.folio', 'ordenpagos.emite','ordenpagos.num_pago', 'detalle_cotizacion.subtotal as cantidadtotal')
+            ->where('folio', $request->ordenpago)->first();
+        return  response()->json($ordenpago);
+
     }
 
 

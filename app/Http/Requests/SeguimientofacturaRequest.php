@@ -18,7 +18,9 @@ class SeguimientofacturaRequest extends FormRequest
         return [
             'ordenpagos_id' => ['required'],
             'factura_creada' => ['required'],
+            'cantidadtotal' => ['required'],
             'num_pago' => ['required'],
+            'saldorestante' => ['required'],
             'fecha_vencimiento' => ['required'],
             'estatufacturas_id' => ['required']
         ];
