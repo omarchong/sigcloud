@@ -26,7 +26,8 @@ class Usuario extends Authenticatable
         'departamento_id',
         'imagen',
         /* 'rol_id', */
-        'estatus'
+        'estatus',
+        'tipo'
     ];
 
     public function roles()

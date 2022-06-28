@@ -29,6 +29,7 @@ class UsuarioRequest extends FormRequest
             'departamento_id' => 'required',
             'imagen' => 'image|mimes:jpg,png,jpeg|max:1024',
             'estatus' => 'required',
+            'tipo' => 'required',
         ];
       
     }

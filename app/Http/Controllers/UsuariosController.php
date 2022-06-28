@@ -17,15 +17,24 @@ class UsuariosController extends Controller
     public function index()
     {
        /*  dd(auth()->user()); */
+       $sessionid = session('sessionid');
         $sessionusuario = session('sessionusuario');
-        $sessionid = session('sessionid');
-        if ($sessionusuario <> "") {
+        $sessiontipo = session('sessiontipo');
+        if ($sessionusuario <> "" and $sessiontipo<>"") {
+                /* Variable notificacion */
+                $notificacionusuario = Usuario::find($sessionid);
+                /* Fin de la Variable notificacion */
+            if($sessiontipo == "admin"){
+                $usuarios= Usuario::all();
+                return view('system.usuarios.index', compact('notificacionusuario', 'usuarios'))
+            ->with('sessiontipo', $sessiontipo);
+            }
+            else{
+                $usuarios = DB::select("SELECT * FROM usuarios WHERE id = $sessionid");
+                return view('system.usuarios.index', compact('notificacionusuario', 'usuarios'))
+            ->with('sessiontipo', $sessiontipo);
+            }
 
-        /* Variable notificacion */
-        $notificacionusuario = Usuario::find($sessionid);
-        /* Fin de la Variable notificacion */
-
-            return view('system.usuarios.index', compact('notificacionusuario'));
         } else {
             Session::flash('mensaje', "Iniciar sesión antes de continuar");
             return redirect()->route('login');
@@ -67,6 +76,7 @@ class UsuariosController extends Controller
             'departamento_id' => 'required',
             'imagen' => 'image|mimes:jpg,png,jpeg|max:1024',
             'estatus' => 'required',
+            'tipo' => 'required'
         ]);
 
         $usuario = $request->all();
@@ -101,6 +111,7 @@ class UsuariosController extends Controller
             'imagen' => $imagen2,
             /* 'imagen' => $request->imagen = $imagenUsuario, */
             'estatus' => $request->estatus,
+            'tipo' => $request->tipo
         ]);
 
         return redirect()
@@ -141,7 +152,8 @@ class UsuariosController extends Controller
             'contrasena_confirmar' => 'required',
             'departamento_id' => 'required',
             'imagen' => 'image|mimes:jpg,png,jpeg|max:2048',
-            'estatus' => 'required'
+            'estatus' => 'required',
+            'tipo' => 'required'
         ]);
         /* $usu = $request->all();
         if ($imagen = $request->file('imagen')) {
@@ -171,6 +183,7 @@ class UsuariosController extends Controller
             'contrasena_confirmar' => Hash::make($request->contrasena_confirmar),
             'departamento_id' => $request->departamento_id,
             'estatus'=> $request->estatus,
+            'tipo'=> $request->tipo,
             'imagen' => $imagen2,
         ]);
         

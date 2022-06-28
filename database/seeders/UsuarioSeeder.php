@@ -22,6 +22,7 @@ class UsuarioSeeder extends Seeder
             'contrasena_confirmar' => bcrypt('omar1234'),
             'imagen' => 'sinfoto.jpeg',
             'estatus' => 'Si',
+            'tipo' => 'admin',
             'departamento_id' => 1, 
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
@@ -38,6 +39,7 @@ class UsuarioSeeder extends Seeder
             'contrasena_confirmar' => bcrypt('cris12345'),
             'imagen' => 'sinfoto.jpeg',
             'estatus' => 'Si',
+            'tipo' => 'admin',
             'departamento_id' => 2,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
@@ -54,6 +56,7 @@ class UsuarioSeeder extends Seeder
             'contrasena_confirmar' => bcrypt('hector12345'),
             'imagen' => 'sinfoto.jpeg',
             'estatus' => 'Si',
+            'tipo' => 'user',
             'departamento_id' => 1,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
@@ -70,6 +73,7 @@ class UsuarioSeeder extends Seeder
             'contrasena_confirmar' => bcrypt('karla12345'),
             'imagen' => 'sinfoto.jpeg',
             'estatus' => 'Si',
+            'tipo' => 'user',
             'departamento_id' => 4,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
@@ -86,6 +90,7 @@ class UsuarioSeeder extends Seeder
             'contrasena_confirmar' => bcrypt('monse12345'),
             'imagen' => 'sinfoto.jpeg',
             'estatus' => 'Si',
+            'tipo' => 'user',
             'departamento_id' => 3,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')

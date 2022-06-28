@@ -34,8 +34,9 @@ class LoginController extends Controller
 
         if ($cuantos == 1 and Hash::check($request->contrasena, $consulta[0]->contrasena)) 
         {
-            Session::put('sessionusuario', $consulta[0]->nombre);
             Session::put('sessionid', $consulta[0]->id);
+            Session::put('sessionusuario', $consulta[0]->nombre);
+            Session::put('sessiontipo', $consulta[0]->tipo);
             return redirect()->route('inicio');
         } 
         else 
@@ -48,6 +49,7 @@ class LoginController extends Controller
     {
         $sessionusuario = session('sessionusuario');
         $sessionid = session('sessionid');
+        $sessiontipo = session('sessiontipo');
         if($sessionusuario<> "")
         {
             $notificacionusuario =Usuario::find($sessionid);   

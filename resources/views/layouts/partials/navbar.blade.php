@@ -1,6 +1,7 @@
 <?php
-$sessionusuario = session('sessionusuario');
 $sessionid = session('sessionid');
+$sessionusuario = session('sessionusuario');
+$sessiontipo = session('sessiontipo');
 ?>
 <div class="encabezado w-100">
     <nav class="navbar navbar-expand-lg navbar-light">

@@ -27,9 +27,44 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($usuarios as $usu)
+                                <tr>
+                                    <td>{{ $usu->id }}</td>
+                                    <td>
+                                        @if ($usu->imagen == null)
+                                            <img class="rounded-circle mx-auto d-block"
+                                                    src="{{ asset('archivos/sinfoto.jpeg') }}" height="50"
+                                                    width="50">
+                                        @else
+                                            <img class="rounded-circle mx-auto d-block"
+                                                    src="{{ asset('archivos/' . $usu->imagen) }}" height="65"
+                                                    width="65"> 
+                                        @endif
+                                    </td>
+                                    <td>{{ $usu->nombre }}</td>
+                                    <td>{{ $usu->usuario }}</td>
+                                    <td>{{ $usu->email }}</td>
+                                    <td>{{ $usu->estatus }}</td>
+                                    <td>
+                                        <a href="/usuarios/{{ $usu->id }}/edit" class="btn">
+                                            <img src="/img/editar.svg" width="15px">
+
+                                        </a>
+                                        @if ($sessiontipo == 'admin')
+                                            <a href="javascript:void(0)" data-toggle="tooltip"
+                                                data-id="{{ $usu->id }}" data-original-title="Delete"
+                                                class="deleteusuarios">
+                                                <img src="/img/basurero.svg" width="20px">
+                                            </a>
+                                        @endif
+                                        <a href="/usuarios/{{ $usu->id }}" class="btn">
+                                            <i class="fas fa-eye"></i> </a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
-                    <script>
+                    {{-- <script>
                         var table = $('#usuarios').DataTable({
                             "responsive": true,
                             "processing": true,
@@ -39,7 +74,10 @@
                                 url: "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
                             },
                             "ajax": "{{ route('usuarios.datatables') }}",
-                            "columns": [{
+                            "columns": [
+                                
+                                
+                                {
                                     data: 'id',
                                 },
                                 {
@@ -69,22 +107,24 @@
                                 },
                                 {
                                     data: 'estatus'
-                                }, {
+                                },
+                                {
                                     data: 'id',
                                     render: function(data, type, full, meta) {
                                         return `
-                                    
-                                                <a href="/usuarios/${data}/edit"
-                                                class="btn">
-                                                <img src="/img/editar.svg" width="15px">
-                                                
-                                                </a>
-
-                                                <a href="javascript:void(0)" data-toggle="tooltip" data-id="${data}" 
-                                                data-original-title="Delete" class="deleteusuarios">
-                                                <img src="/img/basurero.svg" width="20px">
-                                                </a>
-
+                                        
+                                        <a href="/usuarios/${data}/edit"
+                                        class="btn">
+                                        <img src="/img/editar.svg" width="15px">
+                                        
+                                        </a>
+                                        @if ($sessiontipo == 'admin')
+                                        <a href="javascript:void(0)" data-toggle="tooltip" data-id="${data}" 
+                                        data-original-title="Delete" class="deleteusuarios">
+                                        <img src="/img/basurero.svg" width="20px">
+                                        </a>
+                                        
+                                        @endif
                                                 <a href="/usuarios/${data}"
                                                 class="btn">
                                                  <i class="fas fa-eye"></i> </a>
@@ -100,8 +140,19 @@
                         function reloadTable() {
                             $('#usuarios').DataTable().ajax.reload();
                         }
-                    </script>
+                    </script> --}}
                     <script>
+                        var table = $('#usuarios').DataTable({
+                            "autoWidth": false,
+                            "responsive": true,
+                            language: {
+                                url: "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
+                            }
+                        });
+
+                        function reloadTable() {
+                            $('#usuarios').DataTable().ajax.reload();
+                        }
                         $(function() {
                             $.ajaxSetup({
                                 headers: {
