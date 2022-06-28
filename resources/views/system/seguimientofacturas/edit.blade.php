@@ -101,9 +101,6 @@
                                 @foreach ($estatufacturas as $estatufactura)
                                     <option value="{{$estatufactura->id}}" {{ $seguimientofactura->estatufacturas_id == $estatufactura->id ? 'selected' : '' }}>{{$estatufactura->nombre}}
                                 @endforeach
-                                <div class="valid-feedback">
-                                    Correcto!
-                                </div>
                                 @error('estatufacturas_id')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror

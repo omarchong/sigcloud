@@ -18,33 +18,39 @@ $sessionid = session('sessionid');
 
                     <div class="notificacion nav-link dropdown submenu">
                         <img src="/img/notificacion.svg" alt="" class="">
-                        @if (count($notificacionusuario->unreadNotifications)) 
-                            <span class="badge">{{count($notificacionusuario->unreadNotifications)}}</span>
+                        @if (count($notificacionusuario->unreadNotifications))
+                            <span class="badge">{{ count($notificacionusuario->unreadNotifications) }}</span>
                         @endif
                         <div class="dropdown-menu children notificacion-link">
 
 
-                          <span class="dropdown-item bg-danger" href="#" style="color: white;">Notificaciones no leidas</span>
-                          
-                              @forelse($notificacionusuario->unreadNotifications as $notificacion)
+                            <span class="dropdown-item bg-danger" href="#" style="color: white;">Notificaciones no
+                                leidas</span>
+
+                            @forelse($notificacionusuario->unreadNotifications as $notificacion)
                                 {{-- <i class="fas fa-envelope mr-2 mx-2"></i> {{$notificacion->data['nombre'];}} 
                                 <p class="ml-3 float-right text-muted text-sm"> {{$notificacion->created_at->diffForHumans()}} </p>
                                 <div class="text-right">
                                     <button type="button" class="mark-as-read btn btn-outline-dark" data-id="{{ $notificacion->id }}">Marcar como leida</button>
                                 </div> --}}
-                              {{-- @if($loop->last)
+                                {{-- @if ($loop->last)
                                 <a href="#" id="mark-all">Marcar todas como leidas</a>
                                 @endif --}}
-                              <li class=""><i class="fas fa-envelope mr-2 mx-2"></i> {{$notificacion->data['nombre'];}} 
-                                <span class="ml-3 float-right text-muted text-sm"> {{$notificacion->created_at->diffForHumans()}} </span>
-                                <span href="#" type="button" class="mark-as-read dropdown-item float-right text-right" data-id="{{ $notificacion->id }}" style="color: blue"> Marcar como leida</span> 
-                              </li>
-                              @empty
-                                    Sin notificaciones
-                              @endforelse
+                                <li class=""><i class="fas fa-envelope mr-2 mx-2"></i>
+                                    {{ $notificacion->data['nombre'] }}
+                                    <span class="ml-3 float-right text-muted text-sm">
+                                        {{ $notificacion->created_at->diffForHumans() }} </span>
+                                    <span href="#" type="button"
+                                        class="mark-as-read dropdown-item float-right text-right"
+                                        data-id="{{ $notificacion->id }}" style="color: blue"> Marcar como
+                                        leida</span>
+                                </li>
+                            @empty
+                                Sin notificaciones
+                            @endforelse
                             <div class="dropdown-divider"></div>
                             {{-- Notificaciones leidas --}}
-                          {{-- <span class="dropdown-item bg-info" href="#" style="color: white;">Notificaciones leidas</span>
+                            {{-- <span class="dropdown-item bg-info" href="#" style="color: white;">Notificaciones leidas</span>
                           <div class="mx-2 my-2">
                             @forelse ($notificacionusuario->readNotifications as $notificacion)
                             <li class="my-2"><i class="fas fa-envelope-open"></i> {{$notificacion->data['nombre'];}} 
@@ -64,7 +70,9 @@ $sessionid = session('sessionid');
                         <img class="mr-2 my-2" src="/img/apps.svg" alt="" width="40px">
                     </li>
                     <li class="nav-item">
-                        <img class="mr-2 my-2 rounded-circle mx-auto d-block" src="{{ asset('archivos/' . $notificacionusuario['imagen']) }}" alt="" width="40px">
+                        <img class="mr-2 my-2 rounded-circle mx-auto d-block"
+                            src="{{ asset('archivos/' . $notificacionusuario['imagen']) }}" alt=""
+                            width="40px">
                     </li>
                     <li class="nav-item">
                         <a class="nav-link disabled"> <b>Bienvenido <?php echo $sessionusuario; ?></b></a>
@@ -79,7 +87,7 @@ $sessionid = session('sessionid');
 </div>
 
 <script>
-    function sendMarkRequest(id = null){
+    function sendMarkRequest(id = null) {
         return $.ajax("{{ route('markNotification') }}", {
             method: 'POST',
             data: {
@@ -89,11 +97,11 @@ $sessionid = session('sessionid');
         });
     }
 
-    $(function(){
-        $('.mark-as-read').click(function(){
+    $(function() {
+        $('.mark-as-read').click(function() {
             let request = sendMarkRequest($(this).data('id'));
             /* console.log(request); */
-            
+
             request.done(() => {
                 $(this).parents('div.alert').remove();
             });
@@ -107,4 +115,3 @@ $sessionid = session('sessionid');
         }); */
     });
 </script>
-

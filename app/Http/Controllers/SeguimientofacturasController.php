@@ -12,55 +12,51 @@ use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
+
 class SeguimientofacturasController extends Controller
 {
     public function index()
     {
         $sessionusuario = session('sessionusuario');
         $sessionid = session('sessionid');
-        if($sessionusuario<>"")
-        {
+        if ($sessionusuario <> "") {
             /* Variable notificacion */
             $notificacionusuario = Usuario::find($sessionid);
             /* Fin de la Variable notificacion */
-            return view('system.seguimientofacturas.index', compact('notificacionusuario'),[
-                'ordenpagos' => Ordenpago::select('id','folio')->get(),
-                'estatufacturas' => Estatufactura::select('id','nombre')->get()
+            return view('system.seguimientofacturas.index', compact('notificacionusuario'), [
+                'ordenpagos' => Ordenpago::select('id', 'folio')->get(),
+                'estatufacturas' => Estatufactura::select('id', 'nombre')->get()
             ]);
-        }
-        else{
+        } else {
             Session::flash('mensaje', 'Iniciar sesión antes de continuar');
             return redirect()->route('login');
         }
     }
 
     public function create()
-    {   
+    {
         $sessionusuario = session('sessionusuario');
         $sessionid = session('sessionid');
-        if($sessionusuario<>"")
-        {
+        if ($sessionusuario <> "") {
             /* Variable notificacion */
             $notificacionusuario = Usuario::find($sessionid);
             /* Fin de la Variable notificacion */
-            return view('system.seguimientofacturas.create', compact('notificacionusuario'),[
-                'ordenpagos' => Ordenpago::select('id','folio')->get(),
-                'estatufacturas' => Estatufactura::select('id','nombre')->get()
+            return view('system.seguimientofacturas.create', compact('notificacionusuario'), [
+                'ordenpagos' => Ordenpago::select('id', 'folio')->get(),
+                'estatufacturas' => Estatufactura::select('id', 'nombre')->get()
             ]);
-        }
-        else{
+        } else {
             Session::flash('mensaje', 'Iniciar sesión antes de continuar');
             return redirect()->route('login');
         }
     }
 
     public function store(SeguimientofacturaRequest $request)
-    {    
+    {
         $seguimientofactura = Seguimientofactura::create($request->validated());
         return redirect()
-        ->route('seguimientofacturas.index')
-        ->withSuccess("El seguimiento de factura se creo correctamente");
-
+            ->route('seguimientofacturas.index')
+            ->withSuccess("El seguimiento de factura se creo correctamente");
     }
 
 
@@ -68,31 +64,29 @@ class SeguimientofacturasController extends Controller
     {
         $sessionusuario = session('sessionusuario');
         $sessionid = session('sessionid');
-        if($sessionusuario<>"")
-        {
+        if ($sessionusuario <> "") {
             /* Variable notificacion */
             $notificacionusuario = Usuario::find($sessionid);
             /* Fin de la Variable notificacion */
             return view('system.seguimientofacturas.edit', compact('notificacionusuario'), [
                 'seguimientofactura' => $seguimientofactura,
-                'ordenpagos' => Ordenpago::select('id','folio')->get(),
-                'estatufacturas' => Estatufactura::select('id','nombre')->get(),
-            ]); 
-        }
-        else{
+                'ordenpagos' => Ordenpago::select('id', 'folio')->get(),
+                'estatufacturas' => Estatufactura::select('id', 'nombre')->get(),
+            ]);
+        } else {
             Session::flash('mensaje', 'Iniciar sesión antes de continuar');
             return redirect()->route('login');
         }
     }
 
     public function update(SeguimientofacturaRequest $request, seguimientofactura $seguimientofactura)
-    {   
+    {
         $segf = $request->all();
         $seguimientofactura->update($segf);
         return redirect()
-        ->route('seguimientofacturas.index')
-        ->withSuccess("El seguimiento factura se actualizo exitosamente");
-    }  
+            ->route('seguimientofacturas.index')
+            ->withSuccess("El seguimiento factura se actualizo exitosamente");
+    }
     public function destroy_segf($id)
     {
         Seguimientofactura::find($id)->delete();
@@ -102,11 +96,11 @@ class SeguimientofacturasController extends Controller
     public function RegistrosDatatables()
     {
         return datatables()
-      ->eloquent(
-        Seguimientofactura::query()
-          ->with(['ordenpagos', 'estatufacturas'])
-      )
-      ->toJson();
+            ->eloquent(
+                Seguimientofactura::query()
+                    ->with(['ordenpagos', 'estatufacturas'])
+            )
+            ->toJson();
     }
 
     public function buscafolio(Request $request)
@@ -121,27 +115,20 @@ class SeguimientofacturasController extends Controller
         return response()->json($buscafolio);
     }
 
-    public function seleccionafolio(Request $request)    
+    public function seleccionafolio(Request $request)
     {
         /* $ordenpago = Ordenpago::where('folio', $request->ordenpago)->first();
         return response()->json($ordenpago); */
 
-        /* 
-        $ordenpago = DB::select("SELECT folio, num_pago, emite, subtotal
-        FROM ordenpagos 
-        INNER JOIN cotizaciones
-        ON ordenpagos.cotizacion_id = cotizaciones.id
-        INNER JOIN detalle_cotizacion
-        ON ordenpagos.cotizacion_id = detalle_cotizacion.id 
-        where folio like '%17%'"); */
+        /* $ordenpago = Ordenpago::join('detalle_cotizacion', 'ordenpagos.cotizacion_id', '=', 'detalle_cotizacion.cotizacion_id')
+            ->select('ordenpagos.id', 'ordenpagos.folio', 'ordenpagos.emite', 'ordenpagos.num_pago', 'detalle_cotizacion.subtotal as cantidadtotal')
+            ->where('folio', $request->ordenpago)->first(); */
 
-        $ordenpago = Ordenpago::join('detalle_cotizacion','ordenpagos.id','=','detalle_cotizacion.id')
-            ->select('ordenpagos.id','ordenpagos.folio', 'ordenpagos.emite','ordenpagos.num_pago', 'detalle_cotizacion.subtotal as cantidadtotal')
+           $ordenpago = Ordenpago::groupBy('ordenpagos.id','ordenpagos.folio', 'ordenpagos.emite', 'ordenpagos.num_pago')
+            ->join('detalle_cotizacion', 'ordenpagos.cotizacion_id', '=', 'detalle_cotizacion.cotizacion_id')
+            ->join('cotizaciones', 'detalle_cotizacion.cotizacion_id', '=', 'cotizaciones.id')
+            ->selectRaw('ordenpagos.id, ordenpagos.folio, ordenpagos.emite, ordenpagos.num_pago, SUM(detalle_cotizacion.subtotal) AS cantidadtotal')
             ->where('folio', $request->ordenpago)->first();
         return  response()->json($ordenpago);
-
     }
-
-
-
 }

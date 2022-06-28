@@ -1,4 +1,8 @@
 @include('layouts.admin')
+<?php
+$sessionusuario = session('sessionusuario');
+$sessionid = session('sessionid');
+?>
 <div class="main my-3">
     <div class="main-content">
         <div class="container-fluid col-md-10">
@@ -9,7 +13,8 @@
                         <div class="" style="background-color: #29C0FD;">
 
                             <img src="{{ asset('archivos/' . $usuarios['imagen']) }}"
-                                class="rounded-circle mx-auto d-block  my-4" alt="..." width="120px" height="100px">
+                                class="rounded-circle mx-auto d-block  my-4" alt="..." width="120px"
+                                height="100px">
                         </div>
                         <div class="card-body">
                             <h5 class="card-title"> <strong>Nombre: </strong>{{ $usuarios->nombre }}
@@ -42,26 +47,34 @@
                     </div>
                     <div class="card my-3">
                         <div class="card-header text-white bg-danger">
-                            Lista de notificaciones no leidas
+                            Notificaciones no leidas
                         </div>
                         <div class="card-body">
-                            @forelse($usuarios->unreadNotifications as $notificacion)
-                            <div class="alert alert-danger">
-                               <b>Nombre:</b> {{ $notificacion->data['nombre'] }}
-                                <p class="ml-3 float-right text-muted text-sm"> {{ $notificacion->created_at->diffForHumans() }}</p>
-                                <hr>
-                                <div class="text-right">
-                                    <button type="button" class="mark-as-read btn btn-outline-dark" data-id="{{ $notificacion->id }}">Marcar como leida</button>
-                                </div>
-                                
-                            </div>
-                            {{-- @if($loop->last)
-                            <a href="#" id="mark-all">Marcar todas como leidas</a>
-                            @endif --}}
-                            @empty
-                                Sin notificaciones
-                                <div class="dropdown-divider"></div>
-                            @endforelse
+                            @if ($usuarios->nombre == $sessionusuario)
+                                @forelse($notificacionusuario->unreadNotifications as $notificacion)
+                                    <div class="alert alert-danger">
+                                        <b>Nombre:</b> {{ $notificacion->data['nombre'] }}
+                                        <p class="ml-3 float-right text-muted text-sm">
+                                            {{ $notificacion->created_at->diffForHumans() }}</p>
+                                        <hr>
+                                        <div class="text-right">
+                                            <button type="button" class="mark-as-read btn btn-outline-dark"
+                                                data-id="{{ $notificacion->id }}">Marcar como leida</button>
+                                        </div>
+
+                                    </div>
+                                    {{-- Marcar todas las notifiaciones como leidas --}}
+                                    {{-- @if ($loop->last)
+                                <a href="#" id="mark-all">Marcar todas como leidas</a>
+                                @endif --}}
+
+
+                                @empty
+
+                                    Sin notificaciones
+                                    <div class="dropdown-divider"></div>
+                                @endforelse
+                            @endif
                         </div>
                     </div>
                     {{-- Notificaciones leidas --}}
@@ -96,7 +109,7 @@
 
 
 <script>
-    function sendMarkRequest(id = null){
+    function sendMarkRequest(id = null) {
         return $.ajax("{{ route('markNotification') }}", {
             method: 'POST',
             data: {
@@ -106,22 +119,21 @@
         });
     }
 
-    $(function(){
-        $('.mark-as-read').click(function(){
+    $(function() {
+        $('.mark-as-read').click(function() {
             let request = sendMarkRequest($(this).data('id'));
             /* console.log(request); */
-            
+
             request.done(() => {
                 $(this).parents('div.alert').remove();
             });
         });
-        $('#mark-all').click(function(){
+        $('#mark-all').click(function() {
             let request = sendMarkRequest();
-            
+
             request.done(() => {
                 $('div.alert').remove();
             })
         });
     });
 </script>
-
