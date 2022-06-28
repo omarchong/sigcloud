@@ -17,6 +17,11 @@
     <!-- estilos buscador tiempo real -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="http://code.jquery.com/jquery-latest.js"></script> 
+
+    {{-- Estilos datatables --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap4.min.css">
+    {{-- fin de los Estilos datatables --}}
+    
   
 
 </head>
@@ -50,7 +55,10 @@
     <script src="{{ asset('jquery/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('datatables/js/dataTables.bootstrap4.min.js') }}"></script>
-
+    
+    {{-- Datatable responsiva --}}
+    <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+    {{-- fin de Datatable responsiva --}}
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 

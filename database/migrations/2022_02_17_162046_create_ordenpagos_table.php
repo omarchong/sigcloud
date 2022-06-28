@@ -22,7 +22,6 @@ class CreateOrdenpagosTable extends Migration
                 ->references('id')
                 ->on('cotizaciones');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

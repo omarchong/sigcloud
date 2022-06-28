@@ -15,7 +15,6 @@ use App\Http\Controllers\EstatusordenController;
 use App\Http\Controllers\EstatustareaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\OrdenpagosController;
 use App\Http\Controllers\SeguimientofacturasController;
 use App\Http\Controllers\ServiciosController;
@@ -30,6 +29,10 @@ Route::get('/prueba', function () {
 login */
 
 Route::get('/panel-administrativo', [HomeController::class, 'index'])->name('home');
+Route::post('/mark-as-read', [HomeController::class, 'markNotification'])->name('markNotification');
+
+
+
 
 route::get('/', [LoginController::class, 'login'])->name('login');
 Route::post('validar', [LoginController::class, 'validar'])->name('validar');
@@ -39,10 +42,12 @@ route::get('recuperarcontrasena', [LoginController::class, 'recuperarcontrasena'
 Route::get('cerrarsesion', [LoginController::class, 'cerrarsesion'])->name('cerrarsesion');
 /* omar chong */
 Route::resource('contactos', ContactosController::class);
+Route::name('destroy_contactos')->delete('destroy_contactos/{id}', [ContactosController::class, 'destroy_contactos']);
 Route::get('datatables/contactos', [ContactosController::class, 'RegistrosDatatables'])->name('contactos.datatables');
 
 /* clientes */
 Route::resource('clientes', ClientesController::class);
+Route::name('destroy_clientes')->delete('destroy_clientes/{id}', [ClientesController::class, 'destroy_clientes']);
 Route::get('datatables/clientes', [ClientesController::class, 'RegistrosDatatables'])->name('clientes.datatables');
 Route::post('searchcontacto', [ClientesController::class, 'searchcontacto'])->name('searchcontacto');
 Route::post('seleccionarcontacto', [ClientesController::class, 'seleccionarcontacto'])->name('seleccionarcontacto');
@@ -56,6 +61,7 @@ Route::name('destroy')->delete('destroy/{id}', [DepartamentosController::class, 
 
 /* cotizaciones */
 Route::resource('cotizaciones', CotizacionesController::class);
+Route::name('destroy_cotizaciones')->delete('destroy_cotizaciones/{id}', [CotizacionesController::class, 'destroy_cotizaciones']);
 Route::post('buscacliente', [CotizacionesController::class, 'buscacliente'])->name('buscacliente');
 Route::post('buscaservicio', [CotizacionesController::class, 'buscaservicio'])->name('buscaservicio');
 Route::post('seleccionacliente', [CotizacionesController::class, 'seleccionacliente'])->name('seleccionacliente');
@@ -66,13 +72,25 @@ Route::name('coti')->get('coti/{id}', [CotizacionesController::class, 'pdfCoti']
 
 /* usuarios */
 Route::resource('usuarios', UsuariosController::class);
+Route::name('destroy_usuarios')->delete('destroy_usuarios/{id}', [UsuariosController::class, 'destroy_usuarios']);
 Route::get('datatables/usuarios', [UsuariosController::class, 'RegistrosDatatables'])->name('usuarios.datatables');
+
+Route::post('/mark-as-read', [UsuariosController::class, 'markNotification'])->name('markNotification');
+/* Leer notificacion */
+/* $sessionusuario = session('sessionusuario');
+
+Route::get('marcarNotificaciones', function(){
+    session('sessionusuario')->usuario()->unreadNotifications->markAsRead();
+    return redirect()->back();
+})->name('marcarNotificaciones'); */
 
 /* Actividades */
 Route::resource('actividades', ActividadesController::class);
 Route::name('store_actividad')->post('store_actividad/', [ActividadesController::class, 'store']);
 Route::name('editar-actividad')->get('editar_actividad/{id}', [ActividadesController::class, 'edit']);
 Route::name('destroy-actividad')->delete('destroy_actividad/{id}', [ActividadesController::class, 'destroy']);
+Route::get('datatables/actividades', [ActividadesController::class, 'RegistrosDatatables'])->name('actividades.datatables');
+
 
 /* Estatus de servicios */
 Route::resource('estatuservicios', EstatuserviciosController::class);
@@ -95,7 +113,8 @@ Route::name('destroy-estatutarea')->delete('destroy_estatutarea/{id}', [Estatust
 /* Tareas */
 Route::resource('tareas', TareasController::class);
 Route::get('datatables/tareas', [TareasController::class, 'RegistrosDatatables'])->name('tareas.datatables');
-Route::name('delete')->delete('delete/{id}', [TareasController::class], 'destroy');
+Route::name('destroy_tarea')->delete('destroy_tarea/{id}', [TareasController::class, 'destroy_tarea']);
+
 
 /* Estatus de citas */
 Route::resource('estatucitas', EstatuscitaController::class);
@@ -135,6 +154,8 @@ Route::name('destroy-estatufactura')->delete('destroy_estatufactura/{id}', [Esta
 
 /* Citas */
 Route::resource('citas', CitasController::class);
+Route::name('destroy_cita')->delete('destroy_cita/{id}', [CitasController::class, 'destroy_cita']);
+
 Route::get('datatables/citas', [CitasController::class, 'RegistrosDatatables'])->name('citas.datatables');
 Route::post('buscaempresa', [CitasController::class, 'buscaempresa'])->name('buscaempresa');
 Route::post('seleccionaempresa', [CitasController::class, 'seleccionaempresa'])->name('seleccionaempresa');
@@ -143,11 +164,13 @@ Route::post('seleccionausuario', [CitasController::class, 'seleccionausuario'])-
 
 /* Orden */
 Route::resource('orden', OrdenpagosController::class);
+Route::name('destroy_orden')->delete('destroy_orden/{id}', [OrdenpagosController::class, 'destroy_orden']);
 Route::get('datatables/ordenpagos', [OrdenpagosController::class, 'RegistrosDatatables'])->name('ordenpagos.datatables');
 
 
 /* Seguimientofacturas */
 Route::resource('seguimientofacturas', SeguimientofacturasController::class);
+Route::name('destroy_segf')->delete('destroy_segf/{id}', [SeguimientofacturasController::class, 'destroy_segf']);
 Route::get('datatables/seguimientofacturas', [SeguimientofacturasController::class, 'RegistrosDatatables'])->name('seguimientofacturas.datatables');
 Route::post('buscafolio', [SeguimientofacturasController::class, 'buscafolio'])->name('buscafolio');
 Route::post('seleccionafolio', [SeguimientofacturasController::class, 'seleccionafolio'])->name('seleccionafolio');

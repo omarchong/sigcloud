@@ -153,6 +153,22 @@
                             </label>
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <label for="exampleInputEmail1" class="form-label">Tipo de usuario</label>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tipo" id="tipo" value="admin" checked>
+                            <label class="form-check-label" for="exampleRadios1">
+                                Administrador
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tipo" id="tipo" value="user">
+                            <label class="form-check-label" for="exampleRadios2">
+                                Usuario
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary float-right">Guardar</button>
 

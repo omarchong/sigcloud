@@ -9,6 +9,15 @@ class Actividad extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nombre', 'tipoactividad', 'fecha', 'nota'
+        'nombre', 
+        'tipoactividad', 
+        'fecha', 
+        'nota',
+        'usuario_id'
     ];
+
+    public function usuario()
+    {
+        return $this->belongsTo(Usuario::class);
+    }
 }

@@ -31,7 +31,7 @@
                         </tbody>
                     </table>
                     <script>
-                        $("#cotizaciones").DataTable({
+                        var table = $("#cotizaciones").DataTable({
                             "responsive": true,
                             "processing": true,
                             "serverSide": true,
@@ -72,6 +72,11 @@
                                                 class="btn">
                                                 <img src="/img/mail.svg" width="35px"></i>
                                                 </a>
+
+                                                <a href="javascript:void(0)" data-toggle="tooltip" data-id="${data}" 
+                                                data-original-title="Delete" class="deletecotizaciones">
+                                                    <img src="/img/basurero.svg" width="20px">
+                                                </a>
                                     `
                                     }
                                 }
@@ -91,3 +96,40 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('body').on('click', '.deletecotizaciones', function() {
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: '¡La cotización se eliminará definitivamente!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#007bff',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '¡Si, eliminar!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var id = $(this).data('id');
+                    $.ajax({
+                        type: "DELETE",
+                        url: "{{ url('destroy_cotizaciones') }}" + "/" + id,
+                        data: {
+                            id: id
+                        },
+                        dataType: 'json',
+                        success: function(res) {
+                            table.draw();
+                        }
+                    });
+                }
+            })
+        });
+    })
+</script>

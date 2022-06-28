@@ -15,6 +15,7 @@ class ActividadSeeder extends Seeder
             'tipoactividad' => 'LLamada',
             'fecha' => date('Y-m-d'),
             'nota' => 'Realizar una llamada',
+            'usuario_id' => 1,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         ]);
@@ -23,6 +24,7 @@ class ActividadSeeder extends Seeder
             'tipoactividad' => 'Correo',
             'fecha' => date('Y-m-d'),
             'nota' => 'Realizar un correo',
+            'usuario_id' => 1,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         ]);DB::table('actividads')->insert([
@@ -30,6 +32,7 @@ class ActividadSeeder extends Seeder
             'tipoactividad' => 'Reunion',
             'fecha' => date('Y-m-d'),
             'nota' => 'Realizar una reunion',
+            'usuario_id' => 1,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         ]);

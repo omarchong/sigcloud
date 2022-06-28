@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Servicio;
 use Illuminate\Http\Request;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\Hash;
@@ -33,8 +34,9 @@ class LoginController extends Controller
 
         if ($cuantos == 1 and Hash::check($request->contrasena, $consulta[0]->contrasena)) 
         {
-            Session::put('sessionusuario', $consulta[0]->nombre);
             Session::put('sessionid', $consulta[0]->id);
+            Session::put('sessionusuario', $consulta[0]->nombre);
+            Session::put('sessiontipo', $consulta[0]->tipo);
             return redirect()->route('inicio');
         } 
         else 
@@ -46,9 +48,17 @@ class LoginController extends Controller
     public function inicio()
     {
         $sessionusuario = session('sessionusuario');
+        $sessionid = session('sessionid');
+        $sessiontipo = session('sessiontipo');
         if($sessionusuario<> "")
         {
-            return view('system.dashboard.principal');
+            $notificacionusuario =Usuario::find($sessionid);   
+            if (count($notificacionusuario->unreadNotifications)){
+                
+            }
+            $servicios = Servicio::count();
+
+            return view('home.index', compact('notificacionusuario', 'servicios'));
         }
         else{
             Session::flash('mensaje', "Iniciar sesión antes de continuar");
@@ -99,7 +109,7 @@ class LoginController extends Controller
     {
         Session::forget('sesionusuario');
         Session::flush();
-        Session::flash('mensaje',"Sesion cerrada correctamente"); 
+        Session::flash('mensaje',"Sesión cerrada correctamente"); 
         return redirect()->route('login');
     }
 }

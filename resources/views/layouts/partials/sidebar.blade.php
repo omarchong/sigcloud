@@ -102,16 +102,6 @@
                 </a>
             </li>
 
-            {{-- <li class="submenu nav-link">
-                <a href="#"><img class="mr-2" src="/img/reloj.svg" alt="" width="30px"> <span class="icon-rocket"></span>Proyectos<span
-                        class="caret icon-arrow-down6"></span></a>
-                <ul class="children">
-                    <li><a href="#">SubElemento #1 <span class="icon-dot"></span></a></li>
-                    <li><a href="#">SubElemento #2 <span class="icon-dot"></span></a></li>
-                    <li><a href="#">SubElemento #3 <span class="icon-dot"></span></a></li>
-                </ul>
-            </li> --}}
-
             <li class="submenu nav-link">
                 <a href="#">
                     <img class="mr-2" src="/img/reloj.svg" alt="" width="30px">
@@ -149,6 +139,5 @@
                 </a>
             </li>
         </ul>
-    </div>
     </div>
 </nav>

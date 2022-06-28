@@ -30,48 +30,47 @@
                         </tbody>
                     </table>
                     <script>
-                        $("#clientes").DataTable({
-                            "responsive": true,
-                            "processing": true,
-                            "serverSide": true,
-                            "autoWidth": false,
-                            language: {
-                                url: "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
-                            },
-                            "ajax": "{{ route('clientes.datatables') }}",
-                            "columns": [{
-                                    data: 'id',
+                            var table = $("#clientes").DataTable({
+                                "responsive": true,
+                                "processing": true,
+                                "serverSide": true,
+                                "autoWidth": false,
+                                language: {
+                                    url: "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
                                 },
-                                {
-                                    data: 'nombreempresa',
-                                }, {
-                                    data: 'contactos.contacto1'
-                                },
-                                {
-                                    data: 'tipocliente'
-                                },
-                                {
-                                    data: 'giros.nombre'
-                                },
-                                {
-                                    data: 'estatuscliente',
-                                }, {
-                                    data: 'id',
-                                    render: function(data, type, full, meta) {
-                                        return `
-                                    
-                                                <a href="/clientes/${data}/edit"
-                                                class="btn">
-                                                <img src="/img/editar.svg" width="20px">
-                                                <a href="/usuarios/${data}/show"
-                                                class="btn">
-                                                <img src="/img/basurero.svg" width="20px">
+                                "ajax": "{{ route('clientes.datatables') }}",
+                                "columns": [{
+                                        data: 'id',
+                                    },
+                                    {
+                                        data: 'nombreempresa',
+                                    }, {
+                                        data: 'contactos.contacto1'
+                                    },
+                                    {
+                                        data: 'tipocliente'
+                                    },
+                                    {
+                                        data: 'giros.nombre'
+                                    },
+                                    {
+                                        data: 'estatuscliente',
+                                    }, {
+                                        data: 'id',
+                                        render: function(data, type, full, meta) {
+                                            return `
+                                                <a href="/clientes/${data}/edit" class="btn">
+                                                    <img src="/img/editar.svg" width="20px">
                                                 </a>
-                                    `
+                                                <a href="javascript:void(0)" data-toggle="tooltip" data-id="${data}" 
+                                                data-original-title="Delete" class="deleteclientes">
+                                                <img src="/img/basurero.svg" width="20px"></a>
+                                        `
+                                        }
                                     }
-                                }
-                            ]
-                        })
+                                ]
+                            });
+                        
 
                         function reloadTable() {
                             $('#clientes').DataTable().ajax.reload();
@@ -86,3 +85,40 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('body').on('click', '.deleteclientes', function() {
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: '¡El cliente se eliminará definitivamente!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#007bff',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '¡Si, eliminar!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var id = $(this).data('id');
+                    $.ajax({
+                        type: "DELETE",
+                        url: "{{ url('destroy_clientes') }}" + "/" + id,
+                        data: {
+                            id: id
+                        },
+                        dataType: 'json',
+                        success: function(res) {
+                            table.draw();
+                        }
+                    });
+                }
+            })
+        });
+    })
+</script>

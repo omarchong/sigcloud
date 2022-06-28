@@ -8,6 +8,7 @@ use App\Models\Contacto;
 use App\Models\Estado;
 use App\Models\Giro;
 use App\Models\Municipio;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -16,9 +17,13 @@ class ClientesController extends Controller
     public function index()
     {
         $sessionusuario = session('sessionusuario');
+        $sessionid = session('sessionid');
         if($sessionusuario<>"")
         {
-            return view('system.clientes.index');
+            /* Variable notificacion */
+            $notificacionusuario = Usuario::find($sessionid);
+            /* Fin de la Variable notificacion */
+            return view('system.clientes.index', compact('notificacionusuario'));
         }
         else{
             Session::flash('mensaje', "Iniciar sesión antes de continuar");
@@ -29,9 +34,14 @@ class ClientesController extends Controller
     public function create()
     {
         $sessionusuario = session('sessionusuario');
+        $sessionid = session('sessionid');
         if($sessionusuario<>"")
         {
-            return view('system.clientes.create', [
+            /* Variable notificacion */
+            $notificacionusuario = Usuario::find($sessionid);
+            /* Fin de la Variable notificacion */
+
+            return view('system.clientes.create', compact('notificacionusuario'), [
                 'contactos' => Contacto::select('id', 'contacto1')->get(),
                 'estados' => Estado::select('id', 'nombre')->get(),
                 'municipios' => Municipio::select('id', 'nombre')->get(),
@@ -48,9 +58,13 @@ class ClientesController extends Controller
     public function edit(Cliente $cliente)
     {
         $sessionusuario = session('sessionusuario');
+        $sessionid = session('sessionid');
         if($sessionusuario<>"")
         {
-            return view('system.clientes.edit', [
+            /* Variable notificacion */
+            $notificacionusuario = Usuario::find($sessionid);
+            /* Fin de la Variable notificacion */
+            return view('system.clientes.edit', compact('notificacionusuario'), [
                 'cliente' => $cliente,
                 'contactos' => Contacto::select('id', 'contacto1')->get(),
                 'estados' => Estado::select('id', 'nombre')->get(),
@@ -71,6 +85,11 @@ class ClientesController extends Controller
         return redirect()
             ->route('clientes.index')
             ->withSuccess("El cliente $cliente->nombreempresa se actualizo exitosamente");
+    }
+    public function destroy_clientes($id)
+    {
+        Cliente::find($id)->delete();
+        return response()->json(['success' => 'Cliente borrado']);
     }
 
     public function store(ClienteRequest $request)

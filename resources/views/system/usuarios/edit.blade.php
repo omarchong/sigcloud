@@ -112,7 +112,7 @@
                     <div>
                         <div id="preview">
                             @if($usuario->imagen)
-                            <img src="{{asset('/imagen/'.$usuario->imagen)}}">
+                            <img src="{{asset('/archivos/'.$usuario->imagen)}}" height="150" width="150">
                             @endif
                         </div>
                     </div>
@@ -129,6 +129,22 @@
                             <input class="form-check-input" type="radio" name="estatus" id="estatus" value="No" {{old('estatus') == 'No' ? 'checked': ($usuario->estatus == 'No' ? 'checked': '')}}>
                             <label class="form-check-label" for="exampleRadios2">
                                 Inactivo
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="exampleInputEmail1" class="form-label">Tipo de usuario</label>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tipo" id="tipo" value="admin" {{old('tipo') == 'admin' ? 'checked': ($usuario->tipo == 'admin' ? 'checked': '')}}>
+                            <label class="form-check-label" for="exampleRadios1">
+                                Administrador
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tipo" id="tipo" value="user" {{old('tipo') == 'user' ? 'checked': ($usuario->tipo == 'user' ? 'checked': '')}}>
+                            <label class="form-check-label" for="exampleRadios2">
+                                Usuario
                             </label>
                         </div>
                     </div>

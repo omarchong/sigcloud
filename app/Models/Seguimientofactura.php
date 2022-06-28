@@ -9,8 +9,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Seguimientofactura extends Model
 {
-    use HasFactory, SoftDeletes;
-    protected $fillable = ['ordenpagos_id', 'factura_creada', 'num_pago', 'fecha_vencimiento', 'estatufacturas_id'];
+    use HasFactory;
+    protected $fillable = [
+        'ordenpagos_id', 
+        'factura_creada', 
+        'cantidadtotal', 
+        'num_pago', 
+        'saldorestante', 
+        'fecha_vencimiento', 
+        'estatufacturas_id'];
 
     public function ordenpagos()
     {

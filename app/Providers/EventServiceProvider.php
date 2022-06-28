@@ -2,6 +2,12 @@
 
 namespace App\Providers;
 
+use App\Events\ActividadEvent;
+use App\Events\CitaEvent;
+use App\Events\TareaEvent;
+use App\Listeners\ActividadListener;
+use App\Listeners\CitaListener;
+use App\Listeners\TareaListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,6 +24,15 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        TareaEvent::class => [
+            TareaListener::class,
+        ],
+        CitaEvent::class => [
+            CitaListener::class,
+        ],
+        ActividadEvent::class => [
+            ActividadListener::class,
+        ],
     ];
 
     /**
@@ -27,6 +42,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        parent::boot();
         //
     }
 }

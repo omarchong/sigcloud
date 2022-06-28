@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ContactoRequest;
 use App\Models\Contacto;
 use App\Models\Servicio;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Session;
 
@@ -13,9 +14,12 @@ class ContactosController extends Controller
   public function index()
   {
     $sessionusuario = session('sessionusuario');
+    $sessionid = session('sessionid');
         if($sessionusuario<>"")
         {
-      return view('system.contactos.index');
+          $notificacionusuario = Usuario::find($sessionid);
+
+      return view('system.contactos.index', compact('notificacionusuario'));
       /*  return $contacto; */
     }
     else{
@@ -28,9 +32,11 @@ class ContactosController extends Controller
   public function create()
   {
     $sessionusuario = session('sessionusuario');
+    $sessionid = session('sessionid');
     if($sessionusuario<>"")
     {
-      return view('system.contactos.create',[
+      $notificacionusuario = Usuario::find($sessionid);
+      return view('system.contactos.create',compact('notificacionusuario') ,[
         'servicios' => Servicio::select('id','nombre')->get()
       ]);
     }
@@ -69,10 +75,13 @@ class ContactosController extends Controller
   public function show($id)
   {
     $sessionusuario = session('sessionusuario');
+    $sessionid = session('sessionid');
     if($sessionusuario<>"")
     {
       $contacto = Contacto::findOrFail($id);
-      return view('system.contactos.show', compact('contacto'));
+      $notificacionusuario = Usuario::find($sessionid);
+
+      return view('system.contactos.show', compact('contacto', 'notificacionusuario'));
     }
     else{
       Session::flash('mensaje', 'Iniciar sesión antes de continuar');
@@ -81,12 +90,10 @@ class ContactosController extends Controller
 
   }
 
-
-
-  public function destroy(Request $request)
+  public function destroy_contactos($id)
   {
-    $contacto = Contacto::where('id', $request->id)->delete();
-    return response()->json(['success' => true]);
+      Contacto::find($id)->delete();
+      return response()->json(['success' => 'Contacto borrado']);
   }
 
   public function RegistrosDatatables()

@@ -7,6 +7,7 @@ use App\Models\Cliente;
 use App\Models\Cotizacion;
 use App\Models\Estatucotizacion;
 use App\Models\Servicio;
+use App\Models\Usuario;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -55,8 +56,12 @@ class CotizacionesController extends Controller
     public function index()
     {
         $sessionusuario = session('sessionusuario');
+        $sessionid = session('sessionid');
         if ($sessionusuario <> "") {
-            return view('system.cotizaciones.index');
+            /* Variable notificacion */
+            $notificacionusuario = Usuario::find($sessionid);
+            /* Fin de la Variable notificacion */
+            return view('system.cotizaciones.index', compact('notificacionusuario'));
         } else {
             Session::flash('mensaje', "Iniciar sesión antes de continuar");
             return redirect()->route('login');
@@ -66,8 +71,12 @@ class CotizacionesController extends Controller
     public function create()
     {
         $sessionusuario = session('sessionusuario');
+        $sessionid = session('sessionid');
         if ($sessionusuario <> "") {
-            return view('system.cotizaciones.create', [
+            /* Variable notificacion */
+            $notificacionusuario = Usuario::find($sessionid);
+            /* Fin de la Variable notificacion */
+            return view('system.cotizaciones.create', compact('notificacionusuario'), [
                 'estatuscotizaciones' => Estatucotizacion::select('id', 'nombre')->get()
             ]);
         } else {
@@ -96,6 +105,12 @@ class CotizacionesController extends Controller
             return redirect()
                 ->route('cotizaciones.index')->withSuccess("La cotizacion $cotizacion->nombre_proyecto se creo exitosamente");
         });
+    }
+
+    public function destroy_cotizaciones($id)
+    {
+        Cotizacion::find($id)->delete();
+        return response()->json(['success' => 'Cotización borrado']);
     }
 
     public function pdfCoti(Request $request, $id)
@@ -135,6 +150,7 @@ class CotizacionesController extends Controller
     public function show($id)
     {
         $sessionusuario = session('sessionusuario');
+        $sessionid = session('sessionid');
         if ($sessionusuario <> "") {
             $cotizaciones = Cotizacion::findOrFail($id);
             $consulta = DB::select("SELECT dco.cotizacion_id, dco.numero_servicios, dco.precio_bruto, dco.precio_iva, dco.subtotal, serv.nombre, serv.descripcion
@@ -143,7 +159,10 @@ class CotizacionesController extends Controller
             ON dco.servicios_id = serv.id
             WHERE cotizacion_id = $id
             ORDER BY numero_servicios ASC");
-            return  view('system.cotizaciones.show', compact('consulta', 'cotizaciones'));
+            /* Variable notificacion */
+            $notificacionusuario = Usuario::find($sessionid);
+            /* Fin de la Variable notificacion */
+            return  view('system.cotizaciones.show', compact('consulta', 'cotizaciones','notificacionusuario'));
         } else {
             Session::flash('message', 'Iniciar sesión antes de continuar');
             return redirect()->route('login');

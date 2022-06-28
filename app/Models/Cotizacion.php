@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Cotizacion extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
     protected $table = 'cotizaciones';
     protected $fillable = [
         'nombre_proyecto',

@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Symfony\Component\CssSelector\Node\FunctionNode;
-
-class Usuario extends Model
+use Illuminate\Foundation\Auth\User as Authenticatable;
+class Usuario extends Authenticatable
 {
-    use HasFactory, SoftDeletes, Notifiable;
+    use HasFactory;
+    use Notifiable;
     protected $table = 'usuarios';
 
     protected $fillable = [
@@ -25,7 +26,8 @@ class Usuario extends Model
         'departamento_id',
         'imagen',
         /* 'rol_id', */
-        'estatus'
+        'estatus',
+        'tipo'
     ];
 
     public function roles()
@@ -43,7 +45,6 @@ class Usuario extends Model
         return $this->hasMany('App\Cita');
     }
 
-   
     public function tareas()
     {
         return $this->hasMany(Tarea::class);
@@ -56,5 +57,10 @@ class Usuario extends Model
     public function departamentos()
     {
         return $this->belongsTo(Departamento::class);
+    }
+
+    public function actividad()
+    {
+        return $this->hasMany(Actividad::class);
     }
 }
