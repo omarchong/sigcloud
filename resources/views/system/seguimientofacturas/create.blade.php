@@ -8,12 +8,13 @@
                 <input type="hidden" name="id" id="id">
                 <div class="form-row">
                     <div class="col-md-12">
-                        <label for="">Buscar folio</label>
+                        <label for="">Buscar cliente</label>
                         <div class="input-group">
-                            <input type="search" required name="buscarfolio" id="buscarfolio" 
-                            class="form-control @error('ordenpagos_id')  @enderror" placeholder="" aria-label="Search">
+                            <input type="search" required name="buscarordenpago" id="buscarordenpago"
+                                class="form-control @error('ordenpagos_id')  @enderror" placeholder=""
+                                aria-label="Search">
                             <span class="input-group-btn">
-                                <button type="button" id="selectFolio" class="btn btn-primary">
+                                <button type="button" id="selectOrdenpago" class="btn btn-primary">
                                     Seleccionar
                                 </button>
                             </span>
@@ -21,18 +22,19 @@
                         <div class="valid-feedback">
                             Correcto!
                         </div>
-                        @error('ordenpagos_id')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
+                        <div class="">
+                            @error('ordenpagos_id')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
-                    <input type="hidden" readonly class="form-control" name="ordenpagos_id" id="ordenpagos_id">
+                   {{--  <input type="hidden" readonly class="form-control" name="ordenpagos_id" id="ordenpagos_id"> --}}
                     <div class="col-md-4 my-3">
                         <label for="" class="form-label"> Folio</label>
                         <div class="form-group">
-                            <input type="text" readonly class="form-control" name="folio" id="folio">
+                            <input type="text" readonly class="form-control" name="ordenpagos_id" id="ordenpagos_id" >
                         </div>
                     </div>
-
                     <div class="col-md-4 my-3">
                         <label for="" class="form-label">Fecha de creación</label>
                         <div class="">
@@ -187,11 +189,11 @@
 <script>
     $(document).ready(function(){
 
-        $("#buscarfolio").autocomplete({
-            source: function(request, response){
+        $("#buscarordenpago").autocomplete({
+            source: function(request, response) {
                 $.ajax({
-                    url: "{{route('buscafolio')}}",
-                    type: 'POST',
+                    url: "{{ route('buscaordenpago') }}",
+                    type: "POST",
                     data: {
                         term: request.term,
                         _token: $("input[name=_token]").val()
@@ -199,31 +201,31 @@
                     dataType: 'json',
                     success: function(data) {
                         var resp = $.map(data, function(obj) {
-                            return obj.folio;
+                            return obj.contacto1;
                             response(data);
-                        });
+                        })
                         response(resp);
                     }
                 })
             },
-            minLength: 1,
+            minLenght: 1,
         })
 
-        $("#selectFolio").click(function(){
-            const ordenpago = $('#buscarfolio').val()
+        $("#selectOrdenpago").click(function() {
+            const ordenpago = $('#buscarordenpago').val()
             $.ajax({
-                url: "{{route('seleccionafolio')}}",
+                url: "{{ route('seleccionaordenpago') }}",
                 type: "POST",
                 data: {
                     ordenpago: ordenpago,
                     _token: $("input[name=_token]").val()
                 },
-                success: function(data){
+                success: function(data) {
                     $("#ordenpagos_id").val(data.id ?? "Sin datos")
-                    $("#folio").val(data.folio ?? "Sin datos")
+                    $("#contacto1").val(data.contacto1 ?? "Sin datos")
                     $("#cantidadtotal").val(data.cantidadtotal ?? "Sin datos")
-                    $("#emite").val(data.emite ?? "Sin datos")
-                    console.log(data);
+                    $("#emite").val(data.emite ?? "sin datos")
+                    $("#telefono").val(data.telefono ?? "Sin datos")
                 }
             })
         })

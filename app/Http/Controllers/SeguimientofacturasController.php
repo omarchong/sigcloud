@@ -24,7 +24,7 @@ class SeguimientofacturasController extends Controller
             $notificacionusuario = Usuario::find($sessionid);
             /* Fin de la Variable notificacion */
             return view('system.seguimientofacturas.index', compact('notificacionusuario'), [
-                'ordenpagos' => Ordenpago::select('id', 'folio')->get(),
+                'ordenpagos' => Ordenpago::select('id', 'cotizacion_id')->get(),
                 'estatufacturas' => Estatufactura::select('id', 'nombre')->get()
             ]);
         } else {
@@ -42,7 +42,7 @@ class SeguimientofacturasController extends Controller
             $notificacionusuario = Usuario::find($sessionid);
             /* Fin de la Variable notificacion */
             return view('system.seguimientofacturas.create', compact('notificacionusuario'), [
-                'ordenpagos' => Ordenpago::select('id', 'folio')->get(),
+                'ordenpagos' => Ordenpago::select('id', 'contacto1')->get(),
                 'estatufacturas' => Estatufactura::select('id', 'nombre')->get()
             ]);
         } else {
@@ -70,7 +70,7 @@ class SeguimientofacturasController extends Controller
             /* Fin de la Variable notificacion */
             return view('system.seguimientofacturas.edit', compact('notificacionusuario'), [
                 'seguimientofactura' => $seguimientofactura,
-                'ordenpagos' => Ordenpago::select('id', 'folio')->get(),
+                'ordenpagos' => Ordenpago::select('id', 'contacto1')->get(),
                 'estatufacturas' => Estatufactura::select('id', 'nombre')->get(),
             ]);
         } else {
@@ -103,7 +103,24 @@ class SeguimientofacturasController extends Controller
             ->toJson();
     }
 
-    public function buscafolio(Request $request)
+    public function buscaordenpago(Request $request)
+    {
+        $term = $request->get('term');
+        /* $buscaordenpago = DB::select("SELECT usu.nombre, email, depa.nombre FROM usuarios  usu
+        INNER JOIN departamentos depa
+        ON usu.id = depa.id WHERE usu.nombre LIKE '%r%'
+        ORDER BY usu.nombre ASC"); */
+        $buscaordenpago = DB::select("SELECT * FROM ordenpagos where contacto1 like '%$term%'");
+        return response()->json($buscaordenpago);
+    }
+
+    public function seleccionaordenpago(Request $request)
+    {
+        $ordenpago = Ordenpago::where('contacto1', $request->ordenpago)->first();
+        return response()->json($ordenpago);
+    }
+
+    /* public function buscafolio(Request $request)
     {
         $term = $request->get('term');
 
@@ -113,16 +130,10 @@ class SeguimientofacturasController extends Controller
         ON o.cotizacion_id = det.id
         WHERE folio LIKE '%$term%'");
         return response()->json($buscafolio);
-    }
+    } */
 
-    public function seleccionafolio(Request $request)
+    /* public function seleccionafolio(Request $request)
     {
-        /* $ordenpago = Ordenpago::where('folio', $request->ordenpago)->first();
-        return response()->json($ordenpago); */
-
-        /* $ordenpago = Ordenpago::join('detalle_cotizacion', 'ordenpagos.cotizacion_id', '=', 'detalle_cotizacion.cotizacion_id')
-            ->select('ordenpagos.id', 'ordenpagos.folio', 'ordenpagos.emite', 'ordenpagos.num_pago', 'detalle_cotizacion.subtotal as cantidadtotal')
-            ->where('folio', $request->ordenpago)->first(); */
 
            $ordenpago = Ordenpago::groupBy('ordenpagos.id','ordenpagos.folio', 'ordenpagos.emite', 'ordenpagos.num_pago')
             ->join('detalle_cotizacion', 'ordenpagos.cotizacion_id', '=', 'detalle_cotizacion.cotizacion_id')
@@ -130,5 +141,5 @@ class SeguimientofacturasController extends Controller
             ->selectRaw('ordenpagos.id, ordenpagos.folio, ordenpagos.emite, ordenpagos.num_pago, SUM(detalle_cotizacion.subtotal) AS cantidadtotal')
             ->where('folio', $request->ordenpago)->first();
         return  response()->json($ordenpago);
-    }
+    } */
 }

@@ -25,7 +25,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/prueba', function () {
     return view('prueba');
-})->name('prueba');/* 
+})->name('prueba');
+/* 
 login */
 
 Route::get('/panel-administrativo', [HomeController::class, 'index'])->name('home');
@@ -43,6 +44,8 @@ Route::get('cerrarsesion', [LoginController::class, 'cerrarsesion'])->name('cerr
 /* omar chong */
 Route::resource('contactos', ContactosController::class);
 Route::name('destroy_contactos')->delete('destroy_contactos/{id}', [ContactosController::class, 'destroy_contactos']);
+/* Route::name('restore')->put('restore/{id}', [ContactosController::class, 'restore']); */
+Route::put('contactos/{id}/active-record', [ContactosController::class, 'activeRecord']);
 Route::get('datatables/contactos', [ContactosController::class, 'RegistrosDatatables'])->name('contactos.datatables');
 
 /* clientes */
@@ -155,7 +158,6 @@ Route::name('destroy-estatufactura')->delete('destroy_estatufactura/{id}', [Esta
 /* Citas */
 Route::resource('citas', CitasController::class);
 Route::name('destroy_cita')->delete('destroy_cita/{id}', [CitasController::class, 'destroy_cita']);
-
 Route::get('datatables/citas', [CitasController::class, 'RegistrosDatatables'])->name('citas.datatables');
 Route::post('buscaempresa', [CitasController::class, 'buscaempresa'])->name('buscaempresa');
 Route::post('seleccionaempresa', [CitasController::class, 'seleccionaempresa'])->name('seleccionaempresa');
@@ -163,15 +165,17 @@ Route::post('buscausuario', [CitasController::class, 'buscausuario'])->name('bus
 Route::post('seleccionausuario', [CitasController::class, 'seleccionausuario'])->name('seleccionausuario');
 
 /* Orden */
-Route::resource('orden', OrdenpagosController::class);
+Route::resource('ordenpagos', OrdenpagosController::class);
 Route::name('destroy_orden')->delete('destroy_orden/{id}', [OrdenpagosController::class, 'destroy_orden']);
 Route::get('datatables/ordenpagos', [OrdenpagosController::class, 'RegistrosDatatables'])->name('ordenpagos.datatables');
+Route::post('buscaordenpago', [OrdenpagosController::class, 'buscaordenpago'])->name('buscaordenpago');
+Route::post('seleccionaordenpago', [OrdenpagosController::class, 'seleccionaordenpago'])->name('seleccionaordenpago');
 
 
 /* Seguimientofacturas */
 Route::resource('seguimientofacturas', SeguimientofacturasController::class);
 Route::name('destroy_segf')->delete('destroy_segf/{id}', [SeguimientofacturasController::class, 'destroy_segf']);
 Route::get('datatables/seguimientofacturas', [SeguimientofacturasController::class, 'RegistrosDatatables'])->name('seguimientofacturas.datatables');
-Route::post('buscafolio', [SeguimientofacturasController::class, 'buscafolio'])->name('buscafolio');
-Route::post('seleccionafolio', [SeguimientofacturasController::class, 'seleccionafolio'])->name('seleccionafolio');
+Route::post('buscaordenpago', [SeguimientofacturasController::class, 'buscaordenpago'])->name('buscaordenpago');
+Route::post('seleccionaordenpago', [SeguimientofacturasController::class, 'seleccionaordenpago'])->name('seleccionaordenpago');
 

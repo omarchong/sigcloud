@@ -127,12 +127,15 @@
                                     return `
                                     <a href="/contactos/${data}" class="btn">
                                         <i class="fas fa-eye"></i>
+                                    </a>
+                                        
                                     <a href="/contactos/${data}" class="btn">
                                         <img src="img/editar.svg" width="20px">
-                                    <a href="javascript:void(0)" data-toggle="tooltip" data-id="${data}" 
-                                    data-original-title="Delete" class="deletecontactos">
-                                        <img src="img/basurero.svg" width="20px">
                                     </a>
+                                    <a href="javascript:void(0)" data-toggle="tooltip" data-id="${data}" 
+                                        data-original-title="Delete" class="deletecontactos">
+                                        <img src="img/basurero.svg" width="20px">
+                                        </a>
                                     `
                                 }
                             }
@@ -140,22 +143,106 @@
                         ]
 
                     });
+                    
+                    function deleteRecord(id) {
+                        Swal.fire({
+                            title: 'Estas seguro de eliminar este contacto?',
+                            text: "No podras revertir cambios!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Si, eliminar contacto!',
+                            cancelButtonText: 'Cancelar!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                $.ajax({
+                                    type: 'DELETE',
+                                    url: `/contactos/${id}`,
+                                    data: {
+                                        _token: $('[name="_token"]').val(),
+                                    },
+                                    success: res => {
+                                        Swal.fire(
+                                            'Eliminado!',
+                                            `El contacto ${res.contacto.contacto1} ha sido ${res.message} exitosamente.`,
+                                            'success'
+                                        );
+                                        reloadTable();
+                                    },
+                                    error: error => {
+                                        console.log(error);
+                                    },
+                                });
+
+                            }
+                        });
+                    }
+
+
+                    function activeRecord(id) {
+                        Swal.fire({
+                            title: 'Estas seguro que deseas activar esta contacto?',
+                            text: "No podras revertir cambios!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Si, activar contacto!',
+                            cancelButtonText: 'Cancelar!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                $.ajax({
+                                    type: 'PUT',
+                                    url: `/contactos/${id}/active-record`,
+                                    data: {
+                                        _token: $('[name="_token"]').val(),
+                                    },
+                                    success: res => {
+                                        Swal.fire(
+                                            'Activado!',
+                                            `El contacto ${res.cintacto.contacto1} ha sido activado exitosamente.`,
+                                            'success'
+                                        );
+                                        reloadTable();
+                                    },
+                                    error: error => {
+                                        console.log(error);
+                                    },
+                                });
+                            }
+                        });
+                    }
 
                     function reloadTable() {
                         $('#contactos').DataTable().ajax.reload();
                     }
                 </script>
+                    {{-- <a href="javascript:void(0)" data-toggle="tooltip" data-id="${data}" 
+                    data-original-title="restore" class="restore">
+                    <i class="fas fa-user-slash"></i>
+                    </a>
+                    
+                     <button class="btn ${full.deleted_at ? 'btn-success' : 'btn-danger'}"
+                                    ${full.deleted_at ? `onclick="activeRecord(${data})"` : `onclick="deleteRecord(${data})"`}
+                                    onclick="deleteRecord(${data})"
+                                    >
+                                    <i class="${full.deleted_at ? 'fas fa-power-off' : 'fas fa-trash-alt'}"></i>
+                                    </button>
+                    --}}
                 <script>
+
                     $(function() {
                         $.ajaxSetup({
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             }
                         });
+
                         $('body').on('click', '.deletecontactos', function() {
                             Swal.fire({
                                 title: '¿Estás seguro?',
-                                text: '¡La cita se eliminará definitivamente!',
+                                text: '¡El contacto se eliminará definitivamente!',
                                 icon: 'warning',
                                 showCancelButton: true,
                                 confirmButtonColor: '#007bff',
@@ -179,11 +266,37 @@
                                 }
                             })
                         });
+
+                       /*  $('body').on('click', '.restore', function() {
+                            Swal.fire({
+                                title: '¿Estás seguro?',
+                                text: '¡El contacto se reactivara!',
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#007bff',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: '¡Si, reactivar!',
+                                cancelButtonText: 'Cancelar'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    var id = $(this).data('id');
+                                    $.ajax({
+                                        type: "PUT",
+                                        url: "{{ url('restore') }}" + "/" + id,
+                                        data: {
+                                            id: id
+                                        },
+                                        dataType: 'json',
+                                        success: function(res) {
+                                            table.draw();
+                                        }
+                                    });
+                                }
+                            })
+                        }); */
+
                     })
                 </script>
-
-
-
             </div>
         </div>
     </div>

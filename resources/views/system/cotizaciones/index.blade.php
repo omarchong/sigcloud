@@ -62,21 +62,20 @@
                                     
                                                 <a href="/cotizaciones/${data}/edit"
                                                 class="btn">
-                                                <img src="/img/editar.svg" width="20px"> </a>
+                                                <img src="/img/editar.svg" width="20px">
 
                                                 <a href="/cotizaciones/${data}"
                                                 class="btn btn-info">
-                                                 <i class="fas fa-eye"></i> </a>
+                                                 <i class="fas fa-eye"></i>
 
                                                 <a href="/coti/${data}"
                                                 class="btn">
                                                 <img src="/img/mail.svg" width="35px"></i>
-                                                </a>
+                                                
 
                                                 <a href="javascript:void(0)" data-toggle="tooltip" data-id="${data}" 
                                                 data-original-title="Delete" class="deletecotizaciones">
-                                                    <img src="/img/basurero.svg" width="20px">
-                                                </a>
+                                                <img src="/img/basurero.svg" width="20px"></a>
                                     `
                                     }
                                 }
@@ -90,9 +89,6 @@
                     </script>
                 </div>
             </div>
-
-
-
         </div>
     </div>
 </div>

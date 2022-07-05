@@ -73,7 +73,7 @@
             </li>
 
             <li class="nav-link">
-                <a href="{{ route('orden.index') }}">
+                <a href="{{ route('ordenpagos.index') }}">
                     <img class="mr-2" src="/img/documento.svg" alt="" width="30px">
                     <span class="text nav-text"> Orden Pagos</span>
                 </a>

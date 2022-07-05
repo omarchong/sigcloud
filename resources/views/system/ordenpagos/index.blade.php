@@ -8,7 +8,7 @@
                     <span>Gestión de orden de pagos</span>
                 </div>
                 <div class="card-body">
-                    <a href="{{route('orden.create')}}" class="btn btn-primary"> <i class="fas fa-plus"></i>
+                    <a href="{{route('ordenpagos.create')}}" class="btn btn-primary"> <i class="fas fa-plus"></i>
                         Agregar orden</a>
                 </div>
                 <div class="card-body">
@@ -16,9 +16,8 @@
                         <thead class="thead-inverse striped responsive">
                             <tr>
                                 <th>Clave</th>
-                                <th>Folio</th>
                                 <th>Num. pago</th>
-                                <th>Emite</th>
+                                <th>Cliente</th>
                                 <th>Fecha limite</th>
                                 <th>Estatus</th>
                                 <th>Acciones</th>
@@ -47,16 +46,13 @@
                 data: 'id',
             },
             {
-                data: 'folio'
-            },
-            {
                 data: 'num_pago'
             },
             {
-                data: 'emite'
+                data: 'contacto1'
             },
             {
-                data: 'fecha_limite'
+                data: 'segundo_pago'
             },
             {
                 data: 'estatuorden.nombre'
@@ -65,7 +61,7 @@
                 data: 'id',
                 render: function(data, type, full, meta) {
                     return `
-                    <a href="#" class="btn">
+                    <a href="/ordenpagos/${data}/edit" class="btn">
                     <img src="/img/editar.svg" width="20px">
                     <a href="javascript:void(0)" data-toggle="tooltip" data-id="${data}" 
                     data-original-title="Delete" class="deleteorden">

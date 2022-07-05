@@ -11,10 +11,14 @@ class OrdenpagosSeeder extends Seeder
     public function run()
     {
         DB::table('ordenpagos')->insert([
-            'folio' => '170222FEB',
-            'num_pago' => '1',
+            'contacto1' => 'Sonia',
+            'nombre_proyecto' => 'Red de voz y datos',
+            'cantidadtotal' => 1740,
+            'num_pago' => '2',
+            'totalapagar' => 870,
+            'primer_pago' =>date('Y-m-d'),
+            'segundo_pago' =>date('Y-m-d'),
             'emite' => 'DSW',
-            'fecha_limite' => date('Y-m-d H:i:s'),
             'cotizacion_id' => 1,
             'estatuorden_id' => 2,
             'created_at' => date('Y-m-d H:i:s'),

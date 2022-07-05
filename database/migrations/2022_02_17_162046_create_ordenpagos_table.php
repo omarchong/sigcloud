@@ -11,10 +11,14 @@ class CreateOrdenpagosTable extends Migration
     {
         Schema::create('ordenpagos', function (Blueprint $table) {
             $table->id();
-            $table->string('folio');
+            $table->string('contacto1');
+            $table->string('nombre_proyecto');
+            $table->string('cantidadtotal');
             $table->integer('num_pago');
+            $table->string('totalapagar');
+            $table->date('primer_pago');
+            $table->date('segundo_pago');
             $table->string('emite');
-            $table->date('fecha_limite');
             $table->foreignId('estatuorden_id')
                 ->references('id')
                 ->on('estatuordens');

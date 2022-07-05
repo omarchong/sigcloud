@@ -19,7 +19,8 @@ class CreateDetalleCotizacionTable extends Migration
             $table->integer('descuento_general')->nullable();
             $table->foreignId('cotizacion_id')
                 ->references('id')
-                ->on('cotizaciones');
+                ->on('cotizaciones')->constrained()
+                ->onDelete('cascade');
             $table->foreignId('servicios_id')
                 ->references('id')
                 ->on('servicios');

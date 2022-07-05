@@ -10,10 +10,14 @@ class Ordenpago extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'folio', 
+        'contacto1',
+        'nombre_proyecto',
+        'cantidadtotal',
         'num_pago', 
-        'emite', 
-        'fecha_limite', 
+        'totalapagar',
+        'primer_pago',
+        'segundo_pago',
+        'emite',  
         'cotizacion_id', 
         'estatuorden_id'
     ];
