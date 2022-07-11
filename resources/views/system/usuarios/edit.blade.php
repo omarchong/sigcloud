@@ -11,6 +11,7 @@
                     <div class="col-md-4">
                         <label for="exampleInputEmail1" class="form-label">Nombre</label>
                         <div class="form-group">
+                            <input type="hidden" name="id" id="id" value="{{$usuario->id}}" readonly="readonly" class="form-control">
                             <input type="text" class="form-control @error('nombre') is-invalid @enderror" value="{{$usuario->nombre}}" id="nombre" name="nombre">
                             @error('nombre')
                             <small class="text-danger"> {{ $message }} </small>

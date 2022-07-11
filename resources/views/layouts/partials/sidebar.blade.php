@@ -102,12 +102,12 @@
                 </a>
             </li>
 
-            <li class="submenu nav-link">
-                <a href="#">
+            <li class="nav-link subtitle">
+                <a href="#" class="action">
                     <img class="mr-2" src="/img/reloj.svg" alt="" width="30px">
                     <span class="text nav-text"> Estatus</span>
                 </a>
-                <ul class="children">
+                <ul class="submenu opacity">
                     <li><a href="{{ route('estatucitas.index') }}">
                             <span class="text">Estatu citas</span>
                         </a></li>
@@ -141,3 +141,26 @@
         </ul>
     </div>
 </nav>
+{{-- <script>
+    const submenu = document.querySelector("#submenu");
+    document.addEvent.Listener("DOMContentLoaded", ()=>{
+        abrir()
+    })
+    function abrir(){
+        console.log('prueba');
+    }
+</script> --}}
+<script>
+    $(".subtitle .action").click(function (event) {
+        var subtitle = $(this).parents(".subtitle");
+        var submenu = $(subtitle).find(".submenu");
+
+        $(".submenu").not($(submenu)).slideUp("slow").addClass("opacity");
+        $(".open").not($(subtitle)).removeClass("open");
+
+        $(subtitle).toggleClass("open");
+        $(submenu).slideToggle("slow").toggleClass("opacity");
+
+        return false;
+    });
+</script>

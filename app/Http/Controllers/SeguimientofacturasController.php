@@ -110,13 +110,13 @@ class SeguimientofacturasController extends Controller
         INNER JOIN departamentos depa
         ON usu.id = depa.id WHERE usu.nombre LIKE '%r%'
         ORDER BY usu.nombre ASC"); */
-        $buscaordenpago = DB::select("SELECT * FROM ordenpagos where contacto1 like '%$term%'");
+        $buscaordenpago = DB::select("SELECT * FROM ordenpagos where nombre_proyecto like '%$term%'");
         return response()->json($buscaordenpago);
     }
 
     public function seleccionaordenpago(Request $request)
     {
-        $ordenpago = Ordenpago::where('contacto1', $request->ordenpago)->first();
+        $ordenpago = Ordenpago::where('nombre_proyecto', $request->ordenpago)->first();
         return response()->json($ordenpago);
     }
 

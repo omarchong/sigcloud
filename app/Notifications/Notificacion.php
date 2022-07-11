@@ -46,6 +46,7 @@ class Notificacion extends Notification
         return [
             'tarea' => $this->tarea->id,
             'nombre' => $this->tarea->nombre,
+            'fecha_limite' => $this->tarea->fecha_limite,
             'descripcion' => $this->tarea->descripcion,
             'tipo_tarea' => $this->tarea->tipo_tarea,
             'usuario_id'=> $this->tarea->usuario_id,

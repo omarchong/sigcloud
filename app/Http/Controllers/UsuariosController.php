@@ -173,8 +173,24 @@ class UsuariosController extends Controller
             \Storage::disk('local')->put($imagen2, \File::get($file));
         }
 
+        $usuarios = Usuario::all()->find($request->id);
+        $usuarios->id = $request->id;
+        $usuarios->nombre = $request->nombre;
+        $usuarios->app = $request->app;
+        $usuarios->apm = $request->apm;
+        $usuarios->telefono = $request->telefono;
+        $usuarios->contrasena =  $request->contrasena=Hash::make($request->contrasena);
+        $usuarios->contrasena_confirmar =  $request->contrasena_confirmar=Hash::make($request->contrasena_confirmar);
+        $usuarios->departamento_id = $request->departamento_id;
+        $usuarios->estatus = $request->estatus;
+        $usuarios->tipo = $request->tipo;
+        if($file<>"")
+        {
+            $usuarios->imagen = $imagen2;
+        }
+        $usuarios->save();
 
-        $usuario->update([
+        /* $usuario->update([
             'nombre' => $request->nombre,
             'app' => $request->app,
             'apm' => $request->apm,
@@ -184,8 +200,9 @@ class UsuariosController extends Controller
             'departamento_id' => $request->departamento_id,
             'estatus'=> $request->estatus,
             'tipo'=> $request->tipo,
-            'imagen' => $imagen2,
-        ]);
+            "imagen" => $imagen2
+        ]); */
+        
         
         return redirect()
             ->route('usuarios.index')

@@ -8,7 +8,7 @@
                 <input type="hidden" name="id" id="id">
                 <div class="form-row">
                     <div class="col-md-12">
-                        <label for="">Buscar cliente</label>
+                        <label for="">Buscar nombre del proyecto</label>
                         <div class="input-group">
                             <input type="search" required name="buscarordenpago" id="buscarordenpago"
                                 class="form-control @error('ordenpagos_id')  @enderror" placeholder=""
@@ -201,7 +201,7 @@
                     dataType: 'json',
                     success: function(data) {
                         var resp = $.map(data, function(obj) {
-                            return obj.contacto1;
+                            return obj.nombre_proyecto;
                             response(data);
                         })
                         response(resp);

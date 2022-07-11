@@ -9,10 +9,10 @@
                     <div class="col-md-12">
                         <label for="">Buscar</label>
                         <div class="input-group">
-                            <input type="search" required name="buscarordenpago" id="buscarordenpago" 
+                            <input type="search" required name="buscarcotizacion" id="buscarcotizacion" 
                             class="form-control @error('cotizacion_id')  @enderror" placeholder="" aria-label="Search">
                             <span class="input-group-btn">
-                                <button type="button" id="selectOrdenpago" class="btn btn-primary">
+                                <button type="button" id="selectCotizacion" class="btn btn-primary">
                                     Seleccionar
                                 </button>
                             </span>
@@ -20,9 +20,11 @@
                         <div class="valid-feedback">
                             Correcto!
                         </div>
-                        @error('cotizacion_id')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
+                        <div class="">
+                            @error('cotizacion_id')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
                     {{-- <input type="text" class="form-control" name="cotizacion_id" id="cotizacion_id"> --}}
                     <div class="col-md-4">
@@ -189,10 +191,10 @@
 <script>
     $(document).ready(function(){
 
-        $("#buscarordenpago").autocomplete({
+        $("#buscarcotizacion").autocomplete({
             source: function(request, response) {
                 $.ajax({
-                    url: "{{ route('buscaordenpago') }}",
+                    url: "{{ route('buscacotizacion') }}",
                     type: "POST",
                     data: {
                         term: request.term,
@@ -201,7 +203,7 @@
                     dataType: 'json',
                     success: function(data) {
                         var resp = $.map(data, function(obj) {
-                            return obj.cotizacion_id;
+                            return obj.nombre_proyecto;
                             response(data);
                         })
                         response(resp);
@@ -211,17 +213,17 @@
             minLenght: 1,
         })
 
-        $("#selectOrdenpago").click(function() {
-            const ordenpago = $('#buscarordenpago').val()
+        $("#selectCotizacion").click(function() {
+            const cotizacion = $('#buscarcotizacion').val()
             $.ajax({
-                url: "{{ route('seleccionaordenpago') }}",
+                url: "{{ route('seleccionacotizacion') }}",
                 type: "POST",
                 data: {
-                    ordenpago: ordenpago,
+                    cotizacion: cotizacion,
                     _token: $("input[name=_token]").val()
                 },
                 success: function(data) {
-                    $("#cotizacion_id").val(data.cotizacion_id ?? "Sin datos")
+                    $("#cotizacion_id").val(data.id ?? "Sin datos")
                     $("#contacto1").val(data.contacto1 ?? "Sin datos")
                     $("#nombre_proyecto").val(data.nombre_proyecto ?? "sin datos")
                     $("#cantidadtotal").val(data.cantidadtotal ?? "Sin datos")

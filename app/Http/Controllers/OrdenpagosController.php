@@ -80,29 +80,24 @@ class OrdenpagosController extends Controller
     return response()->json(['success' => 'Orden borrado']);
   }
 
-  public function buscaordenpago(Request $request)
+  public function buscacotizacion(Request $request)
   {
     $term = $request->get('term');
 
-    $buscaordenpago = DB::select("SELECT cotizaciones.id, contactos.contacto1, cotizaciones.nombre_proyecto
-        FROM detalle_cotizacion
-        INNER JOIN cotizaciones ON detalle_cotizacion.cotizacion_id = cotizaciones.id
-        INNER JOIN clientes ON cotizaciones.clientes_id = clientes.id
-        INNER JOIN contactos ON clientes.contactos_id = contactos.id
-        WHERE cotizacion_id LIKE '%$term%'");
-    return response()->json($buscaordenpago);
+    $buscacotizacion = DB::select("SELECT * FROM cotizaciones WHERE nombre_proyecto LIKE '%$term%'");
+    return response()->json($buscacotizacion);
   }
 
-  public function seleccionaordenpago(Request $request)
+  public function seleccionacotizacion(Request $request)
   {
 
-    $ordenpago = DetalleCotizacion::groupBy('cotizaciones.id', 'contactos.contacto1', 'cotizaciones.nombre_proyecto', 'detalle_cotizacion.cotizacion_id')
+    $cotizacion = DetalleCotizacion::groupBy('cotizaciones.id', 'contactos.contacto1', 'cotizaciones.nombre_proyecto', 'detalle_cotizacion.cotizacion_id')
       ->join('cotizaciones', 'detalle_cotizacion.cotizacion_id', '=', 'cotizaciones.id')
       ->join('clientes', 'cotizaciones.clientes_id', '=', 'clientes.id')
       ->join('contactos', 'clientes.contactos_id', '=', 'contactos.id')
       ->selectRaw('cotizaciones.id, contactos.contacto1, cotizaciones.nombre_proyecto, SUM(detalle_cotizacion.subtotal) AS cantidadtotal, detalle_cotizacion.cotizacion_id')
-      ->where('cotizacion_id', $request->ordenpago)->first();
-    return response()->json($ordenpago);
+      ->where('nombre_proyecto', $request->cotizacion)->first();
+    return response()->json($cotizacion);
   }
 
   public function RegistrosDatatables()

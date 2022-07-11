@@ -168,8 +168,8 @@ Route::post('seleccionausuario', [CitasController::class, 'seleccionausuario'])-
 Route::resource('ordenpagos', OrdenpagosController::class);
 Route::name('destroy_orden')->delete('destroy_orden/{id}', [OrdenpagosController::class, 'destroy_orden']);
 Route::get('datatables/ordenpagos', [OrdenpagosController::class, 'RegistrosDatatables'])->name('ordenpagos.datatables');
-Route::post('buscaordenpago', [OrdenpagosController::class, 'buscaordenpago'])->name('buscaordenpago');
-Route::post('seleccionaordenpago', [OrdenpagosController::class, 'seleccionaordenpago'])->name('seleccionaordenpago');
+Route::post('buscacotizacion', [OrdenpagosController::class, 'buscacotizacion'])->name('buscacotizacion');
+Route::post('seleccionacotizacion', [OrdenpagosController::class, 'seleccionacotizacion'])->name('seleccionacotizacion');
 
 
 /* Seguimientofacturas */
