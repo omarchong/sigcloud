@@ -27,10 +27,6 @@ Route::get('/prueba', function () {
     return view('prueba');
 })->name('prueba');
 
-
-Route::get('pri', function() {
-    return view('principal');
-});
 Route::get('dash', function() {
     return view('dash');
 });
