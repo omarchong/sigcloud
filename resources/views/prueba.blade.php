@@ -161,11 +161,11 @@
         <div class="encabezado w-100">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container">
-                    <img class="mr-2" src="img/logosigcloud.svg" alt="" width="200px">
-
+                    <img class="" src="img/logosigcloud.svg" alt="" width="200px">
+                    
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
@@ -176,7 +176,7 @@
                             </li>
                             <div class="notificacion nav-link dropdown submenu">
                                 <img src="img/notificacion.svg" alt="" class="">
-                                   {{--  <span class="badge">1</span> --}}
+                                <span class="badge">1</span>
                                 <div class="dropdown-menu children notificacion-link">
         
         
@@ -210,10 +210,11 @@
                 </div>
             </nav>
         </div>
+    
 
 
-        <section class="navbar">
-            <div class="container">
+        <section class="conte">
+            <div class="">
                 <div class="row">
                     <div class="col-lg-3 my-3">
                         <div class="card-header" id="servicios">
@@ -265,13 +266,13 @@
                     </div>
                 </div>
             </div>
-            <div class="container">
+            <div class="">
                 <div class="row">
                     <div class="col-lg-6 my-3">
                         <div class="card" id="ventasa">
                             <div class="card-body">
                                 <h6><b>Ventas anuales</b></h6>
-                                <canvas id="myChart" height="130px"></canvas>
+                                <canvas id="myChart" height="120px"></canvas>
                             </div>
                         </div>
                     </div>
@@ -336,13 +337,13 @@
                     </div>
                 </div>
             </div>
-            <div class="container">
+            <div class="">
                 <div class="row">
                     <div class="col-lg-7 my-3">
                         <div class="card" id="ventasm">
                             <div class="card-body">
                                 <h6><b>Ventas mensuales</b></h6>
-                                <canvas id="grafica" height="128px"></canvas>
+                                <canvas id="grafica" height="115px"></canvas>
                             </div>
                         </div>
                     </div>
@@ -429,7 +430,9 @@
 
 
 
+    
     </section>
+
 </body>
 @if (session()->has('success'))
     <script>
