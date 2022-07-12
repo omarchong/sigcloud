@@ -26,13 +26,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/prueba', function () {
     return view('prueba');
 })->name('prueba');
-/* 
-login */
+
+
+Route::get('pri', function() {
+    return view('principal');
+});
+Route::get('dash', function() {
+    return view('dash');
+});
+
 
 Route::get('/panel-administrativo', [HomeController::class, 'index'])->name('home');
 Route::post('/mark-as-read', [HomeController::class, 'markNotification'])->name('markNotification');
-
-
 
 
 route::get('/', [LoginController::class, 'login'])->name('login');

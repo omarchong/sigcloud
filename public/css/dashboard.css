@@ -449,6 +449,7 @@ span.verde {
     border-radius: 15px;
     background: #fff;
     font-family: 'Montserrat', sans-serif;
+    
 }
 
 #ventasm {
@@ -463,3 +464,33 @@ span.verde {
     font-family: 'Montserrat', sans-serif;
 }
 
+
+@media(max-width:550px)
+{
+
+    #servicios{
+        text-align: center;
+    }
+    #curso{
+        text-align: center;
+    }
+    #validacion{
+        text-align: center;
+    }
+    #concluidos{
+        text-align: center;
+    }
+    #ingresos{
+        text-align: center;
+    }
+    #febrero{
+        text-align: center;
+    }
+    #miembros{
+        text-align: center;
+    }
+    #canales{
+        text-align: center;
+    }
+
+}

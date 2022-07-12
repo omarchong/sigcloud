@@ -150,7 +150,7 @@
         console.log('prueba');
     }
 </script> --}}
-<script>
+{{-- <script>
     $(".subtitle .action").click(function (event) {
         var subtitle = $(this).parents(".subtitle");
         var submenu = $(subtitle).find(".submenu");
@@ -163,4 +163,4 @@
 
         return false;
     });
-</script>
+</script> --}}
